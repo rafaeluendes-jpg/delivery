@@ -3053,6 +3053,11 @@ function desconectarNuvem(){
   setModo('local');rodape();
 }
 /* ao abrir o sistema, volta a ligar a nuvem sem pedir senha de novo */
+function temDadosLocais(){
+  try{
+    return MAPA.some(function(E4){ return (DB[E4.col]||[]).length>0; });
+  }catch(e){return false}
+}
 async function religarNuvem(){
   if(modo()!=='nuvem')return false;
   if(!window.supabase)return false;
@@ -3068,11 +3073,14 @@ async function religarNuvem(){
     NUVEM.token=ses.access_token;
     statusNuvem('ok');rodape();
     setTimeout(ligarTempoReal,400);
-    /* traz o que mudou enquanto o sistema estava fechado */
+    /* traz o que mudou enquanto o sistema estava fechado —
+       mas primeiro envia o que estiver pendente aqui, para nada ser sobrescrito */
     setTimeout(async function(){
-      try{ statusNuvem('baixando'); await baixarDaNuvem(); statusNuvem('ok');
-        if(S.mod&&S.it)abrir(S.mod,S.it); }
-      catch(e){ statusNuvem('erro',(e&&e.message)||''); }
+      try{
+        if(temDadosLocais()){ await sincronizar(); }
+        statusNuvem('baixando'); await baixarDaNuvem(); statusNuvem('ok');
+        if(S.mod&&S.it)abrir(S.mod,S.it);
+      }catch(e){ statusNuvem('erro',(e&&e.message)||''); }
     },900);
     return true;
   }catch(e){NUVEM.cli=null;return false;}
@@ -3358,6 +3366,8 @@ async function sincronizar(){
   }catch(e){
     console.error('[NEXOR sync]',etapa,e);
     statusNuvem('erro',etapa+': '+((e&&e.message)||'falha'));
+    console.error('SINCRONIZACAO falhou em',etapa,e);
+    toast('Não consegui enviar ('+etapa+'): '+((e&&e.message)||'falha')); 
   }finally{
     NUVEM.sincronizando=false;
     if(NUVEM.pendente){NUVEM.pendente=false;agendarSync();}
@@ -3367,7 +3377,12 @@ async function sincronizar(){
 /* ---- trazer da nuvem ---- */
 async function baixarDaNuvem(){
   var l=NUVEM.loja,q='?loja_id=eq.'+l+'&select=*';
-  function volta(linhas,fn){return (linhas||[]).map(fn)}
+  /* se a nuvem responder vazio mas houver dados aqui, mantém os daqui */
+  function volta(linhas,fn,atual){
+    var r=(linhas||[]).map(fn);
+    if(!r.length&&atual&&atual.length)return atual;
+    return r;
+  }
   var cont=await api('contas_capital'+q);
   DB.contas=volta(cont,function(x){return {id:x.ref_local||x.id,nome:x.nome,tipo:x.tipo,banco:x.banco,
     agencia:x.agencia,numero:x.numero,saldoInicial:Number(x.saldo_inicial)||0,fixa:x.fixa}});
@@ -3717,7 +3732,7 @@ function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span>Loja: <b>'+E(nomeLojaAtual())+'</b></span><span>|</span><span>Usuário: <b>Administrador</b></span>'+
 (extra?'<span>|</span><span>'+extra+'</span>':'')+
-'<span class="gw"></span><span class="logo"><em>N</em>NEXOR</span><span>V1.2.0</span>';
+'<span class="gw"></span><span class="logo"><em>N</em>NEXOR</span><span>V1.2.1</span>';
 }
 
 /* ===== BLOCO 7 — ROTEADOR ===== */
