@@ -3047,7 +3047,35 @@ async function conectarNuvem(email,senha){
   return true;
 }
 function desconectarNuvem(){
-  NUVEM.ligada=false;NUVEM.cli=null;setModo('local');
+  try{ if(NUVEM.cli)NUVEM.cli.auth.signOut(); }catch(e){}
+  desligarTempoReal();
+  NUVEM.ligada=false;NUVEM.cli=null;NUVEM.token=null;NUVEM.perfil=null;NUVEM.loja=null;
+  setModo('local');rodape();
+}
+/* ao abrir o sistema, volta a ligar a nuvem sem pedir senha de novo */
+async function religarNuvem(){
+  if(modo()!=='nuvem')return false;
+  if(!window.supabase)return false;
+  try{
+    NUVEM.cli=window.supabase.createClient(NUVEM.url,NUVEM.chave);
+    var r=await NUVEM.cli.auth.getSession();
+    var ses=r&&r.data?r.data.session:null;
+    if(!ses){NUVEM.cli=null;return false;}
+    var rp=await NUVEM.cli.from('perfis')
+      .select('id,nome,cargo,loja_id,empresa_id').eq('id',ses.user.id).maybeSingle();
+    if(rp.error||!rp.data){NUVEM.cli=null;return false;}
+    NUVEM.perfil=rp.data;NUVEM.loja=rp.data.loja_id;NUVEM.ligada=true;
+    NUVEM.token=ses.access_token;
+    statusNuvem('ok');rodape();
+    setTimeout(ligarTempoReal,400);
+    /* traz o que mudou enquanto o sistema estava fechado */
+    setTimeout(async function(){
+      try{ statusNuvem('baixando'); await baixarDaNuvem(); statusNuvem('ok');
+        if(S.mod&&S.it)abrir(S.mod,S.it); }
+      catch(e){ statusNuvem('erro',(e&&e.message)||''); }
+    },900);
+    return true;
+  }catch(e){NUVEM.cli=null;return false;}
 }
 /* ==========================================================
    MOTOR DE SINCRONIZAÇÃO
@@ -3567,6 +3595,8 @@ function abrirSessao(){
   carregar();
   $('login').classList.add('hide');$('app').classList.remove('hide');
   boot();
+  /* volta a ligar a nuvem sozinho, se já estava ligada antes */
+  setTimeout(function(){ try{religarNuvem();}catch(e){console.error('religar',e);} },500);
 }
 function entrar(){
   if($('lgU').value.trim().toLowerCase()==='admin'&&$('lgP').value==='admin'){
@@ -3687,7 +3717,7 @@ function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span>Loja: <b>'+E(nomeLojaAtual())+'</b></span><span>|</span><span>Usuário: <b>Administrador</b></span>'+
 (extra?'<span>|</span><span>'+extra+'</span>':'')+
-'<span class="gw"></span><span class="logo"><em>N</em>NEXOR</span><span>V1.1.1</span>';
+'<span class="gw"></span><span class="logo"><em>N</em>NEXOR</span><span>V1.2.0</span>';
 }
 
 /* ===== BLOCO 7 — ROTEADOR ===== */
