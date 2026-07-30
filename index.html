@@ -3001,7 +3001,7 @@ var DB={categorias:[],produtos:[],grupos:[],fichas:[]};
 var NUVEM={
   url:'https://cevghkndzpzvnzwifhnm.supabase.co',
   chave:'sb_publishable_tH04wQWnUjOUQWePZ0Bshw_RirDPUDY',
-  cli:null, token:null, ligada:false, loja:null, perfil:null, sincronizando:false, pendente:false, ultima:null
+  cli:null, token:null, ligada:false, baixou:false, baixou:false, loja:null, perfil:null, sincronizando:false, pendente:false, ultima:null
 };
 function modo(){try{return localStorage.getItem('nexor_modo')||'local'}catch(e){return 'local'}}
 function setModo(m){try{localStorage.setItem('nexor_modo',m)}catch(e){}}
@@ -3091,31 +3091,31 @@ async function religarNuvem(){
    Para acrescentar campo novo: só incluir no "campos".
    ========================================================== */
 var MAPA=[
- {col:'contas',      tab:'contas_capital',
+ {col:'contas', espelha:true,      tab:'contas_capital',
   campos:function(x){return {nome:x.nome,tipo:x.tipo||'Banco',banco:x.banco||null,agencia:x.agencia||null,
     numero:x.numero||null,saldo_inicial:n(x.saldoInicial),fixa:x.fixa||null}}},
 
- {col:'catfin',      tab:'categorias_financeiras',
+ {col:'catfin', espelha:true,      tab:'categorias_financeiras',
   campos:function(x,i){return {nome:x.nome,ordem:i}},
   filhos:[{lista:'itens',tab:'subcategorias_financeiras',pai:'categoria_id',
     campos:function(o,k){return {nome:o.nome,ordem:k}}}]},
 
- {col:'fornec',      tab:'fornecedores',
+ {col:'fornec', espelha:true,      tab:'fornecedores',
   campos:function(x){return {empresa:x.empresa,contato:x.nome||null,cnpj:x.cnpj||null,
     email:x.email||null,telefone:x.tel||null,whatsapp:x.whats||null}}},
 
- {col:'formasPag',   tab:'formas_pagamento',
+ {col:'formasPag', espelha:true,   tab:'formas_pagamento',
   campos:function(x,i){return {nome:x.nome,tipo:x.tipo||'outro',bandeira:x.bandeira||null,
     taxa_pct:n(x.taxaPct),taxa_fixa:n(x.taxaFixa),dias_recebimento:n(x.dias),
     conta_id:fk('contas',x.contaId),ativa:x.ativa!==false,online:!!x.online,ordem:x.ordem||i}}},
 
- {col:'unidExtra',   tab:'unidades_medida',
+ {col:'unidExtra', espelha:true,   tab:'unidades_medida',
   campos:function(x){return {nome:x.n,sigla:x.ab,base:x.base,fator:n(x.f)}}},
 
- {col:'gruposIng',   tab:'grupos_ingredientes',
+ {col:'gruposIng', espelha:true,   tab:'grupos_ingredientes',
   campos:function(x){return {nome:x.nome,compoe_cmv:x.compoeCMV!==false}}},
 
- {col:'insumos',     tab:'insumos',
+ {col:'insumos', espelha:true,     tab:'insumos',
   campos:function(x){return {nome:x.nome,codigo:x.codigo||null,unidade:x.unidade||'un',
     grupo_id:fk('gruposIng',x.grupoId),
     subcategoria_id:fkSub(x.catFinId),controla_estoque:x.controlaEstoque!==false,
@@ -3123,10 +3123,10 @@ var MAPA=[
     fator:n(x.fator)||1,custo:n(x.custo),custo_ultima:n(x.custoUltima),modo_custo:x.modoCusto||'manual',
     fornecedor_id:fk('fornec',x.fornecedorId),descricao:x.descricao||null}}},
 
- {col:'fichaCats',   tab:'ficha_grupos',
+ {col:'fichaCats', espelha:true,   tab:'ficha_grupos',
   campos:function(x){return {nome:x.nome}}},
 
- {col:'fichas',      tab:'fichas_tecnicas',
+ {col:'fichas', espelha:true,      tab:'fichas_tecnicas',
   campos:function(x){return {nome:x.nome,codigo:x.codigo||null,grupo_id:fk('fichaCats',x.categoriaId),
     subcategoria_id:fkSub(x.contaId),unidade:x.unidade||'un',estocavel:x.estocavel!==false,
     disponivel_venda:!!x.disponivelVenda,rendimento:n(x.rendimento)||1,rend_unidade:x.rendUnidade||null,
@@ -3138,7 +3138,7 @@ var MAPA=[
     campos:function(o){return {insumo_id:fk('insumos',o.insumoId),quantidade:n(o.qtd),
       unidade:o.unidade||'un',perda:n(o.perda)}}}]},
 
- {col:'motivosMov',  tab:'motivos_movimentacao',
+ {col:'motivosMov', espelha:true,  tab:'motivos_movimentacao',
   campos:function(x){return {nome:x.nome,tipo:x.tipo,sistema:!!x.sistema,
     ativo:x.ativo!==false,lojas_visiveis:x.lojas||[]}}},
 
@@ -3151,17 +3151,17 @@ var MAPA=[
   campos:function(x){return {data:x.data||null,hora:x.hora||null,
     perda:n(x.perda),ganho:n(x.ganho),resultado:n(x.resultado),itens:x.itens||[]}}},
 
- {col:'categorias',  tab:'categorias',
+ {col:'categorias', espelha:true,  tab:'categorias',
   campos:function(x,i){return {nome:x.nome,impressao:x.impressao||null,imposto:x.imposto||null,
     cor:x.cor||null,imagem:x.imagem||null,ativa:x.ativo!==false,ordem:x.ordem||i}}},
 
- {col:'grupos',      tab:'grupos_opcoes',
+ {col:'grupos', espelha:true,      tab:'grupos_opcoes',
   campos:function(x,i){return {nome:x.nome,minimo:n(x.min),maximo:x.max||1,
     forcado:!!x.forcado,ordem:x.ordem||i}},
   filhos:[{lista:'opcoes',tab:'opcoes',pai:'grupo_id',
     campos:function(o,k){return {nome:o.nome,preco_adicional:n(o.preco),ordem:k}}}]},
 
- {col:'produtos',    tab:'produtos',
+ {col:'produtos', espelha:true,    tab:'produtos',
   campos:function(x,i){return {nome:x.nome,preco:n(x.preco),codigo:x.codigo||null,
     descricao:x.detalhes||null,categoria_id:fk('categorias',x.categoriaId),
     ativo:x.ativo!==false,ordem:x.ordem||i,imagem_url:x.imagem||null,
@@ -3171,14 +3171,14 @@ var MAPA=[
     insumo_qtd:n(x.insumoQtd),insumo_un:x.insumoUn||null}},
   vinculo:{tab:'produto_grupos',pai:'produto_id',campo:'grupo_id',lista:'grupos',ref:'grupos'}},
 
- {col:'clientes',    tab:'clientes',
+ {col:'clientes', espelha:true,    tab:'clientes',
   campos:function(x){return {nome:x.nome,telefone:x.tel||null,cpf:x.cpf||null,
     nascimento:x.nascimento||null,rua:x.rua||null,numero:x.numero||null,
     bairro:x.bairro||null,cidade:x.cidade||null,referencia:x.ref||null,
     compras:n(x.compras),gasto:n(x.gasto),
     limite_fiado:n(x.limiteFiado),saldo_fiado:n(x.saldoFiado),observacao:x.obs||null}}},
 
- {col:'entregadores',tab:'entregadores',
+ {col:'entregadores', espelha:true,tab:'entregadores',
   campos:function(x){return {nome:x.nome,telefone:x.tel||null,cpf:x.cpf||null,pix:x.pix||null,
     diarias:x.diarias||{},padrao:!!x.padrao,ativo:x.ativo!==false}},
   filhos:[{lista:'taxas',tab:'entregador_taxas',pai:'entregador_id',
@@ -3214,7 +3214,7 @@ var MAPA=[
     pago:n(x.pago),conta_id:fk('contas',x.contaId),forma:x.forma||null,
     observacao:x.obs||null,data:x.data||null}}},
 
- {col:'cupons',      tab:'cupons',
+ {col:'cupons', espelha:true,      tab:'cupons',
   campos:function(x){return {codigo:x.codigo,tipo:x.tipo,valor:n(x.valor),
     teto:n(x.tetoDesconto),minimo:n(x.minimo),valido_de:x.de||null,valido_ate:x.ate||null,
     hora_de:x.horaDe||null,hora_ate:x.horaAte||null,quantidade:n(x.quantidade),
@@ -3276,6 +3276,16 @@ async function enviar(tab,linhas){
   }
   return out;
 }
+/* apaga na nuvem os registros que não existem mais neste aparelho */
+async function espelharExclusoes(tab,refs,loja){
+  try{
+    if(refs.length>300)return;              /* lista grande: não arrisca */
+    var filtro=refs.length
+      ? '&ref_local=not.in.('+refs.map(function(r){return '"'+String(r).replace(/"/g,'')+'"'}).join(',')+')'
+      : '';
+    await api(tab+'?loja_id=eq.'+loja+filtro,'DELETE');
+  }catch(e){console.error('espelhar',tab,e);}
+}
 async function apagar(tab,campo,valor){
   await api(tab+'?'+campo+'=eq.'+encodeURIComponent(valor),'DELETE');
 }
@@ -3313,6 +3323,8 @@ async function sincronizar(){
       });
       var salvos=await enviar(E2.tab,linhas);
       salvos.forEach(function(r){if(r.ref_local)_ids[r.ref_local]=r.id});
+      if(E2.espelha&&NUVEM.baixou)
+        await espelharExclusoes(E2.tab,lista.map(function(x){return x.id}),l);
 
       /* filhos (opções, itens, parcelas...) */
       if(E2.filhos)for(var f=0;f<E2.filhos.length;f++){
@@ -3565,6 +3577,8 @@ async function baixarDaNuvem(){
     tipo:x.tipo,valor:Number(x.valor)||0,data:x.data,formaId:mapaFP[x.forma_id]||'',
     contaId:mapaConta[x.conta_id]||'',obs:x.observacao||''}});
 
+  NUVEM.baixou=true;   /* daqui em diante este aparelho pode espelhar exclusões */
+
   gravarLocal();
 }
 
@@ -3732,7 +3746,7 @@ function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span>Loja: <b>'+E(nomeLojaAtual())+'</b></span><span>|</span><span>Usuário: <b>Administrador</b></span>'+
 (extra?'<span>|</span><span>'+extra+'</span>':'')+
-'<span class="gw"></span><span class="logo"><em>N</em>NEXOR</span><span>V1.3.0</span>';
+'<span class="gw"></span><span class="logo"><em>N</em>NEXOR</span><span>V1.4.0</span>';
 }
 
 /* ===== BLOCO 7 — ROTEADOR ===== */
