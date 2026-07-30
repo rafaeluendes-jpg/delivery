@@ -3252,6 +3252,17 @@ async function sincronizar(){
   try{
     var l=NUVEM.loja;
     _ids={};
+    /* nenhum registro sobe sem identificação própria — é ela que evita duplicar */
+    MAPA.forEach(function(E3){
+      (DB[E3.col]||[]).forEach(function(x){
+        if(!x.id)x.id=uid(E3.col.slice(0,3));
+        (E3.filhos||[]).forEach(function(F2){
+          (x[F2.lista]||[]).forEach(function(o,j){ if(o&&!o.id)o.id=x.id+'_'+j; });
+        });
+      });
+    });
+    gravarLocal();
+
     for(var m=0;m<MAPA.length;m++){
       var E2=MAPA[m];
       etapa=E2.tab;
@@ -3676,7 +3687,7 @@ function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span>Loja: <b>'+E(nomeLojaAtual())+'</b></span><span>|</span><span>Usuário: <b>Administrador</b></span>'+
 (extra?'<span>|</span><span>'+extra+'</span>':'')+
-'<span class="gw"></span><span class="logo"><em>N</em>NEXOR</span><span>V1.1.0</span>';
+'<span class="gw"></span><span class="logo"><em>N</em>NEXOR</span><span>V1.1.1</span>';
 }
 
 /* ===== BLOCO 7 — ROTEADOR ===== */
@@ -9164,6 +9175,10 @@ function custoPorUnidade(f){var r=Number(f.rendimento)||0;return r?+(custoFicha(
 function custoPorVenda(f){var u2=Number(f.unidadesVenda)||0;return u2?+(custoFicha(f)/u2).toFixed(4):custoPorUnidade(f)}
 function baseFicha(){
   baseEstoque();
+  /* limpa a ficha de exemplo que versões antigas criavam */
+  DB.fichas=(DB.fichas||[]).filter(function(f){
+    return !(/Ficha padrão/i.test(f.nome||'')&&!(f.itens||[]).length);
+  });
   if(!DB.fichaCats.length||!DB.fichaCats[0].subs){
     DB.fichaCats=[
       {id:'fc_prod',nome:'Produzido',subs:[
