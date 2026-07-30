@@ -3732,7 +3732,7 @@ function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span>Loja: <b>'+E(nomeLojaAtual())+'</b></span><span>|</span><span>Usuário: <b>Administrador</b></span>'+
 (extra?'<span>|</span><span>'+extra+'</span>':'')+
-'<span class="gw"></span><span class="logo"><em>N</em>NEXOR</span><span>V1.2.1</span>';
+'<span class="gw"></span><span class="logo"><em>N</em>NEXOR</span><span>V1.3.0</span>';
 }
 
 /* ===== BLOCO 7 — ROTEADOR ===== */
@@ -4604,15 +4604,39 @@ function painelNuvem(){
   '</div>';
   modal('Banco de dados',corpo,'Fechar',function(){return true},'lg');
 }
+/* a nuvem já tem cadastro desta loja? */
+async function nuvemTemDados(){
+  try{
+    var l=NUVEM.loja;
+    var alvos=['categorias','produtos','categorias_financeiras','insumos','fichas_tecnicas','clientes'];
+    for(var i=0;i<alvos.length;i++){
+      var r=await api(alvos[i]+'?loja_id=eq.'+l+'&select=id&limit=1');
+      if(r&&r.length)return true;
+    }
+    return false;
+  }catch(e){return false}
+}
 async function ligarNuvem(){
   var e=$('nvE').value.trim(),s2=$('nvS').value;
   $('nvErr').textContent='';
   try{
     await conectarNuvem(e,s2);
     fecharModal();rodape();
-    toast('Nuvem ligada. Enviando seus dados...');
-    await sincronizar();
-    toast('Dados enviados para a nuvem.');
+    /* se a nuvem já tem dados, este aparelho RECEBE em vez de enviar
+       (evita duplicar os cadastros padrão de um aparelho novo) */
+    var nuvemTem=await nuvemTemDados();
+    if(nuvemTem){
+      toast('Nuvem ligada. Trazendo os dados...');
+      statusNuvem('baixando');
+      await baixarDaNuvem();
+      statusNuvem('ok');
+      if(S.mod&&S.it)abrir(S.mod,S.it);
+      toast('Este aparelho recebeu os dados da nuvem.');
+    }else{
+      toast('Nuvem ligada. Enviando seus dados...');
+      await sincronizar();
+      toast('Dados enviados para a nuvem.');
+    }
   }catch(err){
     var m=(err&&err.message)||'Falha ao conectar.';
     if(m.indexOf('Invalid login credentials')>=0)m='E-mail ou senha incorretos.';
