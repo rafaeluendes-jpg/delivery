@@ -3308,25 +3308,26 @@ async function enviar(tab,linhas){
   return out;
 }
 /* apaga na nuvem os registros que não existem mais neste aparelho */
-async function espelharExclusoes(tab,refs,loja){
+/* Só apaga na nuvem o que este aparelho realmente tinha e o usuário removeu.
+   Compara com a foto do último envio bem-sucedido: o que estava lá e sumiu daqui
+   foi excluído por você. O que nunca esteve na foto foi criado em outro
+   aparelho — e esse nunca é tocado. */
+async function apagarRemovidos(tab,chave,idsAgora){
   try{
-    if(refs.length>300)return;              /* lista grande: não arrisca */
-    var filtro=refs.length
-      ? '&ref_local=not.in.('+refs.map(function(r){return '"'+String(r).replace(/"/g,'')+'"'}).join(',')+')'
-      : '';
-    await api(tab+'?loja_id=eq.'+loja+filtro,'DELETE');
-  }catch(e){console.error('espelhar',tab,e);}
+    DB._snap=DB._snap||{};
+    var antes=DB._snap[chave]||null;
+    DB._snap[chave]=idsAgora.slice();
+    if(!antes)return;                       /* primeira vez: nada a comparar */
+    var sumiram=antes.filter(function(id){return idsAgora.indexOf(id)<0});
+    if(!sumiram.length)return;
+    if(sumiram.length>200)return;           /* segurança */
+    await api(tab+'?ref_local=in.('+sumiram.map(function(r){
+      return '"'+String(r).replace(/"/g,'')+'"'}).join(',')+')','DELETE');
+    logNuvem(tab+': '+sumiram.length+' excluído(s) por você');
+  }catch(e){console.error('apagarRemovidos',tab,e);logNuvem('aviso ao excluir em '+tab,true);}
 }
+
 /* apaga os itens de um pai que não existem mais neste aparelho */
-async function espelharFilhos(tab,campoPai,paiId,refs){
-  try{
-    if(refs.length>300)return;
-    var filtro=refs.length
-      ? '&ref_local=not.in.('+refs.map(function(r){return '"'+String(r).replace(/"/g,'')+'"'}).join(',')+')'
-      : '';
-    await api(tab+'?'+campoPai+'=eq.'+encodeURIComponent(paiId)+filtro,'DELETE');
-  }catch(e){console.error('espelhar filho',tab,e);logNuvem('aviso ao limpar '+tab,true);}
-}
 async function apagar(tab,campo,valor){
   try{ await api(tab+'?'+campo+'=eq.'+encodeURIComponent(valor),'DELETE'); }
   catch(e){ console.error('apagar',tab,e); }
@@ -3383,8 +3384,7 @@ async function sincronizar(){
       logNuvem(E2.tab+': '+linhas.length+' enviado(s), '+(salvos||[]).length+' confirmado(s)',
         (salvos||[]).length!==linhas.length);
       salvos.forEach(function(r){if(r.ref_local)_ids[r.ref_local]=r.id});
-      if(E2.espelha&&NUVEM.baixou)
-        await espelharExclusoes(E2.tab,lista.map(function(x){return x.id}),l);
+      if(E2.espelha)await apagarRemovidos(E2.tab,E2.col,lista.map(function(x){return x.id}));
 
       /* filhos (opções, itens, parcelas...) */
       if(E2.filhos)for(var f=0;f<E2.filhos.length;f++){
@@ -3412,7 +3412,7 @@ async function sincronizar(){
           /* só remove o que sumiu daqui — e apenas se este aparelho estiver atualizado.
              Antes ele apagava tudo e reinseria, o que fazia um aparelho
              desatualizado apagar o que o outro tinha acabado de criar. */
-          if(NUVEM.baixou)await espelharFilhos(F.tab,F.pai,paiId,refs);
+          await apagarRemovidos(F.tab,E2.col+'.'+F.lista+'.'+lista[k].id,refs);
         }
       }
 
@@ -3442,6 +3442,7 @@ async function sincronizar(){
 
     NUVEM.ultima=new Date();
     NUVEM.sujo=false;
+    DB._snapOk=true;
     gravarLocal();
     statusNuvem('ok');
     logNuvem('tudo enviado com sucesso');
@@ -3838,7 +3839,7 @@ function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span>Loja: <b>'+E(nomeLojaAtual())+'</b></span><span>|</span><span>Usuário: <b>Administrador</b></span>'+
 (extra?'<span>|</span><span>'+extra+'</span>':'')+
-'<span class="gw"></span><span class="logo"><em>N</em>NEXOR</span><span>V1.8.1</span>';
+'<span class="gw"></span><span class="logo"><em>N</em>NEXOR</span><span>V1.9.0</span>';
 }
 
 /* ===== BLOCO 7 — ROTEADOR ===== */
