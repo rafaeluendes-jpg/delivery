@@ -1877,6 +1877,19 @@ tbody td small{font-size:10.5px}
 .tagFicha{display:inline-block;margin-left:6px;font-size:9px;font-weight:700;padding:1px 5px;
   border-radius:3px;background:var(--blue-soft);color:var(--blue);vertical-align:middle}
 
+/* lista de fichas para vincular — linha simples, compacta */
+.fkTab{width:100%;border-collapse:collapse;font-size:12px}
+.fkTab tr{cursor:pointer;border-bottom:1px solid var(--line-2)}
+.fkTab tr:last-child{border-bottom:none}
+.fkTab tr:hover td{background:var(--alt)}
+.fkTab tr.on td{background:var(--acc-soft);color:var(--acc-d);font-weight:600}
+.fkTab td{padding:4px 8px;line-height:1.4;white-space:nowrap}
+.fkTab .fkCod{width:64px;color:var(--ink-3);font-size:10.5px;font-family:ui-monospace,Menlo,monospace}
+.fkTab .fkNm{width:auto;overflow:hidden;text-overflow:ellipsis;max-width:0}
+.fkTab .fkIng{width:62px;color:var(--ink-3);font-size:10.5px;text-align:right}
+.fkTab .fkCus{width:86px;text-align:right;font-variant-numeric:tabular-nums}
+.fkTab .fkOk{width:22px;color:var(--acc-d)}
+
 @media(max-width:1000px){
   .lfPeriodo{order:3;width:100%}
   .lfTopBtns{width:100%}
@@ -2837,6 +2850,19 @@ tbody td small{font-size:10.5px}
 
 .tagFicha{display:inline-block;margin-left:6px;font-size:9px;font-weight:700;padding:1px 5px;
   border-radius:3px;background:var(--blue-soft);color:var(--blue);vertical-align:middle}
+
+/* lista de fichas para vincular — linha simples, compacta */
+.fkTab{width:100%;border-collapse:collapse;font-size:12px}
+.fkTab tr{cursor:pointer;border-bottom:1px solid var(--line-2)}
+.fkTab tr:last-child{border-bottom:none}
+.fkTab tr:hover td{background:var(--alt)}
+.fkTab tr.on td{background:var(--acc-soft);color:var(--acc-d);font-weight:600}
+.fkTab td{padding:4px 8px;line-height:1.4;white-space:nowrap}
+.fkTab .fkCod{width:64px;color:var(--ink-3);font-size:10.5px;font-family:ui-monospace,Menlo,monospace}
+.fkTab .fkNm{width:auto;overflow:hidden;text-overflow:ellipsis;max-width:0}
+.fkTab .fkIng{width:62px;color:var(--ink-3);font-size:10.5px;text-align:right}
+.fkTab .fkCus{width:86px;text-align:right;font-variant-numeric:tabular-nums}
+.fkTab .fkOk{width:22px;color:var(--acc-d)}
 
 @media(max-width:1000px){
   .lgCard{grid-template-columns:1fr}.lgR{display:none}
@@ -3896,7 +3922,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V2.2.0';
+var VERSAO='V2.2.1';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
@@ -4233,13 +4259,14 @@ function vincularFicha(id){
       if(!q)return true;
       return (f.nome||'').toLowerCase().indexOf(q)>=0||String(f.codigo||'').indexOf(q)>=0;
     }).slice(0,30);
-    $('fLista').innerHTML=r.length?r.map(function(f){
-      return '<div class="pkIt'+(_fichaEscolhida===f.id?' on':'')+'" onclick="escolheFicha(\''+f.id+'\')">'+
-      (f.foto?'<img src="'+f.foto+'">':'<span class="ftMini vazio peq">'+sv('img',10)+'</span>')+
-      '<div><b>'+E(f.nome)+'</b><small>cód. '+E(f.codigo)+' · '+(f.itens||[]).length+' ingredientes · '+
-       'custo R$ '+money(custoPorVenda(f))+' por unidade</small></div>'+
-      (_fichaEscolhida===f.id?'<span class="pkOk">'+sv('check',13)+'</span>':'')+'</div>';
-    }).join(''):'<div class="hint" style="padding:12px">Nenhuma ficha encontrada.</div>';
+    $('fLista').innerHTML=r.length?('<table class="fkTab"><tbody>'+r.map(function(f){
+      return '<tr class="'+(_fichaEscolhida===f.id?'on':'')+'" onclick="escolheFicha(\''+f.id+'\')">'+
+      '<td class="fkCod">'+E(f.codigo)+'</td>'+
+      '<td class="fkNm">'+E(f.nome)+'</td>'+
+      '<td class="fkIng">'+(f.itens||[]).length+' ing.</td>'+
+      '<td class="fkCus">R$ '+money(custoPorVenda(f))+'</td>'+
+      '<td class="fkOk">'+(_fichaEscolhida===f.id?sv('check',12):'')+'</td></tr>';
+    }).join('')+'</tbody></table>'):'<div class="hint" style="padding:10px">Nenhuma ficha encontrada.</div>';
     mostraSel();
   }
   function mostraSel(){
