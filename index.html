@@ -1890,6 +1890,9 @@ tbody td small{font-size:10.5px}
 .fkTab .fkCus{width:86px;text-align:right;font-variant-numeric:tabular-nums}
 .fkTab .fkOk{width:22px;color:var(--acc-d)}
 
+.rtTag.novo{background:rgba(184,115,11,.22);border-color:rgba(184,115,11,.4);color:#F0C070}
+.rtTag.novo i{background:#E8A33D;animation:pulseRT 1.2s infinite}
+
 @media(max-width:1000px){
   .lfPeriodo{order:3;width:100%}
   .lfTopBtns{width:100%}
@@ -2863,6 +2866,9 @@ tbody td small{font-size:10.5px}
 .fkTab .fkIng{width:62px;color:var(--ink-3);font-size:10.5px;text-align:right}
 .fkTab .fkCus{width:86px;text-align:right;font-variant-numeric:tabular-nums}
 .fkTab .fkOk{width:22px;color:var(--acc-d)}
+
+.rtTag.novo{background:rgba(184,115,11,.22);border-color:rgba(184,115,11,.4);color:#F0C070}
+.rtTag.novo i{background:#E8A33D;animation:pulseRT 1.2s infinite}
 
 @media(max-width:1000px){
   .lgCard{grid-template-columns:1fr}.lgR{display:none}
@@ -3940,7 +3946,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V2.3.0';
+var VERSAO='V2.4.0';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
@@ -4677,15 +4683,39 @@ function agendarRecarga(tabela){
       statusNuvem('baixando');
       await baixarDaNuvem();
       statusNuvem('ok');
-      if(S.mod&&S.it)abrir(S.mod,S.it);
-      var ag=new Date();
-      if(ag-RT.ultimoAviso>8000){
-        RT.ultimoAviso=ag;
-        toast('Atualizado com o que mudou em outro aparelho.');
+      /* se você está no meio de algo, a tela NÃO é trocada.
+         Fica um aviso discreto e a atualização acontece quando você terminar. */
+      if(ocupado()){
+        RT.pendenteTela=true;
+        marcaNovidade(true);
+      }else{
+        if(S.mod&&S.it)abrir(S.mod,S.it);
+        marcaNovidade(false);
       }
     }catch(e){statusNuvem('erro','ao baixar: '+((e&&e.message)||''));}
   },1200);
 }
+/* está no meio de alguma coisa? então não mexemos na tela */
+function ocupado(){
+  if(document.getElementById('mdOv'))return true;      /* janela aberta */
+  if(document.getElementById('mdOv2'))return true;
+  var a=document.activeElement;
+  if(a&&/^(INPUT|SELECT|TEXTAREA)$/.test(a.tagName))return true;  /* digitando */
+  if(typeof PDV!=='undefined'&&PDV.comanda&&PDV.comanda.length)return true; /* venda em andamento */
+  return false;
+}
+/* avisa que tem novidade, sem atrapalhar */
+function marcaNovidade(tem){
+  var el=document.getElementById('rtTag');
+  if(el)el.classList.toggle('novo',!!tem);
+}
+/* quando você termina, a tela se atualiza sozinha */
+function aplicarPendente(){
+  if(!RT.pendenteTela||ocupado())return;
+  RT.pendenteTela=false;marcaNovidade(false);
+  if(S.mod&&S.it)abrir(S.mod,S.it);
+}
+setInterval(function(){ if(RT.pendenteTela)aplicarPendente(); },2500);
 function pintaTempoReal(){
   var el=document.getElementById('rtTag');
   if(!el)return;
@@ -5442,7 +5472,14 @@ function remPag(i){_pagos.splice(i,1);recalcPag();}
 
 function finalizarVenda(total,taxa,desc,pagos,fiscal,imprimir,entregadorId,fiado){
   var ag=new Date();
-  var primeira=(cfg().fases[0])||'aguardando';
+  var fs2=cfg().fases||[];
+  /* venda na frente de caixa já sai entregue — só delivery passa pelo fluxo */
+  var primeira;
+  if(PDV.tipo==='entrega'){
+    primeira=fs2[0]||'aguardando';
+  }else{
+    primeira=(fs2.indexOf('entregue')>=0)?'entregue':(fs2[fs2.length-1]||'entregue');
+  }
   var ped={
     id:uid('ped'),numero:(DB.pedidos.length+1),
     tipo:PDV.tipo,fase:primeira,
