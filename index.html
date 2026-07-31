@@ -3253,15 +3253,39 @@ function fk(col,ref){return ref&&_ids[ref]?_ids[ref]:null}
 function fkSub(ref){return ref&&_ids[ref]?_ids[ref]:null}
 
 /* ---- chamada direta ao banco (sem depender de biblioteca externa) ---- */
-async function api(caminho,metodo,corpo,extra){
+/* pega sempre a credencial vigente — ela expira e precisa ser renovada */
+async function tokenAtual(forcar){
+  try{
+    if(!NUVEM.cli)return NUVEM.token;
+    if(forcar){
+      var rr=await NUVEM.cli.auth.refreshSession();
+      if(rr&&rr.data&&rr.data.session)NUVEM.token=rr.data.session.access_token;
+    }else{
+      var r=await NUVEM.cli.auth.getSession();
+      if(r&&r.data&&r.data.session)NUVEM.token=r.data.session.access_token;
+    }
+    if(NUVEM.token&&NUVEM.cli.realtime&&NUVEM.cli.realtime.setAuth)
+      NUVEM.cli.realtime.setAuth(NUVEM.token);
+  }catch(e){}
+  return NUVEM.token;
+}
+async function api(caminho,metodo,corpo,extra,_repetiu){
   var h={'apikey':NUVEM.chave,'Content-Type':'application/json'};
   if(NUVEM.token)h['Authorization']='Bearer '+NUVEM.token;
   if(extra)for(var k in extra)h[k]=extra[k];
   var r=await fetch(NUVEM.url+'/rest/v1/'+caminho,{method:metodo||'GET',headers:h,
     body:corpo?JSON.stringify(corpo):undefined});
   var t=await r.text();
-  var d=t?JSON.parse(t):null;
-  if(!r.ok)throw new Error((d&&(d.message||d.hint))||('erro '+r.status));
+  var d=null;
+  try{ d=t?JSON.parse(t):null; }catch(e){ d=null; }
+  if(!r.ok){
+    /* credencial vencida: renova e tenta uma vez */
+    if((r.status===401||r.status===403)&&!_repetiu){
+      await tokenAtual(true);
+      return api(caminho,metodo,corpo,extra,true);
+    }
+    throw new Error((d&&(d.message||d.hint))||('erro '+r.status));
+  }
   return d;
 }
 /* grava (insere ou atualiza) pelo ref_local e devolve os ids */
@@ -3287,13 +3311,15 @@ async function espelharExclusoes(tab,refs,loja){
   }catch(e){console.error('espelhar',tab,e);}
 }
 async function apagar(tab,campo,valor){
-  await api(tab+'?'+campo+'=eq.'+encodeURIComponent(valor),'DELETE');
+  try{ await api(tab+'?'+campo+'=eq.'+encodeURIComponent(valor),'DELETE'); }
+  catch(e){ console.error('apagar',tab,e); }
 }
 
 /* ---- sincronização completa ---- */
 async function sincronizar(){
   if(!NUVEM.ligada||NUVEM.sincronizando){NUVEM.pendente=true;return;}
   NUVEM.sincronizando=true;statusNuvem('enviando');pausaTempoReal(6000);
+  await tokenAtual();
   var etapa='';
   try{
     var l=NUVEM.loja;
@@ -3388,6 +3414,7 @@ async function sincronizar(){
 
 /* ---- trazer da nuvem ---- */
 async function baixarDaNuvem(){
+  await tokenAtual();
   var l=NUVEM.loja,q='?loja_id=eq.'+l+'&select=*';
   /* se a nuvem responder vazio mas houver dados aqui, mantém os daqui */
   function volta(linhas,fn,atual){
@@ -3755,7 +3782,7 @@ function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span>Loja: <b>'+E(nomeLojaAtual())+'</b></span><span>|</span><span>Usuário: <b>Administrador</b></span>'+
 (extra?'<span>|</span><span>'+extra+'</span>':'')+
-'<span class="gw"></span><span class="logo"><em>N</em>NEXOR</span><span>V1.5.0</span>';
+'<span class="gw"></span><span class="logo"><em>N</em>NEXOR</span><span>V1.6.0</span>';
 }
 
 /* ===== BLOCO 7 — ROTEADOR ===== */
