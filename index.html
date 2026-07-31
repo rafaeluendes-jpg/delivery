@@ -3392,19 +3392,22 @@ async function sincronizar(){
       var E2=MAPA[m];
       etapa=E2.tab;
       var lista=DB[E2.col]||[];
-      if(!lista.length)continue;
 
-      var linhas=lista.map(function(x,i){
-        var o=E2.campos(x,i);
-        o.loja_id=l;
-        o.ref_local=x.id;
-        return o;
-      });
-      var salvos=await enviar(E2.tab,linhas);
-      logNuvem(E2.tab+': '+linhas.length+' enviado(s), '+(salvos||[]).length+' confirmado(s)',
-        (salvos||[]).length!==linhas.length);
-      salvos.forEach(function(r){if(r.ref_local)_ids[r.ref_local]=r.id});
+      if(lista.length){
+        var linhas=lista.map(function(x,i){
+          var o=E2.campos(x,i);
+          o.loja_id=l;
+          o.ref_local=x.id;
+          return o;
+        });
+        var salvos=await enviar(E2.tab,linhas);
+        logNuvem(E2.tab+': '+linhas.length+' enviado(s), '+(salvos||[]).length+' confirmado(s)',
+          (salvos||[]).length!==linhas.length);
+        salvos.forEach(function(r){if(r.ref_local)_ids[r.ref_local]=r.id});
+      }
+      /* roda mesmo com a lista vazia — senão apagar o último item nunca chega na nuvem */
       if(E2.espelha)await apagarRemovidos(E2.tab,E2.col,lista.map(function(x){return x.id}));
+      if(!lista.length)continue;
 
       /* filhos (opções, itens, parcelas...) */
       if(E2.filhos)for(var f=0;f<E2.filhos.length;f++){
@@ -3568,7 +3571,7 @@ async function baixarDaNuvem(forcar){
       ordem:x.ordem||0,imagem:x.imagem_url,pesado:!!x.pesado,variacao:!!x.variacao,
       nomeOnline:x.nome_online,disponivel:x.disponivel||{},promocoes:x.promocoes||[],
       grupos:g,vinculaEstoque:!!x.vincula_estoque,
-      fichaId:mapaFi[x.ficha_id]||'',insumoId:mapaIns[x.insumo_id]||'',
+      _fichaUid:x.ficha_id||'',_insumoUid:x.insumo_id||'',
       insumoQtd:Number(x.insumo_qtd)||0,insumoUn:x.insumo_un||''};});
   var cfgS=await api('config_loja?loja_id=eq.'+l+'&select=*');
   if(cfgS&&cfgS[0]){var c3=cfg();
@@ -3620,6 +3623,14 @@ async function baixarDaNuvem(forcar){
       (c4.subs=c4.subs||[]).push({id:f.subgrupoId,nome:f.subgrupoNome||f.subgrupoId});
   });
 
+  /* agora que fichas e insumos existem, liga cada produto ao seu vínculo de estoque */
+  var mapaFi={};ft.forEach(function(x){mapaFi[x.id]=x.ref_local||x.id});
+  (DB.produtos||[]).forEach(function(p){
+    p.fichaId=mapaFi[p._fichaUid]||'';
+    p.insumoId=mapaIns[p._insumoUid]||'';
+    delete p._fichaUid;delete p._insumoUid;
+  });
+
   var mv=await api('motivos_movimentacao'+qs);
   var mapaMt={};mv.forEach(function(x){mapaMt[x.id]=x.ref_local||x.id});
   DB.motivosMov=volta(mv,function(x){return {id:x.ref_local||x.id,nome:x.nome,tipo:x.tipo,
@@ -3653,7 +3664,6 @@ async function baixarDaNuvem(forcar){
       valor:Number(m2.valor)||0,motivo:m2.motivo,responsavel:m2.responsavel,quando:m2.criado_em}})}});
 
   var mapaCx={};cx.forEach(function(x){mapaCx[x.id]=x.ref_local||x.id});
-  var mapaFi={};ft.forEach(function(x){mapaFi[x.id]=x.ref_local||x.id});
   var mapaCli={};cl.forEach(function(x){mapaCli[x.id]=x.ref_local||x.id});
   var mapaEnt={};en.forEach(function(x){mapaEnt[x.id]=x.ref_local||x.id});
   var mapaPr={};rp.forEach(function(x){mapaPr[x.id]=x.ref_local||x.id});
@@ -3868,7 +3878,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V2.0.0';
+var VERSAO='V2.1.0';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
