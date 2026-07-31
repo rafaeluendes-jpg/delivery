@@ -3021,7 +3021,8 @@ function gravarLocal(){
 }
 function salvar(){
   gravarLocal();                     /* sempre grava no aparelho (rede caindo nao perde dado) */
-  if(NUVEM.ligada){NUVEM.sujo=true;agendarSync();}
+  if(NUVEM.ligada){NUVEM.sujo=true;logNuvem('mudança salva aqui — envio agendado');agendarSync();}
+  else logNuvem('mudança salva aqui (nuvem desligada)');
 }
 /* registro do que acontece na sincronização, para diagnóstico */
 function logNuvem(txt,erro){
@@ -3333,7 +3334,21 @@ async function apagar(tab,campo,valor){
 
 /* ---- sincronização completa ---- */
 async function sincronizar(){
-  if(!NUVEM.ligada||NUVEM.sincronizando){NUVEM.pendente=true;return;}
+  if(!NUVEM.ligada){logNuvem('envio cancelado: nuvem desligada',true);return;}
+  if(NUVEM.sincronizando){
+    NUVEM.pendente=true;
+    logNuvem('envio adiado: já havia um em andamento');
+    /* trava de segurança: se ficar preso, libera e tenta de novo */
+    clearTimeout(NUVEM._destrava);
+    NUVEM._destrava=setTimeout(function(){
+      if(NUVEM.sincronizando){
+        NUVEM.sincronizando=false;
+        logNuvem('envio anterior travou — liberando e tentando de novo',true);
+        agendarSync();
+      }
+    },15000);
+    return;
+  }
   NUVEM.sincronizando=true;statusNuvem('enviando');pausaTempoReal(6000);
   await tokenAtual();
   logNuvem('enviando...');
@@ -3381,6 +3396,7 @@ async function sincronizar(){
           var filhos=lista[k][F.lista]||[];
           var refs=filhos.map(function(o,j){return (lista[k].id)+'_'+(o.id||j)});
 
+          if(!filhos.length)logNuvem(F.tab+': nenhum item para enviar em "'+(lista[k].nome||'')+'"');
           if(filhos.length){
             var lf=filhos.map(function(o,j){
               var y=F.campos(o,j);
@@ -3449,6 +3465,8 @@ async function baixarDaNuvem(forcar){
     logNuvem('download adiado: há mudanças ainda não enviadas');
     return;
   }
+  var antesCat=(DB.catfin||[]).reduce(function(a,p){return a+((p.itens||[]).length)},0);
+  logNuvem('baixando da nuvem...');
   await tokenAtual();
   var l=NUVEM.loja,q='?loja_id=eq.'+l+'&select=*';
   /* se a nuvem responder vazio mas houver dados aqui, mantém os daqui */
@@ -3649,6 +3667,9 @@ async function baixarDaNuvem(forcar){
     contaId:mapaConta[x.conta_id]||'',obs:x.observacao||'',pedidoId:mapaPed[x.pedido_id]||''}});
 
   NUVEM.baixou=true;   /* daqui em diante este aparelho pode espelhar exclusões */
+  var depoisCat=(DB.catfin||[]).reduce(function(a,p){return a+((p.itens||[]).length)},0);
+  logNuvem('download concluído — itens de categorias: '+antesCat+' -> '+depoisCat,
+    depoisCat<antesCat);
 
   gravarLocal();
 }
@@ -3817,7 +3838,7 @@ function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span>Loja: <b>'+E(nomeLojaAtual())+'</b></span><span>|</span><span>Usuário: <b>Administrador</b></span>'+
 (extra?'<span>|</span><span>'+extra+'</span>':'')+
-'<span class="gw"></span><span class="logo"><em>N</em>NEXOR</span><span>V1.8.0</span>';
+'<span class="gw"></span><span class="logo"><em>N</em>NEXOR</span><span>V1.8.1</span>';
 }
 
 /* ===== BLOCO 7 — ROTEADOR ===== */
