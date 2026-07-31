@@ -3228,7 +3228,8 @@ var MAPA=[
     subcategoria_id:fkSub(x.catFinId),controla_estoque:x.controlaEstoque!==false,
     compoe_cmv:x.compoeCMV!==false,estoque_min:n(x.estoqueMin),estoque_atual:n(x.estoqueAtual),
     fator:n(x.fator)||1,custo:n(x.custo),custo_ultima:n(x.custoUltima),modo_custo:x.modoCusto||'manual',
-    fornecedor_id:fk('fornec',x.fornecedorId),descricao:x.descricao||null}}},
+    fornecedor_id:fk('fornec',x.fornecedorId),descricao:x.descricao||null,
+    gelato_venda:!!x.gelatoVenda}}},
 
  {col:'fichaCats', espelha:true,   tab:'ficha_grupos',
   campos:function(x){return {nome:x.nome,
@@ -3244,7 +3245,7 @@ var MAPA=[
     origem:x.origem||null,cst:x.cst||null,aliquota:n(x.aliquota),lojas:x.lojas||[],
     destino_id:fk('insumos',x.destinoId)||fk('fichas',x.destinoId),
     destino_fator:n(x.destinoFator)||1,estoque_atual:n(x.estoqueAtual),
-    custo_medio:n(x.custoMedio)}},
+    custo_medio:n(x.custoMedio),destino_nome:x.destinoNome||null}},
   filhos:[{lista:'itens',tab:'ficha_itens',pai:'ficha_id',
     campos:function(o){return {insumo_id:fk('insumos',o.insumoId),quantidade:n(o.qtd),
       unidade:o.unidade||'un',perda:n(o.perda)}}}]},
@@ -3471,6 +3472,10 @@ async function sincronizar(){
         if(vistosId[x.id])return;
         /* repetido pelo nome dentro do mesmo cadastro: fica o que tem mais conteúdo */
         var chave=(x.nome||x.codigo||'').toString().trim().toLowerCase();
+        /* item usado como destino de produção nunca é descartado */
+        var ehDestino=(DB.fichas||[]).some(function(ff){return ff.destinoId===x.id})
+          ||(DB.fichaCats||[]).some(function(cc){return cc.destinoId===x.id});
+        if(ehDestino){vistosId[x.id]=true;limpa.push(x);return;}
         if(chave&&E3.espelha){
           var ant=vistosNome[chave];
           if(ant!==undefined){
@@ -3709,7 +3714,8 @@ async function baixarDaNuvem(forcar){
     modoCusto:x.modo_custo||'manual',grupoId:mapaGi[x.grupo_id]||'',
     catFinId:mapaSub[x.subcategoria_id]||'',controlaEstoque:x.controla_estoque!==false,
     compoeCMV:x.compoe_cmv!==false,estoqueMin:Number(x.estoque_min)||0,
-    estoqueAtual:Number(x.estoque_atual)||0,custoMedio:Number(x.custo_medio)||0,fator:Number(x.fator)||1,
+    estoqueAtual:Number(x.estoque_atual)||0,custoMedio:Number(x.custo_medio)||0,
+    destinoNome:x.destino_nome||'',fator:Number(x.fator)||1,
     fornecedorId:mapaFo[x.fornecedor_id]||'',descricao:x.descricao||'',
     compras:x.compras||[],gelatoVenda:!!x.gelato_venda}});
 
@@ -3730,6 +3736,7 @@ async function baixarDaNuvem(forcar){
     origem:x.origem||'',cst:x.cst||'',aliquota:Number(x.aliquota)||0,lojas:x.lojas||[],
     destinoId:mapaIns[x.destino_id]||mapaFiRef[x.destino_id]||'',destinoFator:Number(x.destino_fator)||1,
     estoqueAtual:Number(x.estoque_atual)||0,custoMedio:Number(x.custo_medio)||0,
+    destinoNome:x.destino_nome||'',
     itens:(x.ficha_itens||[]).map(function(i2){return {insumoId:mapaIns[i2.insumo_id]||'',
       qtd:Number(i2.quantidade)||0,unidade:i2.unidade||'un',perda:Number(i2.perda)||0}})}});
   /* reconstrói os subgrupos a partir das fichas */
@@ -4001,7 +4008,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V2.9.1';
+var VERSAO='V3.0.0';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
@@ -9928,6 +9935,8 @@ function modalFicha(id){
       ncm:$('ftNc').value.trim(),cfop:$('ftCf').value.trim(),cest:$('ftCe').value.trim(),
       origem:$('ftOr').value,cst:$('ftCs').value.trim(),aliquota:parseFloat($('ftAl').value)||0,lojas:ls,
       destinoId:$('ftDest')?$('ftDest').value:'',
+      destinoNome:(function(){var d=$('ftDest');if(!d)return '';
+        var o=d.options[d.selectedIndex];return o?o.text:'';})(),
       destinoFator:parseFloat(($('ftFat')||{}).value)||1};
     if(f)Object.assign(f,o);
     else{o.id=uid('fi');o.itens=[];o.rendimento=1;o.rendUnidade=o.unidade;DB.fichas.push(o);FT.sel=o.id;}
@@ -10288,9 +10297,13 @@ function baseMov(){
     DB.motivosMov.push({id:'mv_cont',nome:'Contagem de estoque',tipo:'entrada',sistema:true,ativo:true,lojas:[]});
   lojasCad();
   DB.motivosMov.forEach(function(m){if(!m.lojas)m.lojas=[]});
+  repararDestinos();
   recalcCustoProducao();
   /* item de estoque que recebe a produção de gelato */
-  if(!(DB.insumos||[]).some(function(i){return i.gelatoVenda})){
+  var jaTem=(DB.insumos||[]).find(function(i){
+    return i.gelatoVenda||String(i.nome||'').toLowerCase()==='gelato venda';});
+  if(jaTem&&!jaTem.gelatoVenda)jaTem.gelatoVenda=true;
+  if(!jaTem){
     var g=(DB.gruposIng||[])[0]||{id:'gi_ins'};
     DB.insumos.push({id:'ins_gelato_venda',codigo:'900001',nome:'Gelato Venda',unidade:'kg',
       custo:15,modoCusto:'manual',grupoId:g.id,controlaEstoque:true,compoeCMV:true,
@@ -10377,6 +10390,33 @@ function custoDoItem(it){
      ficha comum usa o custo da própria receita */
   if(Number(it.custoMedio)>0)return Number(it.custoMedio);
   return custoPorUnidade(it);
+}
+/* Se um vínculo aponta para um item que não existe mais, religa pelo nome.
+   Sem isso, a produção baixa os ingredientes e não gera nada — em silêncio. */
+function repararDestinos(){
+  var porNome={};
+  (DB.insumos||[]).forEach(function(i){porNome[String(i.nome||'').toLowerCase()]=i.id});
+  (DB.fichas||[]).forEach(function(f){porNome[String(f.nome||'').toLowerCase()]=f.id});
+  var consertados=0;
+  function conserta(o){
+    if(!o||!o.destinoId||o.destinoId==='__nenhum')return;
+    if(itemEstoque(o.destinoId))return;                 /* está válido */
+    var alvo=porNome[String(o.destinoNome||'').toLowerCase()];
+    if(!alvo&&/gelato/i.test(o.nome||''))alvo=porNome['gelato venda'];
+    if(alvo){o.destinoId=alvo;consertados++;}
+  }
+  (DB.fichas||[]).forEach(conserta);
+  (DB.fichaCats||[]).forEach(function(c){
+    if(!c.destinoId)return;
+    if(itemEstoque(c.destinoId))return;
+    var alvo=porNome['gelato venda'];
+    if(alvo){c.destinoId=alvo;consertados++;}
+  });
+  if(consertados){
+    salvar();
+    if(typeof logNuvem==='function')logNuvem(consertados+' vínculo(s) de produção religado(s)');
+  }
+  return consertados;
 }
 function destinoDaFicha(f){
   if(!f)return null;
@@ -10506,6 +10546,7 @@ function aplicarMovimento(mov,desfazer){
       if(!ins.modoCusto)ins.modoCusto='manual';
     }
   });
+  repararDestinos();
   recalcCustoProducao();
 }
 /* gera as linhas a partir dos itens lançados */
