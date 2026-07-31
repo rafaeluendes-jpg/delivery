@@ -1919,6 +1919,8 @@ tbody td small{font-size:10.5px}
 .semDest{display:inline-block;font-size:10.5px;padding:2px 7px;border-radius:3px;
   background:var(--alt);color:var(--ink-3);border:1px dashed var(--line)}
 
+.fmVal.dest7{background:var(--acc-soft);border-color:var(--acc);color:var(--acc-d);font-weight:700}
+
 @media(max-width:1000px){
   .lfPeriodo{order:3;width:100%}
   .lfTopBtns{width:100%}
@@ -2921,6 +2923,8 @@ tbody td small{font-size:10.5px}
   background:var(--acc-soft);color:var(--acc-d)}
 .semDest{display:inline-block;font-size:10.5px;padding:2px 7px;border-radius:3px;
   background:var(--alt);color:var(--ink-3);border:1px dashed var(--line)}
+
+.fmVal.dest7{background:var(--acc-soft);border-color:var(--acc);color:var(--acc-d);font-weight:700}
 
 @media(max-width:1000px){
   .lgCard{grid-template-columns:1fr}.lgR{display:none}
@@ -4042,7 +4046,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V3.5.0';
+var VERSAO='V3.5.1';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
