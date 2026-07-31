@@ -1897,6 +1897,10 @@ tbody td small{font-size:10.5px}
 .destInfo svg{flex:none}
 .destInfo .vr{color:var(--red);display:flex;align-items:center;gap:4px}
 
+.chkL.semOp{background:var(--alt);border:1px dashed var(--line);border-radius:6px;padding:8px 10px;margin-bottom:6px}
+.ntDica{font-size:11.5px;color:var(--ink-2);display:flex;align-items:center;gap:6px}
+.ntDica svg{color:var(--acc-d);flex:none}
+
 @media(max-width:1000px){
   .lfPeriodo{order:3;width:100%}
   .lfTopBtns{width:100%}
@@ -2877,6 +2881,10 @@ tbody td small{font-size:10.5px}
 .destInfo{font-size:10.5px;color:var(--acc-d);margin-top:3px;display:flex;align-items:center;gap:4px}
 .destInfo svg{flex:none}
 .destInfo .vr{color:var(--red);display:flex;align-items:center;gap:4px}
+
+.chkL.semOp{background:var(--alt);border:1px dashed var(--line);border-radius:6px;padding:8px 10px;margin-bottom:6px}
+.ntDica{font-size:11.5px;color:var(--ink-2);display:flex;align-items:center;gap:6px}
+.ntDica svg{color:var(--acc-d);flex:none}
 
 @media(max-width:1000px){
   .lgCard{grid-template-columns:1fr}.lgR{display:none}
@@ -3956,7 +3964,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V2.5.0';
+var VERSAO='V2.6.0';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
@@ -5201,6 +5209,11 @@ function modalOpcoes(p,grupos){
     '<h3>'+E(g.nome)+(g.forcado?' <span class="tagF">obrigatório</span>':'')+
     '<small>escolha de '+(g.min||0)+' a '+(g.max||1)+'</small></h3>';
     if(!(g.opcoes||[]).length)h+='<div class="hint">Sem opções cadastradas neste grupo.</div>';
+    /* a pergunta é obrigatória responder, mas a resposta pode ser "não quero" */
+    if(g.forcado)
+      h+='<label class="chkL semOp"><input type="radio" name="g'+gi+'" class="opNao" '+
+      'data-g="'+g.id+'" checked><span><b>Não quero</b>'+
+      '<small style="display:block;color:var(--ink-3)">nada é acrescentado ao pedido</small></span></label>';
     (g.opcoes||[]).forEach(function(o,oi){
       h+='<label class="chkL"><input type="'+((g.max||1)>1?'checkbox':'radio')+'" name="g'+gi+'" '+
       'class="opSel" data-g="'+g.id+'" data-i="'+oi+'">'+
@@ -5225,8 +5238,14 @@ function modalOpcoes(p,grupos){
     for(var k=0;k<grupos.length;k++){
       var G=grupos[k];
       var qtd=esc.filter(function(e){return e.grupo===G.id}).length;
-      if(G.forcado&&qtd<Math.max(1,G.min||1)){toast('Escolha em "'+G.nome+'" — é pergunta obrigatória.');return false;}
-      if((G.min||0)>qtd){toast('"'+G.nome+'" exige no mínimo '+G.min+'.');return false;}
+      /* respondeu "não quero"? então a pergunta está respondida */
+      var recusou=false;
+      var nao=document.querySelectorAll('.opNao');
+      for(var z=0;z<nao.length;z++)
+        if(nao[z].getAttribute('data-g')===G.id&&nao[z].checked)recusou=true;
+      if(recusou)continue;
+      if(G.forcado&&qtd<1){toast('Responda "'+G.nome+'" — escolha uma opção ou marque Não quero.');return false;}
+      if((G.min||0)>qtd&&qtd>0){toast('"'+G.nome+'" exige no mínimo '+G.min+'.');return false;}
       if(qtd>(G.max||1)){toast('"'+G.nome+'" permite no máximo '+G.max+'.');return false;}
     }
     lancar(p,esc,parseInt($('qtIt').value)||1,$('obsIt').value);
@@ -9238,7 +9257,8 @@ function modalInsumo(id,copia){
   '<div class="blk" style="margin:0 0 11px;max-width:none"><h3>Controles</h3>'+
   '<div class="row2">'+
    '<label class="optCard"><input type="checkbox" id="isCe" '+(!i||i.controlaEstoque!==false?'checked':'')+'>'+
-   '<span><b>Controla estoque</b><span>entra e sai do estoque nas compras e nas vendas</span></span></label>'+
+   '<span><b>Controla estoque</b><span>entra pela nota de entrada e sai nas vendas e produções. '+
+   'Desmarcado, o item aparece na nota mas não movimenta estoque.</span></span></label>'+
    '<label class="optCard"><input type="checkbox" id="isCm" '+(!i||i.compoeCMV!==false?'checked':'')+'>'+
    '<span><b>Compõe CMV</b><span>entra no custo da mercadoria vendida nos relatórios</span></span></label>'+
   '</div>'+
@@ -11938,8 +11958,8 @@ function desenhaNota(){
      '<span>Busque a mercadoria acima, informe quantidade e valor e clique em Ok.</span></td></tr>')+
     '</tbody></table></div>'+
    '<div class="ntRod">'+
-    '<label class="chkL" style="margin:0"><input type="checkbox" id="ntReceber" checked>'+
-    '<span>Receber — dar entrada no estoque</span></label>'+
+    '<span class="ntDica">'+sv('help',13)+' A entrada no estoque segue o cadastro de cada item '+
+    '(campo <b>Controla estoque</b> no ingrediente).</span>'+
     '<div style="flex:1"></div>'+
     '<div class="ntTot"><span>Valor mercadorias</span><b>R$ '+money(merc)+'</b></div>'+
     '<div class="ntTot dest6"><span>Valor total da nota</span><b>R$ '+money(merc)+'</b></div>'+
@@ -11974,7 +11994,7 @@ function guardarCabNota(){
   }
   if($('ntNum'))_nota.numero=$('ntNum').value;
   if($('ntData'))_nota.data=$('ntData').value;
-  if($('ntReceber'))_nota.receber=$('ntReceber').checked;
+  _nota.receber=true;
 }
 /* janela de seleção de mercadoria */
 var _selBusca='';
@@ -12097,16 +12117,21 @@ function finalizarNota(lancs){
 
   /* entrada no estoque */
   if(n.receber){
-    var linhas=n.itens.map(function(it){
+    var linhas=n.itens.filter(function(it){
+      var i2=insumo(it.insumoId);
+      return i2&&i2.controlaEstoque!==false;      /* respeita o cadastro do ingrediente */
+    }).map(function(it){
       return {insumoId:it.insumoId,nome:it.nome,unidade:it.unidade,qtd:it.qtd,
         custo:+(it.total/it.qtd).toFixed(6),direcao:'entrada',origem:'nota'};
     });
-    var mov={id:uid('mv'),data:n.data,hora:n.hora,motivoId:'mv_nota',
-      identificacao:'NF '+n.numero,obs:n.fornecedorNome,linhas:linhas,
-      origem:'nota',notaId:n.id};
-    DB.movEst.push(mov);
-    aplicarMovimento(mov);
-    n.movId=mov.id;
+    if(linhas.length){
+      var mov={id:uid('mv'),data:n.data,hora:n.hora,motivoId:'mv_nota',
+        identificacao:'NF '+n.numero,obs:n.fornecedorNome,linhas:linhas,
+        origem:'nota',notaId:n.id};
+      DB.movEst.push(mov);
+      aplicarMovimento(mov);
+      n.movId=mov.id;
+    }
     n.itens.forEach(function(it){
       var i2=insumo(it.insumoId);
       if(!i2)return;
