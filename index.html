@@ -1893,6 +1893,10 @@ tbody td small{font-size:10.5px}
 .rtTag.novo{background:rgba(184,115,11,.22);border-color:rgba(184,115,11,.4);color:#F0C070}
 .rtTag.novo i{background:#E8A33D;animation:pulseRT 1.2s infinite}
 
+.destInfo{font-size:10.5px;color:var(--acc-d);margin-top:3px;display:flex;align-items:center;gap:4px}
+.destInfo svg{flex:none}
+.destInfo .vr{color:var(--red);display:flex;align-items:center;gap:4px}
+
 @media(max-width:1000px){
   .lfPeriodo{order:3;width:100%}
   .lfTopBtns{width:100%}
@@ -2870,6 +2874,10 @@ tbody td small{font-size:10.5px}
 .rtTag.novo{background:rgba(184,115,11,.22);border-color:rgba(184,115,11,.4);color:#F0C070}
 .rtTag.novo i{background:#E8A33D;animation:pulseRT 1.2s infinite}
 
+.destInfo{font-size:10.5px;color:var(--acc-d);margin-top:3px;display:flex;align-items:center;gap:4px}
+.destInfo svg{flex:none}
+.destInfo .vr{color:var(--red);display:flex;align-items:center;gap:4px}
+
 @media(max-width:1000px){
   .lgCard{grid-template-columns:1fr}.lgR{display:none}
   .cardWrap{grid-template-columns:1fr;overflow-y:auto}
@@ -3189,7 +3197,7 @@ var MAPA=[
     fornecedor_id:fk('fornec',x.fornecedorId),descricao:x.descricao||null}}},
 
  {col:'fichaCats', espelha:true,   tab:'ficha_grupos',
-  campos:function(x){return {nome:x.nome}}},
+  campos:function(x){return {nome:x.nome,destino_id:fk('insumos',x.destinoId)}}},
 
  {col:'fichas', espelha:true,      tab:'fichas_tecnicas',
   campos:function(x){return {nome:x.nome,codigo:x.codigo||null,grupo_id:fk('fichaCats',x.categoriaId),
@@ -3198,7 +3206,8 @@ var MAPA=[
     unidades_venda:n(x.unidadesVenda),preco:n(x.preco),receita:x.receita||null,
     tempo:n(x.tempo),validade:n(x.validade),temperatura:x.temperatura||null,
     observacao:x.obs||null,foto:x.foto||null,ncm:x.ncm||null,cfop:x.cfop||null,cest:x.cest||null,
-    origem:x.origem||null,cst:x.cst||null,aliquota:n(x.aliquota),lojas:x.lojas||[]}},
+    origem:x.origem||null,cst:x.cst||null,aliquota:n(x.aliquota),lojas:x.lojas||[],
+    destino_id:fk('insumos',x.destinoId),destino_fator:n(x.destinoFator)||1}},
   filhos:[{lista:'itens',tab:'ficha_itens',pai:'ficha_id',
     campos:function(o){return {insumo_id:fk('insumos',o.insumoId),quantidade:n(o.qtd),
       unidade:o.unidade||'un',perda:n(o.perda)}}}]},
@@ -3681,6 +3690,7 @@ async function baixarDaNuvem(forcar){
     receita:x.receita||'',tempo:x.tempo||0,validade:x.validade||0,temperatura:x.temperatura||'',
     obs:x.observacao||'',foto:x.foto||'',ncm:x.ncm||'',cfop:x.cfop||'',cest:x.cest||'',
     origem:x.origem||'',cst:x.cst||'',aliquota:Number(x.aliquota)||0,lojas:x.lojas||[],
+    destinoId:mapaIns[x.destino_id]||'',destinoFator:Number(x.destino_fator)||1,
     itens:(x.ficha_itens||[]).map(function(i2){return {insumoId:mapaIns[i2.insumo_id]||'',
       qtd:Number(i2.quantidade)||0,unidade:i2.unidade||'un',perda:Number(i2.perda)||0}})}});
   /* reconstrói os subgrupos a partir das fichas */
@@ -3946,7 +3956,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V2.4.0';
+var VERSAO='V2.5.0';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
@@ -9796,6 +9806,24 @@ function modalFicha(id){
     '<option value="">Não vincular</option>'+
     subs.map(function(x){return '<option value="'+x.id+'"'+(f&&f.contaId===x.id?' selected':'')+'>'+E(x.nome)+'</option>'}).join('')+
    '</select></div>'+
+   '</div>'+
+   '<div class="blk" style="margin:11px 0 0;max-width:none"><h3>O que a produção gera</h3>'+
+   '<div class="hint" style="margin-bottom:10px">Ao produzir esta ficha, o estoque entra neste item. '+
+   'Ex.: todo sabor de gelato gera <b>Gelato Venda</b>; a massa de cascão gera <b>Cascão</b>.</div>'+
+   '<div class="row2">'+
+    '<div class="fld2" style="margin:0"><label>Gerar estoque em</label><select id="ftDest">'+
+     '<option value="">Usar o padrão do grupo'+
+      ((catFicha(f?f.categoriaId:'')||{}).destinoId
+        ? ' ('+E((insumo((catFicha(f.categoriaId)||{}).destinoId)||{}).nome||'')+')' : ' (nenhum)')+'</option>'+
+     '<option value="__nenhum"'+(f&&f.destinoId==='__nenhum'?' selected':'')+'>Não gerar estoque</option>'+
+     (DB.insumos||[]).slice().sort(function(a,b){return a.nome.localeCompare(b.nome)}).map(function(i){
+       return '<option value="'+i.id+'"'+(f&&f.destinoId===i.id?' selected':'')+'>'+E(i.nome)+'</option>'}).join('')+
+    '</select></div>'+
+    '<div class="fld2" style="margin:0"><label>Quanto gera por unidade produzida</label>'+
+     '<input id="ftFat" type="number" step="0.0001" value="'+(f?(f.destinoFator||1):1)+'">'+
+     '<div class="hint">1 = mesma quantidade. Ex.: 1 kg de massa que vira 40 cascões, informe 40.</div></div>'+
+   '</div></div>'+
+   '<div class="blk" style="margin:11px 0 0;max-width:none">'+
    '<label class="chkL"><input type="checkbox" id="ftEs" '+(!f||f.estocavel!==false?'checked':'')+'><span>Estocável</span></label>'+
    '<label class="chkL"><input type="checkbox" id="ftDv2" '+(f&&f.disponivelVenda?'checked':'')+'><span>Disponível para venda</span></label>'+
    '</div></div>'+
@@ -9830,7 +9858,9 @@ function modalFicha(id){
       categoriaId:$('ftG').value,subgrupoId:$('ftSg').value,contaId:$('ftGc').value,
       estocavel:$('ftEs').checked,disponivelVenda:$('ftDv2').checked,
       ncm:$('ftNc').value.trim(),cfop:$('ftCf').value.trim(),cest:$('ftCe').value.trim(),
-      origem:$('ftOr').value,cst:$('ftCs').value.trim(),aliquota:parseFloat($('ftAl').value)||0,lojas:ls};
+      origem:$('ftOr').value,cst:$('ftCs').value.trim(),aliquota:parseFloat($('ftAl').value)||0,lojas:ls,
+      destinoId:$('ftDest')?$('ftDest').value:'',
+      destinoFator:parseFloat(($('ftFat')||{}).value)||1};
     if(f)Object.assign(f,o);
     else{o.id=uid('fi');o.itens=[];o.rendimento=1;o.rendUnidade=o.unidade;DB.fichas.push(o);FT.sel=o.id;}
     FT.mostrar=true;FT.cat=o.categoriaId;FT.sub=o.subgrupoId||'';
@@ -10244,10 +10274,14 @@ function custoNaUnidade(ins,unidade){
   return +(c*q).toFixed(6);
 }
 function destinoDaFicha(f){
-  var c=catFicha(f.categoriaId);
+  if(!f)return null;
+  if(f.destinoId==='__nenhum')return null;          /* forçado a não gerar */
+  if(f.destinoId)return insumo(f.destinoId);        /* definido nesta ficha */
+  var c=catFicha(f.categoriaId);                    /* senão, o padrão do grupo */
   if(c&&c.destinoId)return insumo(c.destinoId);
   return null;
 }
+function fatorDestino(f){return Number(f&&f.destinoFator)||1}
 
 /* ---------- CONFIGURAÇÃO DOS MOTIVOS ---------- */
 function telaCfgMovimentacao(){
@@ -10389,8 +10423,13 @@ function montarLinhas(itens,tipo){
       if(tipo==='producao'){
         var dest=destinoDaFicha(f);
         if(dest){
-          linhas.push({insumoId:dest.id,nome:dest.nome,unidade:it.unidade,qtd:Number(it.qtd)||0,
-            custo:custoPorUnidade(f),direcao:'entrada',origem:'producao:'+f.id,fichaNome:f.nome});
+          var fat=fatorDestino(f);
+          var qDest=+((Number(it.qtd)||0)*fat).toFixed(4);
+          /* o custo total produzido se divide pela quantidade que entra no destino */
+          var custoDest=qDest?+(((Number(it.qtd)||0)*custoPorUnidade(f))/qDest).toFixed(6):0;
+          linhas.push({insumoId:dest.id,nome:dest.nome,
+            unidade:(fat===1?it.unidade:dest.unidade),qtd:qDest,
+            custo:custoDest,direcao:'entrada',origem:'producao:'+f.id,fichaNome:f.nome});
         }
       }
     }else{
@@ -10586,7 +10625,16 @@ function desenhaMovimento(){
       var uBase=base?un(base.unidade).base:(f?un(f.rendUnidade||f.unidade).base:null);
       return '<tr>'+
       '<td><button class="selItem'+(it.refId?' ok3':'')+'" data-pop="1" onclick="abrirPickItem(event,'+k+')">'+
-       '<span>'+(it.refId?E(nomeItem(it)):'Selecione...')+'</span>'+sv('dn',12)+'</button></td>'+
+       '<span>'+(it.refId?E(nomeItem(it)):'Selecione...')+'</span>'+sv('dn',12)+'</button>'+
+       (function(){
+         if(it.tipo!=='ficha')return '';
+         var f3=(DB.fichas||[]).find(function(x){return x.id===it.refId});
+         var d3=f3?destinoDaFicha(f3):null;
+         return '<div class="destInfo">'+(d3
+           ? sv('cr',11)+' gera estoque em <b>'+E(d3.nome)+'</b>'+
+             (fatorDestino(f3)!==1?' ('+fmtQt(fatorDestino(f3))+'x)':'')
+           : '<span class="vr">'+sv('help',11)+' esta ficha não gera estoque</span>')+'</div>';
+       })()+'</td>'+
       '<td><select class="mvUn" data-k="'+k+'">'+
        (uBase?unidades().filter(function(u){return u.base===uBase}).map(function(u){
          return '<option value="'+u.id+'"'+(it.unidade===u.id?' selected':'')+'>'+u.n+'</option>'}).join('')
