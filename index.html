@@ -1914,6 +1914,11 @@ tbody td small{font-size:10.5px}
 .tagGerou{display:inline-block;margin-left:6px;font-size:9px;font-weight:800;padding:1px 5px;
   border-radius:3px;background:var(--acc);color:#fff;vertical-align:middle}
 
+.comDest{display:inline-block;font-size:10.5px;font-weight:600;padding:2px 7px;border-radius:3px;
+  background:var(--acc-soft);color:var(--acc-d)}
+.semDest{display:inline-block;font-size:10.5px;padding:2px 7px;border-radius:3px;
+  background:var(--alt);color:var(--ink-3);border:1px dashed var(--line)}
+
 @media(max-width:1000px){
   .lfPeriodo{order:3;width:100%}
   .lfTopBtns{width:100%}
@@ -2911,6 +2916,11 @@ tbody td small{font-size:10.5px}
 .mvTab tbody tr.destaqueEnt td{background:#F1FAF6}
 .tagGerou{display:inline-block;margin-left:6px;font-size:9px;font-weight:800;padding:1px 5px;
   border-radius:3px;background:var(--acc);color:#fff;vertical-align:middle}
+
+.comDest{display:inline-block;font-size:10.5px;font-weight:600;padding:2px 7px;border-radius:3px;
+  background:var(--acc-soft);color:var(--acc-d)}
+.semDest{display:inline-block;font-size:10.5px;padding:2px 7px;border-radius:3px;
+  background:var(--alt);color:var(--ink-3);border:1px dashed var(--line)}
 
 @media(max-width:1000px){
   .lgCard{grid-template-columns:1fr}.lgR{display:none}
@@ -4031,7 +4041,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V3.1.0';
+var VERSAO='V3.2.0';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
@@ -10320,8 +10330,6 @@ function baseMov(){
     DB.motivosMov.push({id:'mv_cont',nome:'Contagem de estoque',tipo:'entrada',sistema:true,ativo:true,lojas:[]});
   lojasCad();
   DB.motivosMov.forEach(function(m){if(!m.lojas)m.lojas=[]});
-  repararDestinos();
-  recalcCustoProducao();
   /* item de estoque que recebe a produção de gelato */
   var jaTem=(DB.insumos||[]).find(function(i){
     return i.gelatoVenda||String(i.nome||'').toLowerCase()==='gelato venda';});
@@ -10334,9 +10342,12 @@ function baseMov(){
       descricao:'Estoque único de gelato pronto para venda'});
   }
   /* grupo Produzido aponta para Gelato Venda por padrão */
+  var gvId=((DB.insumos||[]).find(function(i){return i.gelatoVenda;})||{}).id;
   (DB.fichaCats||[]).forEach(function(c){
-    if(c.destinoId===undefined&&/produz|gelato/i.test(c.nome))c.destinoId='ins_gelato_venda';
+    if(!c.destinoId&&/produz|gelato/i.test(c.nome)&&gvId)c.destinoId=gvId;
   });
+  repararDestinos();
+  recalcCustoProducao();
 }
 function motivoVisivel(m){
   if(!m||m.ativo===false)return false;
@@ -10443,9 +10454,20 @@ function repararDestinos(){
 }
 function destinoDaFicha(f){
   if(!f)return null;
-  if(f.destinoId==='__nenhum')return null;          /* forçado a não gerar */
-  if(f.destinoId)return itemEstoque(f.destinoId);   /* definido nesta ficha */
-  var c=catFicha(f.categoriaId);                    /* senão, o padrão do grupo */
+  if(f.destinoId==='__nenhum')return null;             /* marcado para não gerar */
+  if(f.destinoId){
+    var d=itemEstoque(f.destinoId);
+    if(d)return d;
+    /* vínculo apontando para item que não existe: tenta pelo nome guardado */
+    if(f.destinoNome){
+      var porNome=(DB.insumos||[]).find(function(i){
+          return String(i.nome||'').toLowerCase()===String(f.destinoNome).toLowerCase();})
+        ||(DB.fichas||[]).find(function(x){
+          return String(x.nome||'').toLowerCase()===String(f.destinoNome).toLowerCase();});
+      if(porNome){f.destinoId=porNome.id;return itemEstoque(porNome.id);}
+    }
+  }
+  var c=catFicha(f.categoriaId);                       /* senão, o padrão do grupo */
   if(c&&c.destinoId)return itemEstoque(c.destinoId);
   return null;
 }
