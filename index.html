@@ -3255,7 +3255,8 @@ var MAPA=[
     origem:x.origem||null,cst:x.cst||null,aliquota:n(x.aliquota),lojas:x.lojas||[],
     destino_id:fk('insumos',x.destinoId)||fk('fichas',x.destinoId)||undefined,
     destino_fator:n(x.destinoFator)||1,estoque_atual:n(x.estoqueAtual),
-    custo_medio:n(x.custoMedio),destino_nome:x.destinoNome||null}},
+    custo_medio:n(x.custoMedio),destino_nome:x.destinoNome||null,
+    destino_modo:x.destinoModo||'igual'}},
   filhos:[{lista:'itens',tab:'ficha_itens',pai:'ficha_id',
     campos:function(o){return {insumo_id:fk('insumos',o.insumoId),quantidade:n(o.qtd),
       unidade:o.unidade||'un',perda:n(o.perda)}}}]},
@@ -3769,7 +3770,7 @@ async function baixarDaNuvem(forcar){
     origem:x.origem||'',cst:x.cst||'',aliquota:Number(x.aliquota)||0,lojas:x.lojas||[],
     destinoId:mapaIns[x.destino_id]||mapaFiRef[x.destino_id]||'',destinoFator:Number(x.destino_fator)||1,
     estoqueAtual:Number(x.estoque_atual)||0,custoMedio:Number(x.custo_medio)||0,
-    destinoNome:x.destino_nome||'',
+    destinoNome:x.destino_nome||'',destinoModo:x.destino_modo||'igual',
     itens:(x.ficha_itens||[]).map(function(i2){return {insumoId:mapaIns[i2.insumo_id]||'',
       qtd:Number(i2.quantidade)||0,unidade:i2.unidade||'un',perda:Number(i2.perda)||0}})}});
   /* reconstrói os subgrupos a partir das fichas */
@@ -4041,7 +4042,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V3.4.1';
+var VERSAO='V3.5.0';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
@@ -10008,14 +10009,19 @@ function modalFicha(id){
        return '<option value="'+x.id+'"'+(f&&f.destinoId===x.id?' selected':'')+'>'+E(x.nome)+'</option>'}).join('')+
      '</optgroup>'+
     '</select></div>'+
-    '<div class="fld2" style="margin:0"><label>Conversão <small>(deixe 1 na maioria dos casos)</small></label>'+
-     '<input id="ftFat" type="number" step="0.0001" value="'+(f?(f.destinoFator||1):1)+'" '+
-     'onchange="avisaFator()">'+
-     '<div class="hint" id="dicaFat">'+
-      '<b>1</b> = a quantidade produzida vira a mesma quantidade no destino.<br>'+
-      'Só mude se a unidade for diferente. Ex.: 1 kg de massa vira 60 cascões → informe <b>60</b>.<br>'+
-      '<span class="vr">Não coloque aqui o rendimento da receita.</span>'+
-     '</div></div>'+
+    '<div class="fld2" style="margin:0"><label>Como converter</label>'+
+     '<select id="ftModo" onchange="avisaFator()">'+
+      '<option value="igual"'+(modoDestino(f||{})==='igual'?' selected':'')+'>'+
+        'Mesma quantidade — 4,5 kg produzidos viram 4,5 kg</option>'+
+      '<option value="receita"'+(modoDestino(f||{})==='receita'?' selected':'')+'>'+
+        'A receita inteira gera N unidades</option>'+
+     '</select>'+
+     '<div id="boxFat" style="margin-top:8px">'+
+      '<label>Quantas unidades a receita inteira gera</label>'+
+      '<input id="ftFat" type="number" step="0.0001" value="'+(f?(f.destinoFator||1):1)+'" '+
+      'oninput="avisaFator()">'+
+     '</div>'+
+     '<div class="hint" id="dicaFat"></div></div>'+
    '</div></div>'+
    '<div class="blk" style="margin:11px 0 0;max-width:none">'+
    '<label class="chkL"><input type="checkbox" id="ftEs" '+(!f||f.estocavel!==false?'checked':'')+'><span>Estocável</span></label>'+
@@ -10054,6 +10060,7 @@ function modalFicha(id){
       ncm:$('ftNc').value.trim(),cfop:$('ftCf').value.trim(),cest:$('ftCe').value.trim(),
       origem:$('ftOr').value,cst:$('ftCs').value.trim(),aliquota:parseFloat($('ftAl').value)||0,lojas:ls,
       destinoId:$('ftDest')?$('ftDest').value:'',
+      destinoModo:($('ftModo')||{}).value||'igual',
       destinoNome:(function(){var d=$('ftDest');if(!d)return '';
         var o=d.options[d.selectedIndex];return o?o.text:'';})(),
       destinoFator:parseFloat(($('ftFat')||{}).value)||1};
@@ -10066,16 +10073,20 @@ function modalFicha(id){
   },'lg');
 }
 function avisaFator(){
-  var v=parseFloat(($('ftFat')||{}).value)||1;
-  var d=$('dicaFat');
-  if(!d)return;
-  if(v!==1){
-    d.innerHTML='<span class="avisoFat">'+sv('help',12)+' Conversão <b>'+fmtQt(v)+'x</b>: '+
-      'produzindo 1 unidade, entram <b>'+fmtQt(v)+'</b> no destino. '+
-      'Se o destino usa a mesma unidade, o certo é <b>1</b>.</span>';
-  }else{
-    d.innerHTML='<b>1</b> = a quantidade produzida vira a mesma quantidade no destino.';
+  var d=$('dicaFat'); if(!d)return;
+  var modo=($('ftModo')||{}).value||'igual';
+  var bf=$('boxFat'); if(bf)bf.style.display=(modo==='receita')?'':'none';
+  var rend=parseFloat(($('ftRend')||{}).value)||parseFloat(($('cpRend')||{}).value)||0;
+  if(modo==='igual'){
+    d.innerHTML='A quantidade produzida entra igual no destino. '+
+      'É o caso dos sabores de gelato: produziu 4,5 kg, entram 4,5 kg de Gelato Venda.';
+    return;
   }
+  var n=parseFloat(($('ftFat')||{}).value)||0;
+  d.innerHTML='<span class="avisoFat">'+sv('help',12)+
+    ' A receita inteira gera <b>'+fmtQt(n)+'</b> unidade(s). '+
+    'O sistema calcula proporcional: produzindo metade da receita, entram '+fmtQt(n/2)+'.<br>'+
+    'O custo de cada unidade sai do custo da receita dividido por '+fmtQt(n)+'.</span>';
 }
 function trocaGrupoFicha(){
   var c=catFicha($('ftG').value);
@@ -10558,6 +10569,20 @@ function destinoDaFicha(f){
   return null;
 }
 function fatorDestino(f){return Number(f&&f.destinoFator)||1}
+function modoDestino(f){
+  if(!f)return 'igual';
+  if(f.destinoModo)return f.destinoModo;
+  return (Number(f.destinoFator)||1)===1?'igual':'receita';
+}
+/* quanto entra no destino ao produzir "qtd" desta ficha */
+function qtdNoDestino(f,qtd){
+  qtd=Number(qtd)||0;
+  if(modoDestino(f)==='receita'){
+    var rend=Number(f.rendimento)||1;
+    return +((qtd/rend)*fatorDestino(f)).toFixed(4);   /* a receita inteira gera N */
+  }
+  return +(qtd*fatorDestino(f)).toFixed(4);            /* proporcional por unidade */
+}
 
 /* ---------- CONFIGURAÇÃO DOS MOTIVOS ---------- */
 function telaCfgMovimentacao(){
@@ -10707,11 +10732,11 @@ function montarLinhas(itens,tipo){
         var dest=destinoDaFicha(f);
         if(dest){
           var fat=fatorDestino(f);
-          var qDest=+((Number(it.qtd)||0)*fat).toFixed(4);
+          var qDest=qtdNoDestino(f,it.qtd);
           /* o custo total produzido se divide pela quantidade que entra no destino */
           var custoDest=qDest?+(((Number(it.qtd)||0)*custoPorUnidade(f))/qDest).toFixed(6):0;
           linhas.push({insumoId:dest.id,nome:dest.nome,
-            unidade:(fat===1?it.unidade:dest.unidade),qtd:qDest,
+            unidade:(modoDestino(f)==='igual'&&fat===1?it.unidade:dest.unidade),qtd:qDest,
             custo:custoDest,direcao:'entrada',origem:'producao:'+f.id,fichaNome:f.nome});
         }
       }
@@ -10939,7 +10964,7 @@ function desenhaMovimento(){
              'e <b>nada será gerado</b></span></div>';
          return '<div class="destInfo">'+(d3
            ? sv('cr',11)+' gera estoque em <b>'+E(d3.nome)+'</b>'+
-             (fatorDestino(f3)!==1?' ('+fmtQt(fatorDestino(f3))+'x)':'')
+             (modoDestino(f3)==='receita'?' ('+fmtQt(fatorDestino(f3))+' un por receita)':'')
            : '<span class="vr">'+sv('help',11)+' esta ficha não gera estoque</span>')+'</div>';
        })()+'</td>'+
       '<td><select class="mvUn" data-k="'+k+'">'+
