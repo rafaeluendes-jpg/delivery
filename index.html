@@ -3233,7 +3233,7 @@ var MAPA=[
 
  {col:'fichaCats', espelha:true,   tab:'ficha_grupos',
   campos:function(x){return {nome:x.nome,
-    destino_id:fk('insumos',x.destinoId)||fk('fichas',x.destinoId)}}},
+    destino_id:fk('insumos',x.destinoId)||fk('fichas',x.destinoId)||undefined}}},
 
  {col:'fichas', espelha:true,      tab:'fichas_tecnicas',
   campos:function(x){return {nome:x.nome,codigo:x.codigo||null,grupo_id:fk('fichaCats',x.categoriaId),
@@ -3243,7 +3243,7 @@ var MAPA=[
     tempo:n(x.tempo),validade:n(x.validade),temperatura:x.temperatura||null,
     observacao:x.obs||null,foto:x.foto||null,ncm:x.ncm||null,cfop:x.cfop||null,cest:x.cest||null,
     origem:x.origem||null,cst:x.cst||null,aliquota:n(x.aliquota),lojas:x.lojas||[],
-    destino_id:fk('insumos',x.destinoId)||fk('fichas',x.destinoId),
+    destino_id:fk('insumos',x.destinoId)||fk('fichas',x.destinoId)||undefined,
     destino_fator:n(x.destinoFator)||1,estoque_atual:n(x.estoqueAtual),
     custo_medio:n(x.custoMedio),destino_nome:x.destinoNome||null}},
   filhos:[{lista:'itens',tab:'ficha_itens',pai:'ficha_id',
@@ -3581,6 +3581,29 @@ async function sincronizar(){
       tempo_retirada:n(c.tempoRetirada),caixa_cego:!!c.caixaCego,
       layout:c.layout||'normal',fases:c.fases||[]}],
       {'Prefer':'resolution=merge-duplicates,return=minimal'});
+
+    /* vínculo de produção que aponta para outra ficha só existe depois
+       que todas as fichas subiram — por isso é gravado agora, no fim */
+    var pend=[];
+    (DB.fichas||[]).forEach(function(f){
+      if(!f.destinoId||f.destinoId==='__nenhum')return;
+      var alvo=_ids[f.destinoId];
+      if(!alvo)return;
+      pend.push({tab:'fichas_tecnicas',ref:f.id,uid:alvo});
+    });
+    (DB.fichaCats||[]).forEach(function(c){
+      if(!c.destinoId)return;
+      var alvo2=_ids[c.destinoId];
+      if(!alvo2)return;
+      pend.push({tab:'ficha_grupos',ref:c.id,uid:alvo2});
+    });
+    for(var pz=0;pz<pend.length;pz++){
+      try{
+        await api(pend[pz].tab+'?ref_local=eq.'+encodeURIComponent(pend[pz].ref),
+          'PATCH',{destino_id:pend[pz].uid});
+      }catch(e){console.error('vinculo',e);}
+    }
+    if(pend.length)logNuvem(pend.length+' vínculo(s) de produção gravado(s)');
 
     NUVEM.ultima=new Date();
     NUVEM.sujo=false;
@@ -4008,7 +4031,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V3.0.0';
+var VERSAO='V3.1.0';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
