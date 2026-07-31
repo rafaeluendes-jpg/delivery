@@ -3483,14 +3483,23 @@ async function sincronizar(){
 async function baixarDaNuvem(forcar){
   /* NUNCA sobrescreve o aparelho enquanto houver algo esperando subir */
   if(NUVEM.sujo&&!forcar){
-    logNuvem('download adiado: há mudanças ainda não enviadas');
-    return;
+    logNuvem('há mudanças pendentes — enviando antes de baixar');
+    try{ await sincronizar(); }catch(e){}
+    if(NUVEM.sujo){ logNuvem('download cancelado: envio não concluiu',true); return; }
   }
   var antesCat=(DB.catfin||[]).reduce(function(a,p){return a+((p.itens||[]).length)},0);
   logNuvem('baixando da nuvem...');
   await tokenAtual();
   var l=NUVEM.loja,q='?loja_id=eq.'+l+'&select=*';
   /* se a nuvem responder vazio mas houver dados aqui, mantém os daqui */
+  /* o filho sobe como "idDoPai_idDoFilho"; na volta devolve o id original,
+     senão o identificador cresce a cada sincronização e o sistema
+     passa a achar que o item foi excluído e recriado */
+  function idFilho(paiRef,ref,alt){
+    if(!ref)return alt;
+    var p=String(paiRef||'')+'_';
+    return String(ref).indexOf(p)===0?String(ref).slice(p.length):ref;
+  }
   function volta(linhas,fn,atual){
     var r=(linhas||[]).map(fn);
     if(!r.length&&atual&&atual.length)return atual;
@@ -3505,9 +3514,11 @@ async function baixarDaNuvem(forcar){
     taxaPct:Number(x.taxa_pct)||0,taxaFixa:Number(x.taxa_fixa)||0,dias:x.dias_recebimento||0,
     contaId:mapaConta[x.conta_id]||'',ativa:x.ativa!==false,online:!!x.online,ordem:x.ordem||0}});
   var cf=await api('categorias_financeiras'+q+'&select=*,subcategorias_financeiras(*)&order=ordem');
-  DB.catfin=volta(cf,function(x){return {id:x.ref_local||x.id,nome:x.nome,
-    itens:(x.subcategorias_financeiras||[]).sort(function(a,b){return (a.ordem||0)-(b.ordem||0)})
-      .map(function(s){return {id:s.ref_local||s.id,nome:s.nome}})}});
+  DB.catfin=volta(cf,function(x){
+    var paiRef=x.ref_local||x.id;
+    return {id:paiRef,nome:x.nome,
+      itens:(x.subcategorias_financeiras||[]).sort(function(a,b){return (a.ordem||0)-(b.ordem||0)})
+        .map(function(s){return {id:idFilho(paiRef,s.ref_local,s.id),nome:s.nome}})};});
   var fo=await api('fornecedores'+q);
   DB.fornec=volta(fo,function(x){return {id:x.ref_local||x.id,empresa:x.empresa,nome:x.contato,
     cnpj:x.cnpj,email:x.email,tel:x.telefone,whats:x.whatsapp}});
@@ -3855,7 +3866,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V1.9.1';
+var VERSAO='V1.9.2';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
