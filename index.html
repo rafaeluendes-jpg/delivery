@@ -1864,6 +1864,16 @@ tbody td small{font-size:10.5px}
 @keyframes pulseRT{0%,100%{opacity:1}50%{opacity:.35}}
 @media(max-width:900px){.rtTag{display:none}}
 
+/* versão sempre visível, inclusive no celular */
+.verTag{font-weight:700;color:var(--deep);white-space:nowrap}
+.verBox{margin-top:10px;padding:9px 12px;background:var(--alt);border:1px solid var(--line-2);
+  border-radius:6px;font-size:12px;color:var(--ink-2);text-align:center}
+.verBox b{color:var(--acc-d);font-size:13px}
+@media(max-width:900px){
+  .stat{gap:8px;padding:0 10px}
+  .stat .soPC{display:none}
+}
+
 @media(max-width:1000px){
   .lfPeriodo{order:3;width:100%}
   .lfTopBtns{width:100%}
@@ -2811,6 +2821,16 @@ tbody td small{font-size:10.5px}
 .rtTag.on i{background:#3BD9BF;box-shadow:0 0 0 3px rgba(59,217,191,.18);animation:pulseRT 2s infinite}
 @keyframes pulseRT{0%,100%{opacity:1}50%{opacity:.35}}
 @media(max-width:900px){.rtTag{display:none}}
+
+/* versão sempre visível, inclusive no celular */
+.verTag{font-weight:700;color:var(--deep);white-space:nowrap}
+.verBox{margin-top:10px;padding:9px 12px;background:var(--alt);border:1px solid var(--line-2);
+  border-radius:6px;font-size:12px;color:var(--ink-2);text-align:center}
+.verBox b{color:var(--acc-d);font-size:13px}
+@media(max-width:900px){
+  .stat{gap:8px;padding:0 10px}
+  .stat .soPC{display:none}
+}
 
 @media(max-width:1000px){
   .lgCard{grid-template-columns:1fr}.lgR{display:none}
@@ -3835,11 +3855,14 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
+var VERSAO='V1.9.1';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
-'<span>Loja: <b>'+E(nomeLojaAtual())+'</b></span><span>|</span><span>Usuário: <b>Administrador</b></span>'+
-(extra?'<span>|</span><span>'+extra+'</span>':'')+
-'<span class="gw"></span><span class="logo"><em>N</em>NEXOR</span><span>V1.9.0</span>';
+'<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
+'<span class="soPC">Usuário: <b>Administrador</b></span>'+
+(extra?'<span class="soPC">|</span><span class="soPC">'+extra+'</span>':'')+
+'<span class="gw"></span><span class="logo soPC"><em>N</em>NEXOR</span>'+
+'<span class="verTag">'+VERSAO+'</span>';
 }
 
 /* ===== BLOCO 7 — ROTEADOR ===== */
@@ -4698,6 +4721,7 @@ function painelNuvem(){
    '<button class="btn" onclick="sincronizar();toast(\'Enviando...\')">'+sv('ref',14)+' Sincronizar agora</button>'+
    '<button class="btn" onclick="puxarNuvem()">'+sv('cloud',14)+' Baixar dados da nuvem</button>'+
    '<button class="btn" onclick="verDiagnostico()">'+sv('list',14)+' Diagnóstico da sincronização</button>'+
+   '<div class="verBox">Versão instalada neste aparelho: <b>'+VERSAO+'</b></div>'+
    '<button class="btn" onclick="desconectarNuvem();fecharModal();rodape();toast(\'Nuvem desligada.\')">Desligar nuvem</button>'+
    '</div></div>'
    :
