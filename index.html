@@ -4041,7 +4041,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V3.3.1';
+var VERSAO='V3.4.0';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
@@ -10385,7 +10385,7 @@ function imprimirFicha(id){
 var TIPOS_MOV=[
  {id:'entrada', n:'Entrada',   d:'soma no estoque'},
  {id:'saida',   n:'Saída',     d:'subtrai do estoque'},
- {id:'producao',n:'Produzir',  d:'baixa os ingredientes da ficha e gera o produto'}
+ {id:'producao',n:'Produzir',  d:'baixa os ingredientes da ficha E GERA o produto acabado'}
 ];
 function baseMov(){
   baseFicha();
@@ -10598,7 +10598,9 @@ function modalMotivo(id){
   (m&&m.sistema?' disabled style="background:var(--alt)"':'')+'></div>'+
   '<div class="fld2"><label>Tipo *</label><select id="mtT"'+(m&&m.sistema?' disabled style="background:var(--alt)"':'')+'>'+
    TIPOS_MOV.map(function(t){return '<option value="'+t.id+'"'+(m&&m.tipo===t.id?' selected':'')+'>'+
-     t.n+' — '+t.d+'</option>'}).join('')+'</select></div>'+
+     t.n+' — '+t.d+'</option>'}).join('')+'</select>'+
+   '<div class="hint" style="margin-top:6px">Para lançar produção de ficha técnica, '+
+   'o tipo precisa ser <b>Produzir</b>. Os outros tipos apenas somam ou subtraem.</div></div>'+
   '<label class="chkL"><input type="checkbox" id="mtA" '+(!m||m.ativo!==false?'checked':'')+'>'+
   '<span>Ativo<small style="display:block;color:var(--ink-3)">aparece na lista ao lançar movimentação</small></span></label>'+
   '</div>'+
@@ -10920,6 +10922,10 @@ function desenhaMovimento(){
          if(it.tipo!=='ficha')return '';
          var f3=(DB.fichas||[]).find(function(x){return x.id===it.refId});
          var d3=f3?destinoDaFicha(f3):null;
+         if(tipoAtual&&tipoAtual!=='producao')
+           return '<div class="destInfo"><span class="vr">'+sv('help',11)+
+             ' o motivo escolhido não é do tipo <b>Produzir</b> — os ingredientes serão baixados '+
+             'e <b>nada será gerado</b></span></div>';
          return '<div class="destInfo">'+(d3
            ? sv('cr',11)+' gera estoque em <b>'+E(d3.nome)+'</b>'+
              (fatorDestino(f3)!==1?' ('+fmtQt(fatorDestino(f3))+'x)':'')
@@ -11128,6 +11134,16 @@ function salvarMovimento(){
   var itens=_movItens.filter(function(it){return it.tipo&&it.refId&&(Number(it.qtd)||0)>0});
   if(!itens.length){toast('Informe ao menos um item com quantidade.');return;}
   var tipo=tipoMotivo(_movMotivo);
+  /* ficha lançada com motivo que não produz: avisa antes de gravar errado */
+  var temFicha=itens.some(function(it){return it.tipo==='ficha'});
+  if(temFicha&&tipo!=='producao'){
+    if(!confirm('O motivo "'+nomeMotivo(_movMotivo)+'" é do tipo "'+
+      ((TIPOS_MOV.find(function(t){return t.id===tipo})||{}).n||tipo)+'".\n\n'+
+      'Para uma ficha técnica gerar produto acabado, o motivo precisa ser do tipo PRODUZIR.\n\n'+
+      'Do jeito que está, os ingredientes serão baixados e NADA será gerado.\n\n'+
+      'Corrija em Configuração da Loja › Configuração de Movimentação de Estoque.\n\n'+
+      'Continuar mesmo assim?'))return;
+  }
   var semDestino=itens.filter(function(it){
     if(it.tipo!=='ficha'||tipo!=='producao')return false;
     var f=(DB.fichas||[]).find(function(x){return x.id===it.refId});
