@@ -1910,6 +1910,10 @@ tbody td small{font-size:10.5px}
   border-radius:5px;color:#8A5A08;font-size:11px}
 .avisoFat svg{vertical-align:middle;margin-right:4px}
 
+.mvTab tbody tr.destaqueEnt td{background:#F1FAF6}
+.tagGerou{display:inline-block;margin-left:6px;font-size:9px;font-weight:800;padding:1px 5px;
+  border-radius:3px;background:var(--acc);color:#fff;vertical-align:middle}
+
 @media(max-width:1000px){
   .lfPeriodo{order:3;width:100%}
   .lfTopBtns{width:100%}
@@ -2903,6 +2907,10 @@ tbody td small{font-size:10.5px}
 .avisoFat{display:block;padding:6px 9px;background:var(--amber-soft);border:1px solid #E8CFA0;
   border-radius:5px;color:#8A5A08;font-size:11px}
 .avisoFat svg{vertical-align:middle;margin-right:4px}
+
+.mvTab tbody tr.destaqueEnt td{background:#F1FAF6}
+.tagGerou{display:inline-block;margin-left:6px;font-size:9px;font-weight:800;padding:1px 5px;
+  border-radius:3px;background:var(--acc);color:#fff;vertical-align:middle}
 
 @media(max-width:1000px){
   .lgCard{grid-template-columns:1fr}.lgR{display:none}
@@ -3993,7 +4001,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V2.9.0';
+var VERSAO='V2.9.1';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
@@ -10615,9 +10623,11 @@ function telaMovimentacao(){
       var l=x.l,m=x.m,ins=x.ins;
       var g=ins?grupoIng(ins.grupoId):null;
       var tot=(Number(l.qtd)||0)*(Number(l.custo)||0);
-      return '<tr class="'+(l.direcao==='entrada'?'ent':'sai')+'">'+
+      return '<tr class="'+(l.direcao==='entrada'?'ent destaqueEnt':'sai')+'">'+
       '<td>'+dataBR(m.data)+'<small>'+E(m.hora||'')+'</small></td>'+
-      '<td><b>'+E(l.nome)+'</b>'+(l.fichaNome?'<small>produção de '+E(l.fichaNome)+'</small>':'')+'</td>'+
+      '<td><b>'+E(l.nome)+'</b>'+
+       (l.direcao==='entrada'?'<span class="tagGerou">gerado</span>':'')+
+       (l.fichaNome?'<small>'+(l.direcao==='entrada'?'produzido a partir de ':'usado em ')+E(l.fichaNome)+'</small>':'')+'</td>'+
       '<td>'+E(g?g.nome:'—')+'</td>'+
       '<td>'+E(nomeMotivo(m.motivoId))+'</td>'+
       '<td>'+E(m.identificacao||'—')+'</td>'+
@@ -10962,11 +10972,27 @@ function salvarMovimento(){
     var f=(DB.fichas||[]).find(function(x){return x.id===it.refId});
     return f&&!destinoDaFicha(f);
   });
-  if(semDestino.length&&!confirm('Alguma ficha não tem destino de produção definido no grupo.\n\n'+
-    'Os ingredientes serão baixados, mas nenhum produto acabado entrará no estoque. Continuar?'))return;
+  if(semDestino.length){
+    var nomes=semDestino.map(function(it){
+      var f4=(DB.fichas||[]).find(function(x){return x.id===it.refId});
+      return f4?f4.nome:'';}).join(', ');
+    if(!confirm('ATENÇÃO\n\n'+nomes+' não tem destino de produção definido.\n\n'+
+      'Os ingredientes serão baixados, mas NENHUM produto acabado entrará no estoque.\n\n'+
+      'Para corrigir: abra a ficha técnica e preencha "Gerar estoque em".\n\nContinuar mesmo assim?'))return;
+  }
 
   var linhas=montarLinhas(itens,tipo);
   if(!linhas.length){toast('Nada a movimentar — verifique se os itens controlam estoque.');return;}
+  if(tipo==='producao'){
+    var entr=linhas.filter(function(l){return l.direcao==='entrada'});
+    var saiu=linhas.filter(function(l){return l.direcao==='saida'});
+    var resumo='Confirmar a produção?\n\n'+
+      'BAIXA '+saiu.length+' ingrediente(s)\n'+
+      (entr.length
+        ? 'GERA: '+entr.map(function(l){return fmtQt(l.qtd)+' '+un(l.unidade).ab+' de '+l.nome}).join('\n      ')
+        : 'GERA: nada — nenhuma ficha tem destino definido');
+    if(!confirm(resumo))return;
+  }
   var mov={id:uid('mv'),data:$('mvD').value||hojeISO(),hora:$('mvH').value||agoraHM(),
     motivoId:_movMotivo,identificacao:_movIdent,obs:_movObs,
     itens:JSON.parse(JSON.stringify(itens)),linhas:linhas,origem:'manual'};
