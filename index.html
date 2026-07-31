@@ -3205,7 +3205,8 @@ var MAPA=[
     fornecedor_id:fk('fornec',x.fornecedorId),descricao:x.descricao||null}}},
 
  {col:'fichaCats', espelha:true,   tab:'ficha_grupos',
-  campos:function(x){return {nome:x.nome,destino_id:fk('insumos',x.destinoId)}}},
+  campos:function(x){return {nome:x.nome,
+    destino_id:fk('insumos',x.destinoId)||fk('fichas',x.destinoId)}}},
 
  {col:'fichas', espelha:true,      tab:'fichas_tecnicas',
   campos:function(x){return {nome:x.nome,codigo:x.codigo||null,grupo_id:fk('fichaCats',x.categoriaId),
@@ -3215,7 +3216,9 @@ var MAPA=[
     tempo:n(x.tempo),validade:n(x.validade),temperatura:x.temperatura||null,
     observacao:x.obs||null,foto:x.foto||null,ncm:x.ncm||null,cfop:x.cfop||null,cest:x.cest||null,
     origem:x.origem||null,cst:x.cst||null,aliquota:n(x.aliquota),lojas:x.lojas||[],
-    destino_id:fk('insumos',x.destinoId),destino_fator:n(x.destinoFator)||1}},
+    destino_id:fk('insumos',x.destinoId)||fk('fichas',x.destinoId),
+    destino_fator:n(x.destinoFator)||1,estoque_atual:n(x.estoqueAtual),
+    custo_medio:n(x.custoMedio)}},
   filhos:[{lista:'itens',tab:'ficha_itens',pai:'ficha_id',
     campos:function(o){return {insumo_id:fk('insumos',o.insumoId),quantidade:n(o.qtd),
       unidade:o.unidade||'un',perda:n(o.perda)}}}]},
@@ -3680,16 +3683,17 @@ async function baixarDaNuvem(forcar){
     modoCusto:x.modo_custo||'manual',grupoId:mapaGi[x.grupo_id]||'',
     catFinId:mapaSub[x.subcategoria_id]||'',controlaEstoque:x.controla_estoque!==false,
     compoeCMV:x.compoe_cmv!==false,estoqueMin:Number(x.estoque_min)||0,
-    estoqueAtual:Number(x.estoque_atual)||0,fator:Number(x.fator)||1,
+    estoqueAtual:Number(x.estoque_atual)||0,custoMedio:Number(x.custo_medio)||0,fator:Number(x.fator)||1,
     fornecedorId:mapaFo[x.fornecedor_id]||'',descricao:x.descricao||'',
     compras:x.compras||[],gelatoVenda:!!x.gelato_venda}});
 
   var fg=await api('ficha_grupos'+qs);
   var mapaFg={};fg.forEach(function(x){mapaFg[x.id]=x.ref_local||x.id});
   DB.fichaCats=volta(fg,function(x){return {id:x.ref_local||x.id,nome:x.nome,subs:[],
-    destinoId:mapaIns[x.destino_id]||''}});
+    destinoId:x.destino_id||''}});
 
   var ft=await api('fichas_tecnicas'+q+'&select=*,ficha_itens(*)');
+  var mapaFiRef={};ft.forEach(function(x){mapaFiRef[x.id]=x.ref_local||x.id});
   DB.fichas=volta(ft,function(x){return {id:x.ref_local||x.id,nome:x.nome,codigo:x.codigo,
     categoriaId:mapaFg[x.grupo_id]||'',subgrupoId:x.subgrupo_id||'',contaId:mapaSub[x.subcategoria_id]||'',
     unidade:x.unidade||'un',estocavel:x.estocavel!==false,disponivelVenda:!!x.disponivel_venda,
@@ -3698,7 +3702,8 @@ async function baixarDaNuvem(forcar){
     receita:x.receita||'',tempo:x.tempo||0,validade:x.validade||0,temperatura:x.temperatura||'',
     obs:x.observacao||'',foto:x.foto||'',ncm:x.ncm||'',cfop:x.cfop||'',cest:x.cest||'',
     origem:x.origem||'',cst:x.cst||'',aliquota:Number(x.aliquota)||0,lojas:x.lojas||[],
-    destinoId:mapaIns[x.destino_id]||'',destinoFator:Number(x.destino_fator)||1,
+    destinoId:mapaIns[x.destino_id]||mapaFiRef[x.destino_id]||'',destinoFator:Number(x.destino_fator)||1,
+    estoqueAtual:Number(x.estoque_atual)||0,custoMedio:Number(x.custo_medio)||0,
     itens:(x.ficha_itens||[]).map(function(i2){return {insumoId:mapaIns[i2.insumo_id]||'',
       qtd:Number(i2.quantidade)||0,unidade:i2.unidade||'un',perda:Number(i2.perda)||0}})}});
   /* reconstrói os subgrupos a partir das fichas */
@@ -3707,6 +3712,12 @@ async function baixarDaNuvem(forcar){
     var c4=(DB.fichaCats||[]).find(function(c5){return c5.id===f.categoriaId});
     if(c4&&!(c4.subs||[]).some(function(sg){return sg.id===f.subgrupoId}))
       (c4.subs=c4.subs||[]).push({id:f.subgrupoId,nome:f.subgrupoNome||f.subgrupoId});
+  });
+
+  /* o destino do grupo pode ser insumo ou ficha — resolve agora que ambos existem */
+  (DB.fichaCats||[]).forEach(function(c){
+    if(!c.destinoId)return;
+    c.destinoId=mapaIns[c.destinoId]||mapaFiRef[c.destinoId]||c.destinoId;
   });
 
   /* agora que fichas e insumos existem, liga cada produto ao seu vínculo de estoque */
@@ -3964,7 +3975,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V2.6.0';
+var VERSAO='V2.7.0';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
@@ -9751,8 +9762,14 @@ function modalCatFicha(id){
   '<input id="cfN" value="'+E(c?c.nome:'')+'" placeholder="ex: Produzido, Vendas"></div>'+
   '<div class="fld2" style="margin:0"><label>Destino da produção</label><select id="cfD">'+
    '<option value="">Nenhum — a produção não gera estoque</option>'+
+   '<optgroup label="Ingredientes e insumos">'+
    (DB.insumos||[]).slice().sort(function(a,b){return a.nome.localeCompare(b.nome)}).map(function(i){
      return '<option value="'+i.id+'"'+(c&&c.destinoId===i.id?' selected':'')+'>'+E(i.nome)+'</option>'}).join('')+
+   '</optgroup>'+
+   '<optgroup label="Fichas técnicas">'+
+   (DB.fichas||[]).slice().sort(function(a,b){return (a.nome||'').localeCompare(b.nome||'')}).map(function(x){
+     return '<option value="'+x.id+'"'+(c&&c.destinoId===x.id?' selected':'')+'>'+E(x.nome)+'</option>'}).join('')+
+   '</optgroup>'+
   '</select><div class="hint">Ao produzir qualquer ficha deste grupo, o estoque entra neste item. '+
   'Ex.: todos os sabores de gelato geram estoque em <b>Gelato Venda</b>.</div></div></div></div>';
   modal(c?'Editar grupo':'Novo grupo',h,'Salvar',function(){
@@ -9836,8 +9853,15 @@ function modalFicha(id){
       ((catFicha(f?f.categoriaId:'')||{}).destinoId
         ? ' ('+E((insumo((catFicha(f.categoriaId)||{}).destinoId)||{}).nome||'')+')' : ' (nenhum)')+'</option>'+
      '<option value="__nenhum"'+(f&&f.destinoId==='__nenhum'?' selected':'')+'>Não gerar estoque</option>'+
+     '<optgroup label="Ingredientes e insumos">'+
      (DB.insumos||[]).slice().sort(function(a,b){return a.nome.localeCompare(b.nome)}).map(function(i){
        return '<option value="'+i.id+'"'+(f&&f.destinoId===i.id?' selected':'')+'>'+E(i.nome)+'</option>'}).join('')+
+     '</optgroup>'+
+     '<optgroup label="Fichas técnicas">'+
+     (DB.fichas||[]).filter(function(x){return !f||x.id!==f.id})
+       .slice().sort(function(a,b){return (a.nome||'').localeCompare(b.nome||'')}).map(function(x){
+       return '<option value="'+x.id+'"'+(f&&f.destinoId===x.id?' selected':'')+'>'+E(x.nome)+'</option>'}).join('')+
+     '</optgroup>'+
     '</select></div>'+
     '<div class="fld2" style="margin:0"><label>Quanto gera por unidade produzida</label>'+
      '<input id="ftFat" type="number" step="0.0001" value="'+(f?(f.destinoFator||1):1)+'">'+
@@ -10254,7 +10278,7 @@ function recalcCustoProducao(){
     (m.linhas||[]).forEach(function(l){
       if(l.direcao!=='entrada')return;
       if(String(l.origem||'').indexOf('producao')<0)return;
-      var ins=insumo(l.insumoId);
+      var ins=itemEstoque(l.insumoId);
       if(!ins)return;
       var q=convUnid(l.qtd,l.unidade,ins.unidade);
       if(q===null)q=l.qtd;
@@ -10265,11 +10289,15 @@ function recalcCustoProducao(){
     });
   });
   Object.keys(acc).forEach(function(id){
-    var ins=insumo(id);
+    var ins=itemEstoque(id);
     if(!ins||!acc[id].q)return;
-    ins.custo=+(acc[id].v/acc[id].q).toFixed(6);
-    ins.custoUltima=ins.custo;
-    if(!ins.modoCusto)ins.modoCusto='manual';
+    var medio=+(acc[id].v/acc[id].q).toFixed(6);
+    if(ins.itens!==undefined&&ins.rendimento!==undefined){
+      ins.custoMedio=medio;                 /* destino é ficha técnica */
+    }else{
+      ins.custo=medio;ins.custoUltima=medio;
+      if(!ins.modoCusto)ins.modoCusto='manual';
+    }
   });
 }
 function motivo(id){return (DB.motivosMov||[]).find(function(m){return m.id===id})||null}
@@ -10293,12 +10321,33 @@ function custoNaUnidade(ins,unidade){
   if(q===null)return c;
   return +(c*q).toFixed(6);
 }
+/* item de estoque = insumo OU ficha técnica marcada como estocável */
+function itemEstoque(id){
+  var i=insumo(id);
+  if(i)return i;
+  var f=(DB.fichas||[]).find(function(x){return x.id===id});
+  if(f&&f.estocavel!==false){
+    if(f.estoqueAtual===undefined)f.estoqueAtual=0;
+    if(!f.unidade)f.unidade='un';
+    return f;
+  }
+  return null;
+}
+function custoDoItem(it){
+  if(!it)return 0;
+  var eFicha=(it.itens!==undefined&&it.rendimento!==undefined);
+  if(!eFicha)return custoAtual(it);
+  /* ficha que recebe produção usa o custo médio do que entrou;
+     ficha comum usa o custo da própria receita */
+  if(Number(it.custoMedio)>0)return Number(it.custoMedio);
+  return custoPorUnidade(it);
+}
 function destinoDaFicha(f){
   if(!f)return null;
   if(f.destinoId==='__nenhum')return null;          /* forçado a não gerar */
-  if(f.destinoId)return insumo(f.destinoId);        /* definido nesta ficha */
+  if(f.destinoId)return itemEstoque(f.destinoId);   /* definido nesta ficha */
   var c=catFicha(f.categoriaId);                    /* senão, o padrão do grupo */
-  if(c&&c.destinoId)return insumo(c.destinoId);
+  if(c&&c.destinoId)return itemEstoque(c.destinoId);
   return null;
 }
 function fatorDestino(f){return Number(f&&f.destinoFator)||1}
@@ -10390,7 +10439,10 @@ function excluirMotivo(id){
 
 /* ---------- APLICAR NO ESTOQUE ---------- */
 function ajustaEstoque(ins,qtd,unidade,sinal){
-  if(!ins||!ins.controlaEstoque)return 0;
+  if(!ins)return 0;
+  /* insumo respeita a chave; ficha estocável sempre movimenta */
+  var eFicha=(ins.itens!==undefined&&ins.rendimento!==undefined);
+  if(!eFicha&&!ins.controlaEstoque)return 0;
   var q=convUnid(qtd,unidade,ins.unidade);
   if(q===null)q=qtd;
   ins.estoqueAtual=+(((Number(ins.estoqueAtual)||0)+sinal*q).toFixed(4));
@@ -10400,12 +10452,13 @@ function ajustaEstoque(ins,qtd,unidade,sinal){
 function aplicarMovimento(mov,desfazer){
   var mult=desfazer?-1:1;
   (mov.linhas||[]).forEach(function(l){
-    var ins=insumo(l.insumoId);
+    var ins=itemEstoque(l.insumoId);
     if(!ins)return;
     var antes=Number(ins.estoqueAtual)||0;
     ajustaEstoque(ins,l.qtd,l.unidade,(l.direcao==='entrada'?1:-1)*mult);
     /* entrada atualiza o custo médio ponderado do item */
-    if(!desfazer&&l.direcao==='entrada'&&Number(l.custo)>0){
+    if(!desfazer&&l.direcao==='entrada'&&Number(l.custo)>0&&
+       !(ins.itens!==undefined&&ins.rendimento!==undefined)){
       var q=convUnid(l.qtd,l.unidade,ins.unidade);
       if(q===null)q=l.qtd;
       var custoUn=convUnid(1,ins.unidade,l.unidade);
@@ -10475,7 +10528,7 @@ function telaMovimentacao(){
     if(MV.ate&&m.data>MV.ate)return;
     if(MV.motivoId&&m.motivoId!==MV.motivoId)return;
     (m.linhas||[]).forEach(function(l){
-      var ins=insumo(l.insumoId);
+      var ins=itemEstoque(l.insumoId);
       if(MV.insumoId&&l.insumoId!==MV.insumoId)return;
       if(MV.grupo&&(!ins||ins.grupoId!==MV.grupo))return;
       if(MV.busca){
@@ -10575,7 +10628,7 @@ function exportarMov(){
     if(MV.ate&&m.data>MV.ate)return;
     if(MV.motivoId&&m.motivoId!==MV.motivoId)return;
     (m.linhas||[]).forEach(function(x){
-      var ins=insumo(x.insumoId);
+      var ins=itemEstoque(x.insumoId);
       if(MV.insumoId&&x.insumoId!==MV.insumoId)return;
       if(MV.grupo&&(!ins||ins.grupoId!==MV.grupo))return;
       var g=ins?grupoIng(ins.grupoId):null;
@@ -10930,9 +10983,25 @@ function baixarEstoqueVenda(ped){
 var ET={busca:'',grupo:'',tipo:'',ordem:'valor'};
 function itensEstoque(){
   baseMov();
-  return (DB.insumos||[]).filter(function(i){return i.controlaEstoque!==false});
+  var lista=(DB.insumos||[]).filter(function(i){return i.controlaEstoque!==false});
+  /* fichas técnicas que recebem produção também têm estoque próprio */
+  var destinos={};
+  (DB.fichas||[]).forEach(function(f){
+    var d=destinoDaFicha(f);
+    if(d)destinos[d.id]=true;
+  });
+  (DB.fichaCats||[]).forEach(function(c){ if(c.destinoId)destinos[c.destinoId]=true; });
+  (DB.fichas||[]).forEach(function(f){
+    if(f.estocavel===false)return;
+    var temEstoque=Math.abs(Number(f.estoqueAtual)||0)>0.0001;
+    if(!destinos[f.id]&&!temEstoque)return;      /* só aparece se recebe produção ou tem saldo */
+    if(f.estoqueAtual===undefined)f.estoqueAtual=0;
+    if(!f.unidade)f.unidade='un';
+    lista.push(f);
+  });
+  return lista;
 }
-function valorItem(i){return (Number(i.estoqueAtual)||0)*custoAtual(i)}
+function valorItem(i){return (Number(i.estoqueAtual)||0)*custoDoItem(i)}
 
 /* ---------- ESTOQUE TOTAL ---------- */
 function telaEstoqueTotal(){
@@ -11003,17 +11072,20 @@ function telaEstoqueTotal(){
     '<th style="width:120px;text-align:right">Última compra</th>'+
     '<th style="width:130px;text-align:right">Valor total</th></tr></thead><tbody>'+
     lista.map(function(i){
-      var g=grupoIng(i.grupoId);
+      var eFicha=(i.itens!==undefined&&i.rendimento!==undefined);
+      var g=eFicha?catFicha(i.categoriaId):grupoIng(i.grupoId);
       var q=Number(i.estoqueAtual)||0;
-      var baixo=q<=Number(i.estoqueMin);
+      var baixo=q<=Number(i.estoqueMin||0);
       return '<tr class="'+(q<0?'neg':baixo?'baixo':'')+'">'+
       '<td>'+E(i.codigo)+'</td>'+
-      '<td><b>'+E(i.nome)+'</b>'+(i.gelatoVenda?'<span class="cidTag" style="margin-left:6px">produção</span>':'')+'</td>'+
+      '<td><b>'+E(i.nome)+'</b>'+
+       (i.itens!==undefined&&i.rendimento!==undefined?'<span class="tagFicha">ficha</span>':'')+
+       (i.gelatoVenda?'<span class="cidTag" style="margin-left:6px">produção</span>':'')+'</td>'+
       '<td>'+E(g?g.nome:'—')+'</td>'+
       '<td style="text-align:right">'+fmtQt(i.estoqueMin)+' '+un(i.unidade).ab+'</td>'+
       '<td style="text-align:right"><b class="'+(q<0?'vr':baixo?'vr':'')+'">'+fmtQt(q)+' '+un(i.unidade).ab+'</b>'+
        (baixo?'<span class="atrTag">baixo</span>':'')+'</td>'+
-      '<td style="text-align:right">'+money(custoAtual(i))+'<small>/'+un(i.unidade).ab+'</small></td>'+
+      '<td style="text-align:right">'+money(custoDoItem(i))+'<small>/'+un(i.unidade).ab+'</small></td>'+
       '<td style="text-align:right">'+money(i.custoUltima||0)+'</td>'+
       '<td style="text-align:right"><b>R$ '+money(valorItem(i))+'</b></td></tr>';
     }).join('')+'</tbody>'+
@@ -11237,7 +11309,7 @@ function resumoContagem(lista){
 }
 /* atualiza só a linha, sem redesenhar a tela */
 function atualizaLinhaCont(id){
-  var i=insumo(id);if(!i)return;
+  var i=itemEstoque(id);if(!i)return;
   var tr=document.getElementById('lc-'+id);if(!tr)return;
   var sis=Number(i.estoqueAtual)||0;
   var c=CT.cont[id];
@@ -11466,7 +11538,7 @@ function linhasHist(filtro){
     if(HP.ate&&m.data>HP.ate)return;
     if(HP.motivoId&&m.motivoId!==HP.motivoId)return;
     (m.linhas||[]).forEach(function(l){
-      var ins=insumo(l.insumoId);
+      var ins=itemEstoque(l.insumoId);
       if(HP.grupo&&(!ins||ins.grupoId!==HP.grupo))return;
       if(filtro&&l.insumoId!==filtro)return;
       out.push({m:m,l:l,ins:ins});
