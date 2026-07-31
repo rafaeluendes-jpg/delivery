@@ -3413,7 +3413,10 @@ async function baixarDaNuvem(){
   var cl=await api('clientes'+q);
   DB.clientes=volta(cl,function(x){return {id:x.ref_local||x.id,nome:x.nome,tel:x.telefone,rua:x.rua,
     numero:x.numero,bairro:x.bairro,cidade:x.cidade,ref:x.referencia,
-    compras:x.compras||0,gasto:Number(x.gasto)||0}});
+    compras:x.compras||0,gasto:Number(x.gasto)||0,
+    cpf:x.cpf||'',nascimento:x.nascimento||'',obs:x.observacao||'',
+    limiteFiado:Number(x.limite_fiado)||0,saldoFiado:Number(x.saldo_fiado)||0,
+    ultima:x.ultima_compra||''}});
   var en=await api('entregadores'+q+'&select=*,entregador_taxas(*)');
   DB.entregadores=volta(en,function(x){return {id:x.ref_local||x.id,nome:x.nome,tel:x.telefone,cpf:x.cpf,
     pix:x.pix,diarias:x.diarias||{},padrao:!!x.padrao,ativo:x.ativo!==false,
@@ -3450,7 +3453,9 @@ async function baixarDaNuvem(){
       detalhes:x.descricao,categoriaId:mapaCat[x.categoria_id]||'',ativo:x.ativo!==false,
       ordem:x.ordem||0,imagem:x.imagem_url,pesado:!!x.pesado,variacao:!!x.variacao,
       nomeOnline:x.nome_online,disponivel:x.disponivel||{},promocoes:x.promocoes||[],
-      grupos:g,vinculaEstoque:!!x.vincula_estoque};});
+      grupos:g,vinculaEstoque:!!x.vincula_estoque,
+      fichaId:mapaFi[x.ficha_id]||'',insumoId:mapaIns[x.insumo_id]||'',
+      insumoQtd:Number(x.insumo_qtd)||0,insumoUn:x.insumo_un||''};});
   var cfgS=await api('config_loja?loja_id=eq.'+l+'&select=*');
   if(cfgS&&cfgS[0]){var c3=cfg();
     c3.lojaAberta=cfgS[0].loja_aberta!==false;c3.tempoEntrega=cfgS[0].tempo_entrega;
@@ -3525,15 +3530,16 @@ async function baixarDaNuvem(){
 
   /* ---------- OPERAÇÃO ---------- */
   var cx=await api('caixas'+q+'&select=*,caixa_movimentos(*)&order=aberto_em.desc&limit=400');
-  DB.caixas=volta(cx,function(x){return {id:x.ref_local||x.id,abertoEm:x.aberto_txt,
-    fechadoEm:x.fechado_txt,operador:x.operador,valorInicial:Number(x.valor_inicial)||0,
+  DB.caixas=volta(cx,function(x){return {id:x.ref_local||x.id,aberto:x.aberto_txt,
+    fechadoEm:x.fechado_txt,operador:x.operador,inicial:Number(x.valor_inicial)||0,
     vendas:Number(x.vendas)||0,esperado:Number(x.esperado)||0,contado:Number(x.contado)||0,
-    totalInformado:Number(x.total_informado)||0,qtdPedidos:x.qtd_pedidos||0,
+    totalInformado:Number(x.total_informado)||0,qtd:x.qtd_pedidos||0,
     conferencia:x.conferencia||{},obs:x.observacao||'',
     movimentos:(x.caixa_movimentos||[]).map(function(m2){return {tipo:m2.tipo,
       valor:Number(m2.valor)||0,motivo:m2.motivo,responsavel:m2.responsavel,quando:m2.criado_em}})}});
 
   var mapaCx={};cx.forEach(function(x){mapaCx[x.id]=x.ref_local||x.id});
+  var mapaFi={};ft.forEach(function(x){mapaFi[x.id]=x.ref_local||x.id});
   var mapaCli={};cl.forEach(function(x){mapaCli[x.id]=x.ref_local||x.id});
   var mapaEnt={};en.forEach(function(x){mapaEnt[x.id]=x.ref_local||x.id});
   var mapaPr={};rp.forEach(function(x){mapaPr[x.id]=x.ref_local||x.id});
@@ -3551,6 +3557,8 @@ async function baixarDaNuvem(){
     pagamentos:(x.pedido_pagamentos||[]).map(function(p2){return {formaId:mapaFP[p2.forma_id]||'',
       valor:Number(p2.valor)||0}})}});
 
+  var mapaPed={};pd.forEach(function(x){mapaPed[x.id]=x.ref_local||x.id});
+
   var ac=await api('acertos'+q+'&order=data.desc&limit=500');
   DB.acertos=volta(ac,function(x){return {id:x.ref_local||x.id,
     entregadorId:mapaEnt[x.entregador_id]||'',data:x.data,de:x.periodo_de,ate:x.periodo_ate,
@@ -3562,20 +3570,21 @@ async function baixarDaNuvem(){
   var cp=await api('cupons'+q);
   var mapaCp={};cp.forEach(function(x){mapaCp[x.id]=x.ref_local||x.id});
   DB.cupons=volta(cp,function(x){return {id:x.ref_local||x.id,codigo:x.codigo,tipo:x.tipo,
-    valor:Number(x.valor)||0,teto:Number(x.teto)||0,minimo:Number(x.minimo)||0,
-    validoDe:x.valido_de,validoAte:x.valido_ate,horaDe:x.hora_de,horaAte:x.hora_ate,
+    valor:Number(x.valor)||0,tetoDesconto:Number(x.teto)||0,minimo:Number(x.minimo)||0,
+    de:x.valido_de,ate:x.valido_ate,horaDe:x.hora_de,horaAte:x.hora_ate,
     quantidade:x.quantidade||0,limiteCliente:x.limite_cliente||0,
     canais:x.canais||[],formas:x.formas||[],ativo:x.ativo!==false}});
 
   var cu=await api('cupom_usos'+q+'&order=data.desc&limit=2000');
   DB.cupomUsos=volta(cu,function(x){return {id:x.ref_local||x.id,cupomId:mapaCp[x.cupom_id]||'',
     clienteId:mapaCli[x.cliente_id]||'',clienteNome:x.cliente_nome||'',data:x.data,
-    valor:Number(x.valor)||0,totalPedido:Number(x.total_pedido)||0,numero:x.numero}});
+    valor:Number(x.valor)||0,totalPedido:Number(x.total_pedido)||0,numero:x.numero,
+    pedidoId:mapaPed[x.pedido_id]||''}});
 
   var fm=await api('fiado_movimentos'+q+'&order=data.desc&limit=2000');
   DB.fiadoMov=volta(fm,function(x){return {id:x.ref_local||x.id,clienteId:mapaCli[x.cliente_id]||'',
     tipo:x.tipo,valor:Number(x.valor)||0,data:x.data,formaId:mapaFP[x.forma_id]||'',
-    contaId:mapaConta[x.conta_id]||'',obs:x.observacao||''}});
+    contaId:mapaConta[x.conta_id]||'',obs:x.observacao||'',pedidoId:mapaPed[x.pedido_id]||''}});
 
   NUVEM.baixou=true;   /* daqui em diante este aparelho pode espelhar exclusões */
 
@@ -3746,7 +3755,7 @@ function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span>Loja: <b>'+E(nomeLojaAtual())+'</b></span><span>|</span><span>Usuário: <b>Administrador</b></span>'+
 (extra?'<span>|</span><span>'+extra+'</span>':'')+
-'<span class="gw"></span><span class="logo"><em>N</em>NEXOR</span><span>V1.4.0</span>';
+'<span class="gw"></span><span class="logo"><em>N</em>NEXOR</span><span>V1.5.0</span>';
 }
 
 /* ===== BLOCO 7 — ROTEADOR ===== */
