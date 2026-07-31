@@ -3412,12 +3412,27 @@ async function sincronizar(){
     /* nenhum registro sobe sem identificação própria — é ela que evita duplicar */
     MAPA.forEach(function(E3){
       var lst=DB[E3.col]||[];
-      var vistos={};
+      var vistosId={},vistosNome={},limpa=[];
       lst.forEach(function(x){
         if(!x.id)x.id=uid(E3.col.slice(0,3));
-        /* dois registros com o mesmo identificador fazem o banco recusar o lote inteiro */
-        if(vistos[x.id])x.id=uid(E3.col.slice(0,3));
-        vistos[x.id]=true;
+        /* repetido pelo identificador: descarta */
+        if(vistosId[x.id])return;
+        /* repetido pelo nome dentro do mesmo cadastro: fica o que tem mais conteúdo */
+        var chave=(x.nome||x.codigo||'').toString().trim().toLowerCase();
+        if(chave&&E3.espelha){
+          var ant=vistosNome[chave];
+          if(ant!==undefined){
+            var peso=function(o){
+              var n=0;
+              (E3.filhos||[]).forEach(function(F3){n+=(o[F3.lista]||[]).length});
+              return n;
+            };
+            if(peso(x)>peso(limpa[ant])){limpa[ant]=x;vistosId[x.id]=true;}
+            return;
+          }
+          vistosNome[chave]=limpa.length;
+        }
+        vistosId[x.id]=true;
         (E3.filhos||[]).forEach(function(F2){
           var vf={};
           (x[F2.lista]||[]).forEach(function(o,j){
@@ -3427,8 +3442,11 @@ async function sincronizar(){
             vf[o.id]=true;
           });
         });
+        limpa.push(x);
       });
-      DB[E3.col]=lst;
+      if(limpa.length!==lst.length)
+        logNuvem(E3.col+': '+(lst.length-limpa.length)+' repetido(s) removido(s)');
+      DB[E3.col]=limpa;
     });
     gravarLocal();
 
@@ -3922,7 +3940,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V2.2.1';
+var VERSAO='V2.3.0';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
