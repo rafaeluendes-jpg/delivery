@@ -4041,7 +4041,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V3.2.0';
+var VERSAO='V3.3.0';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
@@ -9702,6 +9702,7 @@ function telaFichaTecnica(){
     '<button class="btnP2 rdB" onclick="excluirSel()">Excluir</button>'+
     '<button class="btnP2" onclick="abrirComposicao()">Ficha Técnica</button>'+
     '<button class="btnP2" onclick="modalUnidades()">Converter Unids.</button>'+
+    '<button class="btnP2 ok" onclick="corrigirVinculos()">'+sv('ref',13)+' Corrigir vínculos</button>'+
    '</div>'+
    '<div class="ftBody">'+
     '<aside class="ftPane">'+
@@ -9797,6 +9798,80 @@ function marcaLinhaFT(){
   var rs=document.querySelectorAll('.ftTab tbody tr');
   for(var i=0;i<rs.length;i++)rs[i].classList.remove('sel2');
   if(event&&event.currentTarget)event.currentTarget.classList.add('sel2');
+}
+/* Mostra o que o sistema está enxergando e conserta os vínculos de produção.
+   Serve como diagnóstico: se algo estiver errado, aparece aqui na tela. */
+function corrigirVinculos(){
+  baseMov();
+  var itens=itensEstoque();
+  var gv=(DB.insumos||[]).find(function(i){
+    return i.gelatoVenda||String(i.nome||'').toLowerCase()==='gelato venda';});
+  var linhas=(DB.fichas||[]).map(function(f){
+    var d=destinoDaFicha(f);
+    return {f:f,d:d,grupo:(catFicha(f.categoriaId)||{}).nome||'—'};
+  });
+  var semDestino=linhas.filter(function(x){return !x.d});
+
+  var h='<div class="mdB">'+
+  '<div class="blk" style="margin:0 0 11px;max-width:none"><h3>O que o sistema está vendo</h3>'+
+   '<div class="linha"><span>Itens de estoque carregados</span><b>'+itens.length+'</b></div>'+
+   '<div class="linha"><span>Fichas técnicas</span><b>'+(DB.fichas||[]).length+'</b></div>'+
+   '<div class="linha"><span>Item "Gelato Venda"</span><b class="'+(gv?'vg':'vr')+'">'+
+     (gv?'encontrado':'NÃO ENCONTRADO')+'</b></div>'+
+   '<div class="linha"><span>Fichas sem destino</span><b class="'+(semDestino.length?'vr':'vg')+'">'+
+     semDestino.length+'</b></div>'+
+   '<div class="linha"><span>Versão neste aparelho</span><b>'+VERSAO+'</b></div>'+
+  '</div>'+
+  '<div class="blk" style="margin:0;max-width:none;padding:0;overflow:hidden">'+
+   '<div class="acTit">Ficha por ficha</div>'+
+   '<div class="acTabW" style="max-height:300px"><table class="acTab"><tbody>'+
+   linhas.map(function(x){
+     return '<tr><td><b>'+E(x.f.nome)+'</b><small style="display:block;color:var(--ink-3)">'+
+     E(x.grupo)+'</small></td>'+
+     '<td style="text-align:right">'+(x.d
+       ? '<span class="comDest">'+E(x.d.nome)+(fatorDestino(x.f)!==1?' '+fmtQt(fatorDestino(x.f))+'x':'')+'</span>'
+       : '<span class="semDest">sem destino</span>')+'</td></tr>';
+   }).join('')+'</tbody></table></div></div></div>';
+
+  var o=document.createElement('div');o.className='mdOv';o.id='mdOv';
+  o.innerHTML='<div class="mdBox lg"><div class="mdH"><b>Vínculos de produção</b>'+
+   '<button onclick="fecharModal()">&times;</button></div>'+h+
+   '<div class="mdF"><button class="btnP2" onclick="fecharModal()">Fechar</button>'+
+   '<button class="btnP2" onclick="baixarEVincular()">Baixar da nuvem e corrigir</button>'+
+   '<button class="btnP2 ok" onclick="vincularTudo()">Vincular tudo do grupo</button></div></div>';
+  document.body.appendChild(o);
+  fecharSoForaDeVerdade(o);
+}
+/* liga todas as fichas ao destino padrão do grupo delas */
+function vincularTudo(){
+  baseMov();
+  var gv=(DB.insumos||[]).find(function(i){
+    return i.gelatoVenda||String(i.nome||'').toLowerCase()==='gelato venda';});
+  var n=0;
+  (DB.fichaCats||[]).forEach(function(c){
+    if(!c.destinoId&&/produz|gelato/i.test(c.nome)&&gv){c.destinoId=gv.id;n++;}
+  });
+  (DB.fichas||[]).forEach(function(f){
+    if(f.destinoId==='__nenhum')return;
+    if(destinoDaFicha(f))return;
+    var c=catFicha(f.categoriaId);
+    if(c&&c.destinoId){f.destinoId=c.destinoId;f.destinoNome=(itemEstoque(c.destinoId)||{}).nome||'';n++;return;}
+    if(gv&&/gelato|açúcar|acucar|sorbet/i.test(f.nome)){
+      f.destinoId=gv.id;f.destinoNome=gv.nome;f.destinoFator=f.destinoFator||1;n++;
+    }
+  });
+  salvar();
+  fecharModal();
+  telaFichaTecnica();
+  toast(n?n+' vínculo(s) corrigido(s).':'Nada a corrigir — todas as fichas já estão vinculadas.');
+}
+async function baixarEVincular(){
+  if(!NUVEM.ligada){toast('Ligue a nuvem primeiro.');return;}
+  toast('Baixando da nuvem...');
+  try{ await baixarDaNuvem(true); }catch(e){ toast('Erro ao baixar: '+((e&&e.message)||'')); return; }
+  baseMov();
+  fecharModal();
+  corrigirVinculos();
 }
 function editarSel(){if(!FT.sel){toast('Selecione um produto.');return;}modalFicha(FT.sel);}
 function excluirSel(){
