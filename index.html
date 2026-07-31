@@ -3975,7 +3975,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V2.7.0';
+var VERSAO='V2.8.0';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
@@ -10530,7 +10530,7 @@ function telaMovimentacao(){
     (m.linhas||[]).forEach(function(l){
       var ins=itemEstoque(l.insumoId);
       if(MV.insumoId&&l.insumoId!==MV.insumoId)return;
-      if(MV.grupo&&(!ins||ins.grupoId!==MV.grupo))return;
+      if(MV.grupo&&(!ins||(ins.grupoId!==MV.grupo&&ins.categoriaId!==MV.grupo)))return;
       if(MV.busca){
         var q=MV.busca.toLowerCase();
         if((l.nome||'').toLowerCase().indexOf(q)<0&&(m.identificacao||'').toLowerCase().indexOf(q)<0)return;
@@ -10554,11 +10554,14 @@ function telaMovimentacao(){
    '<div class="mvFiltros">'+
     '<div class="f2" style="max-width:140px"><label>De</label><input type="date" id="mvDe" value="'+MV.de+'"></div>'+
     '<div class="f2" style="max-width:140px"><label>Até</label><input type="date" id="mvAte" value="'+MV.ate+'"></div>'+
-    '<div class="f2"><label>Ingrediente</label><select onchange="MV.insumoId=this.value;telaMovimentacao()">'+
-     '<option value="">Todos</option>'+
-     (DB.insumos||[]).slice().sort(function(a,b){return a.nome.localeCompare(b.nome)}).map(function(i){
-       return '<option value="'+i.id+'"'+(MV.insumoId===i.id?' selected':'')+'>'+E(i.nome)+'</option>'}).join('')+
-    '</select></div>'+
+    '<div class="f2" style="min-width:210px"><label>Item</label>'+
+     '<input id="mvBusca" list="mvLista" placeholder="digite 3 letras ou o código" autocomplete="off" '+
+     'value="'+E(MV.insumoId?((itemEstoque(MV.insumoId)||{}).nome||''):'')+'">'+
+     '<datalist id="mvLista">'+
+     itensEstoque().slice().sort(function(a,b){return (a.nome||'').localeCompare(b.nome||'')})
+       .map(function(i){return '<option value="'+E(i.nome)+'">'+E(i.codigo||'')+' · '+
+         (ehFicha(i)?'ficha técnica':'insumo')+'</option>'}).join('')+
+     '</datalist></div>'+
     '<div class="f2"><label>Grupo</label><select onchange="MV.grupo=this.value;telaMovimentacao()">'+
      '<option value="">Todos</option>'+
      (DB.gruposIng||[]).map(function(g){return '<option value="'+g.id+'"'+(MV.grupo===g.id?' selected':'')+'>'+E(g.nome)+'</option>'}).join('')+
@@ -10608,6 +10611,18 @@ function telaMovimentacao(){
    :'<div class="mvVazio">'+sv('box',26)+'<b>Nenhum registro encontrado</b>'+
     '<span>Ajuste o período ou clique no <b>+</b> para lançar uma movimentação.</span></div>')+
    '</div></div>';
+  var mb=document.getElementById('mvBusca');
+  if(mb){
+    mb.oninput=mb.onchange=function(){
+      var t=String(this.value||'').trim().toLowerCase();
+      if(t.length<3){ if(MV.insumoId){MV.insumoId='';telaMovimentacao();} return; }
+      var l2=itensEstoque();
+      var a=l2.find(function(i){return (i.nome||'').toLowerCase()===t})
+          || l2.find(function(i){return String(i.codigo||'').toLowerCase()===t})
+          || l2.find(function(i){return (i.nome||'').toLowerCase().indexOf(t)>=0});
+      if(a&&a.id!==MV.insumoId){MV.insumoId=a.id;telaMovimentacao();}
+    };
+  }
   rodape(linhas.length+' movimentações no período');
 }
 function excluirMov(id){
@@ -10843,6 +10858,18 @@ function montaPickItem(){
   }
   /* pastas das fichas técnicas */
   h+='<div class="pkSep">Fichas técnicas</div>';
+  var semGrupo=(DB.fichas||[]).filter(function(f){
+    return !catFicha(f.categoriaId)&&filtra(f.nome);});
+  if(semGrupo.length){
+    h+='<div class="pkGrp"><div class="pkPasta" onclick="event.stopPropagation();togglePick(\'fsem\')">'+
+     '<span class="ftSeta'+(_pickAbertas['fsem']||q?' ab':'')+'">'+sv('tri',9)+'</span>'+
+     sv('folder',13)+' <span class="pkNm">Sem grupo</span><span class="pkQt">'+semGrupo.length+'</span></div>'+
+     ((_pickAbertas['fsem']||q)?'<div class="pkFilhos">'+semGrupo.map(function(f){
+       return '<div class="pkIt2" onclick="escolherItemMov(\'ficha\',\''+f.id+'\')">'+
+       sv('book',11)+' <span class="pkNm">'+E(f.nome)+'</span>'+
+       '<span class="pkUn">'+un(f.rendUnidade||f.unidade).ab+'</span></div>';}).join('')+'</div>':'')+
+    '</div>';
+  }
   (DB.fichaCats||[]).forEach(function(c){
     var fs2=(DB.fichas||[]).filter(function(f){return f.categoriaId===c.id&&filtra(f.nome)})
       .sort(function(a,b){return a.nome.localeCompare(b.nome)});
@@ -10983,24 +11010,23 @@ function baixarEstoqueVenda(ped){
 var ET={busca:'',grupo:'',tipo:'',ordem:'valor'};
 function itensEstoque(){
   baseMov();
-  var lista=(DB.insumos||[]).filter(function(i){return i.controlaEstoque!==false});
-  /* fichas técnicas que recebem produção também têm estoque próprio */
-  var destinos={};
-  (DB.fichas||[]).forEach(function(f){
-    var d=destinoDaFicha(f);
-    if(d)destinos[d.id]=true;
+  var lista=[];
+  /* todos os insumos que controlam estoque */
+  (DB.insumos||[]).forEach(function(i){
+    if(i.controlaEstoque===false)return;
+    lista.push(i);
   });
-  (DB.fichaCats||[]).forEach(function(c){ if(c.destinoId)destinos[c.destinoId]=true; });
+  /* todas as fichas técnicas estocáveis: bases, massas, cascão, gelato venda... */
   (DB.fichas||[]).forEach(function(f){
     if(f.estocavel===false)return;
-    var temEstoque=Math.abs(Number(f.estoqueAtual)||0)>0.0001;
-    if(!destinos[f.id]&&!temEstoque)return;      /* só aparece se recebe produção ou tem saldo */
     if(f.estoqueAtual===undefined)f.estoqueAtual=0;
     if(!f.unidade)f.unidade='un';
     lista.push(f);
   });
   return lista;
 }
+/* é ficha técnica? */
+function ehFicha(x){return !!(x&&x.itens!==undefined&&x.rendimento!==undefined)}
 function valorItem(i){return (Number(i.estoqueAtual)||0)*custoDoItem(i)}
 
 /* ---------- ESTOQUE TOTAL ---------- */
@@ -11539,7 +11565,7 @@ function linhasHist(filtro){
     if(HP.motivoId&&m.motivoId!==HP.motivoId)return;
     (m.linhas||[]).forEach(function(l){
       var ins=itemEstoque(l.insumoId);
-      if(HP.grupo&&(!ins||ins.grupoId!==HP.grupo))return;
+      if(HP.grupo&&(!ins||(ins.grupoId!==HP.grupo&&ins.categoriaId!==HP.grupo)))return;
       if(filtro&&l.insumoId!==filtro)return;
       out.push({m:m,l:l,ins:ins});
     });
@@ -11579,11 +11605,15 @@ function telaHistPosicao(){
     '<div class="f2" style="max-width:140px"><label>De</label><input type="date" id="hpDe" value="'+HP.de+'"></div>'+
     '<div class="f2" style="max-width:140px"><label>Até</label><input type="date" id="hpAte" value="'+HP.ate+'"></div>'+
     (HP.aba==='rastreio'
-     ?'<div class="f2"><label>Item rastreado</label><select onchange="HP.item=this.value;telaHistPosicao()">'+
-      '<option value="">Selecione o item</option>'+
-      (DB.insumos||[]).slice().sort(function(a,b){return a.nome.localeCompare(b.nome)}).map(function(i){
-        return '<option value="'+i.id+'"'+(HP.item===i.id?' selected':'')+'>'+E(i.nome)+'</option>'}).join('')+
-     '</select></div>'
+     ?'<div class="f2" style="min-width:230px"><label>Item rastreado</label>'+
+      '<input id="hpBusca" list="hpLista" placeholder="digite 3 letras do nome ou o código" '+
+      'value="'+E(HP.item?((itemEstoque(HP.item)||{}).nome||''):'')+'" autocomplete="off">'+
+      '<datalist id="hpLista">'+
+      itensEstoque().slice().sort(function(a,b){return (a.nome||'').localeCompare(b.nome||'')})
+        .map(function(i){
+          return '<option value="'+E(i.nome)+'">'+E(i.codigo||'')+' · '+
+            (ehFicha(i)?'ficha técnica':'insumo')+'</option>';}).join('')+
+      '</datalist></div>'
      :'<div class="f2"><label>Grupo</label><select onchange="HP.grupo=this.value;telaHistPosicao()">'+
       '<option value="">Todos</option>'+
       (DB.gruposIng||[]).map(function(g){return '<option value="'+g.id+'"'+(HP.grupo===g.id?' selected':'')+'>'+E(g.nome)+'</option>'}).join('')+
@@ -11596,7 +11626,22 @@ function telaHistPosicao(){
    '</div>'+
    (HP.aba==='rastreio'?blocoRastreio():HP.aba==='ranking'?blocoRanking():blocoLinhaTempo())+
    '</div></div>';
+  var hb=document.getElementById('hpBusca');
+  if(hb){
+    hb.oninput=function(){escolheItemHP(this.value)};
+    hb.onchange=function(){escolheItemHP(this.value)};
+  }
   rodape();
+}
+/* acha o item pelo que foi digitado — nome, parte do nome ou código */
+function escolheItemHP(txt){
+  var t=String(txt||'').trim().toLowerCase();
+  if(t.length<3){ if(HP.item){HP.item='';telaHistPosicao();} return; }
+  var lista=itensEstoque();
+  var achou=lista.find(function(i){return (i.nome||'').toLowerCase()===t})
+        || lista.find(function(i){return String(i.codigo||'').toLowerCase()===t})
+        || lista.find(function(i){return (i.nome||'').toLowerCase().indexOf(t)>=0});
+  if(achou&&achou.id!==HP.item){HP.item=achou.id;telaHistPosicao();}
 }
 function mudaAbaHP(a){HP.aba=a;telaHistPosicao();}
 function buscarHist(){HP.de=$('hpDe').value;HP.ate=$('hpAte').value;telaHistPosicao();}
@@ -11606,7 +11651,7 @@ function blocoRastreio(){
   if(!HP.item)return '<div class="mvVazio" style="padding:64px">'+sv('search',26)+
    '<b>Escolha um item para rastrear</b>'+
    '<span>Você verá cada entrada e saída, para onde foi e o saldo depois de cada movimento.</span></div>';
-  var i=insumo(HP.item);
+  var i=itemEstoque(HP.item);
   if(!i)return '';
   var lin=linhasHist(HP.item);
   var ent=lin.filter(function(x){return x.l.direcao==='entrada'});
@@ -11653,8 +11698,8 @@ function blocoRastreio(){
      '<div class="hpNums" style="border-top:1px solid var(--line-2)">'+
       '<div class="hpN"><span>Valor que entrou</span><b class="vg">R$ '+money(vEnt)+'</b></div>'+
       '<div class="hpN"><span>Valor consumido</span><b class="vr">R$ '+money(vSai)+'</b></div>'+
-      '<div class="hpN"><span>Custo médio hoje</span><b>R$ '+money(custoAtual(i))+'</b></div>'+
-      '<div class="hpN"><span>Valor em estoque</span><b>R$ '+money(saldoFinal*custoAtual(i))+'</b></div>'+
+      '<div class="hpN"><span>Custo médio hoje</span><b>R$ '+money(custoDoItem(i))+'</b></div>'+
+      '<div class="hpN"><span>Valor em estoque</span><b>R$ '+money(saldoFinal*custoDoItem(i))+'</b></div>'+
      '</div></div>'+
     '<div class="hpCard">'+
      '<div class="hpH">'+sv('cr',14)+' Para onde foi</div>'+
