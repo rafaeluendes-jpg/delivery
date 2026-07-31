@@ -3316,6 +3316,16 @@ async function espelharExclusoes(tab,refs,loja){
     await api(tab+'?loja_id=eq.'+loja+filtro,'DELETE');
   }catch(e){console.error('espelhar',tab,e);}
 }
+/* apaga os itens de um pai que não existem mais neste aparelho */
+async function espelharFilhos(tab,campoPai,paiId,refs){
+  try{
+    if(refs.length>300)return;
+    var filtro=refs.length
+      ? '&ref_local=not.in.('+refs.map(function(r){return '"'+String(r).replace(/"/g,'')+'"'}).join(',')+')'
+      : '';
+    await api(tab+'?'+campoPai+'=eq.'+encodeURIComponent(paiId)+filtro,'DELETE');
+  }catch(e){console.error('espelhar filho',tab,e);logNuvem('aviso ao limpar '+tab,true);}
+}
 async function apagar(tab,campo,valor){
   try{ await api(tab+'?'+campo+'=eq.'+encodeURIComponent(valor),'DELETE'); }
   catch(e){ console.error('apagar',tab,e); }
@@ -3369,18 +3379,24 @@ async function sincronizar(){
           var paiId=_ids[lista[k].id];
           if(!paiId)continue;
           var filhos=lista[k][F.lista]||[];
-          await apagar(F.tab,F.pai,paiId);
-          if(!filhos.length)continue;
-          var lf=filhos.map(function(o,j){
-            var y=F.campos(o,j);
-            y[F.pai]=paiId;
-            y.ref_local=(lista[k].id)+'_'+(o.id||j);
-            return y;
-          });
-          var sf=await enviar(F.tab,lf);
-          logNuvem(F.tab+': '+lf.length+' item(ns), '+(sf||[]).length+' confirmado(s)',
-            (sf||[]).length!==lf.length);
-          sf.forEach(function(r){if(r.ref_local)_ids[r.ref_local]=r.id});
+          var refs=filhos.map(function(o,j){return (lista[k].id)+'_'+(o.id||j)});
+
+          if(filhos.length){
+            var lf=filhos.map(function(o,j){
+              var y=F.campos(o,j);
+              y[F.pai]=paiId;
+              y.ref_local=refs[j];
+              return y;
+            });
+            var sf=await enviar(F.tab,lf);
+            logNuvem(F.tab+': '+lf.length+' item(ns), '+(sf||[]).length+' confirmado(s)',
+              (sf||[]).length!==lf.length);
+            sf.forEach(function(r){if(r.ref_local)_ids[r.ref_local]=r.id});
+          }
+          /* só remove o que sumiu daqui — e apenas se este aparelho estiver atualizado.
+             Antes ele apagava tudo e reinseria, o que fazia um aparelho
+             desatualizado apagar o que o outro tinha acabado de criar. */
+          if(NUVEM.baixou)await espelharFilhos(F.tab,F.pai,paiId,refs);
         }
       }
 
@@ -3801,7 +3817,7 @@ function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span>Loja: <b>'+E(nomeLojaAtual())+'</b></span><span>|</span><span>Usuário: <b>Administrador</b></span>'+
 (extra?'<span>|</span><span>'+extra+'</span>':'')+
-'<span class="gw"></span><span class="logo"><em>N</em>NEXOR</span><span>V1.7.0</span>';
+'<span class="gw"></span><span class="logo"><em>N</em>NEXOR</span><span>V1.8.0</span>';
 }
 
 /* ===== BLOCO 7 — ROTEADOR ===== */
