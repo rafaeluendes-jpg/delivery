@@ -1901,6 +1901,11 @@ tbody td small{font-size:10.5px}
 .ntDica{font-size:11.5px;color:var(--ink-2);display:flex;align-items:center;gap:6px}
 .ntDica svg{color:var(--acc-d);flex:none}
 
+.limpaBusca{margin-top:5px;height:22px;padding:0 8px;border:1px solid var(--line);border-radius:4px;
+  background:#fff;cursor:pointer;font-size:10.5px;color:var(--ink-2);display:inline-flex;
+  align-items:center;gap:4px}
+.limpaBusca:hover{border-color:var(--acc);color:var(--acc-d)}
+
 @media(max-width:1000px){
   .lfPeriodo{order:3;width:100%}
   .lfTopBtns{width:100%}
@@ -2885,6 +2890,11 @@ tbody td small{font-size:10.5px}
 .chkL.semOp{background:var(--alt);border:1px dashed var(--line);border-radius:6px;padding:8px 10px;margin-bottom:6px}
 .ntDica{font-size:11.5px;color:var(--ink-2);display:flex;align-items:center;gap:6px}
 .ntDica svg{color:var(--acc-d);flex:none}
+
+.limpaBusca{margin-top:5px;height:22px;padding:0 8px;border:1px solid var(--line);border-radius:4px;
+  background:#fff;cursor:pointer;font-size:10.5px;color:var(--ink-2);display:inline-flex;
+  align-items:center;gap:4px}
+.limpaBusca:hover{border-color:var(--acc);color:var(--acc-d)}
 
 @media(max-width:1000px){
   .lgCard{grid-template-columns:1fr}.lgR{display:none}
@@ -3975,7 +3985,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V2.8.0';
+var VERSAO='V2.8.1';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
@@ -10613,14 +10623,17 @@ function telaMovimentacao(){
    '</div></div>';
   var mb=document.getElementById('mvBusca');
   if(mb){
+    if(_focoBusca==='mvBusca'){mb.focus();
+      try{mb.setSelectionRange(mb.value.length,mb.value.length)}catch(e){}}
     mb.oninput=mb.onchange=function(){
+      _focoBusca='mvBusca';
       var t=String(this.value||'').trim().toLowerCase();
-      if(t.length<3){ if(MV.insumoId){MV.insumoId='';telaMovimentacao();} return; }
+      if(!t){ if(MV.insumoId){MV.insumoId='';telaMovimentacao();} return; }
       var l2=itensEstoque();
       var a=l2.find(function(i){return (i.nome||'').toLowerCase()===t})
-          || l2.find(function(i){return String(i.codigo||'').toLowerCase()===t})
-          || l2.find(function(i){return (i.nome||'').toLowerCase().indexOf(t)>=0});
-      if(a&&a.id!==MV.insumoId){MV.insumoId=a.id;telaMovimentacao();}
+          || l2.find(function(i){return String(i.codigo||'').toLowerCase()===t});
+      if(a){ if(a.id!==MV.insumoId){MV.insumoId=a.id;telaMovimentacao();} return; }
+      if(MV.insumoId){MV.insumoId='';telaMovimentacao();}
     };
   }
   rodape(linhas.length+' movimentações no período');
@@ -11478,6 +11491,7 @@ function exportarContagem(id){
    BLOCO 24 — HISTÓRICO DE POSIÇÃO DE ESTOQUE
    ========================================================== */
 var HP={aba:'rastreio',item:'',de:'',ate:'',grupo:'',motivoId:''};
+var _focoBusca='';
 
 /* dados de demonstração: bases e sabores */
 var _semeando=false;
@@ -11613,7 +11627,9 @@ function telaHistPosicao(){
         .map(function(i){
           return '<option value="'+E(i.nome)+'">'+E(i.codigo||'')+' · '+
             (ehFicha(i)?'ficha técnica':'insumo')+'</option>';}).join('')+
-      '</datalist></div>'
+      '</datalist>'+
+      (HP.item?'<button class="limpaBusca" onclick="limparItemHP()">'+sv('x2',11)+' ver todos</button>':'')+
+      '</div>'
      :'<div class="f2"><label>Grupo</label><select onchange="HP.grupo=this.value;telaHistPosicao()">'+
       '<option value="">Todos</option>'+
       (DB.gruposIng||[]).map(function(g){return '<option value="'+g.id+'"'+(HP.grupo===g.id?' selected':'')+'>'+E(g.nome)+'</option>'}).join('')+
@@ -11628,21 +11644,26 @@ function telaHistPosicao(){
    '</div></div>';
   var hb=document.getElementById('hpBusca');
   if(hb){
-    hb.oninput=function(){escolheItemHP(this.value)};
+    hb.oninput=function(){_focoBusca='hpBusca';escolheItemHP(this.value)};
     hb.onchange=function(){escolheItemHP(this.value)};
+    if(_focoBusca==='hpBusca'){hb.focus();
+      try{hb.setSelectionRange(hb.value.length,hb.value.length)}catch(e){}}
   }
   rodape();
 }
-/* acha o item pelo que foi digitado — nome, parte do nome ou código */
+/* Só filtra quando o item for escolhido de verdade — nome completo ou código.
+   Enquanto você digita, a lista continua aberta mostrando tudo que combina. */
 function escolheItemHP(txt){
   var t=String(txt||'').trim().toLowerCase();
-  if(t.length<3){ if(HP.item){HP.item='';telaHistPosicao();} return; }
+  if(!t){ if(HP.item){HP.item='';telaHistPosicao();} return; }
   var lista=itensEstoque();
   var achou=lista.find(function(i){return (i.nome||'').toLowerCase()===t})
-        || lista.find(function(i){return String(i.codigo||'').toLowerCase()===t})
-        || lista.find(function(i){return (i.nome||'').toLowerCase().indexOf(t)>=0});
-  if(achou&&achou.id!==HP.item){HP.item=achou.id;telaHistPosicao();}
+        || lista.find(function(i){return String(i.codigo||'').toLowerCase()===t});
+  if(achou){ if(achou.id!==HP.item){HP.item=achou.id;telaHistPosicao();} return; }
+  /* digitou algo que ainda não é um item: mantém a busca aberta */
+  if(HP.item){HP.item='';telaHistPosicao();}
 }
+function limparItemHP(){HP.item='';_focoBusca='';telaHistPosicao();}
 function mudaAbaHP(a){HP.aba=a;telaHistPosicao();}
 function buscarHist(){HP.de=$('hpDe').value;HP.ate=$('hpAte').value;telaHistPosicao();}
 
