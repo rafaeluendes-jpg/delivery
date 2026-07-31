@@ -4041,7 +4041,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V3.4.0';
+var VERSAO='V3.4.1';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
@@ -9853,7 +9853,18 @@ function vincularTudo(){
   });
   (DB.fichas||[]).forEach(function(f){
     if(f.destinoId==='__nenhum')return;
+    /* respeita a escolha que você já fez nesta ficha */
+    if(f.destinoNome){
+      var alvo=(DB.insumos||[]).find(function(i){
+          return String(i.nome||'').toLowerCase()===String(f.destinoNome).toLowerCase();})
+        ||(DB.fichas||[]).find(function(x){
+          return String(x.nome||'').toLowerCase()===String(f.destinoNome).toLowerCase();});
+      if(alvo&&f.destinoId!==alvo.id){f.destinoId=alvo.id;n++;}
+      return;
+    }
     if(destinoDaFicha(f))return;
+    /* massa/base não recebe o padrão do grupo: o destino dela é específico */
+    if(/massa|base/i.test(f.nome||''))return;
     var c=catFicha(f.categoriaId);
     if(c&&c.destinoId){f.destinoId=c.destinoId;f.destinoNome=(itemEstoque(c.destinoId)||{}).nome||'';n++;return;}
     if(gv&&/gelato|açúcar|acucar|sorbet/i.test(f.nome)){
