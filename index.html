@@ -2320,6 +2320,62 @@ tbody td small{font-size:10.5px}
 .avisoVer button:hover{filter:brightness(1.1)}
 .avisoVer button.x{background:transparent;color:rgba(255,255,255,.5);padding:0 4px;font-size:18px}
 
+.pontoSuc{width:11px;height:11px;border-radius:50%;display:inline-block}
+.coresSuc{display:flex;gap:6px}
+.corB{width:28px;height:28px;border-radius:7px;border:2px solid transparent;cursor:pointer}
+.corB.on{border-color:var(--ink);box-shadow:0 0 0 2px #fff inset}
+
+/* ---------- canais de venda ---------- */
+.cvGrade{display:flex;gap:12px;padding:12px 16px;align-items:flex-start}
+.cvLat{width:250px;flex:none;display:flex;flex-direction:column;gap:9px}
+.cvCard{display:flex;align-items:center;gap:12px;padding:13px 15px;border-radius:9px;color:#fff}
+.cvCard.total{background:#00B8D4}
+.cvPct{width:46px;height:46px;border-radius:50%;border:3px solid rgba(255,255,255,.55);
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex:none}
+.cvCard span{display:block;font-size:10px;font-weight:700;letter-spacing:.06em;opacity:.9}
+.cvCard b{display:block;font-size:17px;font-weight:700;margin-top:1px}
+.cvCard small{display:block;font-size:10.5px;opacity:.8}
+.cvCentro{flex:1;min-width:0;background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.cvRank{width:250px;flex:none;background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.cvRankL{padding:12px 13px;display:flex;flex-direction:column;gap:13px}
+.cvRk{display:grid;grid-template-columns:44px 1fr;gap:9px;align-items:center}
+.cvRkP{font-size:14px;font-weight:700;color:var(--ink-2)}
+.cvRkN{font-size:12px;color:var(--ink-2)}
+.cvRkN small{display:block;font-size:10.5px;color:var(--ink-3)}
+.cvRkB{grid-column:1/-1;height:6px;border-radius:4px;background:var(--line-2);overflow:hidden}
+.cvRkB i{display:block;height:100%;border-radius:4px}
+.lnT{opacity:0;pointer-events:none;transition:opacity .1s}
+.lnH{cursor:crosshair}
+.grafBox svg:hover .lnT{opacity:0}
+@media(max-width:1200px){.cvGrade{flex-wrap:wrap}.cvLat,.cvRank{width:100%;flex-direction:row;flex-wrap:wrap}
+ .cvLat .cvCard{flex:1;min-width:180px}}
+
+/* ---------- faturamento ---------- */
+.kpiFaixa{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;padding:13px 16px}
+.kpiC{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:9px;
+  background:var(--c);color:#fff}
+.kpiIc{width:42px;height:42px;border-radius:9px;background:rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;flex:none}
+.kpiC span{display:block;font-size:11.5px;opacity:.92}
+.kpiC b{display:block;font-size:21px;font-weight:700;margin-top:1px}
+.repBar{position:relative;height:20px;border-radius:4px;background:var(--line-2);overflow:hidden}
+.repBar i{display:block;height:100%;border-radius:4px}
+.repBar span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:10.5px;font-weight:700;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.3)}
+
+.semGrade{padding:12px 16px;display:flex;flex-direction:column;gap:10px}
+.semIt{display:grid;grid-template-columns:110px 1fr 180px;gap:12px;align-items:center}
+.semN{font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.semN i{font-style:normal;font-size:9.5px;font-weight:800;background:var(--acc);color:#fff;
+  border-radius:9px;padding:1px 6px;margin-left:4px}
+.semB{height:14px;border-radius:7px;background:var(--line-2);overflow:hidden}
+.semB i{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,#00B89E,#00806F)}
+.semIt.top .semB i{background:linear-gradient(90deg,#00C9AB,#006B5C)}
+.semV{text-align:right}
+.semV b{font-size:13.5px;font-variant-numeric:tabular-nums}
+.semV small{display:block;font-size:10.5px;color:var(--ink-3)}
+@media(max-width:800px){.semIt{grid-template-columns:1fr}.semV{text-align:left}}
+
 @media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
 
 /* ---------- caixa de confirmação ---------- */
@@ -2514,6 +2570,62 @@ tbody td small{font-size:10.5px}
   color:#fff;font-size:12px;font-weight:600;cursor:pointer;flex:none}
 .avisoVer button:hover{filter:brightness(1.1)}
 .avisoVer button.x{background:transparent;color:rgba(255,255,255,.5);padding:0 4px;font-size:18px}
+
+.pontoSuc{width:11px;height:11px;border-radius:50%;display:inline-block}
+.coresSuc{display:flex;gap:6px}
+.corB{width:28px;height:28px;border-radius:7px;border:2px solid transparent;cursor:pointer}
+.corB.on{border-color:var(--ink);box-shadow:0 0 0 2px #fff inset}
+
+/* ---------- canais de venda ---------- */
+.cvGrade{display:flex;gap:12px;padding:12px 16px;align-items:flex-start}
+.cvLat{width:250px;flex:none;display:flex;flex-direction:column;gap:9px}
+.cvCard{display:flex;align-items:center;gap:12px;padding:13px 15px;border-radius:9px;color:#fff}
+.cvCard.total{background:#00B8D4}
+.cvPct{width:46px;height:46px;border-radius:50%;border:3px solid rgba(255,255,255,.55);
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex:none}
+.cvCard span{display:block;font-size:10px;font-weight:700;letter-spacing:.06em;opacity:.9}
+.cvCard b{display:block;font-size:17px;font-weight:700;margin-top:1px}
+.cvCard small{display:block;font-size:10.5px;opacity:.8}
+.cvCentro{flex:1;min-width:0;background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.cvRank{width:250px;flex:none;background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.cvRankL{padding:12px 13px;display:flex;flex-direction:column;gap:13px}
+.cvRk{display:grid;grid-template-columns:44px 1fr;gap:9px;align-items:center}
+.cvRkP{font-size:14px;font-weight:700;color:var(--ink-2)}
+.cvRkN{font-size:12px;color:var(--ink-2)}
+.cvRkN small{display:block;font-size:10.5px;color:var(--ink-3)}
+.cvRkB{grid-column:1/-1;height:6px;border-radius:4px;background:var(--line-2);overflow:hidden}
+.cvRkB i{display:block;height:100%;border-radius:4px}
+.lnT{opacity:0;pointer-events:none;transition:opacity .1s}
+.lnH{cursor:crosshair}
+.grafBox svg:hover .lnT{opacity:0}
+@media(max-width:1200px){.cvGrade{flex-wrap:wrap}.cvLat,.cvRank{width:100%;flex-direction:row;flex-wrap:wrap}
+ .cvLat .cvCard{flex:1;min-width:180px}}
+
+/* ---------- faturamento ---------- */
+.kpiFaixa{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;padding:13px 16px}
+.kpiC{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:9px;
+  background:var(--c);color:#fff}
+.kpiIc{width:42px;height:42px;border-radius:9px;background:rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;flex:none}
+.kpiC span{display:block;font-size:11.5px;opacity:.92}
+.kpiC b{display:block;font-size:21px;font-weight:700;margin-top:1px}
+.repBar{position:relative;height:20px;border-radius:4px;background:var(--line-2);overflow:hidden}
+.repBar i{display:block;height:100%;border-radius:4px}
+.repBar span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:10.5px;font-weight:700;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.3)}
+
+.semGrade{padding:12px 16px;display:flex;flex-direction:column;gap:10px}
+.semIt{display:grid;grid-template-columns:110px 1fr 180px;gap:12px;align-items:center}
+.semN{font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.semN i{font-style:normal;font-size:9.5px;font-weight:800;background:var(--acc);color:#fff;
+  border-radius:9px;padding:1px 6px;margin-left:4px}
+.semB{height:14px;border-radius:7px;background:var(--line-2);overflow:hidden}
+.semB i{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,#00B89E,#00806F)}
+.semIt.top .semB i{background:linear-gradient(90deg,#00C9AB,#006B5C)}
+.semV{text-align:right}
+.semV b{font-size:13.5px;font-variant-numeric:tabular-nums}
+.semV small{display:block;font-size:10.5px;color:var(--ink-3)}
+@media(max-width:800px){.semIt{grid-template-columns:1fr}.semV{text-align:left}}
 
 @media(max-width:1000px){.ivGrade{flex-direction:column}.ivAdic{width:100%}}
 
@@ -2792,6 +2904,62 @@ tbody td small{font-size:10.5px}
 .avisoVer button:hover{filter:brightness(1.1)}
 .avisoVer button.x{background:transparent;color:rgba(255,255,255,.5);padding:0 4px;font-size:18px}
 
+.pontoSuc{width:11px;height:11px;border-radius:50%;display:inline-block}
+.coresSuc{display:flex;gap:6px}
+.corB{width:28px;height:28px;border-radius:7px;border:2px solid transparent;cursor:pointer}
+.corB.on{border-color:var(--ink);box-shadow:0 0 0 2px #fff inset}
+
+/* ---------- canais de venda ---------- */
+.cvGrade{display:flex;gap:12px;padding:12px 16px;align-items:flex-start}
+.cvLat{width:250px;flex:none;display:flex;flex-direction:column;gap:9px}
+.cvCard{display:flex;align-items:center;gap:12px;padding:13px 15px;border-radius:9px;color:#fff}
+.cvCard.total{background:#00B8D4}
+.cvPct{width:46px;height:46px;border-radius:50%;border:3px solid rgba(255,255,255,.55);
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex:none}
+.cvCard span{display:block;font-size:10px;font-weight:700;letter-spacing:.06em;opacity:.9}
+.cvCard b{display:block;font-size:17px;font-weight:700;margin-top:1px}
+.cvCard small{display:block;font-size:10.5px;opacity:.8}
+.cvCentro{flex:1;min-width:0;background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.cvRank{width:250px;flex:none;background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.cvRankL{padding:12px 13px;display:flex;flex-direction:column;gap:13px}
+.cvRk{display:grid;grid-template-columns:44px 1fr;gap:9px;align-items:center}
+.cvRkP{font-size:14px;font-weight:700;color:var(--ink-2)}
+.cvRkN{font-size:12px;color:var(--ink-2)}
+.cvRkN small{display:block;font-size:10.5px;color:var(--ink-3)}
+.cvRkB{grid-column:1/-1;height:6px;border-radius:4px;background:var(--line-2);overflow:hidden}
+.cvRkB i{display:block;height:100%;border-radius:4px}
+.lnT{opacity:0;pointer-events:none;transition:opacity .1s}
+.lnH{cursor:crosshair}
+.grafBox svg:hover .lnT{opacity:0}
+@media(max-width:1200px){.cvGrade{flex-wrap:wrap}.cvLat,.cvRank{width:100%;flex-direction:row;flex-wrap:wrap}
+ .cvLat .cvCard{flex:1;min-width:180px}}
+
+/* ---------- faturamento ---------- */
+.kpiFaixa{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;padding:13px 16px}
+.kpiC{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:9px;
+  background:var(--c);color:#fff}
+.kpiIc{width:42px;height:42px;border-radius:9px;background:rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;flex:none}
+.kpiC span{display:block;font-size:11.5px;opacity:.92}
+.kpiC b{display:block;font-size:21px;font-weight:700;margin-top:1px}
+.repBar{position:relative;height:20px;border-radius:4px;background:var(--line-2);overflow:hidden}
+.repBar i{display:block;height:100%;border-radius:4px}
+.repBar span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:10.5px;font-weight:700;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.3)}
+
+.semGrade{padding:12px 16px;display:flex;flex-direction:column;gap:10px}
+.semIt{display:grid;grid-template-columns:110px 1fr 180px;gap:12px;align-items:center}
+.semN{font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.semN i{font-style:normal;font-size:9.5px;font-weight:800;background:var(--acc);color:#fff;
+  border-radius:9px;padding:1px 6px;margin-left:4px}
+.semB{height:14px;border-radius:7px;background:var(--line-2);overflow:hidden}
+.semB i{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,#00B89E,#00806F)}
+.semIt.top .semB i{background:linear-gradient(90deg,#00C9AB,#006B5C)}
+.semV{text-align:right}
+.semV b{font-size:13.5px;font-variant-numeric:tabular-nums}
+.semV small{display:block;font-size:10.5px;color:var(--ink-3)}
+@media(max-width:800px){.semIt{grid-template-columns:1fr}.semV{text-align:left}}
+
 @media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
 
 /* ---------- caixa de confirmação ---------- */
@@ -2986,6 +3154,62 @@ tbody td small{font-size:10.5px}
   color:#fff;font-size:12px;font-weight:600;cursor:pointer;flex:none}
 .avisoVer button:hover{filter:brightness(1.1)}
 .avisoVer button.x{background:transparent;color:rgba(255,255,255,.5);padding:0 4px;font-size:18px}
+
+.pontoSuc{width:11px;height:11px;border-radius:50%;display:inline-block}
+.coresSuc{display:flex;gap:6px}
+.corB{width:28px;height:28px;border-radius:7px;border:2px solid transparent;cursor:pointer}
+.corB.on{border-color:var(--ink);box-shadow:0 0 0 2px #fff inset}
+
+/* ---------- canais de venda ---------- */
+.cvGrade{display:flex;gap:12px;padding:12px 16px;align-items:flex-start}
+.cvLat{width:250px;flex:none;display:flex;flex-direction:column;gap:9px}
+.cvCard{display:flex;align-items:center;gap:12px;padding:13px 15px;border-radius:9px;color:#fff}
+.cvCard.total{background:#00B8D4}
+.cvPct{width:46px;height:46px;border-radius:50%;border:3px solid rgba(255,255,255,.55);
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex:none}
+.cvCard span{display:block;font-size:10px;font-weight:700;letter-spacing:.06em;opacity:.9}
+.cvCard b{display:block;font-size:17px;font-weight:700;margin-top:1px}
+.cvCard small{display:block;font-size:10.5px;opacity:.8}
+.cvCentro{flex:1;min-width:0;background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.cvRank{width:250px;flex:none;background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.cvRankL{padding:12px 13px;display:flex;flex-direction:column;gap:13px}
+.cvRk{display:grid;grid-template-columns:44px 1fr;gap:9px;align-items:center}
+.cvRkP{font-size:14px;font-weight:700;color:var(--ink-2)}
+.cvRkN{font-size:12px;color:var(--ink-2)}
+.cvRkN small{display:block;font-size:10.5px;color:var(--ink-3)}
+.cvRkB{grid-column:1/-1;height:6px;border-radius:4px;background:var(--line-2);overflow:hidden}
+.cvRkB i{display:block;height:100%;border-radius:4px}
+.lnT{opacity:0;pointer-events:none;transition:opacity .1s}
+.lnH{cursor:crosshair}
+.grafBox svg:hover .lnT{opacity:0}
+@media(max-width:1200px){.cvGrade{flex-wrap:wrap}.cvLat,.cvRank{width:100%;flex-direction:row;flex-wrap:wrap}
+ .cvLat .cvCard{flex:1;min-width:180px}}
+
+/* ---------- faturamento ---------- */
+.kpiFaixa{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;padding:13px 16px}
+.kpiC{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:9px;
+  background:var(--c);color:#fff}
+.kpiIc{width:42px;height:42px;border-radius:9px;background:rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;flex:none}
+.kpiC span{display:block;font-size:11.5px;opacity:.92}
+.kpiC b{display:block;font-size:21px;font-weight:700;margin-top:1px}
+.repBar{position:relative;height:20px;border-radius:4px;background:var(--line-2);overflow:hidden}
+.repBar i{display:block;height:100%;border-radius:4px}
+.repBar span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:10.5px;font-weight:700;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.3)}
+
+.semGrade{padding:12px 16px;display:flex;flex-direction:column;gap:10px}
+.semIt{display:grid;grid-template-columns:110px 1fr 180px;gap:12px;align-items:center}
+.semN{font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.semN i{font-style:normal;font-size:9.5px;font-weight:800;background:var(--acc);color:#fff;
+  border-radius:9px;padding:1px 6px;margin-left:4px}
+.semB{height:14px;border-radius:7px;background:var(--line-2);overflow:hidden}
+.semB i{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,#00B89E,#00806F)}
+.semIt.top .semB i{background:linear-gradient(90deg,#00C9AB,#006B5C)}
+.semV{text-align:right}
+.semV b{font-size:13.5px;font-variant-numeric:tabular-nums}
+.semV small{display:block;font-size:10.5px;color:var(--ink-3)}
+@media(max-width:800px){.semIt{grid-template-columns:1fr}.semV{text-align:left}}
 
 @media(max-width:1000px){
   .lfPeriodo{order:3;width:100%}
@@ -4391,6 +4615,62 @@ tbody td small{font-size:10.5px}
 .avisoVer button:hover{filter:brightness(1.1)}
 .avisoVer button.x{background:transparent;color:rgba(255,255,255,.5);padding:0 4px;font-size:18px}
 
+.pontoSuc{width:11px;height:11px;border-radius:50%;display:inline-block}
+.coresSuc{display:flex;gap:6px}
+.corB{width:28px;height:28px;border-radius:7px;border:2px solid transparent;cursor:pointer}
+.corB.on{border-color:var(--ink);box-shadow:0 0 0 2px #fff inset}
+
+/* ---------- canais de venda ---------- */
+.cvGrade{display:flex;gap:12px;padding:12px 16px;align-items:flex-start}
+.cvLat{width:250px;flex:none;display:flex;flex-direction:column;gap:9px}
+.cvCard{display:flex;align-items:center;gap:12px;padding:13px 15px;border-radius:9px;color:#fff}
+.cvCard.total{background:#00B8D4}
+.cvPct{width:46px;height:46px;border-radius:50%;border:3px solid rgba(255,255,255,.55);
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex:none}
+.cvCard span{display:block;font-size:10px;font-weight:700;letter-spacing:.06em;opacity:.9}
+.cvCard b{display:block;font-size:17px;font-weight:700;margin-top:1px}
+.cvCard small{display:block;font-size:10.5px;opacity:.8}
+.cvCentro{flex:1;min-width:0;background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.cvRank{width:250px;flex:none;background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.cvRankL{padding:12px 13px;display:flex;flex-direction:column;gap:13px}
+.cvRk{display:grid;grid-template-columns:44px 1fr;gap:9px;align-items:center}
+.cvRkP{font-size:14px;font-weight:700;color:var(--ink-2)}
+.cvRkN{font-size:12px;color:var(--ink-2)}
+.cvRkN small{display:block;font-size:10.5px;color:var(--ink-3)}
+.cvRkB{grid-column:1/-1;height:6px;border-radius:4px;background:var(--line-2);overflow:hidden}
+.cvRkB i{display:block;height:100%;border-radius:4px}
+.lnT{opacity:0;pointer-events:none;transition:opacity .1s}
+.lnH{cursor:crosshair}
+.grafBox svg:hover .lnT{opacity:0}
+@media(max-width:1200px){.cvGrade{flex-wrap:wrap}.cvLat,.cvRank{width:100%;flex-direction:row;flex-wrap:wrap}
+ .cvLat .cvCard{flex:1;min-width:180px}}
+
+/* ---------- faturamento ---------- */
+.kpiFaixa{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;padding:13px 16px}
+.kpiC{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:9px;
+  background:var(--c);color:#fff}
+.kpiIc{width:42px;height:42px;border-radius:9px;background:rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;flex:none}
+.kpiC span{display:block;font-size:11.5px;opacity:.92}
+.kpiC b{display:block;font-size:21px;font-weight:700;margin-top:1px}
+.repBar{position:relative;height:20px;border-radius:4px;background:var(--line-2);overflow:hidden}
+.repBar i{display:block;height:100%;border-radius:4px}
+.repBar span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:10.5px;font-weight:700;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.3)}
+
+.semGrade{padding:12px 16px;display:flex;flex-direction:column;gap:10px}
+.semIt{display:grid;grid-template-columns:110px 1fr 180px;gap:12px;align-items:center}
+.semN{font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.semN i{font-style:normal;font-size:9.5px;font-weight:800;background:var(--acc);color:#fff;
+  border-radius:9px;padding:1px 6px;margin-left:4px}
+.semB{height:14px;border-radius:7px;background:var(--line-2);overflow:hidden}
+.semB i{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,#00B89E,#00806F)}
+.semIt.top .semB i{background:linear-gradient(90deg,#00C9AB,#006B5C)}
+.semV{text-align:right}
+.semV b{font-size:13.5px;font-variant-numeric:tabular-nums}
+.semV small{display:block;font-size:10.5px;color:var(--ink-3)}
+@media(max-width:800px){.semIt{grid-template-columns:1fr}.semV{text-align:left}}
+
 @media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
 
 /* ---------- caixa de confirmação ---------- */
@@ -4585,6 +4865,62 @@ tbody td small{font-size:10.5px}
   color:#fff;font-size:12px;font-weight:600;cursor:pointer;flex:none}
 .avisoVer button:hover{filter:brightness(1.1)}
 .avisoVer button.x{background:transparent;color:rgba(255,255,255,.5);padding:0 4px;font-size:18px}
+
+.pontoSuc{width:11px;height:11px;border-radius:50%;display:inline-block}
+.coresSuc{display:flex;gap:6px}
+.corB{width:28px;height:28px;border-radius:7px;border:2px solid transparent;cursor:pointer}
+.corB.on{border-color:var(--ink);box-shadow:0 0 0 2px #fff inset}
+
+/* ---------- canais de venda ---------- */
+.cvGrade{display:flex;gap:12px;padding:12px 16px;align-items:flex-start}
+.cvLat{width:250px;flex:none;display:flex;flex-direction:column;gap:9px}
+.cvCard{display:flex;align-items:center;gap:12px;padding:13px 15px;border-radius:9px;color:#fff}
+.cvCard.total{background:#00B8D4}
+.cvPct{width:46px;height:46px;border-radius:50%;border:3px solid rgba(255,255,255,.55);
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex:none}
+.cvCard span{display:block;font-size:10px;font-weight:700;letter-spacing:.06em;opacity:.9}
+.cvCard b{display:block;font-size:17px;font-weight:700;margin-top:1px}
+.cvCard small{display:block;font-size:10.5px;opacity:.8}
+.cvCentro{flex:1;min-width:0;background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.cvRank{width:250px;flex:none;background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.cvRankL{padding:12px 13px;display:flex;flex-direction:column;gap:13px}
+.cvRk{display:grid;grid-template-columns:44px 1fr;gap:9px;align-items:center}
+.cvRkP{font-size:14px;font-weight:700;color:var(--ink-2)}
+.cvRkN{font-size:12px;color:var(--ink-2)}
+.cvRkN small{display:block;font-size:10.5px;color:var(--ink-3)}
+.cvRkB{grid-column:1/-1;height:6px;border-radius:4px;background:var(--line-2);overflow:hidden}
+.cvRkB i{display:block;height:100%;border-radius:4px}
+.lnT{opacity:0;pointer-events:none;transition:opacity .1s}
+.lnH{cursor:crosshair}
+.grafBox svg:hover .lnT{opacity:0}
+@media(max-width:1200px){.cvGrade{flex-wrap:wrap}.cvLat,.cvRank{width:100%;flex-direction:row;flex-wrap:wrap}
+ .cvLat .cvCard{flex:1;min-width:180px}}
+
+/* ---------- faturamento ---------- */
+.kpiFaixa{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;padding:13px 16px}
+.kpiC{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:9px;
+  background:var(--c);color:#fff}
+.kpiIc{width:42px;height:42px;border-radius:9px;background:rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;flex:none}
+.kpiC span{display:block;font-size:11.5px;opacity:.92}
+.kpiC b{display:block;font-size:21px;font-weight:700;margin-top:1px}
+.repBar{position:relative;height:20px;border-radius:4px;background:var(--line-2);overflow:hidden}
+.repBar i{display:block;height:100%;border-radius:4px}
+.repBar span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:10.5px;font-weight:700;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.3)}
+
+.semGrade{padding:12px 16px;display:flex;flex-direction:column;gap:10px}
+.semIt{display:grid;grid-template-columns:110px 1fr 180px;gap:12px;align-items:center}
+.semN{font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.semN i{font-style:normal;font-size:9.5px;font-weight:800;background:var(--acc);color:#fff;
+  border-radius:9px;padding:1px 6px;margin-left:4px}
+.semB{height:14px;border-radius:7px;background:var(--line-2);overflow:hidden}
+.semB i{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,#00B89E,#00806F)}
+.semIt.top .semB i{background:linear-gradient(90deg,#00C9AB,#006B5C)}
+.semV{text-align:right}
+.semV b{font-size:13.5px;font-variant-numeric:tabular-nums}
+.semV small{display:block;font-size:10.5px;color:var(--ink-3)}
+@media(max-width:800px){.semIt{grid-template-columns:1fr}.semV{text-align:left}}
 
 @media(max-width:1000px){.ivGrade{flex-direction:column}.ivAdic{width:100%}}
 
@@ -4863,6 +5199,62 @@ tbody td small{font-size:10.5px}
 .avisoVer button:hover{filter:brightness(1.1)}
 .avisoVer button.x{background:transparent;color:rgba(255,255,255,.5);padding:0 4px;font-size:18px}
 
+.pontoSuc{width:11px;height:11px;border-radius:50%;display:inline-block}
+.coresSuc{display:flex;gap:6px}
+.corB{width:28px;height:28px;border-radius:7px;border:2px solid transparent;cursor:pointer}
+.corB.on{border-color:var(--ink);box-shadow:0 0 0 2px #fff inset}
+
+/* ---------- canais de venda ---------- */
+.cvGrade{display:flex;gap:12px;padding:12px 16px;align-items:flex-start}
+.cvLat{width:250px;flex:none;display:flex;flex-direction:column;gap:9px}
+.cvCard{display:flex;align-items:center;gap:12px;padding:13px 15px;border-radius:9px;color:#fff}
+.cvCard.total{background:#00B8D4}
+.cvPct{width:46px;height:46px;border-radius:50%;border:3px solid rgba(255,255,255,.55);
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex:none}
+.cvCard span{display:block;font-size:10px;font-weight:700;letter-spacing:.06em;opacity:.9}
+.cvCard b{display:block;font-size:17px;font-weight:700;margin-top:1px}
+.cvCard small{display:block;font-size:10.5px;opacity:.8}
+.cvCentro{flex:1;min-width:0;background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.cvRank{width:250px;flex:none;background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.cvRankL{padding:12px 13px;display:flex;flex-direction:column;gap:13px}
+.cvRk{display:grid;grid-template-columns:44px 1fr;gap:9px;align-items:center}
+.cvRkP{font-size:14px;font-weight:700;color:var(--ink-2)}
+.cvRkN{font-size:12px;color:var(--ink-2)}
+.cvRkN small{display:block;font-size:10.5px;color:var(--ink-3)}
+.cvRkB{grid-column:1/-1;height:6px;border-radius:4px;background:var(--line-2);overflow:hidden}
+.cvRkB i{display:block;height:100%;border-radius:4px}
+.lnT{opacity:0;pointer-events:none;transition:opacity .1s}
+.lnH{cursor:crosshair}
+.grafBox svg:hover .lnT{opacity:0}
+@media(max-width:1200px){.cvGrade{flex-wrap:wrap}.cvLat,.cvRank{width:100%;flex-direction:row;flex-wrap:wrap}
+ .cvLat .cvCard{flex:1;min-width:180px}}
+
+/* ---------- faturamento ---------- */
+.kpiFaixa{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;padding:13px 16px}
+.kpiC{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:9px;
+  background:var(--c);color:#fff}
+.kpiIc{width:42px;height:42px;border-radius:9px;background:rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;flex:none}
+.kpiC span{display:block;font-size:11.5px;opacity:.92}
+.kpiC b{display:block;font-size:21px;font-weight:700;margin-top:1px}
+.repBar{position:relative;height:20px;border-radius:4px;background:var(--line-2);overflow:hidden}
+.repBar i{display:block;height:100%;border-radius:4px}
+.repBar span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:10.5px;font-weight:700;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.3)}
+
+.semGrade{padding:12px 16px;display:flex;flex-direction:column;gap:10px}
+.semIt{display:grid;grid-template-columns:110px 1fr 180px;gap:12px;align-items:center}
+.semN{font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.semN i{font-style:normal;font-size:9.5px;font-weight:800;background:var(--acc);color:#fff;
+  border-radius:9px;padding:1px 6px;margin-left:4px}
+.semB{height:14px;border-radius:7px;background:var(--line-2);overflow:hidden}
+.semB i{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,#00B89E,#00806F)}
+.semIt.top .semB i{background:linear-gradient(90deg,#00C9AB,#006B5C)}
+.semV{text-align:right}
+.semV b{font-size:13.5px;font-variant-numeric:tabular-nums}
+.semV small{display:block;font-size:10.5px;color:var(--ink-3)}
+@media(max-width:800px){.semIt{grid-template-columns:1fr}.semV{text-align:left}}
+
 @media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
 
 /* ---------- caixa de confirmação ---------- */
@@ -5057,6 +5449,62 @@ tbody td small{font-size:10.5px}
   color:#fff;font-size:12px;font-weight:600;cursor:pointer;flex:none}
 .avisoVer button:hover{filter:brightness(1.1)}
 .avisoVer button.x{background:transparent;color:rgba(255,255,255,.5);padding:0 4px;font-size:18px}
+
+.pontoSuc{width:11px;height:11px;border-radius:50%;display:inline-block}
+.coresSuc{display:flex;gap:6px}
+.corB{width:28px;height:28px;border-radius:7px;border:2px solid transparent;cursor:pointer}
+.corB.on{border-color:var(--ink);box-shadow:0 0 0 2px #fff inset}
+
+/* ---------- canais de venda ---------- */
+.cvGrade{display:flex;gap:12px;padding:12px 16px;align-items:flex-start}
+.cvLat{width:250px;flex:none;display:flex;flex-direction:column;gap:9px}
+.cvCard{display:flex;align-items:center;gap:12px;padding:13px 15px;border-radius:9px;color:#fff}
+.cvCard.total{background:#00B8D4}
+.cvPct{width:46px;height:46px;border-radius:50%;border:3px solid rgba(255,255,255,.55);
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex:none}
+.cvCard span{display:block;font-size:10px;font-weight:700;letter-spacing:.06em;opacity:.9}
+.cvCard b{display:block;font-size:17px;font-weight:700;margin-top:1px}
+.cvCard small{display:block;font-size:10.5px;opacity:.8}
+.cvCentro{flex:1;min-width:0;background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.cvRank{width:250px;flex:none;background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.cvRankL{padding:12px 13px;display:flex;flex-direction:column;gap:13px}
+.cvRk{display:grid;grid-template-columns:44px 1fr;gap:9px;align-items:center}
+.cvRkP{font-size:14px;font-weight:700;color:var(--ink-2)}
+.cvRkN{font-size:12px;color:var(--ink-2)}
+.cvRkN small{display:block;font-size:10.5px;color:var(--ink-3)}
+.cvRkB{grid-column:1/-1;height:6px;border-radius:4px;background:var(--line-2);overflow:hidden}
+.cvRkB i{display:block;height:100%;border-radius:4px}
+.lnT{opacity:0;pointer-events:none;transition:opacity .1s}
+.lnH{cursor:crosshair}
+.grafBox svg:hover .lnT{opacity:0}
+@media(max-width:1200px){.cvGrade{flex-wrap:wrap}.cvLat,.cvRank{width:100%;flex-direction:row;flex-wrap:wrap}
+ .cvLat .cvCard{flex:1;min-width:180px}}
+
+/* ---------- faturamento ---------- */
+.kpiFaixa{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;padding:13px 16px}
+.kpiC{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:9px;
+  background:var(--c);color:#fff}
+.kpiIc{width:42px;height:42px;border-radius:9px;background:rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;flex:none}
+.kpiC span{display:block;font-size:11.5px;opacity:.92}
+.kpiC b{display:block;font-size:21px;font-weight:700;margin-top:1px}
+.repBar{position:relative;height:20px;border-radius:4px;background:var(--line-2);overflow:hidden}
+.repBar i{display:block;height:100%;border-radius:4px}
+.repBar span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:10.5px;font-weight:700;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.3)}
+
+.semGrade{padding:12px 16px;display:flex;flex-direction:column;gap:10px}
+.semIt{display:grid;grid-template-columns:110px 1fr 180px;gap:12px;align-items:center}
+.semN{font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.semN i{font-style:normal;font-size:9.5px;font-weight:800;background:var(--acc);color:#fff;
+  border-radius:9px;padding:1px 6px;margin-left:4px}
+.semB{height:14px;border-radius:7px;background:var(--line-2);overflow:hidden}
+.semB i{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,#00B89E,#00806F)}
+.semIt.top .semB i{background:linear-gradient(90deg,#00C9AB,#006B5C)}
+.semV{text-align:right}
+.semV b{font-size:13.5px;font-variant-numeric:tabular-nums}
+.semV small{display:block;font-size:10.5px;color:var(--ink-3)}
+@media(max-width:800px){.semIt{grid-template-columns:1fr}.semV{text-align:left}}
 
 @media(max-width:1000px){
   .lgCard{grid-template-columns:1fr}.lgR{display:none}
@@ -5496,6 +5944,11 @@ var MAPA=[
   campos:function(x){return {cliente_id:fk('clientes',x.clienteId),tipo:x.tipo,valor:n(x.valor),
     data:x.data||null,pedido_id:fk('pedidos',x.pedidoId),forma_id:fk('formasPag',x.formaId),
     conta_id:fk('contas',x.contaId),observacao:x.obs||null}}},
+
+ {col:'sucursais', espelha:true, tab:'sucursais',
+  campos:function(x){return {nome:x.nome,apelido:x.apelido||null,cnpj:x.cnpj||null,
+    telefone:x.telefone||null,cidade:x.cidade||null,uf:x.uf||null,
+    matriz:!!x.matriz,ativa:x.ativa!==false}}},
 
  {col:'ordensProd',  tab:'ordens_producao',
   campos:function(x){return {numero:x.numero||null,data:x.data||null,hora:x.hora||null,
@@ -5960,6 +6413,11 @@ async function baixarDaNuvem(forcar){
     perda:Number(x.perda)||0,ganho:Number(x.ganho)||0,resultado:Number(x.resultado)||0,
     itens:x.itens||[]}});
 
+  var sc=await api('sucursais'+qs);
+  DB.sucursais=volta(sc,function(x){return {id:x.ref_local||x.id,nome:x.nome,
+    apelido:x.apelido||'',cnpj:x.cnpj||'',telefone:x.telefone||'',cidade:x.cidade||'',
+    uf:x.uf||'',matriz:!!x.matriz,ativa:x.ativa!==false,cor:x.cor||'#00A08B'}});
+
   var op=await api('ordens_producao'+qs+'&order=data.desc&limit=1000');
   DB.ordensProd=volta(op,function(x){return {id:x.ref_local||x.id,numero:x.numero,
     data:x.data,hora:x.hora,resp:x.responsavel||'',obs:x.observacao||'',
@@ -6001,6 +6459,7 @@ async function baixarDaNuvem(forcar){
     pagamentos:(x.pedido_pagamentos||[]).map(function(p2){return {formaId:mapaFP[p2.forma_id]||'',
       valor:Number(p2.valor)||0}})}});
 
+  var mapaSuc={};sc.forEach(function(x){mapaSuc[x.id]=x.ref_local||x.id});
   var mapaPed={};pd.forEach(function(x){mapaPed[x.id]=x.ref_local||x.id});
 
   var ac=await api('acertos'+qs+'&order=data.desc&limit=500');
@@ -6198,7 +6657,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V4.7.2';
+var VERSAO='V4.8.0';
 /* confere se há versão nova publicada e avisa, sem forçar nada */
 async function checarVersao(){
   try{
@@ -6267,6 +6726,10 @@ if(mid==='relatorios'&&iid==='vendas-forma-pagamento')return telaVendasFormaPag(
 if(mid==='relatorios'&&iid==='vendas-periodo')return telaVendasPeriodo();
 if(mid==='relatorios'&&iid==='dre')return telaDRE();
 if(mid==='loja'&&iid==='cfg-dre')return telaCfgDRE();
+if(mid==='loja'&&iid==='cfg-sucursais')return telaSucursais();
+if(mid==='dashboard'&&iid==='canais-venda')return telaCanaisVenda();
+if(mid==='dashboard'&&iid==='faturamento')return telaFaturamento();
+if(mid==='dashboard'&&iid==='venda-data-hora')return telaVendaDataHora();
 if(mid==='estoque'&&iid==='producao')return telaProducao();
 if(mid==='estoque'&&iid==='ficha-tecnica')return telaFichaTecnica();
 if(mid==='estoque'&&iid==='ingredientes-insumos')return telaInsumos();
@@ -15368,7 +15831,7 @@ function imprimirOP(id){
 /* ==========================================================
    BLOCO 27 — COMPARATIVO ANUAL
    ========================================================== */
-var CA={modo:'anual',a1:0,a2:0,metrica:'fat',m1:'',m2:''};
+var CA={modo:'anual',a1:0,a2:0,metrica:'fat',m1:'',m2:'',sucs:[]};
 
 function anosComVenda(){
   var s={};
@@ -15387,6 +15850,7 @@ function dadosAno(ano){
     cmv:0,clientes:{},itens:0});
   (DB.pedidos||[]).forEach(function(p){
     if(p.fase==='cancelado')return;
+    if(CA.sucs.length&&CA.sucs.indexOf(p.sucursalId||'suc_matriz')<0)return;
     var d=String(p.data||'');
     if(d.slice(0,4)!==String(ano))return;
     var k=parseInt(d.slice(5,7),10)-1;
@@ -15428,6 +15892,7 @@ function dadosMes(ano,mes){
   var pref=ano+'-'+String(mes).padStart(2,'0');
   (DB.pedidos||[]).forEach(function(p){
     if(p.fase==='cancelado')return;
+    if(CA.sucs.length&&CA.sucs.indexOf(p.sucursalId||'suc_matriz')<0)return;
     var s2=String(p.data||'');
     if(s2.slice(0,7)!==pref)return;
     var k=parseInt(s2.slice(8,10),10)-1;
@@ -15583,6 +16048,7 @@ function telaComparativo(){
       '<select onchange="CA.a2=Number(this.value);telaComparativo()">'+
       anos.map(function(a){return '<option value="'+a+'"'+(CA.a2==a?' selected':'')+'>'+a+'</option>'}).join('')+
       '</select></div>')+
+    seletorSuc('caSuc',CA.sucs,'togCA','togTodosCA()')+
     '<div class="f2"><label>Indicador do gráfico</label>'+
      '<select onchange="CA.metrica=this.value;telaComparativo()">'+
      METRICAS.map(function(m){return '<option value="'+m.id+'"'+(CA.metrica===m.id?' selected':'')+'>'+m.n+'</option>'}).join('')+
@@ -15633,6 +16099,8 @@ function telaComparativo(){
    '</div></div>';
   rodape('comparando '+tit1+' e '+tit2);
 }
+function togCA(s){togFiltro(CA.sucs,s);telaComparativo();}
+function togTodosCA(){CA.sucs=CA.sucs.length?[]:sucAtivas().map(function(s){return s.id});telaComparativo();}
 function explicaComparativo(){
   var h='<div class="mdB"><div class="blk" style="margin:0;max-width:none">'+
   '<h3>De onde vem cada número</h3>'+
@@ -16750,8 +17218,18 @@ function telaGerarDemo(){
 function gerarVendasDemo(){
   baseMov();baseFormas();
   /* garante que todas as listas existem */
-  ['pedidos','produtos','categorias','clientes','entregadores','movEst','formasPag']
+  ['pedidos','produtos','categorias','clientes','entregadores','movEst','formasPag','sucursais']
     .forEach(function(k){ DB[k]=DB[k]||[]; });
+  baseSuc();
+  if(DB.sucursais.length<2){
+    [['Rafaellos Centro','Centro','Santa Fé do Sul'],
+     ['Rafaellos Shopping','Shopping','Jales'],
+     ['Jolô Rubinéia','Rubinéia','Rubinéia'],
+     ['Jolô Três Fronteiras','3 Fronteiras','Três Fronteiras']].forEach(function(x,i){
+      DB.sucursais.push({id:'suc_d'+i,nome:x[0],apelido:x[1],cidade:x[2],uf:'SP',
+        ativa:true,matriz:false,demo:true,cor:CORES_SUC[(i+1)%CORES_SUC.length]});
+    });
+  }
   var meses=parseInt($('gdMeses').value)||6;
   var porDia=parseInt($('gdDia').value)||18;
   var cidades=cidadesCadastradas();
@@ -16820,7 +17298,11 @@ function gerarVendasDemo(){
         var f=formas[Math.floor(Math.random()*formas.length)];
         var cl=clientes.length?clientes[Math.floor(Math.random()*clientes.length)]:null;
         num++;
+        var sucL=DB.sucursais[Math.floor(Math.random()*DB.sucursais.length)];
+        var canalR=Math.random();
         DB.pedidos.push({id:uid('ped'),numero:num,demo:true,
+          sucursalId:sucL.id,
+          canal:(entrega&&canalR<0.35)?'whatsapp':((entrega&&canalR<0.6)?'cardapio':''),
           data:d.toISOString().slice(0,10),
           hora:String(10+Math.floor(Math.random()*12)).padStart(2,'0')+':'+
                String(Math.floor(Math.random()*60)).padStart(2,'0'),
@@ -16893,6 +17375,7 @@ function apagarVendasDemo(){
   DB.categorias=(DB.categorias||[]).filter(function(c){return !c.demo});
   DB.clientes=(DB.clientes||[]).filter(function(c){return !c.demo});
   DB.entregadores=(DB.entregadores||[]).filter(function(e){return !e.demo});
+  DB.sucursais=(DB.sucursais||[]).filter(function(x){return !x.demo});
   salvar();telaGerarDemo();
   toast('Dados de demonstração apagados.');
 }
@@ -17593,6 +18076,588 @@ function salvarCfgDRE(){
   guardarCamposDRE();
   salvar();telaCfgDRE();
   toast('Configuração do DRE salva.');
+}
+
+/* ==========================================================
+   SUCURSAIS
+   ========================================================== */
+function baseSuc(){
+  DB.sucursais=DB.sucursais||[];
+  if(!DB.sucursais.length)
+    DB.sucursais.push({id:'suc_matriz',nome:'Matriz',apelido:'Matriz',cnpj:'',
+      cidade:'',uf:'',telefone:'',matriz:true,ativa:true,cor:'#00A08B'});
+  return DB.sucursais;
+}
+function sucAtivas(){return baseSuc().filter(function(s){return s.ativa!==false})}
+function sucNome(id){var s=baseSuc().find(function(x){return x.id===id});return s?s.nome:'—'}
+var CORES_SUC=['#00A08B','#2C6FD1','#B8730B','#8B5CF6','#C94141','#0E8A46','#D9488A','#0891B2'];
+
+function telaSucursais(){
+  baseSuc();
+  var l=DB.sucursais;
+  $('content').innerHTML='<div class="etWrap"><div class="etScroll">'+
+   '<div class="etTopo">'+
+    '<div><h1>Sucursais da Franquia</h1><p>As unidades que aparecem nos painéis e relatórios.</p></div>'+
+    '<div style="flex:1"></div>'+
+    '<button class="btnP2 ok" onclick="formSucursal()">'+sv('plus',14)+' Cadastrar sucursal</button>'+
+   '</div>'+
+   '<div class="etTabW plano2">'+
+   '<table class="etTab"><thead><tr>'+
+    '<th style="width:36px"></th><th>Nome</th><th style="width:150px">Apelido</th>'+
+    '<th style="width:170px">CNPJ</th><th style="width:180px">Cidade</th>'+
+    '<th style="width:100px;text-align:center">Situação</th>'+
+    '<th style="width:90px"></th></tr></thead><tbody>'+
+   l.map(function(s){
+     return '<tr>'+
+     '<td><span class="pontoSuc" style="background:'+(s.cor||'#00A08B')+'"></span></td>'+
+     '<td><b>'+E(s.nome)+'</b>'+(s.matriz?'<span class="tagFicha">matriz</span>':'')+'</td>'+
+     '<td>'+E(s.apelido||'—')+'</td>'+
+     '<td>'+E(s.cnpj||'—')+'</td>'+
+     '<td>'+E(s.cidade||'—')+(s.uf?' / '+E(s.uf):'')+'</td>'+
+     '<td style="text-align:center">'+(s.ativa!==false
+       ?'<span class="badge2">Ativa</span>':'<span class="badge2 rd">Inativa</span>')+'</td>'+
+     '<td><div class="rowAct">'+
+      '<button class="rBtn" onclick="formSucursal(\''+s.id+'\')">'+sv('edit',12)+'</button>'+
+      (s.matriz?'':'<button class="rBtn rd" onclick="excluirSucursal(\''+s.id+'\')">'+sv('trash',12)+'</button>')+
+     '</div></td></tr>';
+   }).join('')+'</tbody></table></div></div></div>';
+  rodape(l.length+' sucursais');
+}
+function formSucursal(id){
+  baseSuc();
+  var s=id?DB.sucursais.find(function(x){return x.id===id}):null;
+  modal(s?'Editar sucursal':'Cadastrar sucursal',
+  '<div class="mdB"><div class="row2">'+
+   '<div class="fld2"><label>Nome *</label><input id="scNome" value="'+E(s?s.nome:'')+'" placeholder="Gelato Rafaellos Centro"></div>'+
+   '<div class="fld2"><label>Apelido</label><input id="scApe" value="'+E(s?s.apelido:'')+'" placeholder="Centro"></div>'+
+  '</div><div class="row2">'+
+   '<div class="fld2"><label>CNPJ</label><input id="scCnpj" value="'+E(s?s.cnpj:'')+'"></div>'+
+   '<div class="fld2"><label>Telefone</label><input id="scTel" value="'+E(s?s.telefone:'')+'"></div>'+
+  '</div><div class="row2">'+
+   '<div class="fld2"><label>Cidade</label><input id="scCid" value="'+E(s?s.cidade:'')+'"></div>'+
+   '<div class="fld2"><label>UF</label><input id="scUf" maxlength="2" value="'+E(s?s.uf:'')+'"></div>'+
+  '</div><div class="row2">'+
+   '<div class="fld2"><label>Cor nos gráficos</label>'+
+    '<div class="coresSuc">'+CORES_SUC.map(function(c){
+      return '<button class="corB'+((s?s.cor:CORES_SUC[0])===c?' on':'')+'" style="background:'+c+'" '+
+      'onclick="_corSuc=\''+c+'\';document.querySelectorAll(\'.corB\').forEach(function(b){b.classList.remove(\'on\')});this.classList.add(\'on\')"></button>';
+    }).join('')+'</div></div>'+
+   '<div class="fld2"><label>&nbsp;</label>'+
+    '<label class="chkL"><input type="checkbox" id="scAtiva" '+(!s||s.ativa!==false?'checked':'')+'>'+
+    '<span>Sucursal ativa</span></label></div>'+
+  '</div></div>','Salvar',function(){
+    var nome=$('scNome').value.trim();
+    if(!nome){toast('Informe o nome da sucursal.');return false;}
+    var o={nome:nome,apelido:$('scApe').value.trim(),cnpj:$('scCnpj').value.trim(),
+      telefone:$('scTel').value.trim(),cidade:$('scCid').value.trim(),
+      uf:$('scUf').value.trim().toUpperCase(),ativa:$('scAtiva').checked,
+      cor:_corSuc||(s?s.cor:CORES_SUC[DB.sucursais.length%CORES_SUC.length])};
+    if(s)Object.assign(s,o);
+    else DB.sucursais.push(Object.assign({id:uid('suc'),matriz:false},o));
+    _corSuc='';
+    salvar();telaSucursais();
+    toast('Sucursal salva.');
+    return true;
+  },'lg');
+}
+var _corSuc='';
+async function excluirSucursal(id){
+  var s=DB.sucursais.find(function(x){return x.id===id});
+  var ok=await confirmar({titulo:'Excluir a sucursal '+(s?s.nome:''),
+    texto:'As vendas já registradas continuam no histórico.',ok:'Excluir',tipo:'perigo'});
+  if(!ok)return;
+  DB.sucursais=DB.sucursais.filter(function(x){return x.id!==id});
+  salvar();telaSucursais();
+}
+/* filtro de sucursais usado nos painéis */
+function pedidosDeSuc(peds,sucs){
+  if(!sucs||!sucs.length)return peds;
+  return peds.filter(function(p){return sucs.indexOf(p.sucursalId||'suc_matriz')>=0});
+}
+
+/* ==========================================================
+   PAINÉIS — base comum
+   ========================================================== */
+function periodoPadrao(o){
+  if(!o.de){var d=new Date();
+    o.de=new Date(d.getFullYear(),d.getMonth(),1).toISOString().slice(0,10);
+    o.ate=hojeISO();}
+}
+function pedsPeriodo(o){
+  baseSuc();
+  return (DB.pedidos||[]).filter(function(p){
+    if(p.fase==='cancelado')return false;
+    var d=String(p.data||'').slice(0,10);
+    if(o.de&&d<o.de)return false;
+    if(o.ate&&d>o.ate)return false;
+    if(o.sucs&&o.sucs.length&&o.sucs.indexOf(p.sucursalId||'suc_matriz')<0)return false;
+    return true;
+  });
+}
+function seletorSuc(id,arr,onTog,onTodos){
+  return selMulti(id,'Sucursais',
+    sucAtivas().map(function(s){return {id:s.id,nome:s.nome}}),arr,onTog,onTodos);
+}
+function diasEntre(de,ate){
+  var l=[],d=new Date(de+'T12:00:00'),f=new Date(ate+'T12:00:00');
+  while(d<=f){l.push(d.toISOString().slice(0,10));d.setDate(d.getDate()+1);}
+  return l;
+}
+/* gráfico de linha, como o do exemplo */
+function grafLinha(pontos,rotulos,opts){
+  opts=opts||{};
+  var W=Math.max(600,pontos.length*34), H=opts.altura||280;
+  var PL=62,PR=18,PT=18,PB=42;
+  var iw=W-PL-PR, ih=H-PT-PB;
+  var max=Math.max.apply(null,pontos.concat([1]));
+  var teto=Math.ceil(max/1000)*1000||Math.ceil(max);
+  if(teto<max)teto=max;
+  var passo=pontos.length>1?iw/(pontos.length-1):iw;
+  var grade='',eixo='';
+  for(var g=0;g<=5;g++){
+    var y=PT+ih-(ih*g/5);
+    grade+='<line x1="'+PL+'" y1="'+y+'" x2="'+(W-PR)+'" y2="'+y+'" stroke="var(--line-2)"/>';
+    eixo+='<text x="'+(PL-9)+'" y="'+(y+4)+'" text-anchor="end" font-size="10" fill="var(--ink-3)">'+
+      (teto*g/5>=1000?(teto*g/5/1000).toFixed(teto>=10000?0:1)+'k':Math.round(teto*g/5))+'</text>';
+  }
+  /* linhas verticais leves */
+  for(var v=0;v<pontos.length;v+=Math.max(1,Math.round(pontos.length/16))){
+    var xv=PL+passo*v;
+    grade+='<line x1="'+xv+'" y1="'+PT+'" x2="'+xv+'" y2="'+(PT+ih)+'" stroke="var(--line-2)" opacity=".6"/>';
+  }
+  var pts=pontos.map(function(v2,k){
+    return [PL+passo*k, PT+ih-((v2/teto)*ih)];
+  });
+  var cor=opts.cor||'#7FB3D5';
+  var area='M'+pts[0][0]+' '+(PT+ih)+' '+pts.map(function(p){return 'L'+p[0]+' '+p[1]}).join(' ')+
+    ' L'+pts[pts.length-1][0]+' '+(PT+ih)+' Z';
+  var linha=pts.map(function(p,k){return (k?'L':'M')+p[0]+' '+p[1]}).join(' ');
+  var bolas='',tips='';
+  pts.forEach(function(p,k){
+    bolas+='<circle class="lnP" data-i="'+k+'" cx="'+p[0]+'" cy="'+p[1]+'" r="4" '+
+      'fill="#fff" stroke="'+cor+'" stroke-width="2.5"/>'+
+      '<rect class="lnH" data-i="'+k+'" x="'+(p[0]-passo/2)+'" y="'+PT+'" width="'+passo+'" height="'+ih+'" fill="transparent"/>';
+    var bw=126,bh=40;
+    var bx=Math.min(Math.max(p[0]-bw/2,PL),W-PR-bw);
+    var by=Math.max(PT+2,p[1]-bh-10);
+    tips+='<g class="lnT" data-i="'+k+'">'+
+      '<line x1="'+p[0]+'" y1="'+PT+'" x2="'+p[0]+'" y2="'+(PT+ih)+'" stroke="'+cor+'" stroke-dasharray="3 3"/>'+
+      '<rect x="'+bx+'" y="'+by+'" width="'+bw+'" height="'+bh+'" rx="7" fill="#122A42"/>'+
+      '<text x="'+(bx+bw/2)+'" y="'+(by+16)+'" text-anchor="middle" font-size="10" fill="#9AB4CC">'+
+        E(rotulos[k])+'</text>'+
+      '<text x="'+(bx+bw/2)+'" y="'+(by+31)+'" text-anchor="middle" font-size="12" fill="#fff" '+
+        'font-weight="700">R$ '+money(pontos[k])+'</text></g>';
+  });
+  var rot='';
+  var salto=Math.max(1,Math.round(pontos.length/12));
+  rotulos.forEach(function(r,k){
+    if(k%salto)return;
+    rot+='<text x="'+pts[k][0]+'" y="'+(H-16)+'" text-anchor="middle" font-size="10" '+
+      'fill="var(--ink-3)">'+E(r)+'</text>';
+  });
+  return '<div class="grafBox" onmousemove="realceLinha(event,this)" onmouseleave="limpaLinha(this)">'+
+   '<svg viewBox="0 0 '+W+' '+H+'" width="100%" height="'+H+'">'+
+   '<defs><linearGradient id="gArea" x1="0" y1="0" x2="0" y2="1">'+
+   '<stop offset="0%" stop-color="'+cor+'" stop-opacity=".28"/>'+
+   '<stop offset="100%" stop-color="'+cor+'" stop-opacity="0"/></linearGradient></defs>'+
+   grade+eixo+
+   '<path d="'+area+'" fill="url(#gArea)"/>'+
+   '<path d="'+linha+'" fill="none" stroke="'+cor+'" stroke-width="2.5" '+
+    'stroke-linejoin="round" stroke-linecap="round"/>'+
+   bolas+rot+tips+'</svg></div>';
+}
+
+function realceLinha(ev,box){
+  var svg=box.querySelector('svg');
+  if(!svg)return;
+  var r=svg.getBoundingClientRect();
+  var hits=svg.querySelectorAll('.lnH');
+  var achou=-1;
+  for(var i=0;i<hits.length;i++){
+    var hb=hits[i].getBoundingClientRect();
+    if(ev.clientX>=hb.left&&ev.clientX<=hb.right){achou=hits[i].getAttribute('data-i');break;}
+  }
+  var tips=svg.querySelectorAll('.lnT');
+  for(var k=0;k<tips.length;k++)
+    tips[k].style.opacity=(tips[k].getAttribute('data-i')===String(achou))?'1':'0';
+  var pts=svg.querySelectorAll('.lnP');
+  for(var z=0;z<pts.length;z++)
+    pts[z].setAttribute('r',pts[z].getAttribute('data-i')===String(achou)?'6':'4');
+}
+function limpaLinha(box){
+  var svg=box.querySelector('svg');if(!svg)return;
+  var t=svg.querySelectorAll('.lnT');
+  for(var i=0;i<t.length;i++)t[i].style.opacity='0';
+  var p=svg.querySelectorAll('.lnP');
+  for(var k=0;k<p.length;k++)p[k].setAttribute('r','4');
+}
+
+/* ==========================================================
+   CANAIS DE VENDA
+   ========================================================== */
+var CV={de:'',ate:'',sucs:[]};
+function telaCanaisVenda(){
+  baseMov();baseSuc();
+  periodoPadrao(CV);
+  var peds=pedsPeriodo(CV);
+  var total=peds.reduce(function(a,p){return a+(Number(p.total)||0)},0);
+  var canais=[
+   {id:'entrega', n:'Delivery',      cor:'#E8574A', fn:function(p){return p.tipo==='entrega'&&(p.canal||'')!=='whatsapp'&&(p.canal||'')!=='cardapio'}},
+   {id:'loja',    n:'Loja física',   cor:'#4CAF50', fn:function(p){return p.tipo!=='entrega'}},
+   {id:'whatsapp',n:'WhatsApp',      cor:'#7E57C2', fn:function(p){return (p.canal||'')==='whatsapp'}},
+   {id:'cardapio',n:'Cardápio digital',cor:'#F5A623',fn:function(p){return (p.canal||'')==='cardapio'}}
+  ].map(function(c){
+    var lista=peds.filter(c.fn);
+    c.valor=lista.reduce(function(a,p){return a+(Number(p.total)||0)},0);
+    c.qtd=lista.length;
+    c.pct=total?(c.valor/total*100):0;
+    return c;
+  });
+  var dias=diasEntre(CV.de,CV.ate);
+  var porDia=dias.map(function(d){
+    return peds.filter(function(p){return String(p.data).slice(0,10)===d})
+      .reduce(function(a,p){return a+(Number(p.total)||0)},0);
+  });
+  var rot=dias.map(function(d){return d.slice(8,10)+'/'+d.slice(5,7)});
+  var rank=canais.slice().filter(function(c){return c.valor>0})
+    .sort(function(a,b){return b.valor-a.valor});
+
+  $('content').innerHTML='<div class="etWrap"><div class="etScroll">'+
+   '<div class="etTopo">'+
+    '<div><h1>Canais de Venda</h1><p>Por onde o faturamento entrou, dia a dia.</p></div>'+
+    '<button class="infoBt" onclick="explicaCanais()">'+sv('help',15)+'</button>'+
+    '<div style="flex:1"></div>'+
+    '<button class="btnP2" onclick="imprimirRel(\'Canais de Venda\')">'+sv('print2',13)+' PDF</button>'+
+   '</div>'+
+   '<div class="barraF">'+
+    '<div class="bfCampo"><label>Data inicial</label><input type="date" id="cvDe" value="'+CV.de+'"></div>'+
+    '<div class="bfCampo"><label>Data final</label><input type="date" id="cvAte" value="'+CV.ate+'"></div>'+
+    seletorSuc('cvSuc',CV.sucs,'togCV','togTodosCV()')+
+    '<button class="btnP2 ok" onclick="CV.de=$(\'cvDe\').value;CV.ate=$(\'cvAte\').value;telaCanaisVenda()">'+
+     sv('search',13)+' Buscar</button>'+
+    '<div class="bfAtalhos">'+
+     '<button onclick="perCV(0)">Mês</button><button onclick="perCV(-1)">Anterior</button>'+
+     '<button onclick="perCV(7)">7d</button><button onclick="perCV(30)">30d</button></div>'+
+   '</div>'+
+   '<div class="cvGrade" id="relArea">'+
+    '<div class="cvLat">'+
+     '<div class="cvCard total"><div class="cvPct">100%</div>'+
+      '<div><span>TOTAL</span><b>R$ '+money(total)+'</b>'+
+      '<small>'+peds.length+' pedidos</small></div></div>'+
+     canais.map(function(c){
+       return '<div class="cvCard" style="background:'+c.cor+'">'+
+       '<div class="cvPct">'+c.pct.toFixed(0)+'%</div>'+
+       '<div><span>'+E(c.n.toUpperCase())+'</span><b>R$ '+money(c.valor)+'</b>'+
+       '<small>'+c.qtd+' pedidos</small></div></div>';
+     }).join('')+
+    '</div>'+
+    '<div class="cvCentro">'+
+     '<div class="grafH"><div><b>Evolução no período</b>'+
+      '<span>'+dias.length+' dias · '+dataBR(CV.de)+' a '+dataBR(CV.ate)+'</span></div></div>'+
+     grafLinha(porDia,rot,{cor:'#7FB3D5',altura:300})+
+    '</div>'+
+    '<aside class="cvRank">'+
+     '<div class="colH">Ranking de canais</div>'+
+     '<div class="cvRankL">'+
+     (rank.length?rank.map(function(c){
+       return '<div class="cvRk"><span class="cvRkP">'+c.pct.toFixed(0)+'%</span>'+
+       '<div class="cvRkN">'+E(c.n)+'<small>R$ '+money(c.valor)+'</small></div>'+
+       '<div class="cvRkB"><i style="width:'+c.pct+'%;background:'+c.cor+'"></i></div></div>';
+     }).join(''):'<div class="hint" style="padding:14px">Nenhuma venda no período.</div>')+
+     '</div></aside>'+
+   '</div></div></div>';
+  rodape('R$ '+money(total)+' em '+peds.length+' pedidos');
+}
+function togCV(s){togFiltro(CV.sucs,s);telaCanaisVenda();}
+function togTodosCV(){CV.sucs=CV.sucs.length?[]:sucAtivas().map(function(s){return s.id});telaCanaisVenda();}
+function perCV(n){
+  var d=new Date();
+  if(n===0){CV.de=new Date(d.getFullYear(),d.getMonth(),1).toISOString().slice(0,10);CV.ate=hojeISO();}
+  else if(n===-1){CV.de=new Date(d.getFullYear(),d.getMonth()-1,1).toISOString().slice(0,10);
+    CV.ate=new Date(d.getFullYear(),d.getMonth(),0).toISOString().slice(0,10);}
+  else {CV.de=diasAtrasISO(n);CV.ate=hojeISO();}
+  telaCanaisVenda();
+}
+function explicaCanais(){
+  explicaRel('Canais de Venda — como é feito',[
+   ['Total','soma de todos os pedidos do período, sem os cancelados'],
+   ['Delivery','pedidos do tipo entrega feitos no PDV'],
+   ['Loja física','vendas de salão e balcão'],
+   ['WhatsApp e Cardápio digital','pedidos que chegam por esses canais; ficam em zero até os módulos existirem'],
+   ['Evolução no período','faturamento de cada dia — passe o mouse para ver o valor'],
+   ['Ranking','participação de cada canal no faturamento do período']
+  ],'os pedidos do PDV, separados pelo tipo de venda e pelo canal de origem, '+
+    'filtrados pelas sucursais escolhidas.',
+   'pedidos cancelados e vendas fora do período selecionado.');
+}
+
+/* ==========================================================
+   FATURAMENTO
+   ========================================================== */
+var FT={de:'',ate:'',sucs:[]};
+function telaFaturamento(){
+  baseMov();baseSuc();
+  periodoPadrao(FT);
+  var peds=pedsPeriodo(FT);
+  function tk(lista){
+    var v=lista.reduce(function(a,p){return a+(Number(p.total)||0)},0);
+    return {v:v,q:lista.length,t:lista.length?v/lista.length:0};
+  }
+  var tot=tk(peds);
+  var ent=tk(peds.filter(function(p){return p.tipo==='entrega'}));
+  var ret=tk(peds.filter(function(p){return p.tipo==='retirada'}));
+  var sal=tk(peds.filter(function(p){return p.tipo==='loja'||p.tipo==='salao'}));
+  var fic=tk(peds.filter(function(p){return p.tipo!=='entrega'&&p.tipo!=='retirada'}));
+
+  var porLoja=sucAtivas().map(function(s){
+    var l=peds.filter(function(p){return (p.sucursalId||'suc_matriz')===s.id});
+    var x=tk(l);
+    return {suc:s,valor:x.v,qtd:x.q,ticket:x.t,
+      ent:tk(l.filter(function(p){return p.tipo==='entrega'})).t,
+      ret:tk(l.filter(function(p){return p.tipo==='retirada'})).t,
+      sal:tk(l.filter(function(p){return p.tipo!=='entrega'&&p.tipo!=='retirada'})).t};
+  }).sort(function(a,b){return b.valor-a.valor});
+  var maxL=Math.max.apply(null,porLoja.map(function(x){return x.valor}).concat([1]));
+
+  var KPI=[
+   ['Faturamento Total','R$ '+money(tot.v),'#00B8D4','chart'],
+   ['Ticket entrega','R$ '+money(ent.t),'#5B7C8D','truck'],
+   ['Ticket retirada','R$ '+money(ret.t),'#F5A623','bag'],
+   ['Ticket salão','R$ '+money(sal.t),'#4CAF50','users'],
+   ['Ticket ficha','R$ '+money(fic.t),'#E8574A','file']
+  ];
+
+  $('content').innerHTML='<div class="etWrap"><div class="etScroll">'+
+   '<div class="etTopo">'+
+    '<div><h1>Faturamento</h1><p>Quanto cada unidade está faturando no período.</p></div>'+
+    '<button class="infoBt" onclick="explicaFaturamento()">'+sv('help',15)+'</button>'+
+    '<div style="flex:1"></div>'+
+    '<button class="btnP2" onclick="imprimirRel(\'Faturamento\')">'+sv('print2',13)+' PDF</button>'+
+   '</div>'+
+   '<div class="barraF">'+
+    '<div class="bfCampo"><label>Data inicial</label><input type="date" id="ftDe" value="'+FT.de+'"></div>'+
+    '<div class="bfCampo"><label>Data final</label><input type="date" id="ftAte" value="'+FT.ate+'"></div>'+
+    seletorSuc('ftSuc',FT.sucs,'togFT','togTodosFT()')+
+    '<button class="btnP2 ok" onclick="FT.de=$(\'ftDe\').value;FT.ate=$(\'ftAte\').value;telaFaturamento()">'+
+     sv('search',13)+' Buscar</button>'+
+    '<div class="bfAtalhos">'+
+     '<button onclick="perFT(0)">Mês</button><button onclick="perFT(-1)">Anterior</button>'+
+     '<button onclick="perFT(1)">Hoje</button><button onclick="perFT(7)">7d</button></div>'+
+   '</div>'+
+   '<div class="kpiFaixa">'+KPI.map(function(k){
+     return '<div class="kpiC" style="--c:'+k[2]+'">'+
+      '<div class="kpiIc">'+sv(k[3],20)+'</div>'+
+      '<div><span>'+E(k[0])+'</span><b>'+E(k[1])+'</b></div></div>';
+   }).join('')+'</div>'+
+   '<div class="etTabW plano2" id="relArea">'+
+   '<table class="etTab"><thead><tr>'+
+    '<th style="width:30px"></th><th>Loja</th>'+
+    '<th style="width:140px;text-align:right">Faturamento</th>'+
+    '<th style="width:100px;text-align:right">Pedidos</th>'+
+    '<th style="width:120px;text-align:right">Ticket entrega</th>'+
+    '<th style="width:120px;text-align:right">Ticket retirada</th>'+
+    '<th style="width:120px;text-align:right">Ticket salão</th>'+
+    '<th style="width:230px">Representatividade</th></tr></thead><tbody>'+
+   porLoja.map(function(x){
+     var pc=tot.v?(x.valor/tot.v*100):0;
+     return '<tr><td><span class="pontoSuc" style="background:'+(x.suc.cor||'#00A08B')+'"></span></td>'+
+     '<td><b>'+E(x.suc.nome)+'</b></td>'+
+     '<td style="text-align:right"><b>R$ '+money(x.valor)+'</b></td>'+
+     '<td style="text-align:right">'+x.qtd+'</td>'+
+     '<td style="text-align:right">R$ '+money(x.ent)+'</td>'+
+     '<td style="text-align:right">R$ '+money(x.ret)+'</td>'+
+     '<td style="text-align:right">R$ '+money(x.sal)+'</td>'+
+     '<td><div class="repBar"><i style="width:'+pc+'%;background:'+(x.suc.cor||'#00A08B')+'"></i>'+
+      '<span>'+pc.toFixed(2).replace('.',',')+'%</span></div></td></tr>';
+   }).join('')+'</tbody></table></div>'+
+   '<div class="grafCard" style="margin:0 16px 16px">'+
+    '<div class="grafH"><div><b>Faturamento por loja</b>'+
+     '<span>'+dataBR(FT.de)+' a '+dataBR(FT.ate)+'</span></div></div>'+
+    '<div class="grafBox">'+(function(){
+      var W=Math.max(520,porLoja.length*130),H=250,PL=64,PR=18,PT=18,PB=44;
+      var iw=W-PL-PR,ih=H-PT-PB;
+      var passo=iw/Math.max(1,porLoja.length);
+      var larg=Math.min(78,passo*0.58);
+      var g='',eixo='';
+      for(var k=0;k<=4;k++){
+        var y=PT+ih-(ih*k/4);
+        g+='<line x1="'+PL+'" y1="'+y+'" x2="'+(W-PR)+'" y2="'+y+'" stroke="var(--line-2)"'+
+          (k?' stroke-dasharray="3 4"':'')+'/>';
+        eixo+='<text x="'+(PL-9)+'" y="'+(y+4)+'" text-anchor="end" font-size="10" '+
+          'fill="var(--ink-3)">'+(maxL*k/4>=1000?(maxL*k/4/1000).toFixed(1)+'k':Math.round(maxL*k/4))+'</text>';
+      }
+      var b='';
+      porLoja.forEach(function(x,k){
+        var h=Math.max(2,(x.valor/maxL)*ih);
+        var px=PL+passo*k+(passo-larg)/2;
+        var py=PT+ih-h;
+        b+='<g class="gBar"><rect x="'+px+'" y="'+py+'" width="'+larg+'" height="'+h+'" rx="5" '+
+          'fill="'+(x.suc.cor||'#00A08B')+'" opacity=".88"/>'+
+          '<text x="'+(px+larg/2)+'" y="'+(py-7)+'" text-anchor="middle" font-size="11" '+
+           'font-weight="700" fill="var(--ink-2)">R$ '+money(x.valor)+'</text>'+
+          '<text x="'+(px+larg/2)+'" y="'+(H-16)+'" text-anchor="middle" font-size="10.5" '+
+           'fill="var(--ink-2)" font-weight="600">'+E(x.suc.apelido||x.suc.nome)+'</text></g>';
+      });
+      return '<svg viewBox="0 0 '+W+' '+H+'" width="100%" height="'+H+'">'+g+eixo+b+'</svg>';
+    })()+'</div></div>'+
+   '</div></div>';
+  rodape('R$ '+money(tot.v)+' · '+porLoja.length+' loja(s)');
+}
+function togFT(s){togFiltro(FT.sucs,s);telaFaturamento();}
+function togTodosFT(){FT.sucs=FT.sucs.length?[]:sucAtivas().map(function(s){return s.id});telaFaturamento();}
+function perFT(n){
+  var d=new Date();
+  if(n===0){FT.de=new Date(d.getFullYear(),d.getMonth(),1).toISOString().slice(0,10);FT.ate=hojeISO();}
+  else if(n===-1){FT.de=new Date(d.getFullYear(),d.getMonth()-1,1).toISOString().slice(0,10);
+    FT.ate=new Date(d.getFullYear(),d.getMonth(),0).toISOString().slice(0,10);}
+  else if(n===1){FT.de=hojeISO();FT.ate=hojeISO();}
+  else {FT.de=diasAtrasISO(n);FT.ate=hojeISO();}
+  telaFaturamento();
+}
+function explicaFaturamento(){
+  explicaRel('Faturamento — como é feito',[
+   ['Faturamento total','soma dos pedidos do período, sem os cancelados, nas sucursais escolhidas'],
+   ['Ticket entrega','faturamento das entregas dividido pela quantidade de entregas'],
+   ['Ticket retirada','mesma conta para os pedidos de retirada'],
+   ['Ticket salão','mesma conta para as vendas no salão e balcão'],
+   ['Ticket ficha','ticket médio de tudo que não é entrega — é a venda de frente de caixa'],
+   ['Representatividade','peso de cada loja no faturamento total do período'],
+   ['Gráfico por loja','faturamento de cada unidade, na cor cadastrada da sucursal']
+  ],'os pedidos do PDV de cada sucursal, no período escolhido.',
+   'pedidos cancelados e sucursais desmarcadas no filtro.');
+}
+
+/* ==========================================================
+   VENDA POR DATA E HORA
+   ========================================================== */
+var VDH={de:'',ate:'',sucs:[],aba:'hora'};
+function telaVendaDataHora(){
+  baseMov();baseSuc();
+  periodoPadrao(VDH);
+  var peds=pedsPeriodo(VDH);
+  var total=peds.reduce(function(a,p){return a+(Number(p.total)||0)},0);
+
+  /* por hora */
+  var horas=[];for(var h=0;h<24;h++)horas.push({v:0,q:0});
+  peds.forEach(function(p){
+    var hh=parseInt(String(p.hora||'0').slice(0,2),10);
+    if(isNaN(hh)||hh<0||hh>23)return;
+    horas[hh].v+=Number(p.total)||0;horas[hh].q++;
+  });
+  var hIni=0,hFim=23;
+  while(hIni<23&&!horas[hIni].q)hIni++;
+  while(hFim>0&&!horas[hFim].q)hFim--;
+  if(hIni>hFim){hIni=8;hFim=22;}
+  /* por dia da semana */
+  var sem=[];for(var d=0;d<7;d++)sem.push({v:0,q:0,dias:{}});
+  peds.forEach(function(p){
+    var k=diaSemana(String(p.data).slice(0,10));
+    sem[k].v+=Number(p.total)||0;sem[k].q++;sem[k].dias[p.data]=true;
+  });
+  sem.forEach(function(x){x.nd=Object.keys(x.dias).length;x.media=x.nd?x.v/x.nd:0;});
+  var maxSem=Math.max.apply(null,sem.map(function(x){return x.media}).concat([1]));
+  var maxH=Math.max.apply(null,horas.map(function(x){return x.v}).concat([1]));
+  /* melhor hora e melhor dia */
+  var melhorH=horas.indexOf(horas.slice().sort(function(a,b){return b.v-a.v})[0]);
+  var melhorD=sem.indexOf(sem.slice().sort(function(a,b){return b.media-a.media})[0]);
+
+  $('content').innerHTML='<div class="etWrap"><div class="etScroll">'+
+   '<div class="etTopo">'+
+    '<div><h1>Venda por Data e Hora</h1><p>Quando a loja vende mais — por hora e por dia da semana.</p></div>'+
+    '<button class="infoBt" onclick="explicaDataHora()">'+sv('help',15)+'</button>'+
+    '<div style="flex:1"></div>'+
+    '<button class="btnP2" onclick="imprimirRel(\'Venda por Data e Hora\')">'+sv('print2',13)+' PDF</button>'+
+   '</div>'+
+   '<div class="barraF">'+
+    '<div class="bfCampo"><label>Data inicial</label><input type="date" id="vdDe" value="'+VDH.de+'"></div>'+
+    '<div class="bfCampo"><label>Data final</label><input type="date" id="vdAte" value="'+VDH.ate+'"></div>'+
+    seletorSuc('vdSuc',VDH.sucs,'togVDH','togTodosVDH()')+
+    '<button class="btnP2 ok" onclick="VDH.de=$(\'vdDe\').value;VDH.ate=$(\'vdAte\').value;telaVendaDataHora()">'+
+     sv('search',13)+' Buscar</button>'+
+    '<div class="bfAtalhos">'+
+     '<button onclick="perVDH(0)">Mês</button><button onclick="perVDH(-1)">Anterior</button>'+
+     '<button onclick="perVDH(30)">30d</button><button onclick="perVDH(90)">90d</button></div>'+
+   '</div>'+
+   '<div class="relKpis">'+
+    '<div class="rk dest"><span>Faturamento</span><b>R$ '+money(total)+'</b></div>'+
+    '<div class="rk"><span>Pedidos</span><b>'+peds.length+'</b></div>'+
+    '<div class="rk"><span>Melhor horário</span><b>'+String(melhorH).padStart(2,'0')+'h</b></div>'+
+    '<div class="rk"><span>Melhor dia</span><b>'+DIAS_SEM[melhorD]+'</b></div>'+
+    '<div class="rk"><span>Média por dia da semana</span><b>R$ '+money(sem[melhorD].media)+'</b></div>'+
+   '</div>'+
+   '<div class="grafCard" style="margin:12px 16px" id="relArea">'+
+    '<div class="grafH"><div><b>Faturamento por horário</b>'+
+     '<span>soma de todos os dias do período</span></div>'+
+     '<div class="grafLeg"><span><i class="lg1"></i>valor por hora</span></div></div>'+
+    '<div class="grafBox">'+(function(){
+      var n=hFim-hIni+1;
+      var W=Math.max(620,n*54),H=250,PL=62,PR=18,PT=22,PB=42;
+      var iw=W-PL-PR,ih=H-PT-PB,passo=iw/n,larg=Math.min(30,passo*0.55);
+      var g='',eixo='',b='';
+      for(var k=0;k<=4;k++){
+        var y=PT+ih-(ih*k/4);
+        g+='<line x1="'+PL+'" y1="'+y+'" x2="'+(W-PR)+'" y2="'+y+'" stroke="var(--line-2)"'+
+          (k?' stroke-dasharray="3 4"':'')+'/>';
+        eixo+='<text x="'+(PL-9)+'" y="'+(y+4)+'" text-anchor="end" font-size="10" fill="var(--ink-3)">'+
+          (maxH*k/4>=1000?(maxH*k/4/1000).toFixed(1)+'k':Math.round(maxH*k/4))+'</text>';
+      }
+      for(var hh=hIni;hh<=hFim;hh++){
+        var x2=horas[hh];
+        var i2=hh-hIni;
+        var hgt=Math.max(2,(x2.v/maxH)*ih);
+        var px=PL+passo*i2+(passo-larg)/2;
+        var py=PT+ih-hgt;
+        var pico=(hh===melhorH);
+        b+='<g class="gBar"><rect x="'+px+'" y="'+py+'" width="'+larg+'" height="'+hgt+'" rx="4" '+
+          'fill="'+(pico?'#00806F':'url(#gradEnt)')+'"/>'+
+          '<text x="'+(px+larg/2)+'" y="'+(H-16)+'" text-anchor="middle" font-size="10" '+
+           'fill="'+(pico?'var(--acc-d)':'var(--ink-3)')+'" font-weight="'+(pico?'700':'500')+'">'+
+           String(hh).padStart(2,'0')+'h</text>'+
+          '<g class="gTip"><rect x="'+Math.min(Math.max(px+larg/2-58,PL),W-PR-116)+'" y="'+Math.max(2,py-44)+'" '+
+           'width="116" height="38" rx="7" fill="#122A42"/>'+
+           '<text x="'+Math.min(Math.max(px+larg/2,PL+58),W-PR-58)+'" y="'+(Math.max(2,py-44)+15)+'" '+
+            'text-anchor="middle" font-size="10" fill="#9AB4CC">'+String(hh).padStart(2,'0')+'h · '+x2.q+' pedidos</text>'+
+           '<text x="'+Math.min(Math.max(px+larg/2,PL+58),W-PR-58)+'" y="'+(Math.max(2,py-44)+30)+'" '+
+            'text-anchor="middle" font-size="12" fill="#5FE0CB" font-weight="700">R$ '+money(x2.v)+'</text></g></g>';
+      }
+      return '<svg viewBox="0 0 '+W+' '+H+'" width="100%" height="'+H+'">'+
+        '<defs><linearGradient id="gradEnt" x1="0" y1="0" x2="0" y2="1">'+
+        '<stop offset="0%" stop-color="#00B89E"/><stop offset="100%" stop-color="#00806F"/></linearGradient></defs>'+
+        g+eixo+b+'</svg>';
+    })()+'</div></div>'+
+   '<div class="grafCard" style="margin:0 16px 16px">'+
+    '<div class="grafH"><div><b>Média por dia da semana</b>'+
+     '<span>faturamento médio de cada dia no período</span></div></div>'+
+    '<div class="semGrade">'+sem.map(function(x,k){
+      var pc=maxSem?(x.media/maxSem*100):0;
+      return '<div class="semIt'+(k===melhorD?' top':'')+'">'+
+       '<div class="semN">'+DIAS_SEM[k]+(k===melhorD?' <i>melhor</i>':'')+'</div>'+
+       '<div class="semB"><i style="width:'+pc+'%"></i></div>'+
+       '<div class="semV"><b>R$ '+money(x.media)+'</b>'+
+        '<small>'+x.q+' pedidos em '+x.nd+' dia(s)</small></div></div>';
+    }).join('')+'</div></div>'+
+   '</div></div>';
+  rodape('R$ '+money(total)+' · pico às '+String(melhorH).padStart(2,'0')+'h');
+}
+function togVDH(s){togFiltro(VDH.sucs,s);telaVendaDataHora();}
+function togTodosVDH(){VDH.sucs=VDH.sucs.length?[]:sucAtivas().map(function(s){return s.id});telaVendaDataHora();}
+function perVDH(n){
+  var d=new Date();
+  if(n===0){VDH.de=new Date(d.getFullYear(),d.getMonth(),1).toISOString().slice(0,10);VDH.ate=hojeISO();}
+  else if(n===-1){VDH.de=new Date(d.getFullYear(),d.getMonth()-1,1).toISOString().slice(0,10);
+    VDH.ate=new Date(d.getFullYear(),d.getMonth(),0).toISOString().slice(0,10);}
+  else {VDH.de=diasAtrasISO(n);VDH.ate=hojeISO();}
+  telaVendaDataHora();
+}
+function explicaDataHora(){
+  explicaRel('Venda por Data e Hora — como é feito',[
+   ['Faturamento por horário','soma das vendas de cada hora, juntando todos os dias do período'],
+   ['Melhor horário','a hora que mais faturou — útil para escalar equipe'],
+   ['Média por dia da semana','faturamento total daquele dia dividido por quantas vezes ele apareceu no período'],
+   ['Melhor dia','o dia da semana com maior média, não com maior total'],
+   ['Sucursais','com várias marcadas, os números somam; com uma só, mostra o comportamento dela']
+  ],'a data e a hora gravadas em cada pedido no momento da venda.',
+   'pedidos cancelados e pedidos sem hora registrada.');
 }
 
 /* ---------- POPUP E MODAL ---------- */
