@@ -7734,7 +7734,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V4.9.1';
+var VERSAO='V4.9.2';
 /* confere se há versão nova publicada e avisa, sem forçar nada */
 async function checarVersao(){
   try{
@@ -19752,19 +19752,15 @@ function previaPDV(c){
     '<div class="pvCT"><span>Total</span><b>R$ 56,00</b></div></div>'+
    '</div>';
 }
-async function salvarCfgPDV(){
+function salvarCfgPDV(){
   var c=cfgPDV();
   c_prev();
   var f=($('pvFases')||{}).value||'';
   var lista=f.split(',').map(function(x){return x.trim().toLowerCase()}).filter(Boolean);
   if(lista.length)c.fases=lista;
   salvar();
-  var ir=await confirmar({
-    titulo:'Configuração salva',
-    texto:'O PDV já está usando o layout '+
-      ((LAYOUTS_PDV.find(function(l){return l.id===c.layout})||{}).n||'')+'.',
-    ok:'Abrir o PDV',cancelar:'Continuar aqui',tipo:'check'});
-  if(ir)abrir('pdv','frente-caixa');
+  toast('Configuração salva — o PDV já está usando o layout '+
+    ((LAYOUTS_PDV.find(function(l){return l.id===c.layout})||{}).n||'')+'.');
 }
 
 /* ==========================================================
