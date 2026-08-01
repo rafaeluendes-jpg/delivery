@@ -6657,7 +6657,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V4.8.0';
+var VERSAO='V4.8.1';
 /* confere se há versão nova publicada e avisa, sem forçar nada */
 async function checarVersao(){
   try{
@@ -18394,11 +18394,11 @@ function explicaCanais(){
 /* ==========================================================
    FATURAMENTO
    ========================================================== */
-var FT={de:'',ate:'',sucs:[]};
+var FTP={de:'',ate:'',sucs:[]};
 function telaFaturamento(){
   baseMov();baseSuc();
-  periodoPadrao(FT);
-  var peds=pedsPeriodo(FT);
+  periodoPadrao(FTP);
+  var peds=pedsPeriodo(FTP);
   function tk(lista){
     var v=lista.reduce(function(a,p){return a+(Number(p.total)||0)},0);
     return {v:v,q:lista.length,t:lista.length?v/lista.length:0};
@@ -18435,10 +18435,10 @@ function telaFaturamento(){
     '<button class="btnP2" onclick="imprimirRel(\'Faturamento\')">'+sv('print2',13)+' PDF</button>'+
    '</div>'+
    '<div class="barraF">'+
-    '<div class="bfCampo"><label>Data inicial</label><input type="date" id="ftDe" value="'+FT.de+'"></div>'+
-    '<div class="bfCampo"><label>Data final</label><input type="date" id="ftAte" value="'+FT.ate+'"></div>'+
-    seletorSuc('ftSuc',FT.sucs,'togFT','togTodosFT()')+
-    '<button class="btnP2 ok" onclick="FT.de=$(\'ftDe\').value;FT.ate=$(\'ftAte\').value;telaFaturamento()">'+
+    '<div class="bfCampo"><label>Data inicial</label><input type="date" id="ftDe" value="'+FTP.de+'"></div>'+
+    '<div class="bfCampo"><label>Data final</label><input type="date" id="ftAte" value="'+FTP.ate+'"></div>'+
+    seletorSuc('ftSuc',FTP.sucs,'togFT','togTodosFT()')+
+    '<button class="btnP2 ok" onclick="FTP.de=$(\'ftDe\').value;FTP.ate=$(\'ftAte\').value;telaFaturamento()">'+
      sv('search',13)+' Buscar</button>'+
     '<div class="bfAtalhos">'+
      '<button onclick="perFT(0)">Mês</button><button onclick="perFT(-1)">Anterior</button>'+
@@ -18472,7 +18472,7 @@ function telaFaturamento(){
    }).join('')+'</tbody></table></div>'+
    '<div class="grafCard" style="margin:0 16px 16px">'+
     '<div class="grafH"><div><b>Faturamento por loja</b>'+
-     '<span>'+dataBR(FT.de)+' a '+dataBR(FT.ate)+'</span></div></div>'+
+     '<span>'+dataBR(FTP.de)+' a '+dataBR(FTP.ate)+'</span></div></div>'+
     '<div class="grafBox">'+(function(){
       var W=Math.max(520,porLoja.length*130),H=250,PL=64,PR=18,PT=18,PB=44;
       var iw=W-PL-PR,ih=H-PT-PB;
@@ -18503,15 +18503,15 @@ function telaFaturamento(){
    '</div></div>';
   rodape('R$ '+money(tot.v)+' · '+porLoja.length+' loja(s)');
 }
-function togFT(s){togFiltro(FT.sucs,s);telaFaturamento();}
-function togTodosFT(){FT.sucs=FT.sucs.length?[]:sucAtivas().map(function(s){return s.id});telaFaturamento();}
+function togFT(s){togFiltro(FTP.sucs,s);telaFaturamento();}
+function togTodosFT(){FTP.sucs=FTP.sucs.length?[]:sucAtivas().map(function(s){return s.id});telaFaturamento();}
 function perFT(n){
   var d=new Date();
-  if(n===0){FT.de=new Date(d.getFullYear(),d.getMonth(),1).toISOString().slice(0,10);FT.ate=hojeISO();}
-  else if(n===-1){FT.de=new Date(d.getFullYear(),d.getMonth()-1,1).toISOString().slice(0,10);
-    FT.ate=new Date(d.getFullYear(),d.getMonth(),0).toISOString().slice(0,10);}
-  else if(n===1){FT.de=hojeISO();FT.ate=hojeISO();}
-  else {FT.de=diasAtrasISO(n);FT.ate=hojeISO();}
+  if(n===0){FTP.de=new Date(d.getFullYear(),d.getMonth(),1).toISOString().slice(0,10);FTP.ate=hojeISO();}
+  else if(n===-1){FTP.de=new Date(d.getFullYear(),d.getMonth()-1,1).toISOString().slice(0,10);
+    FTP.ate=new Date(d.getFullYear(),d.getMonth(),0).toISOString().slice(0,10);}
+  else if(n===1){FTP.de=hojeISO();FTP.ate=hojeISO();}
+  else {FTP.de=diasAtrasISO(n);FTP.ate=hojeISO();}
   telaFaturamento();
 }
 function explicaFaturamento(){
