@@ -2376,6 +2376,119 @@ tbody td small{font-size:10.5px}
 .semV small{display:block;font-size:10.5px;color:var(--ink-3)}
 @media(max-width:800px){.semIt{grid-template-columns:1fr}.semV{text-align:left}}
 
+/* ---------- configuração do PDV ---------- */
+.layGrade{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.layOp{text-align:left;padding:12px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer}
+.layOp:hover{border-color:var(--acc)}
+.layOp.on{border-color:var(--acc);background:var(--acc-soft)}
+.layOp b{display:block;font-size:12.5px;margin-top:9px;color:var(--ink)}
+.layOp span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:2px;line-height:1.45}
+.layMini{height:52px;background:var(--alt);border-radius:6px;padding:6px;display:flex}
+.mL{display:grid;gap:4px;width:100%}
+.mL.g1{grid-template-columns:1fr}.mL.g2{grid-template-columns:1fr 1fr}.mL.g3{grid-template-columns:repeat(3,1fr)}
+.mL i{background:#C6D4E0;border-radius:3px;display:block}
+.mL i.b{height:100%}.mL i.c{height:100%;border-left:5px solid #9AB4CC}
+.mL i.l{height:7px}.mL i.q{height:100%}
+.cfgSep{font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;
+  letter-spacing:.05em;margin:16px 0 10px;padding-top:12px;border-top:1px solid var(--line-2)}
+.chkGrade{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.chkGrade .chkL{align-items:flex-start;padding:9px 11px;border:1px solid var(--line-2);border-radius:7px}
+.chkGrade .chkL b{display:block;font-size:12.5px}
+.chkGrade .chkL span span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:1px}
+.previaCol{width:430px;flex:none}
+.btnMini{margin-left:auto;display:flex;align-items:center;gap:5px;border:1px solid var(--line);
+  background:#fff;border-radius:5px;padding:3px 8px;font-size:10.5px;cursor:pointer;
+  color:var(--ink-2);text-transform:none;letter-spacing:0}
+/* prévia do PDV */
+.pvPrev{background:var(--alt);border-radius:8px;padding:10px;font-size:11px}
+.pvCats{display:flex;gap:5px;margin-bottom:9px;flex-wrap:wrap}
+.pvCat{padding:4px 10px;border-radius:14px;border:1px solid var(--line);background:#fff;
+  font-size:10.5px;color:var(--ink-2);cursor:default}
+.pvCat.on{background:var(--cc);border-color:var(--cc);color:#fff;font-weight:600}
+.pvProds{display:grid;grid-template-columns:repeat(var(--cols),1fr);gap:6px}
+.pvP{background:#fff;border:1px solid var(--line-2);border-radius:7px;overflow:hidden}
+.pvFoto{height:52px;background:#E4EBF1;display:flex;align-items:center;justify-content:center;color:#9AB4CC}
+.pvFotoP{width:30px;height:30px;background:#E4EBF1;border-radius:5px;display:flex;
+  align-items:center;justify-content:center;color:#9AB4CC;flex:none}
+.pvCor{height:5px}
+.pvInfo{padding:6px 8px}
+.pvInfo b{display:block;font-size:10.5px;line-height:1.3}
+.pvInfo small{display:block;font-size:9px;color:var(--ink-3);margin-top:1px}
+.pvPreco{display:block;font-size:11px;font-weight:700;color:var(--acc-d);margin-top:3px}
+.pv-compacto .pvP{display:flex;align-items:center;gap:7px;padding:5px}
+.pv-compacto .pvInfo{padding:0}
+.pv-lista{grid-template-columns:1fr!important;gap:3px}
+.pv-lista .pvP{display:flex;align-items:center;justify-content:space-between;padding:6px 10px}
+.pv-lista .pvInfo{padding:0;display:flex;align-items:baseline;gap:9px;width:100%}
+.pv-lista .pvInfo b{flex:1}
+.pv-lista .pvPreco{margin:0}
+.pv-grande .pvInfo{padding:10px 11px}
+.pv-grande .pvInfo b{font-size:12px}
+.pv-grande .pvFoto{height:70px}
+.pvComanda{margin-top:10px;background:#fff;border:1px solid var(--line-2);border-radius:7px;overflow:hidden}
+.pvCH{padding:5px 10px;background:var(--deep);color:#fff;font-size:10px;font-weight:700;letter-spacing:.05em}
+.pvCI{display:flex;justify-content:space-between;padding:5px 10px;border-bottom:1px solid var(--line-2);font-size:10.5px}
+.pvCT{display:flex;justify-content:space-between;padding:7px 10px;font-weight:700;font-size:12px;color:var(--acc-d)}
+@media(max-width:1100px){.previaCol{width:100%}}
+
+/* ---------- áreas de entrega ---------- */
+.areasLista{display:flex;flex-direction:column;gap:10px;padding:0 16px 16px}
+.areaCard{background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.areaH{display:flex;align-items:center;gap:10px;padding:11px 14px;cursor:pointer;background:var(--alt)}
+.areaH:hover{background:#EEF3F7}
+.areaH>svg{color:var(--acc-d)}
+.areaN{flex:1}
+.areaN b{display:block;font-size:13.5px}
+.areaN small{display:block;font-size:11px;color:var(--ink-3);margin-top:1px}
+.areaAc{display:flex;gap:4px}
+.areaB{border-top:1px solid var(--line-2)}
+.zonaTab td{padding:6px 12px}
+.tipoZ{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px}
+.tipoZ.bairro{background:var(--blue-soft);color:var(--blue)}
+.tipoZ.rural{background:var(--amber-soft);color:#8A5A08}
+.tipoZ.raio{background:var(--acc-soft);color:var(--acc-d)}
+.zonaVazia{display:flex;align-items:center;gap:12px;padding:16px;color:var(--ink-3);font-size:12px}
+.zonaVazia svg{color:#C6D4E0;flex:none}
+.zonaVazia span{flex:1;line-height:1.5}
+
+/* ---------- motivos ---------- */
+.motGrade{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;padding:14px 16px}
+.motCol{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;
+  border-top:3px solid var(--mc)}
+.motH{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--alt);
+  border-bottom:1px solid var(--line-2)}
+.motH>svg{color:var(--mc)}
+.motH b{display:block;font-size:13px;color:var(--ink)}
+.motH span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:1px}
+.motH .cnt2{margin-left:auto}
+.motB{padding:8px}
+.motIt{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:7px;
+  border:1px solid var(--line-2);margin-bottom:6px}
+.motIt.off{opacity:.5}
+.motN{flex:1;min-width:0}
+.motN b{display:block;font-size:12.5px}
+.motN small{display:block;font-size:10.5px;color:var(--ink-3)}
+.motAc{display:flex;align-items:center;gap:4px}
+.lockIc{color:var(--ink-3);display:flex;padding:0 4px}
+.miniSw{position:relative;width:32px;height:18px;flex:none;cursor:pointer}
+.miniSw input{opacity:0;width:0;height:0;position:absolute}
+.miniSw i{position:absolute;inset:0;background:#C6D4E0;border-radius:10px;transition:.15s}
+.miniSw i:before{content:'';position:absolute;width:14px;height:14px;left:2px;top:2px;
+  background:#fff;border-radius:50%;transition:.15s}
+.miniSw input:checked+i{background:var(--acc)}
+.miniSw input:checked+i:before{transform:translateX(14px)}
+.motVazio{padding:14px;text-align:center;font-size:11.5px;color:var(--ink-3)}
+.motAdd{width:100%;display:flex;align-items:center;justify-content:center;gap:6px;
+  padding:9px;border:1px dashed var(--line);border-radius:7px;background:transparent;
+  cursor:pointer;font-size:11.5px;color:var(--ink-3)}
+.motAdd:hover{border-color:var(--acc);color:var(--acc-d);background:var(--acc-soft)}
+.tipoEsc{display:flex;flex-direction:column;gap:7px}
+.tipoOp{display:block;padding:10px 12px;border:2px solid var(--line);border-radius:8px;cursor:pointer}
+.tipoOp.on{border-color:var(--acc);background:var(--acc-soft)}
+.tipoOp input{margin-right:7px}
+.tipoOp b{font-size:12.5px}
+.tipoOp span{display:block;font-size:11px;color:var(--ink-3);margin-top:2px;padding-left:20px}
+
 @media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
 
 /* ---------- caixa de confirmação ---------- */
@@ -2626,6 +2739,119 @@ tbody td small{font-size:10.5px}
 .semV b{font-size:13.5px;font-variant-numeric:tabular-nums}
 .semV small{display:block;font-size:10.5px;color:var(--ink-3)}
 @media(max-width:800px){.semIt{grid-template-columns:1fr}.semV{text-align:left}}
+
+/* ---------- configuração do PDV ---------- */
+.layGrade{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.layOp{text-align:left;padding:12px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer}
+.layOp:hover{border-color:var(--acc)}
+.layOp.on{border-color:var(--acc);background:var(--acc-soft)}
+.layOp b{display:block;font-size:12.5px;margin-top:9px;color:var(--ink)}
+.layOp span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:2px;line-height:1.45}
+.layMini{height:52px;background:var(--alt);border-radius:6px;padding:6px;display:flex}
+.mL{display:grid;gap:4px;width:100%}
+.mL.g1{grid-template-columns:1fr}.mL.g2{grid-template-columns:1fr 1fr}.mL.g3{grid-template-columns:repeat(3,1fr)}
+.mL i{background:#C6D4E0;border-radius:3px;display:block}
+.mL i.b{height:100%}.mL i.c{height:100%;border-left:5px solid #9AB4CC}
+.mL i.l{height:7px}.mL i.q{height:100%}
+.cfgSep{font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;
+  letter-spacing:.05em;margin:16px 0 10px;padding-top:12px;border-top:1px solid var(--line-2)}
+.chkGrade{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.chkGrade .chkL{align-items:flex-start;padding:9px 11px;border:1px solid var(--line-2);border-radius:7px}
+.chkGrade .chkL b{display:block;font-size:12.5px}
+.chkGrade .chkL span span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:1px}
+.previaCol{width:430px;flex:none}
+.btnMini{margin-left:auto;display:flex;align-items:center;gap:5px;border:1px solid var(--line);
+  background:#fff;border-radius:5px;padding:3px 8px;font-size:10.5px;cursor:pointer;
+  color:var(--ink-2);text-transform:none;letter-spacing:0}
+/* prévia do PDV */
+.pvPrev{background:var(--alt);border-radius:8px;padding:10px;font-size:11px}
+.pvCats{display:flex;gap:5px;margin-bottom:9px;flex-wrap:wrap}
+.pvCat{padding:4px 10px;border-radius:14px;border:1px solid var(--line);background:#fff;
+  font-size:10.5px;color:var(--ink-2);cursor:default}
+.pvCat.on{background:var(--cc);border-color:var(--cc);color:#fff;font-weight:600}
+.pvProds{display:grid;grid-template-columns:repeat(var(--cols),1fr);gap:6px}
+.pvP{background:#fff;border:1px solid var(--line-2);border-radius:7px;overflow:hidden}
+.pvFoto{height:52px;background:#E4EBF1;display:flex;align-items:center;justify-content:center;color:#9AB4CC}
+.pvFotoP{width:30px;height:30px;background:#E4EBF1;border-radius:5px;display:flex;
+  align-items:center;justify-content:center;color:#9AB4CC;flex:none}
+.pvCor{height:5px}
+.pvInfo{padding:6px 8px}
+.pvInfo b{display:block;font-size:10.5px;line-height:1.3}
+.pvInfo small{display:block;font-size:9px;color:var(--ink-3);margin-top:1px}
+.pvPreco{display:block;font-size:11px;font-weight:700;color:var(--acc-d);margin-top:3px}
+.pv-compacto .pvP{display:flex;align-items:center;gap:7px;padding:5px}
+.pv-compacto .pvInfo{padding:0}
+.pv-lista{grid-template-columns:1fr!important;gap:3px}
+.pv-lista .pvP{display:flex;align-items:center;justify-content:space-between;padding:6px 10px}
+.pv-lista .pvInfo{padding:0;display:flex;align-items:baseline;gap:9px;width:100%}
+.pv-lista .pvInfo b{flex:1}
+.pv-lista .pvPreco{margin:0}
+.pv-grande .pvInfo{padding:10px 11px}
+.pv-grande .pvInfo b{font-size:12px}
+.pv-grande .pvFoto{height:70px}
+.pvComanda{margin-top:10px;background:#fff;border:1px solid var(--line-2);border-radius:7px;overflow:hidden}
+.pvCH{padding:5px 10px;background:var(--deep);color:#fff;font-size:10px;font-weight:700;letter-spacing:.05em}
+.pvCI{display:flex;justify-content:space-between;padding:5px 10px;border-bottom:1px solid var(--line-2);font-size:10.5px}
+.pvCT{display:flex;justify-content:space-between;padding:7px 10px;font-weight:700;font-size:12px;color:var(--acc-d)}
+@media(max-width:1100px){.previaCol{width:100%}}
+
+/* ---------- áreas de entrega ---------- */
+.areasLista{display:flex;flex-direction:column;gap:10px;padding:0 16px 16px}
+.areaCard{background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.areaH{display:flex;align-items:center;gap:10px;padding:11px 14px;cursor:pointer;background:var(--alt)}
+.areaH:hover{background:#EEF3F7}
+.areaH>svg{color:var(--acc-d)}
+.areaN{flex:1}
+.areaN b{display:block;font-size:13.5px}
+.areaN small{display:block;font-size:11px;color:var(--ink-3);margin-top:1px}
+.areaAc{display:flex;gap:4px}
+.areaB{border-top:1px solid var(--line-2)}
+.zonaTab td{padding:6px 12px}
+.tipoZ{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px}
+.tipoZ.bairro{background:var(--blue-soft);color:var(--blue)}
+.tipoZ.rural{background:var(--amber-soft);color:#8A5A08}
+.tipoZ.raio{background:var(--acc-soft);color:var(--acc-d)}
+.zonaVazia{display:flex;align-items:center;gap:12px;padding:16px;color:var(--ink-3);font-size:12px}
+.zonaVazia svg{color:#C6D4E0;flex:none}
+.zonaVazia span{flex:1;line-height:1.5}
+
+/* ---------- motivos ---------- */
+.motGrade{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;padding:14px 16px}
+.motCol{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;
+  border-top:3px solid var(--mc)}
+.motH{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--alt);
+  border-bottom:1px solid var(--line-2)}
+.motH>svg{color:var(--mc)}
+.motH b{display:block;font-size:13px;color:var(--ink)}
+.motH span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:1px}
+.motH .cnt2{margin-left:auto}
+.motB{padding:8px}
+.motIt{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:7px;
+  border:1px solid var(--line-2);margin-bottom:6px}
+.motIt.off{opacity:.5}
+.motN{flex:1;min-width:0}
+.motN b{display:block;font-size:12.5px}
+.motN small{display:block;font-size:10.5px;color:var(--ink-3)}
+.motAc{display:flex;align-items:center;gap:4px}
+.lockIc{color:var(--ink-3);display:flex;padding:0 4px}
+.miniSw{position:relative;width:32px;height:18px;flex:none;cursor:pointer}
+.miniSw input{opacity:0;width:0;height:0;position:absolute}
+.miniSw i{position:absolute;inset:0;background:#C6D4E0;border-radius:10px;transition:.15s}
+.miniSw i:before{content:'';position:absolute;width:14px;height:14px;left:2px;top:2px;
+  background:#fff;border-radius:50%;transition:.15s}
+.miniSw input:checked+i{background:var(--acc)}
+.miniSw input:checked+i:before{transform:translateX(14px)}
+.motVazio{padding:14px;text-align:center;font-size:11.5px;color:var(--ink-3)}
+.motAdd{width:100%;display:flex;align-items:center;justify-content:center;gap:6px;
+  padding:9px;border:1px dashed var(--line);border-radius:7px;background:transparent;
+  cursor:pointer;font-size:11.5px;color:var(--ink-3)}
+.motAdd:hover{border-color:var(--acc);color:var(--acc-d);background:var(--acc-soft)}
+.tipoEsc{display:flex;flex-direction:column;gap:7px}
+.tipoOp{display:block;padding:10px 12px;border:2px solid var(--line);border-radius:8px;cursor:pointer}
+.tipoOp.on{border-color:var(--acc);background:var(--acc-soft)}
+.tipoOp input{margin-right:7px}
+.tipoOp b{font-size:12.5px}
+.tipoOp span{display:block;font-size:11px;color:var(--ink-3);margin-top:2px;padding-left:20px}
 
 @media(max-width:1000px){.ivGrade{flex-direction:column}.ivAdic{width:100%}}
 
@@ -2960,6 +3186,119 @@ tbody td small{font-size:10.5px}
 .semV small{display:block;font-size:10.5px;color:var(--ink-3)}
 @media(max-width:800px){.semIt{grid-template-columns:1fr}.semV{text-align:left}}
 
+/* ---------- configuração do PDV ---------- */
+.layGrade{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.layOp{text-align:left;padding:12px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer}
+.layOp:hover{border-color:var(--acc)}
+.layOp.on{border-color:var(--acc);background:var(--acc-soft)}
+.layOp b{display:block;font-size:12.5px;margin-top:9px;color:var(--ink)}
+.layOp span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:2px;line-height:1.45}
+.layMini{height:52px;background:var(--alt);border-radius:6px;padding:6px;display:flex}
+.mL{display:grid;gap:4px;width:100%}
+.mL.g1{grid-template-columns:1fr}.mL.g2{grid-template-columns:1fr 1fr}.mL.g3{grid-template-columns:repeat(3,1fr)}
+.mL i{background:#C6D4E0;border-radius:3px;display:block}
+.mL i.b{height:100%}.mL i.c{height:100%;border-left:5px solid #9AB4CC}
+.mL i.l{height:7px}.mL i.q{height:100%}
+.cfgSep{font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;
+  letter-spacing:.05em;margin:16px 0 10px;padding-top:12px;border-top:1px solid var(--line-2)}
+.chkGrade{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.chkGrade .chkL{align-items:flex-start;padding:9px 11px;border:1px solid var(--line-2);border-radius:7px}
+.chkGrade .chkL b{display:block;font-size:12.5px}
+.chkGrade .chkL span span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:1px}
+.previaCol{width:430px;flex:none}
+.btnMini{margin-left:auto;display:flex;align-items:center;gap:5px;border:1px solid var(--line);
+  background:#fff;border-radius:5px;padding:3px 8px;font-size:10.5px;cursor:pointer;
+  color:var(--ink-2);text-transform:none;letter-spacing:0}
+/* prévia do PDV */
+.pvPrev{background:var(--alt);border-radius:8px;padding:10px;font-size:11px}
+.pvCats{display:flex;gap:5px;margin-bottom:9px;flex-wrap:wrap}
+.pvCat{padding:4px 10px;border-radius:14px;border:1px solid var(--line);background:#fff;
+  font-size:10.5px;color:var(--ink-2);cursor:default}
+.pvCat.on{background:var(--cc);border-color:var(--cc);color:#fff;font-weight:600}
+.pvProds{display:grid;grid-template-columns:repeat(var(--cols),1fr);gap:6px}
+.pvP{background:#fff;border:1px solid var(--line-2);border-radius:7px;overflow:hidden}
+.pvFoto{height:52px;background:#E4EBF1;display:flex;align-items:center;justify-content:center;color:#9AB4CC}
+.pvFotoP{width:30px;height:30px;background:#E4EBF1;border-radius:5px;display:flex;
+  align-items:center;justify-content:center;color:#9AB4CC;flex:none}
+.pvCor{height:5px}
+.pvInfo{padding:6px 8px}
+.pvInfo b{display:block;font-size:10.5px;line-height:1.3}
+.pvInfo small{display:block;font-size:9px;color:var(--ink-3);margin-top:1px}
+.pvPreco{display:block;font-size:11px;font-weight:700;color:var(--acc-d);margin-top:3px}
+.pv-compacto .pvP{display:flex;align-items:center;gap:7px;padding:5px}
+.pv-compacto .pvInfo{padding:0}
+.pv-lista{grid-template-columns:1fr!important;gap:3px}
+.pv-lista .pvP{display:flex;align-items:center;justify-content:space-between;padding:6px 10px}
+.pv-lista .pvInfo{padding:0;display:flex;align-items:baseline;gap:9px;width:100%}
+.pv-lista .pvInfo b{flex:1}
+.pv-lista .pvPreco{margin:0}
+.pv-grande .pvInfo{padding:10px 11px}
+.pv-grande .pvInfo b{font-size:12px}
+.pv-grande .pvFoto{height:70px}
+.pvComanda{margin-top:10px;background:#fff;border:1px solid var(--line-2);border-radius:7px;overflow:hidden}
+.pvCH{padding:5px 10px;background:var(--deep);color:#fff;font-size:10px;font-weight:700;letter-spacing:.05em}
+.pvCI{display:flex;justify-content:space-between;padding:5px 10px;border-bottom:1px solid var(--line-2);font-size:10.5px}
+.pvCT{display:flex;justify-content:space-between;padding:7px 10px;font-weight:700;font-size:12px;color:var(--acc-d)}
+@media(max-width:1100px){.previaCol{width:100%}}
+
+/* ---------- áreas de entrega ---------- */
+.areasLista{display:flex;flex-direction:column;gap:10px;padding:0 16px 16px}
+.areaCard{background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.areaH{display:flex;align-items:center;gap:10px;padding:11px 14px;cursor:pointer;background:var(--alt)}
+.areaH:hover{background:#EEF3F7}
+.areaH>svg{color:var(--acc-d)}
+.areaN{flex:1}
+.areaN b{display:block;font-size:13.5px}
+.areaN small{display:block;font-size:11px;color:var(--ink-3);margin-top:1px}
+.areaAc{display:flex;gap:4px}
+.areaB{border-top:1px solid var(--line-2)}
+.zonaTab td{padding:6px 12px}
+.tipoZ{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px}
+.tipoZ.bairro{background:var(--blue-soft);color:var(--blue)}
+.tipoZ.rural{background:var(--amber-soft);color:#8A5A08}
+.tipoZ.raio{background:var(--acc-soft);color:var(--acc-d)}
+.zonaVazia{display:flex;align-items:center;gap:12px;padding:16px;color:var(--ink-3);font-size:12px}
+.zonaVazia svg{color:#C6D4E0;flex:none}
+.zonaVazia span{flex:1;line-height:1.5}
+
+/* ---------- motivos ---------- */
+.motGrade{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;padding:14px 16px}
+.motCol{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;
+  border-top:3px solid var(--mc)}
+.motH{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--alt);
+  border-bottom:1px solid var(--line-2)}
+.motH>svg{color:var(--mc)}
+.motH b{display:block;font-size:13px;color:var(--ink)}
+.motH span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:1px}
+.motH .cnt2{margin-left:auto}
+.motB{padding:8px}
+.motIt{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:7px;
+  border:1px solid var(--line-2);margin-bottom:6px}
+.motIt.off{opacity:.5}
+.motN{flex:1;min-width:0}
+.motN b{display:block;font-size:12.5px}
+.motN small{display:block;font-size:10.5px;color:var(--ink-3)}
+.motAc{display:flex;align-items:center;gap:4px}
+.lockIc{color:var(--ink-3);display:flex;padding:0 4px}
+.miniSw{position:relative;width:32px;height:18px;flex:none;cursor:pointer}
+.miniSw input{opacity:0;width:0;height:0;position:absolute}
+.miniSw i{position:absolute;inset:0;background:#C6D4E0;border-radius:10px;transition:.15s}
+.miniSw i:before{content:'';position:absolute;width:14px;height:14px;left:2px;top:2px;
+  background:#fff;border-radius:50%;transition:.15s}
+.miniSw input:checked+i{background:var(--acc)}
+.miniSw input:checked+i:before{transform:translateX(14px)}
+.motVazio{padding:14px;text-align:center;font-size:11.5px;color:var(--ink-3)}
+.motAdd{width:100%;display:flex;align-items:center;justify-content:center;gap:6px;
+  padding:9px;border:1px dashed var(--line);border-radius:7px;background:transparent;
+  cursor:pointer;font-size:11.5px;color:var(--ink-3)}
+.motAdd:hover{border-color:var(--acc);color:var(--acc-d);background:var(--acc-soft)}
+.tipoEsc{display:flex;flex-direction:column;gap:7px}
+.tipoOp{display:block;padding:10px 12px;border:2px solid var(--line);border-radius:8px;cursor:pointer}
+.tipoOp.on{border-color:var(--acc);background:var(--acc-soft)}
+.tipoOp input{margin-right:7px}
+.tipoOp b{font-size:12.5px}
+.tipoOp span{display:block;font-size:11px;color:var(--ink-3);margin-top:2px;padding-left:20px}
+
 @media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
 
 /* ---------- caixa de confirmação ---------- */
@@ -3210,6 +3549,119 @@ tbody td small{font-size:10.5px}
 .semV b{font-size:13.5px;font-variant-numeric:tabular-nums}
 .semV small{display:block;font-size:10.5px;color:var(--ink-3)}
 @media(max-width:800px){.semIt{grid-template-columns:1fr}.semV{text-align:left}}
+
+/* ---------- configuração do PDV ---------- */
+.layGrade{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.layOp{text-align:left;padding:12px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer}
+.layOp:hover{border-color:var(--acc)}
+.layOp.on{border-color:var(--acc);background:var(--acc-soft)}
+.layOp b{display:block;font-size:12.5px;margin-top:9px;color:var(--ink)}
+.layOp span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:2px;line-height:1.45}
+.layMini{height:52px;background:var(--alt);border-radius:6px;padding:6px;display:flex}
+.mL{display:grid;gap:4px;width:100%}
+.mL.g1{grid-template-columns:1fr}.mL.g2{grid-template-columns:1fr 1fr}.mL.g3{grid-template-columns:repeat(3,1fr)}
+.mL i{background:#C6D4E0;border-radius:3px;display:block}
+.mL i.b{height:100%}.mL i.c{height:100%;border-left:5px solid #9AB4CC}
+.mL i.l{height:7px}.mL i.q{height:100%}
+.cfgSep{font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;
+  letter-spacing:.05em;margin:16px 0 10px;padding-top:12px;border-top:1px solid var(--line-2)}
+.chkGrade{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.chkGrade .chkL{align-items:flex-start;padding:9px 11px;border:1px solid var(--line-2);border-radius:7px}
+.chkGrade .chkL b{display:block;font-size:12.5px}
+.chkGrade .chkL span span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:1px}
+.previaCol{width:430px;flex:none}
+.btnMini{margin-left:auto;display:flex;align-items:center;gap:5px;border:1px solid var(--line);
+  background:#fff;border-radius:5px;padding:3px 8px;font-size:10.5px;cursor:pointer;
+  color:var(--ink-2);text-transform:none;letter-spacing:0}
+/* prévia do PDV */
+.pvPrev{background:var(--alt);border-radius:8px;padding:10px;font-size:11px}
+.pvCats{display:flex;gap:5px;margin-bottom:9px;flex-wrap:wrap}
+.pvCat{padding:4px 10px;border-radius:14px;border:1px solid var(--line);background:#fff;
+  font-size:10.5px;color:var(--ink-2);cursor:default}
+.pvCat.on{background:var(--cc);border-color:var(--cc);color:#fff;font-weight:600}
+.pvProds{display:grid;grid-template-columns:repeat(var(--cols),1fr);gap:6px}
+.pvP{background:#fff;border:1px solid var(--line-2);border-radius:7px;overflow:hidden}
+.pvFoto{height:52px;background:#E4EBF1;display:flex;align-items:center;justify-content:center;color:#9AB4CC}
+.pvFotoP{width:30px;height:30px;background:#E4EBF1;border-radius:5px;display:flex;
+  align-items:center;justify-content:center;color:#9AB4CC;flex:none}
+.pvCor{height:5px}
+.pvInfo{padding:6px 8px}
+.pvInfo b{display:block;font-size:10.5px;line-height:1.3}
+.pvInfo small{display:block;font-size:9px;color:var(--ink-3);margin-top:1px}
+.pvPreco{display:block;font-size:11px;font-weight:700;color:var(--acc-d);margin-top:3px}
+.pv-compacto .pvP{display:flex;align-items:center;gap:7px;padding:5px}
+.pv-compacto .pvInfo{padding:0}
+.pv-lista{grid-template-columns:1fr!important;gap:3px}
+.pv-lista .pvP{display:flex;align-items:center;justify-content:space-between;padding:6px 10px}
+.pv-lista .pvInfo{padding:0;display:flex;align-items:baseline;gap:9px;width:100%}
+.pv-lista .pvInfo b{flex:1}
+.pv-lista .pvPreco{margin:0}
+.pv-grande .pvInfo{padding:10px 11px}
+.pv-grande .pvInfo b{font-size:12px}
+.pv-grande .pvFoto{height:70px}
+.pvComanda{margin-top:10px;background:#fff;border:1px solid var(--line-2);border-radius:7px;overflow:hidden}
+.pvCH{padding:5px 10px;background:var(--deep);color:#fff;font-size:10px;font-weight:700;letter-spacing:.05em}
+.pvCI{display:flex;justify-content:space-between;padding:5px 10px;border-bottom:1px solid var(--line-2);font-size:10.5px}
+.pvCT{display:flex;justify-content:space-between;padding:7px 10px;font-weight:700;font-size:12px;color:var(--acc-d)}
+@media(max-width:1100px){.previaCol{width:100%}}
+
+/* ---------- áreas de entrega ---------- */
+.areasLista{display:flex;flex-direction:column;gap:10px;padding:0 16px 16px}
+.areaCard{background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.areaH{display:flex;align-items:center;gap:10px;padding:11px 14px;cursor:pointer;background:var(--alt)}
+.areaH:hover{background:#EEF3F7}
+.areaH>svg{color:var(--acc-d)}
+.areaN{flex:1}
+.areaN b{display:block;font-size:13.5px}
+.areaN small{display:block;font-size:11px;color:var(--ink-3);margin-top:1px}
+.areaAc{display:flex;gap:4px}
+.areaB{border-top:1px solid var(--line-2)}
+.zonaTab td{padding:6px 12px}
+.tipoZ{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px}
+.tipoZ.bairro{background:var(--blue-soft);color:var(--blue)}
+.tipoZ.rural{background:var(--amber-soft);color:#8A5A08}
+.tipoZ.raio{background:var(--acc-soft);color:var(--acc-d)}
+.zonaVazia{display:flex;align-items:center;gap:12px;padding:16px;color:var(--ink-3);font-size:12px}
+.zonaVazia svg{color:#C6D4E0;flex:none}
+.zonaVazia span{flex:1;line-height:1.5}
+
+/* ---------- motivos ---------- */
+.motGrade{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;padding:14px 16px}
+.motCol{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;
+  border-top:3px solid var(--mc)}
+.motH{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--alt);
+  border-bottom:1px solid var(--line-2)}
+.motH>svg{color:var(--mc)}
+.motH b{display:block;font-size:13px;color:var(--ink)}
+.motH span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:1px}
+.motH .cnt2{margin-left:auto}
+.motB{padding:8px}
+.motIt{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:7px;
+  border:1px solid var(--line-2);margin-bottom:6px}
+.motIt.off{opacity:.5}
+.motN{flex:1;min-width:0}
+.motN b{display:block;font-size:12.5px}
+.motN small{display:block;font-size:10.5px;color:var(--ink-3)}
+.motAc{display:flex;align-items:center;gap:4px}
+.lockIc{color:var(--ink-3);display:flex;padding:0 4px}
+.miniSw{position:relative;width:32px;height:18px;flex:none;cursor:pointer}
+.miniSw input{opacity:0;width:0;height:0;position:absolute}
+.miniSw i{position:absolute;inset:0;background:#C6D4E0;border-radius:10px;transition:.15s}
+.miniSw i:before{content:'';position:absolute;width:14px;height:14px;left:2px;top:2px;
+  background:#fff;border-radius:50%;transition:.15s}
+.miniSw input:checked+i{background:var(--acc)}
+.miniSw input:checked+i:before{transform:translateX(14px)}
+.motVazio{padding:14px;text-align:center;font-size:11.5px;color:var(--ink-3)}
+.motAdd{width:100%;display:flex;align-items:center;justify-content:center;gap:6px;
+  padding:9px;border:1px dashed var(--line);border-radius:7px;background:transparent;
+  cursor:pointer;font-size:11.5px;color:var(--ink-3)}
+.motAdd:hover{border-color:var(--acc);color:var(--acc-d);background:var(--acc-soft)}
+.tipoEsc{display:flex;flex-direction:column;gap:7px}
+.tipoOp{display:block;padding:10px 12px;border:2px solid var(--line);border-radius:8px;cursor:pointer}
+.tipoOp.on{border-color:var(--acc);background:var(--acc-soft)}
+.tipoOp input{margin-right:7px}
+.tipoOp b{font-size:12.5px}
+.tipoOp span{display:block;font-size:11px;color:var(--ink-3);margin-top:2px;padding-left:20px}
 
 @media(max-width:1000px){
   .lfPeriodo{order:3;width:100%}
@@ -4671,6 +5123,119 @@ tbody td small{font-size:10.5px}
 .semV small{display:block;font-size:10.5px;color:var(--ink-3)}
 @media(max-width:800px){.semIt{grid-template-columns:1fr}.semV{text-align:left}}
 
+/* ---------- configuração do PDV ---------- */
+.layGrade{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.layOp{text-align:left;padding:12px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer}
+.layOp:hover{border-color:var(--acc)}
+.layOp.on{border-color:var(--acc);background:var(--acc-soft)}
+.layOp b{display:block;font-size:12.5px;margin-top:9px;color:var(--ink)}
+.layOp span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:2px;line-height:1.45}
+.layMini{height:52px;background:var(--alt);border-radius:6px;padding:6px;display:flex}
+.mL{display:grid;gap:4px;width:100%}
+.mL.g1{grid-template-columns:1fr}.mL.g2{grid-template-columns:1fr 1fr}.mL.g3{grid-template-columns:repeat(3,1fr)}
+.mL i{background:#C6D4E0;border-radius:3px;display:block}
+.mL i.b{height:100%}.mL i.c{height:100%;border-left:5px solid #9AB4CC}
+.mL i.l{height:7px}.mL i.q{height:100%}
+.cfgSep{font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;
+  letter-spacing:.05em;margin:16px 0 10px;padding-top:12px;border-top:1px solid var(--line-2)}
+.chkGrade{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.chkGrade .chkL{align-items:flex-start;padding:9px 11px;border:1px solid var(--line-2);border-radius:7px}
+.chkGrade .chkL b{display:block;font-size:12.5px}
+.chkGrade .chkL span span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:1px}
+.previaCol{width:430px;flex:none}
+.btnMini{margin-left:auto;display:flex;align-items:center;gap:5px;border:1px solid var(--line);
+  background:#fff;border-radius:5px;padding:3px 8px;font-size:10.5px;cursor:pointer;
+  color:var(--ink-2);text-transform:none;letter-spacing:0}
+/* prévia do PDV */
+.pvPrev{background:var(--alt);border-radius:8px;padding:10px;font-size:11px}
+.pvCats{display:flex;gap:5px;margin-bottom:9px;flex-wrap:wrap}
+.pvCat{padding:4px 10px;border-radius:14px;border:1px solid var(--line);background:#fff;
+  font-size:10.5px;color:var(--ink-2);cursor:default}
+.pvCat.on{background:var(--cc);border-color:var(--cc);color:#fff;font-weight:600}
+.pvProds{display:grid;grid-template-columns:repeat(var(--cols),1fr);gap:6px}
+.pvP{background:#fff;border:1px solid var(--line-2);border-radius:7px;overflow:hidden}
+.pvFoto{height:52px;background:#E4EBF1;display:flex;align-items:center;justify-content:center;color:#9AB4CC}
+.pvFotoP{width:30px;height:30px;background:#E4EBF1;border-radius:5px;display:flex;
+  align-items:center;justify-content:center;color:#9AB4CC;flex:none}
+.pvCor{height:5px}
+.pvInfo{padding:6px 8px}
+.pvInfo b{display:block;font-size:10.5px;line-height:1.3}
+.pvInfo small{display:block;font-size:9px;color:var(--ink-3);margin-top:1px}
+.pvPreco{display:block;font-size:11px;font-weight:700;color:var(--acc-d);margin-top:3px}
+.pv-compacto .pvP{display:flex;align-items:center;gap:7px;padding:5px}
+.pv-compacto .pvInfo{padding:0}
+.pv-lista{grid-template-columns:1fr!important;gap:3px}
+.pv-lista .pvP{display:flex;align-items:center;justify-content:space-between;padding:6px 10px}
+.pv-lista .pvInfo{padding:0;display:flex;align-items:baseline;gap:9px;width:100%}
+.pv-lista .pvInfo b{flex:1}
+.pv-lista .pvPreco{margin:0}
+.pv-grande .pvInfo{padding:10px 11px}
+.pv-grande .pvInfo b{font-size:12px}
+.pv-grande .pvFoto{height:70px}
+.pvComanda{margin-top:10px;background:#fff;border:1px solid var(--line-2);border-radius:7px;overflow:hidden}
+.pvCH{padding:5px 10px;background:var(--deep);color:#fff;font-size:10px;font-weight:700;letter-spacing:.05em}
+.pvCI{display:flex;justify-content:space-between;padding:5px 10px;border-bottom:1px solid var(--line-2);font-size:10.5px}
+.pvCT{display:flex;justify-content:space-between;padding:7px 10px;font-weight:700;font-size:12px;color:var(--acc-d)}
+@media(max-width:1100px){.previaCol{width:100%}}
+
+/* ---------- áreas de entrega ---------- */
+.areasLista{display:flex;flex-direction:column;gap:10px;padding:0 16px 16px}
+.areaCard{background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.areaH{display:flex;align-items:center;gap:10px;padding:11px 14px;cursor:pointer;background:var(--alt)}
+.areaH:hover{background:#EEF3F7}
+.areaH>svg{color:var(--acc-d)}
+.areaN{flex:1}
+.areaN b{display:block;font-size:13.5px}
+.areaN small{display:block;font-size:11px;color:var(--ink-3);margin-top:1px}
+.areaAc{display:flex;gap:4px}
+.areaB{border-top:1px solid var(--line-2)}
+.zonaTab td{padding:6px 12px}
+.tipoZ{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px}
+.tipoZ.bairro{background:var(--blue-soft);color:var(--blue)}
+.tipoZ.rural{background:var(--amber-soft);color:#8A5A08}
+.tipoZ.raio{background:var(--acc-soft);color:var(--acc-d)}
+.zonaVazia{display:flex;align-items:center;gap:12px;padding:16px;color:var(--ink-3);font-size:12px}
+.zonaVazia svg{color:#C6D4E0;flex:none}
+.zonaVazia span{flex:1;line-height:1.5}
+
+/* ---------- motivos ---------- */
+.motGrade{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;padding:14px 16px}
+.motCol{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;
+  border-top:3px solid var(--mc)}
+.motH{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--alt);
+  border-bottom:1px solid var(--line-2)}
+.motH>svg{color:var(--mc)}
+.motH b{display:block;font-size:13px;color:var(--ink)}
+.motH span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:1px}
+.motH .cnt2{margin-left:auto}
+.motB{padding:8px}
+.motIt{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:7px;
+  border:1px solid var(--line-2);margin-bottom:6px}
+.motIt.off{opacity:.5}
+.motN{flex:1;min-width:0}
+.motN b{display:block;font-size:12.5px}
+.motN small{display:block;font-size:10.5px;color:var(--ink-3)}
+.motAc{display:flex;align-items:center;gap:4px}
+.lockIc{color:var(--ink-3);display:flex;padding:0 4px}
+.miniSw{position:relative;width:32px;height:18px;flex:none;cursor:pointer}
+.miniSw input{opacity:0;width:0;height:0;position:absolute}
+.miniSw i{position:absolute;inset:0;background:#C6D4E0;border-radius:10px;transition:.15s}
+.miniSw i:before{content:'';position:absolute;width:14px;height:14px;left:2px;top:2px;
+  background:#fff;border-radius:50%;transition:.15s}
+.miniSw input:checked+i{background:var(--acc)}
+.miniSw input:checked+i:before{transform:translateX(14px)}
+.motVazio{padding:14px;text-align:center;font-size:11.5px;color:var(--ink-3)}
+.motAdd{width:100%;display:flex;align-items:center;justify-content:center;gap:6px;
+  padding:9px;border:1px dashed var(--line);border-radius:7px;background:transparent;
+  cursor:pointer;font-size:11.5px;color:var(--ink-3)}
+.motAdd:hover{border-color:var(--acc);color:var(--acc-d);background:var(--acc-soft)}
+.tipoEsc{display:flex;flex-direction:column;gap:7px}
+.tipoOp{display:block;padding:10px 12px;border:2px solid var(--line);border-radius:8px;cursor:pointer}
+.tipoOp.on{border-color:var(--acc);background:var(--acc-soft)}
+.tipoOp input{margin-right:7px}
+.tipoOp b{font-size:12.5px}
+.tipoOp span{display:block;font-size:11px;color:var(--ink-3);margin-top:2px;padding-left:20px}
+
 @media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
 
 /* ---------- caixa de confirmação ---------- */
@@ -4921,6 +5486,119 @@ tbody td small{font-size:10.5px}
 .semV b{font-size:13.5px;font-variant-numeric:tabular-nums}
 .semV small{display:block;font-size:10.5px;color:var(--ink-3)}
 @media(max-width:800px){.semIt{grid-template-columns:1fr}.semV{text-align:left}}
+
+/* ---------- configuração do PDV ---------- */
+.layGrade{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.layOp{text-align:left;padding:12px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer}
+.layOp:hover{border-color:var(--acc)}
+.layOp.on{border-color:var(--acc);background:var(--acc-soft)}
+.layOp b{display:block;font-size:12.5px;margin-top:9px;color:var(--ink)}
+.layOp span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:2px;line-height:1.45}
+.layMini{height:52px;background:var(--alt);border-radius:6px;padding:6px;display:flex}
+.mL{display:grid;gap:4px;width:100%}
+.mL.g1{grid-template-columns:1fr}.mL.g2{grid-template-columns:1fr 1fr}.mL.g3{grid-template-columns:repeat(3,1fr)}
+.mL i{background:#C6D4E0;border-radius:3px;display:block}
+.mL i.b{height:100%}.mL i.c{height:100%;border-left:5px solid #9AB4CC}
+.mL i.l{height:7px}.mL i.q{height:100%}
+.cfgSep{font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;
+  letter-spacing:.05em;margin:16px 0 10px;padding-top:12px;border-top:1px solid var(--line-2)}
+.chkGrade{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.chkGrade .chkL{align-items:flex-start;padding:9px 11px;border:1px solid var(--line-2);border-radius:7px}
+.chkGrade .chkL b{display:block;font-size:12.5px}
+.chkGrade .chkL span span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:1px}
+.previaCol{width:430px;flex:none}
+.btnMini{margin-left:auto;display:flex;align-items:center;gap:5px;border:1px solid var(--line);
+  background:#fff;border-radius:5px;padding:3px 8px;font-size:10.5px;cursor:pointer;
+  color:var(--ink-2);text-transform:none;letter-spacing:0}
+/* prévia do PDV */
+.pvPrev{background:var(--alt);border-radius:8px;padding:10px;font-size:11px}
+.pvCats{display:flex;gap:5px;margin-bottom:9px;flex-wrap:wrap}
+.pvCat{padding:4px 10px;border-radius:14px;border:1px solid var(--line);background:#fff;
+  font-size:10.5px;color:var(--ink-2);cursor:default}
+.pvCat.on{background:var(--cc);border-color:var(--cc);color:#fff;font-weight:600}
+.pvProds{display:grid;grid-template-columns:repeat(var(--cols),1fr);gap:6px}
+.pvP{background:#fff;border:1px solid var(--line-2);border-radius:7px;overflow:hidden}
+.pvFoto{height:52px;background:#E4EBF1;display:flex;align-items:center;justify-content:center;color:#9AB4CC}
+.pvFotoP{width:30px;height:30px;background:#E4EBF1;border-radius:5px;display:flex;
+  align-items:center;justify-content:center;color:#9AB4CC;flex:none}
+.pvCor{height:5px}
+.pvInfo{padding:6px 8px}
+.pvInfo b{display:block;font-size:10.5px;line-height:1.3}
+.pvInfo small{display:block;font-size:9px;color:var(--ink-3);margin-top:1px}
+.pvPreco{display:block;font-size:11px;font-weight:700;color:var(--acc-d);margin-top:3px}
+.pv-compacto .pvP{display:flex;align-items:center;gap:7px;padding:5px}
+.pv-compacto .pvInfo{padding:0}
+.pv-lista{grid-template-columns:1fr!important;gap:3px}
+.pv-lista .pvP{display:flex;align-items:center;justify-content:space-between;padding:6px 10px}
+.pv-lista .pvInfo{padding:0;display:flex;align-items:baseline;gap:9px;width:100%}
+.pv-lista .pvInfo b{flex:1}
+.pv-lista .pvPreco{margin:0}
+.pv-grande .pvInfo{padding:10px 11px}
+.pv-grande .pvInfo b{font-size:12px}
+.pv-grande .pvFoto{height:70px}
+.pvComanda{margin-top:10px;background:#fff;border:1px solid var(--line-2);border-radius:7px;overflow:hidden}
+.pvCH{padding:5px 10px;background:var(--deep);color:#fff;font-size:10px;font-weight:700;letter-spacing:.05em}
+.pvCI{display:flex;justify-content:space-between;padding:5px 10px;border-bottom:1px solid var(--line-2);font-size:10.5px}
+.pvCT{display:flex;justify-content:space-between;padding:7px 10px;font-weight:700;font-size:12px;color:var(--acc-d)}
+@media(max-width:1100px){.previaCol{width:100%}}
+
+/* ---------- áreas de entrega ---------- */
+.areasLista{display:flex;flex-direction:column;gap:10px;padding:0 16px 16px}
+.areaCard{background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.areaH{display:flex;align-items:center;gap:10px;padding:11px 14px;cursor:pointer;background:var(--alt)}
+.areaH:hover{background:#EEF3F7}
+.areaH>svg{color:var(--acc-d)}
+.areaN{flex:1}
+.areaN b{display:block;font-size:13.5px}
+.areaN small{display:block;font-size:11px;color:var(--ink-3);margin-top:1px}
+.areaAc{display:flex;gap:4px}
+.areaB{border-top:1px solid var(--line-2)}
+.zonaTab td{padding:6px 12px}
+.tipoZ{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px}
+.tipoZ.bairro{background:var(--blue-soft);color:var(--blue)}
+.tipoZ.rural{background:var(--amber-soft);color:#8A5A08}
+.tipoZ.raio{background:var(--acc-soft);color:var(--acc-d)}
+.zonaVazia{display:flex;align-items:center;gap:12px;padding:16px;color:var(--ink-3);font-size:12px}
+.zonaVazia svg{color:#C6D4E0;flex:none}
+.zonaVazia span{flex:1;line-height:1.5}
+
+/* ---------- motivos ---------- */
+.motGrade{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;padding:14px 16px}
+.motCol{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;
+  border-top:3px solid var(--mc)}
+.motH{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--alt);
+  border-bottom:1px solid var(--line-2)}
+.motH>svg{color:var(--mc)}
+.motH b{display:block;font-size:13px;color:var(--ink)}
+.motH span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:1px}
+.motH .cnt2{margin-left:auto}
+.motB{padding:8px}
+.motIt{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:7px;
+  border:1px solid var(--line-2);margin-bottom:6px}
+.motIt.off{opacity:.5}
+.motN{flex:1;min-width:0}
+.motN b{display:block;font-size:12.5px}
+.motN small{display:block;font-size:10.5px;color:var(--ink-3)}
+.motAc{display:flex;align-items:center;gap:4px}
+.lockIc{color:var(--ink-3);display:flex;padding:0 4px}
+.miniSw{position:relative;width:32px;height:18px;flex:none;cursor:pointer}
+.miniSw input{opacity:0;width:0;height:0;position:absolute}
+.miniSw i{position:absolute;inset:0;background:#C6D4E0;border-radius:10px;transition:.15s}
+.miniSw i:before{content:'';position:absolute;width:14px;height:14px;left:2px;top:2px;
+  background:#fff;border-radius:50%;transition:.15s}
+.miniSw input:checked+i{background:var(--acc)}
+.miniSw input:checked+i:before{transform:translateX(14px)}
+.motVazio{padding:14px;text-align:center;font-size:11.5px;color:var(--ink-3)}
+.motAdd{width:100%;display:flex;align-items:center;justify-content:center;gap:6px;
+  padding:9px;border:1px dashed var(--line);border-radius:7px;background:transparent;
+  cursor:pointer;font-size:11.5px;color:var(--ink-3)}
+.motAdd:hover{border-color:var(--acc);color:var(--acc-d);background:var(--acc-soft)}
+.tipoEsc{display:flex;flex-direction:column;gap:7px}
+.tipoOp{display:block;padding:10px 12px;border:2px solid var(--line);border-radius:8px;cursor:pointer}
+.tipoOp.on{border-color:var(--acc);background:var(--acc-soft)}
+.tipoOp input{margin-right:7px}
+.tipoOp b{font-size:12.5px}
+.tipoOp span{display:block;font-size:11px;color:var(--ink-3);margin-top:2px;padding-left:20px}
 
 @media(max-width:1000px){.ivGrade{flex-direction:column}.ivAdic{width:100%}}
 
@@ -5255,6 +5933,119 @@ tbody td small{font-size:10.5px}
 .semV small{display:block;font-size:10.5px;color:var(--ink-3)}
 @media(max-width:800px){.semIt{grid-template-columns:1fr}.semV{text-align:left}}
 
+/* ---------- configuração do PDV ---------- */
+.layGrade{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.layOp{text-align:left;padding:12px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer}
+.layOp:hover{border-color:var(--acc)}
+.layOp.on{border-color:var(--acc);background:var(--acc-soft)}
+.layOp b{display:block;font-size:12.5px;margin-top:9px;color:var(--ink)}
+.layOp span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:2px;line-height:1.45}
+.layMini{height:52px;background:var(--alt);border-radius:6px;padding:6px;display:flex}
+.mL{display:grid;gap:4px;width:100%}
+.mL.g1{grid-template-columns:1fr}.mL.g2{grid-template-columns:1fr 1fr}.mL.g3{grid-template-columns:repeat(3,1fr)}
+.mL i{background:#C6D4E0;border-radius:3px;display:block}
+.mL i.b{height:100%}.mL i.c{height:100%;border-left:5px solid #9AB4CC}
+.mL i.l{height:7px}.mL i.q{height:100%}
+.cfgSep{font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;
+  letter-spacing:.05em;margin:16px 0 10px;padding-top:12px;border-top:1px solid var(--line-2)}
+.chkGrade{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.chkGrade .chkL{align-items:flex-start;padding:9px 11px;border:1px solid var(--line-2);border-radius:7px}
+.chkGrade .chkL b{display:block;font-size:12.5px}
+.chkGrade .chkL span span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:1px}
+.previaCol{width:430px;flex:none}
+.btnMini{margin-left:auto;display:flex;align-items:center;gap:5px;border:1px solid var(--line);
+  background:#fff;border-radius:5px;padding:3px 8px;font-size:10.5px;cursor:pointer;
+  color:var(--ink-2);text-transform:none;letter-spacing:0}
+/* prévia do PDV */
+.pvPrev{background:var(--alt);border-radius:8px;padding:10px;font-size:11px}
+.pvCats{display:flex;gap:5px;margin-bottom:9px;flex-wrap:wrap}
+.pvCat{padding:4px 10px;border-radius:14px;border:1px solid var(--line);background:#fff;
+  font-size:10.5px;color:var(--ink-2);cursor:default}
+.pvCat.on{background:var(--cc);border-color:var(--cc);color:#fff;font-weight:600}
+.pvProds{display:grid;grid-template-columns:repeat(var(--cols),1fr);gap:6px}
+.pvP{background:#fff;border:1px solid var(--line-2);border-radius:7px;overflow:hidden}
+.pvFoto{height:52px;background:#E4EBF1;display:flex;align-items:center;justify-content:center;color:#9AB4CC}
+.pvFotoP{width:30px;height:30px;background:#E4EBF1;border-radius:5px;display:flex;
+  align-items:center;justify-content:center;color:#9AB4CC;flex:none}
+.pvCor{height:5px}
+.pvInfo{padding:6px 8px}
+.pvInfo b{display:block;font-size:10.5px;line-height:1.3}
+.pvInfo small{display:block;font-size:9px;color:var(--ink-3);margin-top:1px}
+.pvPreco{display:block;font-size:11px;font-weight:700;color:var(--acc-d);margin-top:3px}
+.pv-compacto .pvP{display:flex;align-items:center;gap:7px;padding:5px}
+.pv-compacto .pvInfo{padding:0}
+.pv-lista{grid-template-columns:1fr!important;gap:3px}
+.pv-lista .pvP{display:flex;align-items:center;justify-content:space-between;padding:6px 10px}
+.pv-lista .pvInfo{padding:0;display:flex;align-items:baseline;gap:9px;width:100%}
+.pv-lista .pvInfo b{flex:1}
+.pv-lista .pvPreco{margin:0}
+.pv-grande .pvInfo{padding:10px 11px}
+.pv-grande .pvInfo b{font-size:12px}
+.pv-grande .pvFoto{height:70px}
+.pvComanda{margin-top:10px;background:#fff;border:1px solid var(--line-2);border-radius:7px;overflow:hidden}
+.pvCH{padding:5px 10px;background:var(--deep);color:#fff;font-size:10px;font-weight:700;letter-spacing:.05em}
+.pvCI{display:flex;justify-content:space-between;padding:5px 10px;border-bottom:1px solid var(--line-2);font-size:10.5px}
+.pvCT{display:flex;justify-content:space-between;padding:7px 10px;font-weight:700;font-size:12px;color:var(--acc-d)}
+@media(max-width:1100px){.previaCol{width:100%}}
+
+/* ---------- áreas de entrega ---------- */
+.areasLista{display:flex;flex-direction:column;gap:10px;padding:0 16px 16px}
+.areaCard{background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.areaH{display:flex;align-items:center;gap:10px;padding:11px 14px;cursor:pointer;background:var(--alt)}
+.areaH:hover{background:#EEF3F7}
+.areaH>svg{color:var(--acc-d)}
+.areaN{flex:1}
+.areaN b{display:block;font-size:13.5px}
+.areaN small{display:block;font-size:11px;color:var(--ink-3);margin-top:1px}
+.areaAc{display:flex;gap:4px}
+.areaB{border-top:1px solid var(--line-2)}
+.zonaTab td{padding:6px 12px}
+.tipoZ{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px}
+.tipoZ.bairro{background:var(--blue-soft);color:var(--blue)}
+.tipoZ.rural{background:var(--amber-soft);color:#8A5A08}
+.tipoZ.raio{background:var(--acc-soft);color:var(--acc-d)}
+.zonaVazia{display:flex;align-items:center;gap:12px;padding:16px;color:var(--ink-3);font-size:12px}
+.zonaVazia svg{color:#C6D4E0;flex:none}
+.zonaVazia span{flex:1;line-height:1.5}
+
+/* ---------- motivos ---------- */
+.motGrade{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;padding:14px 16px}
+.motCol{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;
+  border-top:3px solid var(--mc)}
+.motH{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--alt);
+  border-bottom:1px solid var(--line-2)}
+.motH>svg{color:var(--mc)}
+.motH b{display:block;font-size:13px;color:var(--ink)}
+.motH span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:1px}
+.motH .cnt2{margin-left:auto}
+.motB{padding:8px}
+.motIt{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:7px;
+  border:1px solid var(--line-2);margin-bottom:6px}
+.motIt.off{opacity:.5}
+.motN{flex:1;min-width:0}
+.motN b{display:block;font-size:12.5px}
+.motN small{display:block;font-size:10.5px;color:var(--ink-3)}
+.motAc{display:flex;align-items:center;gap:4px}
+.lockIc{color:var(--ink-3);display:flex;padding:0 4px}
+.miniSw{position:relative;width:32px;height:18px;flex:none;cursor:pointer}
+.miniSw input{opacity:0;width:0;height:0;position:absolute}
+.miniSw i{position:absolute;inset:0;background:#C6D4E0;border-radius:10px;transition:.15s}
+.miniSw i:before{content:'';position:absolute;width:14px;height:14px;left:2px;top:2px;
+  background:#fff;border-radius:50%;transition:.15s}
+.miniSw input:checked+i{background:var(--acc)}
+.miniSw input:checked+i:before{transform:translateX(14px)}
+.motVazio{padding:14px;text-align:center;font-size:11.5px;color:var(--ink-3)}
+.motAdd{width:100%;display:flex;align-items:center;justify-content:center;gap:6px;
+  padding:9px;border:1px dashed var(--line);border-radius:7px;background:transparent;
+  cursor:pointer;font-size:11.5px;color:var(--ink-3)}
+.motAdd:hover{border-color:var(--acc);color:var(--acc-d);background:var(--acc-soft)}
+.tipoEsc{display:flex;flex-direction:column;gap:7px}
+.tipoOp{display:block;padding:10px 12px;border:2px solid var(--line);border-radius:8px;cursor:pointer}
+.tipoOp.on{border-color:var(--acc);background:var(--acc-soft)}
+.tipoOp input{margin-right:7px}
+.tipoOp b{font-size:12.5px}
+.tipoOp span{display:block;font-size:11px;color:var(--ink-3);margin-top:2px;padding-left:20px}
+
 @media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
 
 /* ---------- caixa de confirmação ---------- */
@@ -5505,6 +6296,119 @@ tbody td small{font-size:10.5px}
 .semV b{font-size:13.5px;font-variant-numeric:tabular-nums}
 .semV small{display:block;font-size:10.5px;color:var(--ink-3)}
 @media(max-width:800px){.semIt{grid-template-columns:1fr}.semV{text-align:left}}
+
+/* ---------- configuração do PDV ---------- */
+.layGrade{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.layOp{text-align:left;padding:12px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer}
+.layOp:hover{border-color:var(--acc)}
+.layOp.on{border-color:var(--acc);background:var(--acc-soft)}
+.layOp b{display:block;font-size:12.5px;margin-top:9px;color:var(--ink)}
+.layOp span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:2px;line-height:1.45}
+.layMini{height:52px;background:var(--alt);border-radius:6px;padding:6px;display:flex}
+.mL{display:grid;gap:4px;width:100%}
+.mL.g1{grid-template-columns:1fr}.mL.g2{grid-template-columns:1fr 1fr}.mL.g3{grid-template-columns:repeat(3,1fr)}
+.mL i{background:#C6D4E0;border-radius:3px;display:block}
+.mL i.b{height:100%}.mL i.c{height:100%;border-left:5px solid #9AB4CC}
+.mL i.l{height:7px}.mL i.q{height:100%}
+.cfgSep{font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;
+  letter-spacing:.05em;margin:16px 0 10px;padding-top:12px;border-top:1px solid var(--line-2)}
+.chkGrade{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.chkGrade .chkL{align-items:flex-start;padding:9px 11px;border:1px solid var(--line-2);border-radius:7px}
+.chkGrade .chkL b{display:block;font-size:12.5px}
+.chkGrade .chkL span span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:1px}
+.previaCol{width:430px;flex:none}
+.btnMini{margin-left:auto;display:flex;align-items:center;gap:5px;border:1px solid var(--line);
+  background:#fff;border-radius:5px;padding:3px 8px;font-size:10.5px;cursor:pointer;
+  color:var(--ink-2);text-transform:none;letter-spacing:0}
+/* prévia do PDV */
+.pvPrev{background:var(--alt);border-radius:8px;padding:10px;font-size:11px}
+.pvCats{display:flex;gap:5px;margin-bottom:9px;flex-wrap:wrap}
+.pvCat{padding:4px 10px;border-radius:14px;border:1px solid var(--line);background:#fff;
+  font-size:10.5px;color:var(--ink-2);cursor:default}
+.pvCat.on{background:var(--cc);border-color:var(--cc);color:#fff;font-weight:600}
+.pvProds{display:grid;grid-template-columns:repeat(var(--cols),1fr);gap:6px}
+.pvP{background:#fff;border:1px solid var(--line-2);border-radius:7px;overflow:hidden}
+.pvFoto{height:52px;background:#E4EBF1;display:flex;align-items:center;justify-content:center;color:#9AB4CC}
+.pvFotoP{width:30px;height:30px;background:#E4EBF1;border-radius:5px;display:flex;
+  align-items:center;justify-content:center;color:#9AB4CC;flex:none}
+.pvCor{height:5px}
+.pvInfo{padding:6px 8px}
+.pvInfo b{display:block;font-size:10.5px;line-height:1.3}
+.pvInfo small{display:block;font-size:9px;color:var(--ink-3);margin-top:1px}
+.pvPreco{display:block;font-size:11px;font-weight:700;color:var(--acc-d);margin-top:3px}
+.pv-compacto .pvP{display:flex;align-items:center;gap:7px;padding:5px}
+.pv-compacto .pvInfo{padding:0}
+.pv-lista{grid-template-columns:1fr!important;gap:3px}
+.pv-lista .pvP{display:flex;align-items:center;justify-content:space-between;padding:6px 10px}
+.pv-lista .pvInfo{padding:0;display:flex;align-items:baseline;gap:9px;width:100%}
+.pv-lista .pvInfo b{flex:1}
+.pv-lista .pvPreco{margin:0}
+.pv-grande .pvInfo{padding:10px 11px}
+.pv-grande .pvInfo b{font-size:12px}
+.pv-grande .pvFoto{height:70px}
+.pvComanda{margin-top:10px;background:#fff;border:1px solid var(--line-2);border-radius:7px;overflow:hidden}
+.pvCH{padding:5px 10px;background:var(--deep);color:#fff;font-size:10px;font-weight:700;letter-spacing:.05em}
+.pvCI{display:flex;justify-content:space-between;padding:5px 10px;border-bottom:1px solid var(--line-2);font-size:10.5px}
+.pvCT{display:flex;justify-content:space-between;padding:7px 10px;font-weight:700;font-size:12px;color:var(--acc-d)}
+@media(max-width:1100px){.previaCol{width:100%}}
+
+/* ---------- áreas de entrega ---------- */
+.areasLista{display:flex;flex-direction:column;gap:10px;padding:0 16px 16px}
+.areaCard{background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.areaH{display:flex;align-items:center;gap:10px;padding:11px 14px;cursor:pointer;background:var(--alt)}
+.areaH:hover{background:#EEF3F7}
+.areaH>svg{color:var(--acc-d)}
+.areaN{flex:1}
+.areaN b{display:block;font-size:13.5px}
+.areaN small{display:block;font-size:11px;color:var(--ink-3);margin-top:1px}
+.areaAc{display:flex;gap:4px}
+.areaB{border-top:1px solid var(--line-2)}
+.zonaTab td{padding:6px 12px}
+.tipoZ{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px}
+.tipoZ.bairro{background:var(--blue-soft);color:var(--blue)}
+.tipoZ.rural{background:var(--amber-soft);color:#8A5A08}
+.tipoZ.raio{background:var(--acc-soft);color:var(--acc-d)}
+.zonaVazia{display:flex;align-items:center;gap:12px;padding:16px;color:var(--ink-3);font-size:12px}
+.zonaVazia svg{color:#C6D4E0;flex:none}
+.zonaVazia span{flex:1;line-height:1.5}
+
+/* ---------- motivos ---------- */
+.motGrade{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;padding:14px 16px}
+.motCol{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;
+  border-top:3px solid var(--mc)}
+.motH{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--alt);
+  border-bottom:1px solid var(--line-2)}
+.motH>svg{color:var(--mc)}
+.motH b{display:block;font-size:13px;color:var(--ink)}
+.motH span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:1px}
+.motH .cnt2{margin-left:auto}
+.motB{padding:8px}
+.motIt{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:7px;
+  border:1px solid var(--line-2);margin-bottom:6px}
+.motIt.off{opacity:.5}
+.motN{flex:1;min-width:0}
+.motN b{display:block;font-size:12.5px}
+.motN small{display:block;font-size:10.5px;color:var(--ink-3)}
+.motAc{display:flex;align-items:center;gap:4px}
+.lockIc{color:var(--ink-3);display:flex;padding:0 4px}
+.miniSw{position:relative;width:32px;height:18px;flex:none;cursor:pointer}
+.miniSw input{opacity:0;width:0;height:0;position:absolute}
+.miniSw i{position:absolute;inset:0;background:#C6D4E0;border-radius:10px;transition:.15s}
+.miniSw i:before{content:'';position:absolute;width:14px;height:14px;left:2px;top:2px;
+  background:#fff;border-radius:50%;transition:.15s}
+.miniSw input:checked+i{background:var(--acc)}
+.miniSw input:checked+i:before{transform:translateX(14px)}
+.motVazio{padding:14px;text-align:center;font-size:11.5px;color:var(--ink-3)}
+.motAdd{width:100%;display:flex;align-items:center;justify-content:center;gap:6px;
+  padding:9px;border:1px dashed var(--line);border-radius:7px;background:transparent;
+  cursor:pointer;font-size:11.5px;color:var(--ink-3)}
+.motAdd:hover{border-color:var(--acc);color:var(--acc-d);background:var(--acc-soft)}
+.tipoEsc{display:flex;flex-direction:column;gap:7px}
+.tipoOp{display:block;padding:10px 12px;border:2px solid var(--line);border-radius:8px;cursor:pointer}
+.tipoOp.on{border-color:var(--acc);background:var(--acc-soft)}
+.tipoOp input{margin-right:7px}
+.tipoOp b{font-size:12.5px}
+.tipoOp span{display:block;font-size:11px;color:var(--ink-3);margin-top:2px;padding-left:20px}
 
 @media(max-width:1000px){
   .lgCard{grid-template-columns:1fr}.lgR{display:none}
@@ -6657,7 +7561,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V4.8.1';
+var VERSAO='V4.9.0';
 /* confere se há versão nova publicada e avisa, sem forçar nada */
 async function checarVersao(){
   try{
@@ -8636,73 +9540,6 @@ function painelWhats(){
 }
 
 /* ---------- CONFIGURAÇÃO DO PDV ---------- */
-function telaCfgPDV(){
-  var c=cfg();
-  $('content').innerHTML='<div class="cfgWrap">'+
-  '<div class="cfgTit"><h1>Configuração do PDV</h1>'+
-  '<p>Ajustes da frente de caixa: operação, quadro de pedidos, fechamento e layout.</p></div>'+
-
-  '<div class="cfgCard"><div class="h"><div class="ic2">'+sv('store',18)+'</div>'+
-  '<div><b>Operação da loja</b><span>tempos informados ao cliente e situação de atendimento</span></div></div>'+
-  '<div class="b"><div class="grid2">'+
-  '<div class="fld2" style="margin:0"><label>Tempo de entrega</label>'+
-  '<div class="cur"><span>min</span><input id="sEnt" type="number" value="'+c.tempoEntrega+'"></div>'+
-  '<div class="hint">Aparece para o cliente no cardápio digital e no pedido online.</div></div>'+
-  '<div class="fld2" style="margin:0"><label>Tempo de retirada</label>'+
-  '<div class="cur"><span>min</span><input id="sRet" type="number" value="'+c.tempoRetirada+'"></div>'+
-  '<div class="hint">Tempo estimado para o cliente buscar na loja.</div></div>'+
-  '<div class="fld2" style="margin:0"><label>Situação da loja</label><select id="sAb">'+
-  '<option value="1"'+(c.lojaAberta?' selected':'')+'>Aberta — recebendo pedidos</option>'+
-  '<option value="0"'+(!c.lojaAberta?' selected':'')+'>Fechada — pedidos bloqueados</option></select>'+
-  '<div class="hint">Também dá para alternar direto na barra do PDV.</div></div>'+
-  '</div>'+
-  '<div class="avisoCfg" style="margin-top:18px">'+sv('help',16)+
-  '<div>As <b>taxas de entrega</b> não ficam aqui. Elas serão cadastradas em <b>Configuração da Loja › Áreas de Entrega</b>, '+
-  'onde você define cidades, bairros, raios e o valor de cada faixa. O PDV vai buscar a taxa automaticamente pelo endereço do cliente.</div></div>'+
-  '</div></div>'+
-
-  '<div class="cfgCard"><div class="h"><div class="ic2">'+sv('list',18)+'</div>'+
-  '<div><b>Etapas do quadro de pedidos</b><span>marque só as etapas que a sua operação usa</span></div></div>'+
-  '<div class="b"><div class="faseList">'+FASES_DISP.map(function(f){
-    var fixa=(f.id==='aguardando'||f.id==='cancelado');
-    var desc={aguardando:'entra aqui assim que a venda é fechada',
-      preparo:'quando a cozinha ou o balcão começa a produzir',
-      pronto:'produto finalizado, esperando o cliente retirar',
-      saiu:'pedido despachado com o entregador',
-      entregue:'pedido concluído e entregue ao cliente',
-      cancelado:'pedidos cancelados ficam separados do faturamento'};
-    return '<label class="faseIt"><input type="checkbox" class="sFase" value="'+f.id+'"'+
-    (c.fases.indexOf(f.id)>=0?' checked':'')+(fixa?' disabled':'')+'>'+
-    '<span><b>'+f.n+'</b><small>'+(fixa?'etapa obrigatória · ':'')+desc[f.id]+'</small></span></label>';}).join('')+
-  '</div></div></div>'+
-
-  '<div class="cfgCard"><div class="h"><div class="ic2">'+sv('cash',18)+'</div>'+
-  '<div><b>Fechamento de caixa</b><span>regras de conferência no fim do turno</span></div></div>'+
-  '<div class="b">'+
-  '<label class="optCard"><input type="checkbox" id="sCego" '+(c.caixaCego?'checked':'')+'>'+
-  '<span><b>Fechamento de caixa cego</b><span>O operador informa o valor contado na gaveta sem ver quanto o sistema esperava. '+
-  'Evita que ele ajuste o valor para bater. O gerente vê a diferença depois.</span></span></label>'+
-  '<div class="hint" style="margin-top:14px">Sangrias e suprimentos ficam registrados com hora, motivo e responsável, e entram no cálculo do fechamento.</div>'+
-  '</div></div>'+
-
-  '<div class="cfgCard"><div class="h"><div class="ic2">'+sv('gear2',18)+'</div>'+
-  '<div><b>Layout da frente de caixa</b><span>como os produtos aparecem para o operador</span></div></div>'+
-  '<div class="b"><div class="grid2">'+
-  '<div class="fld2" style="margin:0"><label>Tamanho dos blocos de produto</label><select id="sLay">'+
-  '<option value="normal"'+(c.layout!=='grande'?' selected':'')+'>Normal — mais itens na tela</option>'+
-  '<option value="grande"'+(c.layout==='grande'?' selected':'')+'>Grande — telas sensíveis ao toque</option></select>'+
-  '<div class="hint">Use o modo grande em tablets de balcão.</div></div>'+
-  '</div>'+
-  '<div class="avisoCfg" style="margin-top:18px">'+sv('help',16)+
-  '<div>Para entregar o PDV às operadoras, abra <b>PDV › PDV</b>: o menu de módulos some e fica só a frente de caixa. '+
-  'O botão <b>Sistema</b>, no canto esquerdo, traz o menu de volta.</div></div>'+
-  '</div></div>'+
-
-  '<div class="cfgFoot"><button class="btnP2" onclick="abrir(\'pdv\',\'pdv\')">Ir para o PDV</button>'+
-  '<button class="btnP2 ok" onclick="salvarCfgPDV()">'+sv('check',14)+' Salvar configurações</button></div>'+
-  '</div>';
-  rodape();
-}
 function salvarCfgPDV(){
   var c=cfg();
   c.tempoEntrega=parseInt($('sEnt').value)||0;
@@ -13242,46 +14079,6 @@ function qtdNoDestino(f,qtd){
 }
 
 /* ---------- CONFIGURAÇÃO DOS MOTIVOS ---------- */
-function telaCfgMovimentacao(){
-  baseMov();
-  var lista=DB.motivosMov||[];
-  $('content').innerHTML='<div class="finWrap" style="max-width:900px">'+
-  '<div class="finTop"><div><h1>Configuração de Movimentação de Estoque</h1>'+
-  '<p>Motivos usados nos lançamentos de estoque. Cada motivo define se soma, subtrai ou produz.</p></div>'+
-  '<div class="finActs"><button class="btnP2 ok" onclick="modalMotivo()">'+sv('plus',14)+' Novo motivo</button></div></div>'+
-  '<div class="pnl2"><div class="pnl2H">Motivos <span class="cnt2">'+lista.length+'</span></div>'+
-  '<div class="pnl2B" style="padding:0">'+
-  '<table class="pTable finTab"><thead><tr>'+
-   '<th>Motivo</th><th style="width:175px">Tipo</th>'+
-   '<th style="width:200px">Sucursais</th>'+
-   '<th style="width:100px;text-align:center">Situação</th>'+
-   '<th style="width:110px;text-align:center">Lançamentos</th>'+
-   '<th style="width:100px"></th></tr></thead><tbody>'+
-   lista.map(function(m){
-     var q=(DB.movEst||[]).filter(function(x){return x.motivoId===m.id}).length;
-     var t=TIPOS_MOV.find(function(x){return x.id===m.tipo})||TIPOS_MOV[1];
-     return '<tr><td><b>'+E(m.nome)+'</b>'+
-      (m.sistema?'<small>gerado automaticamente pelo sistema</small>':'')+'</td>'+
-     '<td><span class="miniTag '+(m.tipo==='entrada'?'ok2':m.tipo==='producao'?'cm':'off2')+'">'+
-      t.n.toUpperCase()+'</span></td>'+
-     '<td>'+((m.lojas||[]).length
-       ?m.lojas.map(function(lid){var l=lojasCad().find(function(x){return x.id===lid});
-         return '<span class="cidTag">'+E(l?l.nome:'—')+'</span>'}).join(' ')
-       :'<span class="cidTag">todas as lojas</span>')+'</td>'+
-     '<td style="text-align:center">'+(m.ativo!==false
-       ?'<span class="badge2 gr">Ativo</span>':'<span class="badge2 rd">Inativo</span>')+'</td>'+
-     '<td style="text-align:center">'+q+'</td>'+
-     '<td><div class="rowAct">'+
-      '<button class="rBtn" onclick="modalMotivo(\''+m.id+'\')" title="Editar">'+sv('edit',12)+'</button>'+
-      '<button class="rBtn rd" onclick="excluirMotivo(\''+m.id+'\')" title="Excluir">'+sv('trash',12)+'</button>'+
-     '</div></td></tr>';
-   }).join('')+'</tbody></table></div></div>'+
-  '<div class="avisoCfg">'+sv('help',15)+
-   '<div>O motivo <b>Venda frente de caixa</b> é do sistema: toda venda no PDV gera esse lançamento automaticamente, '+
-   'baixando a ficha técnica ou o ingrediente vinculado ao produto.</div></div>'+
-  '</div>';
-  rodape(lista.length+' motivos cadastrados');
-}
 function modalMotivo(id){
   baseMov();
   var m=id?motivo(id):null;
@@ -16806,6 +17603,7 @@ function exportarItensVend(){
 var VA={de:'',ate:'',cidades:[],canais:[]};
 function cidadesCadastradas(){
   var s={};
+  (DB.areas||[]).forEach(function(a){ if(a.nome)s[a.nome]=true; });
   (DB.entregadores||[]).forEach(function(e){
     (e.taxas||[]).forEach(function(t){ if(t.cidade)s[t.cidade]=true; });
   });
@@ -18658,6 +19456,454 @@ function explicaDataHora(){
    ['Sucursais','com várias marcadas, os números somam; com uma só, mostra o comportamento dela']
   ],'a data e a hora gravadas em cada pedido no momento da venda.',
    'pedidos cancelados e pedidos sem hora registrada.');
+}
+
+/* ==========================================================
+   CONFIGURAÇÃO DO PDV — com prévia ao lado
+   ========================================================== */
+var LAYOUTS_PDV=[
+ {id:'foto',   n:'Cartões com foto',   d:'imagem grande, ideal para tablet e cardápio visual'},
+ {id:'compacto',n:'Cartões compactos', d:'foto pequena ao lado do nome, cabe mais produto na tela'},
+ {id:'lista',  n:'Lista sem foto',     d:'linhas densas, o mais rápido para quem já sabe o cardápio'},
+ {id:'grade',  n:'Grade colorida',     d:'blocos com a cor da categoria, sem foto'}
+];
+function cfgPDV(){
+  var c=cfg();
+  if(!c.layout)c.layout='foto';
+  if(c.colunas===undefined)c.colunas=4;
+  if(c.mostraPreco===undefined)c.mostraPreco=true;
+  if(c.mostraDesc===undefined)c.mostraDesc=false;
+  if(c.botaoGrande===undefined)c.botaoGrande=false;
+  return c;
+}
+function telaCfgPDV(){
+  baseMov();
+  var c=cfgPDV();
+  $('content').innerHTML='<div class="etWrap"><div class="etScroll">'+
+   '<div class="etTopo">'+
+    '<div><h1>Configuração do PDV</h1><p>Escolha como o cardápio aparece na frente de caixa.</p></div>'+
+    '<div style="flex:1"></div>'+
+    '<button class="btnP2 ok" onclick="salvarCfgPDV()">'+sv('check',13)+' Salvar</button>'+
+   '</div>'+
+   '<div class="cfgDuas">'+
+    '<div class="cfgCol">'+
+     '<div class="colH">Aparência do cardápio</div>'+
+     '<div class="colB" style="padding:14px">'+
+      '<div class="layGrade">'+LAYOUTS_PDV.map(function(l){
+        return '<button class="layOp'+(c.layout===l.id?' on':'')+'" onclick="trocaLayout(\''+l.id+'\')">'+
+        '<div class="layMini">'+miniLayout(l.id)+'</div>'+
+        '<b>'+E(l.n)+'</b><span>'+E(l.d)+'</span></button>';
+      }).join('')+'</div>'+
+      '<div class="cfgSep">Ajustes</div>'+
+      '<div class="row2">'+
+       '<div class="fld2" style="margin:0"><label>Produtos por linha</label>'+
+        '<select id="pvCols" onchange="c_prev()">'+
+        [2,3,4,5,6].map(function(n){return '<option value="'+n+'"'+(c.colunas===n?' selected':'')+'>'+n+'</option>'}).join('')+
+        '</select></div>'+
+       '<div class="fld2" style="margin:0"><label>Fases do pedido</label>'+
+        '<input id="pvFases" value="'+E((c.fases||[]).join(', '))+'" placeholder="aguardando, preparo, saiu, entregue"></div>'+
+      '</div>'+
+      '<div class="chkGrade">'+
+       '<label class="chkL"><input type="checkbox" id="pvPreco" '+(c.mostraPreco?'checked':'')+' onchange="c_prev()">'+
+        '<span><b>Mostrar preço</b><span>o valor aparece no cartão do produto</span></span></label>'+
+       '<label class="chkL"><input type="checkbox" id="pvDesc" '+(c.mostraDesc?'checked':'')+' onchange="c_prev()">'+
+        '<span><b>Mostrar descrição</b><span>uma linha com a descrição embaixo do nome</span></span></label>'+
+       '<label class="chkL"><input type="checkbox" id="pvBotao" '+(c.botaoGrande?'checked':'')+' onchange="c_prev()">'+
+        '<span><b>Botões grandes</b><span>alvo maior, melhor para tela sensível ao toque</span></span></label>'+
+      '</div>'+
+     '</div></div>'+
+    '<div class="cfgCol previaCol">'+
+     '<div class="colH">Como vai ficar'+
+      '<button class="btnMini" onclick="c_prev()">'+sv('ref',12)+' atualizar</button></div>'+
+     '<div class="colB" id="pdvPrevia">'+previaPDV(c)+'</div>'+
+    '</div>'+
+   '</div></div></div>';
+  rodape('layout: '+(LAYOUTS_PDV.find(function(l){return l.id===c.layout})||{}).n);
+}
+function miniLayout(id){
+  if(id==='foto')return '<div class="mL g2"><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i></div>';
+  if(id==='compacto')return '<div class="mL g2"><i class="c"></i><i class="c"></i><i class="c"></i><i class="c"></i></div>';
+  if(id==='lista')return '<div class="mL g1"><i class="l"></i><i class="l"></i><i class="l"></i><i class="l"></i></div>';
+  return '<div class="mL g3"><i class="q"></i><i class="q"></i><i class="q"></i><i class="q"></i><i class="q"></i><i class="q"></i></div>';
+}
+function trocaLayout(id){
+  var c=cfgPDV();c.layout=id;telaCfgPDV();
+}
+function c_prev(){
+  var c=cfgPDV();
+  c.colunas=parseInt(($('pvCols')||{}).value)||4;
+  c.mostraPreco=($('pvPreco')||{}).checked;
+  c.mostraDesc=($('pvDesc')||{}).checked;
+  c.botaoGrande=($('pvBotao')||{}).checked;
+  var el=$('pdvPrevia');
+  if(el)el.innerHTML=previaPDV(c);
+}
+function previaPDV(c){
+  var cats=(DB.categorias||[]).filter(function(x){return x.ativo!==false}).slice(0,4);
+  if(!cats.length)cats=[{id:'d1',nome:'Cascões',cor:'#00A08B'},{id:'d2',nome:'Potes',cor:'#2C6FD1'}];
+  var prods=(DB.produtos||[]).filter(function(p){return p.ativo!==false}).slice(0,8);
+  if(!prods.length)prods=[
+   {nome:'Cascão 1 bola',preco:12,desc:'uma bola do sabor que escolher'},
+   {nome:'Cascão 2 bolas',preco:18,desc:'duas bolas, cascão crocante'},
+   {nome:'Pote 500ml',preco:32,desc:'para levar para casa'},
+   {nome:'Pote 1 litro',preco:58,desc:'rende bem para a família'},
+   {nome:'Milkshake 400ml',preco:22,desc:''},
+   {nome:'Água mineral',preco:5,desc:''}];
+  var cls='pv-'+c.layout+(c.botaoGrande?' pv-grande':'');
+  return '<div class="pvPrev">'+
+   '<div class="pvCats">'+cats.map(function(x,k){
+     return '<button class="pvCat'+(k===0?' on':'')+'" style="--cc:'+(x.cor||'#00A08B')+'">'+E(x.nome)+'</button>';
+   }).join('')+'</div>'+
+   '<div class="pvProds '+cls+'" style="--cols:'+c.colunas+'">'+
+   prods.map(function(p,k){
+     var cor=cats[k%cats.length].cor||'#00A08B';
+     return '<div class="pvP">'+
+      (c.layout==='foto'?'<div class="pvFoto">'+sv('img',20)+'</div>':'')+
+      (c.layout==='compacto'?'<div class="pvFotoP">'+sv('img',14)+'</div>':'')+
+      (c.layout==='grade'?'<div class="pvCor" style="background:'+cor+'"></div>':'')+
+      '<div class="pvInfo"><b>'+E(p.nome)+'</b>'+
+       (c.mostraDesc&&p.desc?'<small>'+E(p.desc)+'</small>':'')+
+       (c.mostraPreco?'<span class="pvPreco">R$ '+money(p.preco)+'</span>':'')+
+      '</div></div>';
+   }).join('')+'</div>'+
+   '<div class="pvComanda"><div class="pvCH">Comanda</div>'+
+    '<div class="pvCI"><span>2× Cascão 1 bola</span><b>R$ 24,00</b></div>'+
+    '<div class="pvCI"><span>1× Pote 500ml</span><b>R$ 32,00</b></div>'+
+    '<div class="pvCT"><span>Total</span><b>R$ 56,00</b></div></div>'+
+   '</div>';
+}
+function salvarCfgPDV(){
+  var c=cfgPDV();
+  c_prev();
+  var f=($('pvFases')||{}).value||'';
+  var lista=f.split(',').map(function(x){return x.trim().toLowerCase()}).filter(Boolean);
+  if(lista.length)c.fases=lista;
+  salvar();
+  toast('Configuração do PDV salva.');
+}
+
+/* ==========================================================
+   ÁREAS DE ENTREGA
+   ========================================================== */
+function baseAreas(){
+  DB.areas=DB.areas||[];
+  DB.areas.forEach(function(a){ a.zonas=a.zonas||[]; });
+  return DB.areas;
+}
+var AE={aberta:{},busca:''};
+function telaAreasEntrega(){
+  baseMov();baseAreas();
+  var q=(AE.busca||'').toLowerCase();
+  var lista=DB.areas.filter(function(a){
+    if(!q)return true;
+    return (a.nome||'').toLowerCase().indexOf(q)>=0||
+      (a.zonas||[]).some(function(z){return (z.nome||'').toLowerCase().indexOf(q)>=0});
+  });
+  var totZ=DB.areas.reduce(function(a,x){return a+(x.zonas||[]).length},0);
+  $('content').innerHTML='<div class="etWrap"><div class="etScroll">'+
+   '<div class="etTopo">'+
+    '<div><h1>Áreas de Entrega</h1>'+
+    '<p>Cidades, bairros e zonas rurais com a taxa de cada uma.</p></div>'+
+    '<button class="infoBt" onclick="explicaAreas()">'+sv('help',15)+'</button>'+
+    '<div style="flex:1"></div>'+
+    '<button class="btnP2 ok" onclick="formCidade()">'+sv('plus',14)+' Cadastrar cidade</button>'+
+   '</div>'+
+   '<div class="barraF">'+
+    '<div class="bfCampo cresce"><label>Buscar</label>'+
+     '<input id="aeB" value="'+E(AE.busca)+'" placeholder="cidade, bairro ou zona"></div>'+
+    '<div class="bfAtalhos">'+
+     '<button onclick="expandirAreas(true)">Abrir todas</button>'+
+     '<button onclick="expandirAreas(false)">Fechar todas</button></div>'+
+   '</div>'+
+   '<div class="relKpis">'+
+    '<div class="rk dest"><span>Cidades</span><b>'+DB.areas.length+'</b></div>'+
+    '<div class="rk"><span>Zonas cadastradas</span><b>'+totZ+'</b></div>'+
+    '<div class="rk"><span>Taxa mínima</span><b>R$ '+money(taxaMinMax().min)+'</b></div>'+
+    '<div class="rk"><span>Taxa máxima</span><b>R$ '+money(taxaMinMax().max)+'</b></div>'+
+   '</div>'+
+   '<div class="areasLista">'+
+   (lista.length?lista.map(function(a){
+     var ab=AE.aberta[a.id]!==false;
+     var zs=a.zonas||[];
+     return '<div class="areaCard">'+
+      '<div class="areaH" onclick="AE.aberta[\''+a.id+'\']='+(ab?'false':'true')+';telaAreasEntrega()">'+
+       '<span class="ftSeta'+(ab?' ab':'')+'">'+sv('tri',10)+'</span>'+
+       sv('map',15)+
+       '<div class="areaN"><b>'+E(a.nome)+'</b>'+
+        '<small>'+(a.uf?E(a.uf)+' · ':'')+zs.length+' zona(s)'+
+        (a.taxaPadrao?' · taxa padrão R$ '+money(a.taxaPadrao):'')+'</small></div>'+
+       '<div class="areaAc" onclick="event.stopPropagation()">'+
+        '<button class="rBtn" onclick="formZona(\''+a.id+'\')" title="Nova zona">'+sv('plus',12)+'</button>'+
+        '<button class="rBtn" onclick="formCidade(\''+a.id+'\')" title="Editar cidade">'+sv('edit',12)+'</button>'+
+        '<button class="rBtn rd" onclick="excluirCidade(\''+a.id+'\')" title="Excluir">'+sv('trash',12)+'</button>'+
+       '</div></div>'+
+      (ab?'<div class="areaB">'+
+       (zs.length?'<table class="etTab zonaTab"><thead><tr>'+
+        '<th>Zona / bairro</th><th style="width:120px">Tipo</th>'+
+        '<th style="width:110px;text-align:right">Distância</th>'+
+        '<th style="width:110px;text-align:right">Taxa</th>'+
+        '<th style="width:110px;text-align:right">Tempo</th>'+
+        '<th style="width:90px;text-align:center">Situação</th>'+
+        '<th style="width:70px"></th></tr></thead><tbody>'+
+        zs.map(function(z,k){
+          return '<tr>'+
+          '<td><b>'+E(z.nome)+'</b>'+(z.obs?'<small style="display:block;color:var(--ink-3)">'+E(z.obs)+'</small>':'')+'</td>'+
+          '<td><span class="tipoZ '+(z.tipo||'bairro')+'">'+
+           (z.tipo==='rural'?'Rural / sítio':z.tipo==='raio'?'Por raio':'Bairro')+'</span></td>'+
+          '<td style="text-align:right">'+(z.km?fmtQt(z.km)+' km':'—')+'</td>'+
+          '<td style="text-align:right"><b>R$ '+money(z.taxa)+'</b></td>'+
+          '<td style="text-align:right">'+(z.tempo?z.tempo+' min':'—')+'</td>'+
+          '<td style="text-align:center">'+(z.ativa!==false
+            ?'<span class="badge2">Ativa</span>':'<span class="badge2 rd">Inativa</span>')+'</td>'+
+          '<td><div class="rowAct">'+
+           '<button class="rBtn" onclick="formZona(\''+a.id+'\','+k+')">'+sv('edit',11)+'</button>'+
+           '<button class="rBtn rd" onclick="excluirZona(\''+a.id+'\','+k+')">'+sv('trash',11)+'</button>'+
+          '</div></td></tr>';
+        }).join('')+'</tbody></table>'
+       :'<div class="zonaVazia">'+sv('map',20)+'<span>Nenhuma zona nesta cidade. '+
+        'Use o botão <b>+</b> para cadastrar bairros, zonas rurais ou faixas por distância.</span>'+
+        '<button class="btnP2 ok" onclick="formZona(\''+a.id+'\')">'+sv('plus',12)+' Cadastrar zona</button></div>')+
+      '</div>':'')+
+     '</div>';
+   }).join('')
+   :'<div class="mvVazio">'+sv('map',26)+'<b>Nenhuma cidade cadastrada</b>'+
+    '<span>Cadastre as cidades onde você entrega para o PDV calcular a taxa sozinho.</span></div>')+
+   '</div></div></div>';
+  var b=$('aeB');
+  if(b)b.oninput=function(){AE.busca=this.value;var p=this.selectionStart;telaAreasEntrega();
+    var n=$('aeB');if(n){n.focus();n.setSelectionRange(p,p);}};
+  rodape(DB.areas.length+' cidades · '+totZ+' zonas');
+}
+function taxaMinMax(){
+  var t=[];
+  (DB.areas||[]).forEach(function(a){(a.zonas||[]).forEach(function(z){
+    if(z.ativa!==false)t.push(Number(z.taxa)||0);})});
+  if(!t.length)return {min:0,max:0};
+  return {min:Math.min.apply(null,t),max:Math.max.apply(null,t)};
+}
+function expandirAreas(v){
+  (DB.areas||[]).forEach(function(a){AE.aberta[a.id]=v});
+  telaAreasEntrega();
+}
+function formCidade(id){
+  baseAreas();
+  var a=id?DB.areas.find(function(x){return x.id===id}):null;
+  modal(a?'Editar cidade':'Cadastrar cidade',
+  '<div class="mdB"><div class="row2">'+
+   '<div class="fld2"><label>Cidade *</label><input id="acNome" value="'+E(a?a.nome:'')+'" placeholder="Santa Fé do Sul"></div>'+
+   '<div class="fld2"><label>UF</label><input id="acUf" maxlength="2" value="'+E(a?a.uf:'')+'"></div>'+
+  '</div><div class="row2">'+
+   '<div class="fld2"><label>Taxa padrão</label><input id="acTaxa" type="number" step="0.01" value="'+(a?(a.taxaPadrao||0):0)+'">'+
+    '<div class="hint">usada quando o endereço não cair em nenhuma zona</div></div>'+
+   '<div class="fld2"><label>Tempo estimado (min)</label><input id="acTempo" type="number" value="'+(a?(a.tempo||0):0)+'"></div>'+
+  '</div></div>','Salvar',function(){
+    var nome=$('acNome').value.trim();
+    if(!nome){toast('Informe a cidade.');return false;}
+    var o={nome:nome,uf:$('acUf').value.trim().toUpperCase(),
+      taxaPadrao:parseFloat($('acTaxa').value)||0,tempo:parseInt($('acTempo').value)||0};
+    if(a)Object.assign(a,o);
+    else {var novo=Object.assign({id:uid('ar'),zonas:[]},o);DB.areas.push(novo);AE.aberta[novo.id]=true;}
+    salvar();telaAreasEntrega();
+    toast('Cidade salva.');
+    return true;
+  });
+}
+function formZona(cid,k){
+  baseAreas();
+  var a=DB.areas.find(function(x){return x.id===cid});
+  if(!a)return;
+  var z=(k!==undefined)?a.zonas[k]:null;
+  modal(z?'Editar zona':'Nova zona em '+a.nome,
+  '<div class="mdB"><div class="row2">'+
+   '<div class="fld2"><label>Nome da zona *</label><input id="azNome" value="'+E(z?z.nome:'')+'" placeholder="Centro, Jardim América, Sítio do Braz..."></div>'+
+   '<div class="fld2"><label>Tipo</label><select id="azTipo">'+
+    '<option value="bairro"'+(!z||z.tipo==='bairro'?' selected':'')+'>Bairro</option>'+
+    '<option value="rural"'+(z&&z.tipo==='rural'?' selected':'')+'>Zona rural / sítio / rancho</option>'+
+    '<option value="raio"'+(z&&z.tipo==='raio'?' selected':'')+'>Faixa por distância</option>'+
+   '</select></div>'+
+  '</div><div class="row3">'+
+   '<div class="fld2" style="margin:0"><label>Taxa de entrega *</label>'+
+    '<input id="azTaxa" type="number" step="0.01" value="'+(z?z.taxa:(a.taxaPadrao||0))+'"></div>'+
+   '<div class="fld2" style="margin:0"><label>Distância (km)</label>'+
+    '<input id="azKm" type="number" step="0.1" value="'+(z?(z.km||''):'')+'" placeholder="opcional"></div>'+
+   '<div class="fld2" style="margin:0"><label>Tempo (min)</label>'+
+    '<input id="azTempo" type="number" value="'+(z?(z.tempo||''):(a.tempo||''))+'"></div>'+
+  '</div>'+
+  '<div class="fld2"><label>Referência / observação</label>'+
+   '<input id="azObs" value="'+E(z?(z.obs||''):'')+'" placeholder="depois do trevo, estrada do porto..."></div>'+
+  '<label class="chkL"><input type="checkbox" id="azAtiva" '+(!z||z.ativa!==false?'checked':'')+'>'+
+   '<span>Zona ativa — aparece no PDV e no cardápio digital</span></label>'+
+  '</div>','Salvar',function(){
+    var nome=$('azNome').value.trim();
+    if(!nome){toast('Informe o nome da zona.');return false;}
+    var o={nome:nome,tipo:$('azTipo').value,taxa:parseFloat($('azTaxa').value)||0,
+      km:parseFloat($('azKm').value)||0,tempo:parseInt($('azTempo').value)||0,
+      obs:$('azObs').value.trim(),ativa:$('azAtiva').checked};
+    if(z)Object.assign(z,o); else a.zonas.push(Object.assign({id:uid('zn')},o));
+    salvar();telaAreasEntrega();
+    toast('Zona salva.');
+    return true;
+  },'lg');
+}
+async function excluirCidade(id){
+  var a=DB.areas.find(function(x){return x.id===id});
+  var ok=await confirmar({titulo:'Excluir '+(a?a.nome:''),
+    texto:(a&&a.zonas.length?a.zonas.length+' zona(s) serão removidas junto.':''),
+    ok:'Excluir',tipo:'perigo'});
+  if(!ok)return;
+  DB.areas=DB.areas.filter(function(x){return x.id!==id});
+  salvar();telaAreasEntrega();
+}
+async function excluirZona(cid,k){
+  var a=DB.areas.find(function(x){return x.id===cid});
+  if(!a)return;
+  var ok=await confirmar({titulo:'Excluir a zona '+a.zonas[k].nome,ok:'Excluir',tipo:'perigo'});
+  if(!ok)return;
+  a.zonas.splice(k,1);salvar();telaAreasEntrega();
+}
+function explicaAreas(){
+  explicaRel('Áreas de Entrega — como funciona',[
+   ['Cidade','agrupa as zonas. A taxa padrão vale quando o endereço não cair em nenhuma zona'],
+   ['Bairro','a divisão comum dentro da cidade'],
+   ['Zona rural','para sítios, ranchos e estradas — use a referência para orientar o entregador'],
+   ['Faixa por distância','cobra pela distância: até 3 km um valor, de 3 a 6 km outro'],
+   ['Taxa','o valor cobrado do cliente — aparece no PDV ao escolher a cidade'],
+   ['Onde isso aparece','no PDV ao lançar uma entrega, no cardápio digital, no relatório de '+
+    'Vendas por Área de Entrega e no acerto do entregador']
+  ],'as zonas cadastradas aqui. Ao lançar uma entrega, o PDV busca a zona do cliente e traz a taxa.',
+   'zonas marcadas como inativas, que somem do PDV e do cardápio mas continuam no histórico.');
+}
+/* usada pelo PDV e pelos relatórios */
+function taxaDaZona(cidade,zona){
+  baseAreas();
+  var a=(DB.areas||[]).find(function(x){
+    return String(x.nome||'').toLowerCase()===String(cidade||'').toLowerCase()});
+  if(!a)return 0;
+  if(zona){
+    var z=(a.zonas||[]).find(function(y){
+      return String(y.nome||'').toLowerCase()===String(zona||'').toLowerCase()});
+    if(z&&z.ativa!==false)return Number(z.taxa)||0;
+  }
+  return Number(a.taxaPadrao)||0;
+}
+function cidadesEntrega(){
+  baseAreas();
+  return (DB.areas||[]).map(function(a){return a.nome}).sort();
+}
+
+/* ==========================================================
+   CONFIGURAÇÃO DE MOTIVOS DE MOVIMENTAÇÃO
+   ========================================================== */
+function telaCfgMovimentacao(){
+  baseMov();
+  var por={entrada:[],saida:[],producao:[]};
+  (DB.motivosMov||[]).forEach(function(m){ (por[m.tipo]||por.saida).push(m); });
+  var TIPOS=[
+   {id:'entrada', n:'Entrada',  ic:'up2',  cor:'#0E8A46', d:'soma no estoque'},
+   {id:'saida',   n:'Saída',    ic:'dn4',  cor:'#C94141', d:'subtrai do estoque'},
+   {id:'producao',n:'Produzir', ic:'box',  cor:'#00A08B', d:'baixa a receita e gera o produto acabado'}
+  ];
+  $('content').innerHTML='<div class="etWrap"><div class="etScroll">'+
+   '<div class="etTopo">'+
+    '<div><h1>Motivos de Movimentação de Estoque</h1>'+
+    '<p>Cada lançamento de estoque precisa de um motivo — é ele que define o que acontece.</p></div>'+
+    '<button class="infoBt" onclick="explicaMotivos()">'+sv('help',15)+'</button>'+
+    '<div style="flex:1"></div>'+
+    '<button class="btnP2 ok" onclick="formMotivo()">'+sv('plus',14)+' Cadastrar motivo</button>'+
+   '</div>'+
+   '<div class="motGrade">'+
+   TIPOS.map(function(t){
+     var l=por[t.id]||[];
+     return '<div class="motCol" style="--mc:'+t.cor+'">'+
+      '<div class="motH">'+sv(t.ic,15)+'<div><b>'+t.n+'</b><span>'+t.d+'</span></div>'+
+      '<span class="cnt2">'+l.length+'</span></div>'+
+      '<div class="motB">'+
+      (l.length?l.map(function(m){
+        var usos=(DB.movEst||[]).filter(function(x){return x.motivoId===m.id}).length;
+        return '<div class="motIt'+(m.ativo===false?' off':'')+'">'+
+         '<div class="motN"><b>'+E(m.nome)+'</b>'+
+          '<small>'+(m.sistema?'do sistema · ':'')+usos+' lançamento(s)</small></div>'+
+         '<div class="motAc">'+
+          (m.sistema?'<span class="lockIc" title="motivo do sistema">'+sv('lock',12)+'</span>'
+           :'<button class="rBtn" onclick="formMotivo(\''+m.id+'\')">'+sv('edit',11)+'</button>'+
+            '<button class="rBtn rd" onclick="excluirMotivo(\''+m.id+'\')">'+sv('trash',11)+'</button>')+
+          '<label class="miniSw"><input type="checkbox" '+(m.ativo!==false?'checked':'')+
+           ' onchange="togMotivo(\''+m.id+'\')"><i></i></label>'+
+         '</div></div>';
+      }).join('')
+      :'<div class="motVazio">nenhum motivo deste tipo</div>')+
+      '<button class="motAdd" onclick="formMotivo(null,\''+t.id+'\')">'+sv('plus',12)+' novo motivo de '+t.n.toLowerCase()+'</button>'+
+      '</div></div>';
+   }).join('')+
+   '</div></div></div>';
+  rodape((DB.motivosMov||[]).length+' motivos cadastrados');
+}
+function formMotivo(id,tipoPadrao){
+  baseMov();
+  var m=id?DB.motivosMov.find(function(x){return x.id===id}):null;
+  modal(m?'Editar motivo':'Cadastrar motivo',
+  '<div class="mdB">'+
+   '<div class="fld2"><label>Nome do motivo *</label>'+
+    '<input id="mvNome" value="'+E(m?m.nome:'')+'" placeholder="Perda por quebra, Produzir gelato..."></div>'+
+   '<div class="fld2"><label>O que este motivo faz *</label>'+
+    '<div class="tipoEsc">'+
+    [['entrada','Entrada','soma a quantidade no estoque'],
+     ['saida','Saída','subtrai a quantidade do estoque'],
+     ['producao','Produzir','baixa os ingredientes da ficha e gera o produto acabado']]
+     .map(function(t){
+      var sel=(m?m.tipo:(tipoPadrao||'saida'))===t[0];
+      return '<label class="tipoOp'+(sel?' on':'')+'">'+
+       '<input type="radio" name="mvTipo" value="'+t[0]+'"'+(sel?' checked':'')+'>'+
+       '<b>'+t[1]+'</b><span>'+t[2]+'</span></label>';
+     }).join('')+'</div></div>'+
+   '<label class="chkL"><input type="checkbox" id="mvAtivo" '+(!m||m.ativo!==false?'checked':'')+'>'+
+    '<span>Motivo ativo — aparece na lista ao lançar movimentação</span></label>'+
+  '</div>','Salvar',function(){
+    var nome=$('mvNome').value.trim();
+    if(!nome){toast('Informe o nome do motivo.');return false;}
+    var tipo='saida';
+    var rs=document.querySelectorAll('input[name="mvTipo"]');
+    for(var i=0;i<rs.length;i++)if(rs[i].checked)tipo=rs[i].value;
+    var o={nome:nome,tipo:tipo,ativo:$('mvAtivo').checked};
+    if(m)Object.assign(m,o);
+    else DB.motivosMov.push(Object.assign({id:uid('mt'),sistema:false,lojas:[]},o));
+    salvar();telaCfgMovimentacao();
+    toast('Motivo salvo.');
+    return true;
+  },'lg');
+}
+function togMotivo(id){
+  var m=DB.motivosMov.find(function(x){return x.id===id});
+  if(!m)return;
+  m.ativo=(m.ativo===false);
+  salvar();telaCfgMovimentacao();
+}
+async function excluirMotivo(id){
+  var m=DB.motivosMov.find(function(x){return x.id===id});
+  var usos=(DB.movEst||[]).filter(function(x){return x.motivoId===id}).length;
+  if(usos){
+    await confirmar({titulo:'Não dá para excluir',
+      texto:'"'+(m?m.nome:'')+'" já foi usado em '+usos+' lançamento(s).',
+      aviso:'Você pode <b>desativar</b> o motivo na chavinha ao lado — ele some da lista de '+
+        'lançamento mas o histórico continua correto.',
+      ok:'Entendi',cancelar:null,tipo:'info'});
+    return;
+  }
+  var ok=await confirmar({titulo:'Excluir o motivo '+(m?m.nome:''),ok:'Excluir',tipo:'perigo'});
+  if(!ok)return;
+  DB.motivosMov=DB.motivosMov.filter(function(x){return x.id!==id});
+  salvar();telaCfgMovimentacao();
+}
+function explicaMotivos(){
+  explicaRel('Motivos de Movimentação — como funciona',[
+   ['Entrada','soma a quantidade no estoque. Ex.: devolução de cliente, ajuste para mais'],
+   ['Saída','subtrai do estoque. Ex.: perda, quebra, uso interno, degustação'],
+   ['Produzir','o único que transforma: baixa os ingredientes da ficha técnica e gera o produto acabado'],
+   ['Motivo do sistema','criado automaticamente e usado por venda, nota de entrada e contagem — não pode ser excluído'],
+   ['Desativar','o motivo some da lista de lançamento, mas o histórico dele continua intacto']
+  ],'os motivos cadastrados aqui aparecem ao lançar movimentação de estoque, na produção '+
+    'e no filtro do relatório de Itens Consumidos.',
+   'nada — todos os motivos cadastrados aparecem. Os inativos só somem da hora de lançar.');
 }
 
 /* ---------- POPUP E MODAL ---------- */
