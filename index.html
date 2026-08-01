@@ -7114,6 +7114,7 @@ var MAPA=[
   campos:function(x){return {nome:x.nome,telefone:x.tel||null,cpf:x.cpf||null,
     nascimento:x.nascimento||null,rua:x.rua||null,numero:x.numero||null,
     bairro:x.bairro||null,cidade:x.cidade||null,referencia:x.ref||null,
+    zona_id:x.zonaId||null,zona:x.zona||null,
     compras:n(x.compras),gasto:n(x.gasto),
     limite_fiado:n(x.limiteFiado),saldo_fiado:n(x.saldoFiado),observacao:x.obs||null}}},
 
@@ -7168,6 +7169,13 @@ var MAPA=[
   campos:function(x){return {cliente_id:fk('clientes',x.clienteId),tipo:x.tipo,valor:n(x.valor),
     data:x.data||null,pedido_id:fk('pedidos',x.pedidoId),forma_id:fk('formasPag',x.formaId),
     conta_id:fk('contas',x.contaId),observacao:x.obs||null}}},
+
+ {col:'areas', espelha:true, tab:'areas_entrega',
+  campos:function(x){return {nome:x.nome,uf:x.uf||null,
+    taxa_padrao:n(x.taxaPadrao),tempo:n(x.tempo)}},
+  filhos:[{lista:'zonas',tab:'areas_zonas',pai:'area_id',
+    campos:function(o,k){return {nome:o.nome,tipo:o.tipo||'bairro',taxa:n(o.taxa),
+      km:n(o.km),tempo:n(o.tempo),observacao:o.obs||null,ativa:o.ativa!==false,ordem:k}}}]},
 
  {col:'sucursais', espelha:true, tab:'sucursais',
   campos:function(x){return {nome:x.nome,apelido:x.apelido||null,cnpj:x.cnpj||null,
@@ -7643,6 +7651,17 @@ async function baixarDaNuvem(forcar){
     perda:Number(x.perda)||0,ganho:Number(x.ganho)||0,resultado:Number(x.resultado)||0,
     itens:x.itens||[]}});
 
+  var ae=await api('areas_entrega'+q+'&select=*,areas_zonas(*)');
+  DB.areas=volta(ae,function(x){
+    var paiRef=x.ref_local||x.id;
+    return {id:paiRef,nome:x.nome,uf:x.uf||'',taxaPadrao:Number(x.taxa_padrao)||0,
+      tempo:Number(x.tempo)||0,
+      zonas:(x.areas_zonas||[]).sort(function(a,b){return (a.ordem||0)-(b.ordem||0)})
+        .map(function(z){return {id:idFilho(paiRef,z.ref_local,z.id),nome:z.nome,
+          tipo:z.tipo||'bairro',taxa:Number(z.taxa)||0,km:Number(z.km)||0,
+          tempo:Number(z.tempo)||0,obs:z.observacao||'',ativa:z.ativa!==false}})};
+  });
+
   var sc=await api('sucursais'+qs);
   DB.sucursais=volta(sc,function(x){return {id:x.ref_local||x.id,nome:x.nome,
     apelido:x.apelido||'',cnpj:x.cnpj||'',telefone:x.telefone||'',cidade:x.cidade||'',
@@ -7887,7 +7906,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V5.0.0';
+var VERSAO='V5.0.1';
 /* confere se há versão nova publicada e avisa, sem forçar nada */
 async function checarVersao(){
   try{
@@ -9588,6 +9607,8 @@ function finalizarVenda(total,taxa,desc,pagos,fiscal,imprimir,entregadorId,fiado
     total:total,taxa:taxa,desconto:desc,pagamentos:pagos,fiscal:!!fiscal,
     entregadorId:entregadorId||(PDV.tipo==='entrega'&&entregadorPadrao()?entregadorPadrao().id:null),
     cidade:_cidadeVenda||(PDV.cliente&&PDV.cliente.cidade)||'',
+    zonaId:(PDV.cliente&&PDV.cliente.zonaId)||'',
+    zona:(PDV.cliente&&PDV.cliente.zona)||'',
     data:ag.toISOString(),hora:agoraHM(),caixaId:(caixaAberto()||{}).id
   };
   if(_cupomAtivo)ped.cupom={id:_cupomAtivo.id,codigo:_cupomAtivo.codigo,valor:valorCupom(_cupomAtivo,total+desc-taxa)};
@@ -10350,32 +10371,52 @@ function modalEntregador(id){
 }
 function renderTaxas(){
   var b=$('taxasBox');if(!b)return;
-  b.innerHTML=_taxasTmp.length?_taxasTmp.map(function(t,i){
-    return '<div class="opRow"><input value="'+E(t.cidade)+'" placeholder="cidade ou bairro" class="txC">'+
+  baseAreas();
+  var cid=nomesCidadesEntrega();
+  b.innerHTML=(_taxasTmp.length?_taxasTmp.map(function(t,i){
+    return '<div class="opRow">'+
+    (cid.length
+      ?'<select class="txC">'+
+       '<option value="">Selecione a cidade</option>'+
+       cid.map(function(c){
+         return '<option value="'+E(c)+'"'+(String(t.cidade||'').toLowerCase()===c.toLowerCase()?' selected':'')+'>'+
+         E(c)+'</option>';}).join('')+
+       (t.cidade&&cid.map(function(c){return c.toLowerCase()}).indexOf(String(t.cidade).toLowerCase())<0
+         ?'<option value="'+E(t.cidade)+'" selected>'+E(t.cidade)+' (fora das áreas)</option>':'')+
+       '</select>'
+      :'<input value="'+E(t.cidade)+'" placeholder="cidade" class="txC">')+
     '<div class="cur" style="width:130px"><span>R$</span><input type="number" step="0.01" value="'+(t.valor||0)+'" class="txV"></div>'+
     '<button onclick="remTaxa('+i+')">'+sv('trash',13)+'</button></div>';}).join('')
-    :'<div class="hint">Nenhuma cidade cadastrada.</div>';
+    :'<div class="hint">Nenhuma cidade nesta lista.</div>')+
+   (cid.length
+    ?'<div class="hint" style="margin-top:7px">As cidades vêm de <b>Configuração da Loja › Áreas de Entrega</b>. '+
+     'Aqui você define quanto o <b>entregador recebe</b> por entrega em cada cidade — '+
+     'a taxa cobrada do cliente é a das Áreas de Entrega.</div>'
+    :'<div class="hint" style="margin-top:7px">Cadastre as cidades em '+
+     '<b>Configuração da Loja › Áreas de Entrega</b> para escolhê-las aqui.</div>');
 }
 function lerTaxas(){
   var c=document.querySelectorAll('.txC'),v=document.querySelectorAll('.txV');
   _taxasTmp=[];for(var i=0;i<c.length;i++)_taxasTmp.push({cidade:c[i].value,valor:parseFloat(v[i].value)||0});
 }
 function addTaxa(){lerTaxas();_taxasTmp.push({cidade:'',valor:0});renderTaxas();}
+function puxarCidadesAreas(){
+  lerTaxas();
+  baseAreas();
+  var jaTem={};
+  _taxasTmp.forEach(function(t){jaTem[String(t.cidade||'').toLowerCase()]=true});
+  var n=0;
+  nomesCidadesEntrega().forEach(function(c){
+    if(jaTem[c.toLowerCase()])return;
+    var a=(DB.areas||[]).find(function(x){return x.nome===c});
+    _taxasTmp.push({cidade:c,valor:Number(a&&a.taxaPadrao)||0});
+    n++;
+  });
+  renderTaxas();
+  toast(n?n+' cidade(s) trazida(s) das Áreas de Entrega.':'Todas as cidades já estão na lista.');
+}
 function remTaxa(i){lerTaxas();_taxasTmp.splice(i,1);renderTaxas();}
 
-/* todas as cidades cadastradas nos entregadores, sem repetir */
-function cidadesEntrega(){
-  var m={};
-  (DB.entregadores||[]).forEach(function(e){
-    (e.taxas||[]).forEach(function(t){
-      var c=(t.cidade||'').trim();
-      if(!c)return;
-      var k=c.toLowerCase();
-      if(m[k]===undefined||Number(t.valor)>0)m[k]={cidade:c,valor:Number(t.valor)||0};
-    });
-  });
-  return Object.keys(m).sort().map(function(k){return m[k]});
-}
 function valorCidade(cidade){
   if(!cidade)return 0;
   var a=cidadesEntrega().find(function(x){return x.cidade.toLowerCase()===String(cidade).trim().toLowerCase()});
@@ -20224,6 +20265,18 @@ function taxaDaZona(cidade,zona){
   return Number(a.taxaPadrao)||0;
 }
 function cidadesEntrega(){
+  baseAreas();
+  var l=[];
+  (DB.areas||[]).forEach(function(a){
+    l.push({cidade:a.nome,valor:Number(a.taxaPadrao)||0,zona:'',areaId:a.id});
+    (a.zonas||[]).forEach(function(z){
+      if(z.ativa===false)return;
+      l.push({cidade:a.nome,valor:Number(z.taxa)||0,zona:z.nome,areaId:a.id,zonaId:z.id,tipo:z.tipo});
+    });
+  });
+  return l;
+}
+function nomesCidadesEntrega(){
   baseAreas();
   return (DB.areas||[]).map(function(a){return a.nome}).sort();
 }
