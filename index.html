@@ -2043,7 +2043,17 @@ tbody td small{font-size:10.5px}
 .ivTab tbody tr.ivCat:hover td{background:#EEF3F7}
 .ivTab tbody tr.ivCat td{border-top:1px solid var(--line)}
 .ivTab tbody tr.ivProd td:first-child{padding-left:34px;color:var(--ink-2)}
+.chip.vazio{opacity:.55}
+.chipN{margin-left:4px;font-size:9.5px;font-weight:800;background:rgba(0,0,0,.08);
+  border-radius:10px;padding:0 5px}
+.chip.on .chipN{background:rgba(255,255,255,.25)}
+
 @media(max-width:1000px){.ivGrade{flex-direction:column}.ivAdic{width:100%}}
+
+.chip.vazio{opacity:.55}
+.chipN{margin-left:4px;font-size:9.5px;font-weight:800;background:rgba(0,0,0,.08);
+  border-radius:10px;padding:0 5px}
+.chip.on .chipN{background:rgba(255,255,255,.25)}
 
 @media(max-width:1000px){
   .lfPeriodo{order:3;width:100%}
@@ -3172,7 +3182,17 @@ tbody td small{font-size:10.5px}
 .ivTab tbody tr.ivCat:hover td{background:#EEF3F7}
 .ivTab tbody tr.ivCat td{border-top:1px solid var(--line)}
 .ivTab tbody tr.ivProd td:first-child{padding-left:34px;color:var(--ink-2)}
+.chip.vazio{opacity:.55}
+.chipN{margin-left:4px;font-size:9.5px;font-weight:800;background:rgba(0,0,0,.08);
+  border-radius:10px;padding:0 5px}
+.chip.on .chipN{background:rgba(255,255,255,.25)}
+
 @media(max-width:1000px){.ivGrade{flex-direction:column}.ivAdic{width:100%}}
+
+.chip.vazio{opacity:.55}
+.chipN{margin-left:4px;font-size:9.5px;font-weight:800;background:rgba(0,0,0,.08);
+  border-radius:10px;padding:0 5px}
+.chip.on .chipN{background:rgba(255,255,255,.25)}
 
 @media(max-width:1000px){
   .lgCard{grid-template-columns:1fr}.lgR{display:none}
@@ -4312,7 +4332,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V4.1.0';
+var VERSAO='V4.1.1';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
@@ -14021,12 +14041,21 @@ function telaItensConsumidos(){
       '<input id="icBusca" value="'+E(IC.busca)+'" placeholder="filtrar pelo nome"></div>'+
     '</div>'+
     '<div class="rfBloco"><label class="rfTit">Motivo da saída</label><div class="rfChips">'+
-     (DB.motivosMov||[]).filter(function(m){return m.tipo!=='entrada'||m.id==='mv_prod'})
-      .map(function(m){
-       return '<label class="chip'+(IC.motivos.indexOf(m.id)>=0?' on':'')+'">'+
+     (DB.motivosMov||[]).map(function(m){
+       var q=(DB.movEst||[]).filter(function(mv){
+         if(mv.motivoId!==m.id)return false;
+         var d2=String(mv.data||'').slice(0,10);
+         return (!IC.de||d2>=IC.de)&&(!IC.ate||d2<=IC.ate);
+       }).length;
+       return '<label class="chip'+(IC.motivos.indexOf(m.id)>=0?' on':'')+
+       (q?'':' vazio')+'" title="'+q+' lançamento(s) no período">'+
        '<input type="checkbox" onchange="togFiltro(IC.motivos,\''+m.id+'\');telaItensConsumidos()"'+
-       (IC.motivos.indexOf(m.id)>=0?' checked':'')+'>'+E(m.nome)+'</label>';}).join('')+
-    '</div><div class="hint">Sem marcar nada, mostra todas as saídas.</div></div>'+
+       (IC.motivos.indexOf(m.id)>=0?' checked':'')+'>'+E(m.nome)+
+       (q?'<span class="chipN">'+q+'</span>':'')+'</label>';}).join('')+
+    '</div><div class="hint">Todos os motivos cadastrados em '+
+    '<b>Configuração de Movimentação de Estoque</b> aparecem aqui. '+
+    'Criando um motivo novo, ele entra nesta lista sozinho. '+
+    'Sem marcar nada, mostra todas as saídas de estoque.</div></div>'+
     '<div class="rfAcoes">'+
      '<button class="btnP2 ok" onclick="IC.de=$(\'icDe\').value;IC.ate=$(\'icAte\').value;telaItensConsumidos()">'+
       sv('search',13)+' Buscar</button>'+
