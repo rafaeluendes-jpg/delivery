@@ -2178,6 +2178,36 @@ tbody td small{font-size:10.5px}
 .grafBox:has(.gBar[data-i="10"]:hover) .gTip[data-i="10"],
 .grafBox:has(.gBar[data-i="11"]:hover) .gTip[data-i="11"]{opacity:1}
 
+/* ---------- indicadores com dica ---------- */
+.indGrade{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:9px;padding:14px 16px}
+.indIt{position:relative;background:#fff;border:1px solid var(--line);border-radius:8px;padding:11px 13px}
+.indIt.dest{border-color:var(--acc);box-shadow:inset 3px 0 0 var(--acc)}
+.indT{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:var(--ink-3);
+  text-transform:uppercase;letter-spacing:.04em;line-height:1.35}
+.indT svg{opacity:.45;flex:none}
+.indIt b{display:block;font-size:19px;font-weight:700;margin-top:4px}
+.indIt.dest b{color:var(--acc-d);font-size:22px}
+.indDica{position:absolute;left:10px;right:10px;top:calc(100% - 4px);z-index:40;
+  background:#122A42;color:#fff;font-style:normal;font-size:11px;line-height:1.5;
+  padding:9px 11px;border-radius:8px;opacity:0;pointer-events:none;transition:.14s;
+  box-shadow:var(--sh2)}
+.indIt:hover{border-color:var(--acc)}
+.indIt:hover .indDica{opacity:1;top:calc(100% + 5px)}
+.indIt:hover .indT svg{opacity:1;color:var(--acc-d)}
+/* ---------- caixa de cupom ---------- */
+.cupBox{display:flex;align-items:center;gap:14px;margin:0 16px;padding:13px 16px;
+  background:linear-gradient(90deg,var(--acc-soft),#fff);border:1px solid var(--acc);
+  border-radius:10px;flex-wrap:wrap}
+.cupIc{width:38px;height:38px;border-radius:9px;background:var(--acc);color:#fff;
+  display:flex;align-items:center;justify-content:center;flex:none}
+.cupT b{display:block;font-size:13.5px;color:var(--ink)}
+.cupT span{display:block;font-size:11.5px;color:var(--ink-2);margin-top:1px}
+.cupN{margin-left:auto;text-align:right}
+.cupN span{display:block;font-size:9.5px;font-weight:700;color:var(--ink-3);
+  text-transform:uppercase;letter-spacing:.04em}
+.cupN b{display:block;font-size:16px;font-weight:700;margin-top:2px}
+.etTab tbody tr.linCanc td{opacity:.6;background:#FCF3F3}
+
 @media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
 
 /* ---------- caixa de confirmação ---------- */
@@ -2232,6 +2262,36 @@ tbody td small{font-size:10.5px}
 .grafBox:has(.gBar[data-i="9"]:hover) .gTip[data-i="9"],
 .grafBox:has(.gBar[data-i="10"]:hover) .gTip[data-i="10"],
 .grafBox:has(.gBar[data-i="11"]:hover) .gTip[data-i="11"]{opacity:1}
+
+/* ---------- indicadores com dica ---------- */
+.indGrade{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:9px;padding:14px 16px}
+.indIt{position:relative;background:#fff;border:1px solid var(--line);border-radius:8px;padding:11px 13px}
+.indIt.dest{border-color:var(--acc);box-shadow:inset 3px 0 0 var(--acc)}
+.indT{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:var(--ink-3);
+  text-transform:uppercase;letter-spacing:.04em;line-height:1.35}
+.indT svg{opacity:.45;flex:none}
+.indIt b{display:block;font-size:19px;font-weight:700;margin-top:4px}
+.indIt.dest b{color:var(--acc-d);font-size:22px}
+.indDica{position:absolute;left:10px;right:10px;top:calc(100% - 4px);z-index:40;
+  background:#122A42;color:#fff;font-style:normal;font-size:11px;line-height:1.5;
+  padding:9px 11px;border-radius:8px;opacity:0;pointer-events:none;transition:.14s;
+  box-shadow:var(--sh2)}
+.indIt:hover{border-color:var(--acc)}
+.indIt:hover .indDica{opacity:1;top:calc(100% + 5px)}
+.indIt:hover .indT svg{opacity:1;color:var(--acc-d)}
+/* ---------- caixa de cupom ---------- */
+.cupBox{display:flex;align-items:center;gap:14px;margin:0 16px;padding:13px 16px;
+  background:linear-gradient(90deg,var(--acc-soft),#fff);border:1px solid var(--acc);
+  border-radius:10px;flex-wrap:wrap}
+.cupIc{width:38px;height:38px;border-radius:9px;background:var(--acc);color:#fff;
+  display:flex;align-items:center;justify-content:center;flex:none}
+.cupT b{display:block;font-size:13.5px;color:var(--ink)}
+.cupT span{display:block;font-size:11.5px;color:var(--ink-2);margin-top:1px}
+.cupN{margin-left:auto;text-align:right}
+.cupN span{display:block;font-size:9.5px;font-weight:700;color:var(--ink-3);
+  text-transform:uppercase;letter-spacing:.04em}
+.cupN b{display:block;font-size:16px;font-weight:700;margin-top:2px}
+.etTab tbody tr.linCanc td{opacity:.6;background:#FCF3F3}
 
 @media(max-width:1000px){.ivGrade{flex-direction:column}.ivAdic{width:100%}}
 
@@ -2370,6 +2430,36 @@ tbody td small{font-size:10.5px}
 .grafBox:has(.gBar[data-i="10"]:hover) .gTip[data-i="10"],
 .grafBox:has(.gBar[data-i="11"]:hover) .gTip[data-i="11"]{opacity:1}
 
+/* ---------- indicadores com dica ---------- */
+.indGrade{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:9px;padding:14px 16px}
+.indIt{position:relative;background:#fff;border:1px solid var(--line);border-radius:8px;padding:11px 13px}
+.indIt.dest{border-color:var(--acc);box-shadow:inset 3px 0 0 var(--acc)}
+.indT{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:var(--ink-3);
+  text-transform:uppercase;letter-spacing:.04em;line-height:1.35}
+.indT svg{opacity:.45;flex:none}
+.indIt b{display:block;font-size:19px;font-weight:700;margin-top:4px}
+.indIt.dest b{color:var(--acc-d);font-size:22px}
+.indDica{position:absolute;left:10px;right:10px;top:calc(100% - 4px);z-index:40;
+  background:#122A42;color:#fff;font-style:normal;font-size:11px;line-height:1.5;
+  padding:9px 11px;border-radius:8px;opacity:0;pointer-events:none;transition:.14s;
+  box-shadow:var(--sh2)}
+.indIt:hover{border-color:var(--acc)}
+.indIt:hover .indDica{opacity:1;top:calc(100% + 5px)}
+.indIt:hover .indT svg{opacity:1;color:var(--acc-d)}
+/* ---------- caixa de cupom ---------- */
+.cupBox{display:flex;align-items:center;gap:14px;margin:0 16px;padding:13px 16px;
+  background:linear-gradient(90deg,var(--acc-soft),#fff);border:1px solid var(--acc);
+  border-radius:10px;flex-wrap:wrap}
+.cupIc{width:38px;height:38px;border-radius:9px;background:var(--acc);color:#fff;
+  display:flex;align-items:center;justify-content:center;flex:none}
+.cupT b{display:block;font-size:13.5px;color:var(--ink)}
+.cupT span{display:block;font-size:11.5px;color:var(--ink-2);margin-top:1px}
+.cupN{margin-left:auto;text-align:right}
+.cupN span{display:block;font-size:9.5px;font-weight:700;color:var(--ink-3);
+  text-transform:uppercase;letter-spacing:.04em}
+.cupN b{display:block;font-size:16px;font-weight:700;margin-top:2px}
+.etTab tbody tr.linCanc td{opacity:.6;background:#FCF3F3}
+
 @media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
 
 /* ---------- caixa de confirmação ---------- */
@@ -2424,6 +2514,36 @@ tbody td small{font-size:10.5px}
 .grafBox:has(.gBar[data-i="9"]:hover) .gTip[data-i="9"],
 .grafBox:has(.gBar[data-i="10"]:hover) .gTip[data-i="10"],
 .grafBox:has(.gBar[data-i="11"]:hover) .gTip[data-i="11"]{opacity:1}
+
+/* ---------- indicadores com dica ---------- */
+.indGrade{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:9px;padding:14px 16px}
+.indIt{position:relative;background:#fff;border:1px solid var(--line);border-radius:8px;padding:11px 13px}
+.indIt.dest{border-color:var(--acc);box-shadow:inset 3px 0 0 var(--acc)}
+.indT{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:var(--ink-3);
+  text-transform:uppercase;letter-spacing:.04em;line-height:1.35}
+.indT svg{opacity:.45;flex:none}
+.indIt b{display:block;font-size:19px;font-weight:700;margin-top:4px}
+.indIt.dest b{color:var(--acc-d);font-size:22px}
+.indDica{position:absolute;left:10px;right:10px;top:calc(100% - 4px);z-index:40;
+  background:#122A42;color:#fff;font-style:normal;font-size:11px;line-height:1.5;
+  padding:9px 11px;border-radius:8px;opacity:0;pointer-events:none;transition:.14s;
+  box-shadow:var(--sh2)}
+.indIt:hover{border-color:var(--acc)}
+.indIt:hover .indDica{opacity:1;top:calc(100% + 5px)}
+.indIt:hover .indT svg{opacity:1;color:var(--acc-d)}
+/* ---------- caixa de cupom ---------- */
+.cupBox{display:flex;align-items:center;gap:14px;margin:0 16px;padding:13px 16px;
+  background:linear-gradient(90deg,var(--acc-soft),#fff);border:1px solid var(--acc);
+  border-radius:10px;flex-wrap:wrap}
+.cupIc{width:38px;height:38px;border-radius:9px;background:var(--acc);color:#fff;
+  display:flex;align-items:center;justify-content:center;flex:none}
+.cupT b{display:block;font-size:13.5px;color:var(--ink)}
+.cupT span{display:block;font-size:11.5px;color:var(--ink-2);margin-top:1px}
+.cupN{margin-left:auto;text-align:right}
+.cupN span{display:block;font-size:9.5px;font-weight:700;color:var(--ink-3);
+  text-transform:uppercase;letter-spacing:.04em}
+.cupN b{display:block;font-size:16px;font-weight:700;margin-top:2px}
+.etTab tbody tr.linCanc td{opacity:.6;background:#FCF3F3}
 
 @media(max-width:1000px){
   .lfPeriodo{order:3;width:100%}
@@ -3687,6 +3807,36 @@ tbody td small{font-size:10.5px}
 .grafBox:has(.gBar[data-i="10"]:hover) .gTip[data-i="10"],
 .grafBox:has(.gBar[data-i="11"]:hover) .gTip[data-i="11"]{opacity:1}
 
+/* ---------- indicadores com dica ---------- */
+.indGrade{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:9px;padding:14px 16px}
+.indIt{position:relative;background:#fff;border:1px solid var(--line);border-radius:8px;padding:11px 13px}
+.indIt.dest{border-color:var(--acc);box-shadow:inset 3px 0 0 var(--acc)}
+.indT{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:var(--ink-3);
+  text-transform:uppercase;letter-spacing:.04em;line-height:1.35}
+.indT svg{opacity:.45;flex:none}
+.indIt b{display:block;font-size:19px;font-weight:700;margin-top:4px}
+.indIt.dest b{color:var(--acc-d);font-size:22px}
+.indDica{position:absolute;left:10px;right:10px;top:calc(100% - 4px);z-index:40;
+  background:#122A42;color:#fff;font-style:normal;font-size:11px;line-height:1.5;
+  padding:9px 11px;border-radius:8px;opacity:0;pointer-events:none;transition:.14s;
+  box-shadow:var(--sh2)}
+.indIt:hover{border-color:var(--acc)}
+.indIt:hover .indDica{opacity:1;top:calc(100% + 5px)}
+.indIt:hover .indT svg{opacity:1;color:var(--acc-d)}
+/* ---------- caixa de cupom ---------- */
+.cupBox{display:flex;align-items:center;gap:14px;margin:0 16px;padding:13px 16px;
+  background:linear-gradient(90deg,var(--acc-soft),#fff);border:1px solid var(--acc);
+  border-radius:10px;flex-wrap:wrap}
+.cupIc{width:38px;height:38px;border-radius:9px;background:var(--acc);color:#fff;
+  display:flex;align-items:center;justify-content:center;flex:none}
+.cupT b{display:block;font-size:13.5px;color:var(--ink)}
+.cupT span{display:block;font-size:11.5px;color:var(--ink-2);margin-top:1px}
+.cupN{margin-left:auto;text-align:right}
+.cupN span{display:block;font-size:9.5px;font-weight:700;color:var(--ink-3);
+  text-transform:uppercase;letter-spacing:.04em}
+.cupN b{display:block;font-size:16px;font-weight:700;margin-top:2px}
+.etTab tbody tr.linCanc td{opacity:.6;background:#FCF3F3}
+
 @media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
 
 /* ---------- caixa de confirmação ---------- */
@@ -3741,6 +3891,36 @@ tbody td small{font-size:10.5px}
 .grafBox:has(.gBar[data-i="9"]:hover) .gTip[data-i="9"],
 .grafBox:has(.gBar[data-i="10"]:hover) .gTip[data-i="10"],
 .grafBox:has(.gBar[data-i="11"]:hover) .gTip[data-i="11"]{opacity:1}
+
+/* ---------- indicadores com dica ---------- */
+.indGrade{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:9px;padding:14px 16px}
+.indIt{position:relative;background:#fff;border:1px solid var(--line);border-radius:8px;padding:11px 13px}
+.indIt.dest{border-color:var(--acc);box-shadow:inset 3px 0 0 var(--acc)}
+.indT{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:var(--ink-3);
+  text-transform:uppercase;letter-spacing:.04em;line-height:1.35}
+.indT svg{opacity:.45;flex:none}
+.indIt b{display:block;font-size:19px;font-weight:700;margin-top:4px}
+.indIt.dest b{color:var(--acc-d);font-size:22px}
+.indDica{position:absolute;left:10px;right:10px;top:calc(100% - 4px);z-index:40;
+  background:#122A42;color:#fff;font-style:normal;font-size:11px;line-height:1.5;
+  padding:9px 11px;border-radius:8px;opacity:0;pointer-events:none;transition:.14s;
+  box-shadow:var(--sh2)}
+.indIt:hover{border-color:var(--acc)}
+.indIt:hover .indDica{opacity:1;top:calc(100% + 5px)}
+.indIt:hover .indT svg{opacity:1;color:var(--acc-d)}
+/* ---------- caixa de cupom ---------- */
+.cupBox{display:flex;align-items:center;gap:14px;margin:0 16px;padding:13px 16px;
+  background:linear-gradient(90deg,var(--acc-soft),#fff);border:1px solid var(--acc);
+  border-radius:10px;flex-wrap:wrap}
+.cupIc{width:38px;height:38px;border-radius:9px;background:var(--acc);color:#fff;
+  display:flex;align-items:center;justify-content:center;flex:none}
+.cupT b{display:block;font-size:13.5px;color:var(--ink)}
+.cupT span{display:block;font-size:11.5px;color:var(--ink-2);margin-top:1px}
+.cupN{margin-left:auto;text-align:right}
+.cupN span{display:block;font-size:9.5px;font-weight:700;color:var(--ink-3);
+  text-transform:uppercase;letter-spacing:.04em}
+.cupN b{display:block;font-size:16px;font-weight:700;margin-top:2px}
+.etTab tbody tr.linCanc td{opacity:.6;background:#FCF3F3}
 
 @media(max-width:1000px){.ivGrade{flex-direction:column}.ivAdic{width:100%}}
 
@@ -3879,6 +4059,36 @@ tbody td small{font-size:10.5px}
 .grafBox:has(.gBar[data-i="10"]:hover) .gTip[data-i="10"],
 .grafBox:has(.gBar[data-i="11"]:hover) .gTip[data-i="11"]{opacity:1}
 
+/* ---------- indicadores com dica ---------- */
+.indGrade{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:9px;padding:14px 16px}
+.indIt{position:relative;background:#fff;border:1px solid var(--line);border-radius:8px;padding:11px 13px}
+.indIt.dest{border-color:var(--acc);box-shadow:inset 3px 0 0 var(--acc)}
+.indT{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:var(--ink-3);
+  text-transform:uppercase;letter-spacing:.04em;line-height:1.35}
+.indT svg{opacity:.45;flex:none}
+.indIt b{display:block;font-size:19px;font-weight:700;margin-top:4px}
+.indIt.dest b{color:var(--acc-d);font-size:22px}
+.indDica{position:absolute;left:10px;right:10px;top:calc(100% - 4px);z-index:40;
+  background:#122A42;color:#fff;font-style:normal;font-size:11px;line-height:1.5;
+  padding:9px 11px;border-radius:8px;opacity:0;pointer-events:none;transition:.14s;
+  box-shadow:var(--sh2)}
+.indIt:hover{border-color:var(--acc)}
+.indIt:hover .indDica{opacity:1;top:calc(100% + 5px)}
+.indIt:hover .indT svg{opacity:1;color:var(--acc-d)}
+/* ---------- caixa de cupom ---------- */
+.cupBox{display:flex;align-items:center;gap:14px;margin:0 16px;padding:13px 16px;
+  background:linear-gradient(90deg,var(--acc-soft),#fff);border:1px solid var(--acc);
+  border-radius:10px;flex-wrap:wrap}
+.cupIc{width:38px;height:38px;border-radius:9px;background:var(--acc);color:#fff;
+  display:flex;align-items:center;justify-content:center;flex:none}
+.cupT b{display:block;font-size:13.5px;color:var(--ink)}
+.cupT span{display:block;font-size:11.5px;color:var(--ink-2);margin-top:1px}
+.cupN{margin-left:auto;text-align:right}
+.cupN span{display:block;font-size:9.5px;font-weight:700;color:var(--ink-3);
+  text-transform:uppercase;letter-spacing:.04em}
+.cupN b{display:block;font-size:16px;font-weight:700;margin-top:2px}
+.etTab tbody tr.linCanc td{opacity:.6;background:#FCF3F3}
+
 @media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
 
 /* ---------- caixa de confirmação ---------- */
@@ -3933,6 +4143,36 @@ tbody td small{font-size:10.5px}
 .grafBox:has(.gBar[data-i="9"]:hover) .gTip[data-i="9"],
 .grafBox:has(.gBar[data-i="10"]:hover) .gTip[data-i="10"],
 .grafBox:has(.gBar[data-i="11"]:hover) .gTip[data-i="11"]{opacity:1}
+
+/* ---------- indicadores com dica ---------- */
+.indGrade{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:9px;padding:14px 16px}
+.indIt{position:relative;background:#fff;border:1px solid var(--line);border-radius:8px;padding:11px 13px}
+.indIt.dest{border-color:var(--acc);box-shadow:inset 3px 0 0 var(--acc)}
+.indT{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:var(--ink-3);
+  text-transform:uppercase;letter-spacing:.04em;line-height:1.35}
+.indT svg{opacity:.45;flex:none}
+.indIt b{display:block;font-size:19px;font-weight:700;margin-top:4px}
+.indIt.dest b{color:var(--acc-d);font-size:22px}
+.indDica{position:absolute;left:10px;right:10px;top:calc(100% - 4px);z-index:40;
+  background:#122A42;color:#fff;font-style:normal;font-size:11px;line-height:1.5;
+  padding:9px 11px;border-radius:8px;opacity:0;pointer-events:none;transition:.14s;
+  box-shadow:var(--sh2)}
+.indIt:hover{border-color:var(--acc)}
+.indIt:hover .indDica{opacity:1;top:calc(100% + 5px)}
+.indIt:hover .indT svg{opacity:1;color:var(--acc-d)}
+/* ---------- caixa de cupom ---------- */
+.cupBox{display:flex;align-items:center;gap:14px;margin:0 16px;padding:13px 16px;
+  background:linear-gradient(90deg,var(--acc-soft),#fff);border:1px solid var(--acc);
+  border-radius:10px;flex-wrap:wrap}
+.cupIc{width:38px;height:38px;border-radius:9px;background:var(--acc);color:#fff;
+  display:flex;align-items:center;justify-content:center;flex:none}
+.cupT b{display:block;font-size:13.5px;color:var(--ink)}
+.cupT span{display:block;font-size:11.5px;color:var(--ink-2);margin-top:1px}
+.cupN{margin-left:auto;text-align:right}
+.cupN span{display:block;font-size:9.5px;font-weight:700;color:var(--ink-3);
+  text-transform:uppercase;letter-spacing:.04em}
+.cupN b{display:block;font-size:16px;font-weight:700;margin-top:2px}
+.etTab tbody tr.linCanc td{opacity:.6;background:#FCF3F3}
 
 @media(max-width:1000px){
   .lgCard{grid-template-columns:1fr}.lgR{display:none}
@@ -5073,7 +5313,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V4.5.1';
+var VERSAO='V4.6.0';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
@@ -5117,6 +5357,7 @@ if(mid==='relatorios'&&iid==='itens-consumidos')return telaItensConsumidos();
 if(mid==='relatorios'&&iid==='itens-vendidos')return telaItensVendidos();
 if(mid==='relatorios'&&iid==='vendas-area-entrega')return telaVendasArea();
 if(mid==='relatorios'&&iid==='vendas-forma-pagamento')return telaVendasFormaPag();
+if(mid==='relatorios'&&iid==='vendas-periodo')return telaVendasPeriodo();
 if(mid==='estoque'&&iid==='producao')return telaProducao();
 if(mid==='estoque'&&iid==='ficha-tecnica')return telaFichaTecnica();
 if(mid==='estoque'&&iid==='ingredientes-insumos')return telaInsumos();
@@ -15794,6 +16035,261 @@ function confirmar(op){
 function avisar(titulo,texto,tipo){
   return confirmar({titulo:titulo,texto:texto,tipo:tipo||'info',
     ok:'Entendi',cancelar:null}).then(function(){});
+}
+
+/* ==========================================================
+   6 — VENDAS POR PERÍODO
+   ========================================================== */
+var VPE={de:'',ate:'',canais:[],cupons:[],formas:[],ordem:'data'};
+function telaVendasPeriodo(){
+  baseMov();baseFormas();
+  if(!VPE.de){var d=new Date();
+    VPE.de=new Date(d.getFullYear(),d.getMonth(),1).toISOString().slice(0,10);
+    VPE.ate=hojeISO();}
+  var todos=pedidosFiltrados(VPE);
+  if(VPE.cupons.length)
+    todos=todos.filter(function(p){return p.cupomCodigo&&VPE.cupons.indexOf(p.cupomCodigo)>=0});
+  if(VPE.formas.length)
+    todos=todos.filter(function(p){
+      return (p.pagamentos||[]).some(function(g){return VPE.formas.indexOf(g.formaId)>=0})});
+  var peds=todos.filter(function(p){return p.fase!=='cancelado'});
+  var canc=todos.filter(function(p){return p.fase==='cancelado'});
+
+  /* ---- indicadores ---- */
+  function soma(arr,fn){return arr.reduce(function(a,p){return a+(fn(p)||0)},0)}
+  var ent=peds.filter(function(p){return p.tipo==='entrega'});
+  var loja=peds.filter(function(p){return p.tipo!=='entrega'});
+  var vTotal=soma(peds,function(p){return Number(p.total)||0});
+  var vEnt=soma(ent,function(p){return Number(p.total)||0});
+  var vLoja=soma(loja,function(p){return Number(p.total)||0});
+  var vItens=soma(peds,function(p){
+    return (p.itens||[]).reduce(function(a,i){return a+(Number(i.total)||0)},0)});
+  var qItens=soma(peds,function(p){
+    return (p.itens||[]).reduce(function(a,i){return a+(Number(i.qtd)||0)},0)});
+  var vTaxa=soma(peds,function(p){return Number(p.taxa)||0});
+  var vAcr=soma(peds,function(p){return Number(p.acrescimo)||0});
+  var vDesc=soma(peds,function(p){return Number(p.desconto)||0});
+  var vCup=soma(peds,function(p){return Number(p.cupomValor)||0});
+  var comCupom=peds.filter(function(p){return p.cupomCodigo});
+  var clientes={};peds.forEach(function(p){ if(p.clienteId)clientes[p.clienteId]=true; });
+  function porCanal(c){return peds.filter(function(p){return (p.canal||'')===c}).length}
+
+  var IND=[
+   ['Total de pedidos',peds.length,'','quantidade de vendas concluídas no período, sem contar canceladas'],
+   ['Pedidos cancelados',canc.length,canc.length?'vr':'','pedidos que foram para a fase Cancelado no PDV'],
+   ['Faturamento total','R$ '+money(vTotal),'dest','soma do valor final de cada pedido, já com taxa, acréscimo e desconto'],
+   ['Ticket médio geral','R$ '+money(peds.length?vTotal/peds.length:0),'','faturamento dividido pela quantidade de pedidos'],
+   ['Ticket médio da entrega','R$ '+money(ent.length?vEnt/ent.length:0),'','faturamento das entregas dividido pela quantidade de entregas'],
+   ['Ticket médio do balcão','R$ '+money(loja.length?vLoja/loja.length:0),'','faturamento do salão dividido pela quantidade de vendas no balcão'],
+   ['Pedidos na frente de caixa',loja.length,'','vendas do tipo salão ou balcão, feitas no PDV'],
+   ['Pedidos de entrega',ent.length,'','vendas do tipo entrega, com endereço e taxa'],
+   ['Clientes que compraram',Object.keys(clientes).length,'','clientes diferentes identificados nas vendas — quem comprou sem se identificar não entra'],
+   ['Total em itens','R$ '+money(vItens),'','soma do valor dos produtos, sem taxa de entrega nem acréscimo'],
+   ['Quantidade de itens',fmtQt(qItens),'','soma das quantidades de todos os produtos vendidos'],
+   ['Taxa de entrega','R$ '+money(vTaxa),'','taxas cobradas nas entregas, conforme a cidade do cliente'],
+   ['Acréscimos','R$ '+money(vAcr),'','valores somados no fechamento do pedido'],
+   ['Descontos','R$ '+money(vDesc),vDesc?'vr':'','descontos concedidos no fechamento, incluindo cupons'],
+   ['Pedidos pelo cardápio digital',porCanal('cardapio'),'','pedidos vindos do cardápio online — disponível quando o módulo for publicado'],
+   ['Pedidos pelo WhatsApp',porCanal('whatsapp'),'','pedidos vindos do robô do WhatsApp — disponível quando o módulo for publicado']
+  ];
+
+  /* ---- lista de pedidos ---- */
+  var lista=todos.slice().sort(function(a,b){
+    if(VPE.ordem==='valor')return (Number(b.total)||0)-(Number(a.total)||0);
+    return (String(a.data)+String(a.hora)).localeCompare(String(b.data)+String(b.hora));
+  });
+  var cupons=(DB.cupons||[]).map(function(c){
+    var q=(DB.pedidos||[]).filter(function(p){return p.cupomCodigo===c.codigo}).length;
+    return {id:c.codigo,nome:c.codigo,n:q||''};
+  });
+  var canais=canaisVenda();
+
+  $('content').innerHTML='<div class="etWrap"><div class="etScroll">'+
+   '<div class="etTopo">'+
+    '<div><h1>Vendas por Período</h1>'+
+    '<p>Todos os números do período, pedido a pedido — a base da apresentação de resultado.</p></div>'+
+    '<button class="infoBt" onclick="explicaVendasPeriodo()">'+sv('help',15)+'</button>'+
+    '<div style="flex:1"></div>'+
+    '<button class="btnP2" onclick="imprimirRel(\'Vendas por Período\')">'+sv('print2',13)+' PDF</button>'+
+    '<button class="btnP2" onclick="exportarPeriodo()">'+sv('down2',13)+' Exportar</button>'+
+   '</div>'+
+   '<div class="barraF">'+
+    '<div class="bfCampo"><label>De</label><input type="date" id="vpeDe" value="'+VPE.de+'"></div>'+
+    '<div class="bfCampo"><label>Até</label><input type="date" id="vpeAte" value="'+VPE.ate+'"></div>'+
+    selMulti('vpeCan','Canal de venda',
+      Object.keys(canais).map(function(k){return {id:k,nome:canais[k]}}),
+      VPE.canais,'togVPE','togTodosVPE(\'canais\')')+
+    selMulti('vpeCup','Cupom de desconto',cupons,VPE.cupons,'togVPEcup','togTodosVPE(\'cupons\')')+
+    selMulti('vpeFor','Forma de pagamento',
+      (DB.formasPag||[]).map(function(f){return {id:f.id,nome:f.nome}}),
+      VPE.formas,'togVPEfor','togTodosVPE(\'formas\')')+
+    '<button class="btnP2 ok" onclick="VPE.de=$(\'vpeDe\').value;VPE.ate=$(\'vpeAte\').value;telaVendasPeriodo()">'+
+     sv('search',13)+' Buscar</button>'+
+    '<div class="bfAtalhos">'+
+     '<button onclick="perVPE(0)">Mês</button>'+
+     '<button onclick="perVPE(-1)">Anterior</button>'+
+     '<button onclick="perVPE(7)">7d</button>'+
+     (VPE.canais.length||VPE.cupons.length||VPE.formas.length
+       ?'<button class="lim" onclick="limparVPE()">limpar</button>':'')+
+    '</div>'+
+   '</div>'+
+   (VPE.cupons.length||comCupom.length?
+    '<div class="cupBox">'+
+     '<div class="cupIc">'+sv('copy',16)+'</div>'+
+     '<div class="cupT"><b>Cupons de desconto</b>'+
+      '<span>'+(VPE.cupons.length?'filtrando por '+VPE.cupons.join(', '):'todos os cupons do período')+'</span></div>'+
+     '<div class="cupN"><span>Vendas com cupom</span><b>'+comCupom.length+'</b></div>'+
+     '<div class="cupN"><span>Valor dessas vendas</span><b>R$ '+
+      money(soma(comCupom,function(p){return Number(p.total)||0}))+'</b></div>'+
+     '<div class="cupN"><span>Desconto concedido</span><b class="vr">R$ '+money(vCup||vDesc)+'</b></div>'+
+    '</div>':'')+
+   '<div class="indGrade">'+
+   IND.map(function(x){
+     return '<div class="indIt'+(x[2]==='dest'?' dest':'')+'" title="'+E(x[3])+'">'+
+      '<span class="indT">'+E(x[0])+sv('help',10)+'</span>'+
+      '<b class="'+(x[2]&&x[2]!=='dest'?x[2]:'')+'">'+E(String(x[1]))+'</b>'+
+      '<i class="indDica">'+E(x[3])+'</i></div>';
+   }).join('')+
+   '</div>'+
+   '<div class="etTabW plano2" id="relArea">'+
+   (lista.length?'<table class="etTab"><thead><tr>'+
+    '<th style="width:70px">Pedido</th>'+
+    '<th style="width:110px">Data</th><th style="width:70px">Hora</th>'+
+    '<th>Cliente</th>'+
+    '<th style="width:150px">Pagamento</th>'+
+    '<th style="width:120px">Tipo</th>'+
+    '<th style="width:110px;text-align:right">Itens</th>'+
+    '<th style="width:100px;text-align:right">Taxa</th>'+
+    '<th style="width:110px;text-align:right">Acr. / Desc.</th>'+
+    '<th style="width:120px;text-align:right">Total</th>'+
+    '<th style="width:50px"></th></tr></thead><tbody>'+
+    lista.slice(0,500).map(function(p){
+      var pg=(p.pagamentos||[]).map(function(g){
+        var f=(DB.formasPag||[]).find(function(x){return x.id===g.formaId});
+        return f?f.nome:'—';}).join(', ');
+      var vi=(p.itens||[]).reduce(function(a,i){return a+(Number(i.total)||0)},0);
+      var canc2=(p.fase==='cancelado');
+      return '<tr class="'+(canc2?'linCanc':'')+'" style="cursor:pointer" onclick="verPedidoRel(\''+p.id+'\')">'+
+      '<td><b>#'+E(p.numero)+'</b></td>'+
+      '<td>'+dataBR(p.data)+'</td><td>'+E(p.hora||'')+'</td>'+
+      '<td>'+E(p.clienteNome||'Não identificado')+
+       (p.cupomCodigo?'<small style="color:var(--acc-d)">cupom '+E(p.cupomCodigo)+'</small>':'')+'</td>'+
+      '<td>'+E(pg||'—')+'</td>'+
+      '<td>'+(canc2?'<span class="badge2 rd">Cancelado</span>':
+        p.tipo==='entrega'?'<span class="cidTag">Entrega'+(p.cidade?' · '+E(p.cidade):'')+'</span>'
+        :'<span class="cidTag">Frente de caixa</span>')+'</td>'+
+      '<td style="text-align:right">R$ '+money(vi)+'</td>'+
+      '<td style="text-align:right">'+(p.taxa?'R$ '+money(p.taxa):'—')+'</td>'+
+      '<td style="text-align:right">'+
+       (p.acrescimo?'<span class="vg">+'+money(p.acrescimo)+'</span> ':'')+
+       (p.desconto?'<span class="vr">-'+money(p.desconto)+'</span>':'')+
+       (!p.acrescimo&&!p.desconto?'—':'')+'</td>'+
+      '<td style="text-align:right"><b>R$ '+money(p.total)+'</b></td>'+
+      '<td onclick="event.stopPropagation()"><button class="rBtn" onclick="verPedidoRel(\''+p.id+'\')" '+
+       'title="Ver o pedido">'+sv('eye',12)+'</button></td></tr>';
+    }).join('')+'</tbody>'+
+    '<tfoot><tr><td colspan="6"><b>'+peds.length+' pedido(s)'+
+     (canc.length?' · '+canc.length+' cancelado(s)':'')+
+     (lista.length>500?' — mostrando os 500 primeiros':'')+'</b></td>'+
+    '<td style="text-align:right"><b>R$ '+money(vItens)+'</b></td>'+
+    '<td style="text-align:right"><b>R$ '+money(vTaxa)+'</b></td>'+
+    '<td style="text-align:right"><b class="vr">-'+money(vDesc)+'</b></td>'+
+    '<td style="text-align:right"><b>R$ '+money(vTotal)+'</b></td><td></td></tr></tfoot></table>'
+   :'<div class="mvVazio">'+sv('box',26)+'<b>Nenhum pedido no período</b></div>')+
+   '</div></div></div>';
+  rodape(peds.length+' pedidos · R$ '+money(vTotal));
+}
+function togVPE(c){togFiltro(VPE.canais,c);telaVendasPeriodo();}
+function togVPEcup(c){togFiltro(VPE.cupons,c);telaVendasPeriodo();}
+function togVPEfor(f){togFiltro(VPE.formas,f);telaVendasPeriodo();}
+function togTodosVPE(campo){
+  if(campo==='canais')VPE.canais=VPE.canais.length?[]:Object.keys(canaisVenda());
+  else if(campo==='cupons')VPE.cupons=VPE.cupons.length?[]:(DB.cupons||[]).map(function(c){return c.codigo});
+  else VPE.formas=VPE.formas.length?[]:(DB.formasPag||[]).map(function(f){return f.id});
+  telaVendasPeriodo();
+}
+function limparVPE(){VPE.canais=[];VPE.cupons=[];VPE.formas=[];telaVendasPeriodo();}
+function perVPE(n){
+  var d=new Date();
+  if(n===0){VPE.de=new Date(d.getFullYear(),d.getMonth(),1).toISOString().slice(0,10);VPE.ate=hojeISO();}
+  else if(n===-1){VPE.de=new Date(d.getFullYear(),d.getMonth()-1,1).toISOString().slice(0,10);
+    VPE.ate=new Date(d.getFullYear(),d.getMonth(),0).toISOString().slice(0,10);}
+  else {VPE.de=diasAtrasISO(n);VPE.ate=hojeISO();}
+  telaVendasPeriodo();
+}
+/* ver o pedido completo */
+function verPedidoRel(id){
+  var p=(DB.pedidos||[]).find(function(x){return x.id===id});
+  if(!p)return;
+  var vi=(p.itens||[]).reduce(function(a,i){return a+(Number(i.total)||0)},0);
+  var pg=(p.pagamentos||[]).map(function(g){
+    var f=(DB.formasPag||[]).find(function(x){return x.id===g.formaId});
+    return {nome:f?f.nome:'—',valor:Number(g.valor)||0};});
+  var h='<div class="mdB">'+
+  '<div class="acHead"><div class="av3" style="width:42px;height:42px">'+sv('cart',18)+'</div>'+
+  '<div><b>Pedido #'+E(p.numero)+'</b>'+
+   '<span>'+dataBR(p.data)+' às '+E(p.hora||'')+' · '+
+    (p.tipo==='entrega'?'Entrega'+(p.cidade?' para '+E(p.cidade):''):'Frente de caixa')+'</span>'+
+   '<span>'+E(p.clienteNome||'Cliente não identificado')+'</span></div>'+
+  '<div style="text-align:right"><span class="hint">Total</span>'+
+   '<b style="display:block;font-size:20px;color:var(--acc-d)">R$ '+money(p.total)+'</b></div></div>'+
+  '<div class="blk" style="margin:0 0 11px;max-width:none;padding:0;overflow:hidden">'+
+   '<div class="acTit">Itens do pedido</div>'+
+   '<table class="acTab"><thead><tr><th>Produto</th>'+
+   '<th style="width:80px;text-align:right">Qtd</th>'+
+   '<th style="width:110px;text-align:right">Unitário</th>'+
+   '<th style="width:110px;text-align:right">Total</th></tr></thead><tbody>'+
+   (p.itens||[]).map(function(i2){
+     return '<tr><td><b>'+E(i2.nome)+'</b>'+
+     ((i2.opcoes||[]).length?'<small style="display:block;color:var(--ink-3)">'+
+       (i2.opcoes||[]).map(function(o){return E(o.nome||o)}).join(' · ')+'</small>':'')+
+     (i2.obs?'<small style="display:block;color:var(--ink-3)">obs: '+E(i2.obs)+'</small>':'')+'</td>'+
+     '<td style="text-align:right">'+fmtQt(i2.qtd)+'</td>'+
+     '<td style="text-align:right">R$ '+money(i2.unitario)+'</td>'+
+     '<td style="text-align:right"><b>R$ '+money(i2.total)+'</b></td></tr>';
+   }).join('')+'</tbody></table></div>'+
+  '<div class="blk" style="margin:0;max-width:none"><h3>Fechamento</h3>'+
+   '<div class="linha"><span>Itens</span><b>R$ '+money(vi)+'</b></div>'+
+   (p.taxa?'<div class="linha"><span>Taxa de entrega</span><b>R$ '+money(p.taxa)+'</b></div>':'')+
+   (p.acrescimo?'<div class="linha"><span>Acréscimo</span><b class="vg">+ R$ '+money(p.acrescimo)+'</b></div>':'')+
+   (p.desconto?'<div class="linha"><span>Desconto'+
+     (p.cupomCodigo?' (cupom '+E(p.cupomCodigo)+')':'')+'</span><b class="vr">- R$ '+money(p.desconto)+'</b></div>':'')+
+   '<div class="linha tot"><span>Total do pedido</span><span>R$ '+money(p.total)+'</span></div>'+
+   (pg.length?'<div style="margin-top:12px">'+pg.map(function(g){
+     return '<div class="linha"><span>'+E(g.nome)+'</span><b>R$ '+money(g.valor)+'</b></div>';
+   }).join('')+'</div>':'')+
+  '</div></div>';
+  var o=document.createElement('div');o.className='mdOv';o.id='mdOv';
+  o.innerHTML='<div class="mdBox lg"><div class="mdH"><b>Pedido #'+E(p.numero)+'</b>'+
+   '<button onclick="fecharModal()">&times;</button></div>'+h+
+   '<div class="mdF"><button class="btnP2" onclick="fecharModal()">Fechar</button></div></div>';
+  document.body.appendChild(o);
+  fecharSoForaDeVerdade(o);
+}
+function explicaVendasPeriodo(){
+  explicaRel('Vendas por Período — como é feito',[
+   ['Total de pedidos','vendas concluídas no PDV, sem contar as canceladas'],
+   ['Ticket médio','faturamento dividido pela quantidade de pedidos — calculado separado para entrega e balcão'],
+   ['Clientes que compraram','clientes diferentes identificados nas vendas; quem comprou sem se identificar não é contado'],
+   ['Total em itens','soma do valor dos produtos, sem taxa de entrega nem acréscimo'],
+   ['Taxa de entrega','vem da tabela de taxas do entregador, pela cidade do cliente'],
+   ['Cupom de desconto','filtra as vendas onde um cupom foi aplicado e mostra o desconto concedido'],
+   ['Cardápio digital e WhatsApp','contam os pedidos por canal de origem; ficam em zero até esses módulos existirem'],
+   ['Lista de pedidos','cada venda do período — clique na linha para abrir o pedido completo']
+  ],'os pedidos registrados no PDV, cruzados com o cadastro de clientes, formas de pagamento '+
+    'e cupons. O ticket médio usa o valor final do pedido, já com taxa e desconto.',
+   'pedidos cancelados nos totais (aparecem em indicador próprio e marcados na lista), '+
+   'lançamentos financeiros que não vieram de venda, e vendas de outras lojas.');
+}
+function exportarPeriodo(){
+  var l=[['Pedido','Data','Hora','Cliente','Pagamento','Tipo','Itens','Taxa','Acrescimo','Desconto','Total']];
+  var trs=document.querySelectorAll('#relArea tbody tr');
+  for(var i=0;i<trs.length;i++){
+    var td=trs[i].querySelectorAll('td');
+    l.push([td[0].innerText,td[1].innerText,td[2].innerText,td[3].innerText.split('\n')[0],
+      td[4].innerText,td[5].innerText,td[6].innerText,td[7].innerText,'',td[8].innerText,td[9].innerText]);
+  }
+  baixarCSV('nexor-vendas-periodo.csv',l);
 }
 
 /* ---------- POPUP E MODAL ---------- */
