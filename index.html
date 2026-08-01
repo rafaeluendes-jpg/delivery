@@ -3148,14 +3148,20 @@ var MOD=[
  {id:'historico-posicao',n:'Histórico de Posição de Estoque'},
  {id:'notas-entrada',n:'Notas de Entrada'}]},
 {id:'relatorios',n:'Gestão de Relatórios',ic:'file',it:[
- {id:'cupons',n:'Cupons'},{id:'vendas-geradas',n:'Vendas Geradas'},{id:'dre',n:'DRE'},
- {id:'faturamento-dia',n:'Faturamento por Dia'},{id:'itens-consumidos',n:'Itens Consumidos'},
- {id:'itens-vendidos',n:'Itens Vendidos'},{id:'vendas-area-entrega',n:'Vendas por Área de Entrega'},
- {id:'vendas-forma-pagamento',n:'Vendas por Forma de Pagamento'},{id:'vendas-periodo',n:'Vendas por Período'},
- {id:'relatorio-cmv',n:'Relatório CMV'}]},
+ {id:'faturamento-dia',n:'Faturamento por Dia'},
+ {id:'itens-consumidos',n:'Itens Consumidos'},
+ {id:'itens-vendidos',n:'Itens Vendidos'},
+ {id:'vendas-area-entrega',n:'Vendas por Área de Entrega'},
+ {id:'vendas-forma-pagamento',n:'Vendas por Forma de Pagamento'},
+ {id:'vendas-periodo',n:'Vendas por Período'},
+ {id:'relatorio-cmv',n:'Relatório CMV'},
+ {id:'dre',n:'DRE'},
+ {id:'cupons',n:'Cupons'}]},
 {id:'dashboard',n:'Gestão e Dashboard',ic:'chart',it:[
- {id:'acompanhamento-venda',n:'Acompanhamento de Venda'},{id:'canais-venda',n:'Canais de Venda'},
- {id:'faturamento',n:'Faturamento'},{id:'venda-data-hora',n:'Venda por Data e Hora'}]},
+ {id:'canais-venda',n:'Canais de Venda'},
+ {id:'faturamento',n:'Faturamento'},
+ {id:'venda-data-hora',n:'Venda por Data e Hora'},
+ {id:'comparativo-anual',n:'Comparativo Anual'}]},
 {id:'loja',n:'Configuração da Loja',ic:'store',it:[
  {id:'cfg-pdv',n:'Configuração do PDV'},
  {id:'cfg-movimentacao',n:'Configuração de Movimentação de Estoque'},
@@ -4132,7 +4138,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V3.8.0';
+var VERSAO='V3.8.1';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+

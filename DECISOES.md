@@ -36,6 +36,29 @@ Exemplo do tipo de texto esperado:
 - Motivo de movimentação precisa ser do **tipo Produzir** para gerar produto acabado
 - Custo do destino = média ponderada do que foi realmente produzido
 
+## Ordem dos relatórios (definida por Rafael)
+
+1. Faturamento por Dia
+2. Itens Consumidos
+3. Itens Vendidos
+4. Vendas por Área de Entrega
+5. Vendas por Forma de Pagamento
+6. Vendas por Período
+7. Relatório CMV
+8. DRE
+9. Cupons
+
+Removido: "Vendas Geradas" (redundante).
+
+## Dashboard
+
+- Canais de Venda
+- Faturamento
+- Venda por Data e Hora
+- **Comparativo Anual** (novo)
+
+Removido: "Acompanhamento de Venda".
+
 ## Pendências
 
 - [ ] Gestão de Relatórios (com a explicação de cada um)
