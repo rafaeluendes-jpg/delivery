@@ -35,7 +35,7 @@ async function carregar(){
     if(lc.sacola)S.sacola=lc.sacola;
     if(lc.cliente)S.cliente=lc.cliente;
     if(lc.loja){var l=D.lojas.find(function(x){return x.id===lc.loja});
-      if(l){S.loja=l;S.tela='menu';}}
+      if(l){S.loja=l;S.tela='menu';aplicarMarca();}}
     render();
   }catch(e){
     $('app').innerHTML='<div class="carregando">Não consegui carregar o cardápio agora.<br>'+
@@ -46,6 +46,13 @@ function cfgLoja(){
   if(!S.loja)return {};
   return D.cfg[S.loja.id]||D.cfg.geral||{};
 }
+function nomeLoja(){
+  var c=cfgLoja();
+  return c.titulo||(S.loja?S.loja.nome:'Cardápio Digital');
+}
+function sloganLoja(){ return cfgLoja().slogan||''; }
+function logoLoja(){ return cfgLoja().logo||'img/logo.jpg'; }
+function capaLoja(){ return cfgLoja().capa||'img/capa.jpg'; }
 function abertoAgora(){
   var c=cfgLoja();
   if(c.ativo===false)return false;
@@ -96,8 +103,9 @@ function topo(){
   var ab=S.loja?abertoAgora():true;
   var c=cfgLoja();
   return '<div class="topo"><div class="topoIn">'+
-   '<div class="marca"><img src="img/logo.jpg" alt="">'+
-    '<div><b>JOLÔ</b><span>gelato</span></div></div>'+
+   '<div class="marca">'+(logoLoja()?'<img src="'+logoLoja()+'" alt="">':'')+
+    '<div><b>'+E(nomeLoja())+'</b>'+
+    (sloganLoja()?'<span>'+E(sloganLoja())+'</span>':'')+'</div></div>'+
    (S.loja?'<div class="statusP"><span class="pt'+(ab?'':' off')+'"></span>'+
      (ab?'Aberto':'Fechado')+(c.tempo_entrega?' · '+E(c.tempo_entrega):'')+'</div>':'')+
    '<div style="flex:1"></div>'+
@@ -109,9 +117,9 @@ function topo(){
 }
 function capa(){
   var c=cfgLoja();
-  return '<div class="hero"><img src="img/capa.jpg" alt="">'+
-   '<div class="heroIn"><div class="heroLogo"><img src="img/logo.jpg" alt="Jolô Gelato"></div>'+
-   '<h1>Gelato artesanal</h1><p>feito para valer a pena</p>'+
+  return '<div class="hero"><img src="'+capaLoja()+'" alt="">'+
+   '<div class="heroIn">'+(logoLoja()?'<div class="heroLogo"><img src="'+logoLoja()+'" alt=""></div>':'')+
+   '<h1>'+E(nomeLoja())+'</h1><p>'+E(sloganLoja())+'</p>'+
    (S.loja?'<div class="heroTags">'+
      (c.tempo_entrega?'<span class="heroTag">entrega em '+E(c.tempo_entrega)+'</span>':'')+
      (Number(c.pedido_minimo)?'<span class="heroTag">mínimo R$ '+money(c.pedido_minimo)+'</span>':'')+
@@ -121,16 +129,42 @@ function capa(){
 }
 function rodape(){
   var c=cfgLoja();
-  return '<div class="rodape"><img src="img/logo.jpg" alt="">'+
-   '<b>Jolô Gelato</b>'+
-   'feito para valer a pena<br>'+
+  return '<div class="rodape">'+(logoLoja()?'<img src="'+logoLoja()+'" alt="">':'')+
+   '<b>'+E(nomeLoja())+'</b>'+
+   E(sloganLoja())+'<br>'+
+   (c.endereco?E(c.endereco)+'<br>':'')+
+   (c.instagram?E(c.instagram)+'<br>':'')+
    (S.loja?E(S.loja.nome)+(S.loja.cidade?' · '+E(S.loja.cidade):'')+'<br>':'')+
    (c.whatsapp?'WhatsApp '+E(c.whatsapp)+'<br>':'')+
    '<br><span style="opacity:.55;font-size:11px">pedidos por Nexor Delivery</span></div>';
 }
+function aplicarMarca(){
+  var c=cfgLoja();
+  var r=document.documentElement.style;
+  if(c.cor_principal){
+    r.setProperty('--verde',c.cor_principal);
+    r.setProperty('--verde-c',c.cor_principal);
+    r.setProperty('--verde-e',escurecer(c.cor_principal,22));
+    r.setProperty('--verde-cl',clarear(c.cor_principal,22));
+  }
+  if(c.cor_fundo){
+    r.setProperty('--creme',c.cor_fundo);
+    r.setProperty('--creme-2',escurecer(c.cor_fundo,5));
+  }
+  var t=c.titulo||(S.loja?S.loja.nome:'')||'Cardápio';
+  document.title=t+' — Delivery';
+}
+function hex(c){var m=String(c||'').replace('#','');
+  if(m.length===3)m=m[0]+m[0]+m[1]+m[1]+m[2]+m[2];
+  return [parseInt(m.slice(0,2),16),parseInt(m.slice(2,4),16),parseInt(m.slice(4,6),16)];}
+function escurecer(c,p){var v=hex(c);
+  return '#'+v.map(function(x){return Math.max(0,Math.round(x*(1-p/100))).toString(16).padStart(2,'0')}).join('');}
+function clarear(c,p){var v=hex(c);
+  return '#'+v.map(function(x){return Math.min(255,Math.round(x+(255-x)*p/100)).toString(16).padStart(2,'0')}).join('');}
 function escolherLoja(id){
   S.loja=D.lojas.find(function(x){return x.id===id});
   S.tela='menu';S.cat=null;
+  aplicarMarca();
   salvarLocal();
   window.scrollTo(0,0);
   render();
@@ -140,6 +174,12 @@ function prodsDaLoja(){
   return D.prods.filter(function(p){
     return p.ativo!==false && p.disponivel_delivery!==false;
   });
+}
+function formasAceitas(){
+  var c=cfgLoja();
+  var f=c.formas_aceitas;
+  if(f&&f.length)return f;
+  return ['Dinheiro','Pix','Cartão de débito','Cartão de crédito'];
 }
 function telaMenu(){
   var c=cfgLoja(), ab=abertoAgora();
@@ -381,7 +421,7 @@ function irDados(){
     '<div class="cp"><label>Forma de pagamento *</label>'+
      '<select id="cPag" onchange="mudouPag()">'+
      '<option value="">Como você vai pagar</option>'+
-     ['Dinheiro','Pix','Cartão de débito','Cartão de crédito'].map(function(f){
+     formasAceitas().map(function(f){
        return '<option value="'+f+'"'+(cl.pag===f?' selected':'')+'>'+f+'</option>';}).join('')+
      '</select><div class="dica">o pagamento é feito na '+
      (S.tipo==='entrega'?'entrega':'retirada')+'</div></div>'+
