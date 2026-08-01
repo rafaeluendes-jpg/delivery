@@ -1963,15 +1963,15 @@ tbody td small{font-size:10.5px}
   cursor:pointer;color:var(--ink-3);display:flex;align-items:center;justify-content:center;
   align-self:center;margin-left:8px;flex:none}
 .infoBt:hover{border-color:var(--acc);color:var(--acc-d);background:var(--acc-soft)}
-.caResumo{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;padding:14px 16px}
-.caCard{background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 14px}
-.caCardT{display:block;font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;
-  letter-spacing:.05em}
-.caCardV{display:flex;align-items:baseline;gap:8px;margin:5px 0 3px}
-.caCardV b{font-size:19px;font-weight:700}
-.caVar{font-size:11px;font-weight:700}
+.caResumo{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:1px;
+  margin:12px 16px;background:var(--line-2);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.caCard{background:#fff;padding:9px 12px 10px}
+.caCardT{display:block;font-size:10px;font-weight:600;color:var(--ink-3);line-height:1.3}
+.caCardV{display:flex;align-items:baseline;gap:7px;margin:3px 0 2px}
+.caCardV b{font-size:16px;font-weight:700;font-variant-numeric:tabular-nums}
+.caVar{font-size:10.5px;font-weight:700}
 .caVar.sobe{color:var(--acc-d)} .caVar.desce{color:var(--red)}
-.caCardA{font-size:11px;color:var(--ink-3)}
+.caCardA{font-size:10.5px;color:var(--ink-3)}
 .caGraf{margin:4px 16px 14px;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
 .caGrafH{display:flex;align-items:center;padding:10px 14px;background:var(--alt);
   border-bottom:1px solid var(--line-2);font-size:12px;font-weight:700;color:var(--ink-2)}
@@ -2023,12 +2023,13 @@ tbody td small{font-size:10.5px}
 .chip.on{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
 .chip input{width:12px;height:12px;margin:0}
 .rfAcoes{display:flex;gap:8px}
-.relKpis{display:flex;gap:10px;padding:13px 16px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
-.rk{border:1px solid var(--line);border-radius:7px;padding:9px 14px;background:#fff;min-width:120px}
-.rk span{display:block;font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em}
-.rk b{display:block;font-size:17px;font-weight:700;margin-top:2px}
-.rk.dest{border-color:var(--acc);box-shadow:inset 3px 0 0 var(--acc)}
-.rk.dest b{color:var(--acc-d);font-size:20px}
+.relKpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:1px;
+  margin:12px 16px;background:var(--line-2);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.rk{background:#fff;padding:8px 12px 9px}
+.rk span{display:block;font-size:10px;font-weight:600;color:var(--ink-3);line-height:1.3}
+.rk b{display:block;font-size:16px;font-weight:700;margin-top:2px;font-variant-numeric:tabular-nums}
+.rk.dest{background:var(--acc-soft)}
+.rk.dest b{color:var(--acc-d);font-size:18px}
 .ivGrade{display:flex;gap:12px;padding:0 16px 16px;align-items:flex-start}
 .ivGrade .etTabW{flex:1;min-width:0;border:1px solid var(--line);border-radius:8px}
 .ivAdic{width:290px;flex:none;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
@@ -2195,18 +2196,43 @@ tbody td small{font-size:10.5px}
 .indIt:hover .indDica{opacity:1;top:calc(100% + 5px)}
 .indIt:hover .indT svg{opacity:1;color:var(--acc-d)}
 /* ---------- caixa de cupom ---------- */
-.cupBox{display:flex;align-items:center;gap:14px;margin:0 16px;padding:13px 16px;
-  background:linear-gradient(90deg,var(--acc-soft),#fff);border:1px solid var(--acc);
-  border-radius:10px;flex-wrap:wrap}
-.cupIc{width:38px;height:38px;border-radius:9px;background:var(--acc);color:#fff;
+.cupBox{display:flex;align-items:center;gap:12px;margin:12px 16px 0;padding:9px 14px;
+  background:var(--acc-soft);border:1px solid var(--acc);border-radius:8px;flex-wrap:wrap}
+.cupIc{width:28px;height:28px;border-radius:7px;background:var(--acc);color:#fff;
   display:flex;align-items:center;justify-content:center;flex:none}
-.cupT b{display:block;font-size:13.5px;color:var(--ink)}
-.cupT span{display:block;font-size:11.5px;color:var(--ink-2);margin-top:1px}
-.cupN{margin-left:auto;text-align:right}
-.cupN span{display:block;font-size:9.5px;font-weight:700;color:var(--ink-3);
-  text-transform:uppercase;letter-spacing:.04em}
-.cupN b{display:block;font-size:16px;font-weight:700;margin-top:2px}
+.cupT b{display:block;font-size:12px;color:var(--ink)}
+.cupT span{display:block;font-size:10.5px;color:var(--ink-2)}
+.cupN{margin-left:14px;text-align:right}
+.cupN span{display:block;font-size:9.5px;font-weight:600;color:var(--ink-3)}
+.cupN b{display:block;font-size:14px;font-weight:700}
 .etTab tbody tr.linCanc td{opacity:.6;background:#FCF3F3}
+
+/* tabelas dos relatórios: linha mais baixa, cara de sistema */
+.etTabW.plano2 .etTab td{padding:5px 10px}
+.etTabW.plano2 .etTab th{padding:7px 10px;font-size:10.5px}
+.etTabW.plano2 .etTab td small{font-size:9.5px}
+.etTabW.plano2{margin:0 16px 14px;border:1px solid var(--line);border-radius:8px;overflow:auto}
+
+/* ---------- painel de indicadores compacto ---------- */
+.painelInd{margin:12px 16px;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.piH{display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--alt);
+  border-bottom:1px solid var(--line-2);font-size:11px;font-weight:700;color:var(--ink-2);
+  text-transform:uppercase;letter-spacing:.05em}
+.piSub{margin-left:auto;font-size:10.5px;font-weight:500;color:var(--ink-3);text-transform:none;letter-spacing:0}
+.piGrade{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:1px;background:var(--line-2)}
+.piIt{background:#fff;padding:8px 12px 9px}
+.piIt.dest{background:var(--acc-soft)}
+.piT{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--ink-3);
+  font-weight:600;line-height:1.3}
+.piI{width:13px;height:13px;border-radius:50%;border:1px solid var(--line);background:#fff;
+  color:var(--ink-3);font-size:9px;font-weight:700;cursor:pointer;line-height:1;
+  display:flex;align-items:center;justify-content:center;flex:none;padding:0;font-family:inherit}
+.piI:hover{background:var(--acc);border-color:var(--acc);color:#fff}
+.piIt b{display:block;font-size:16px;font-weight:700;margin-top:2px;font-variant-numeric:tabular-nums}
+.piIt.dest b{color:var(--acc-d);font-size:18px}
+.dicaBox{padding:10px 12px;max-width:250px}
+.dicaBox b{display:block;font-size:12px;color:var(--ink);margin-bottom:3px}
+.dicaBox span{display:block;font-size:11.5px;color:var(--ink-2);line-height:1.55}
 
 @media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
 
@@ -2280,18 +2306,43 @@ tbody td small{font-size:10.5px}
 .indIt:hover .indDica{opacity:1;top:calc(100% + 5px)}
 .indIt:hover .indT svg{opacity:1;color:var(--acc-d)}
 /* ---------- caixa de cupom ---------- */
-.cupBox{display:flex;align-items:center;gap:14px;margin:0 16px;padding:13px 16px;
-  background:linear-gradient(90deg,var(--acc-soft),#fff);border:1px solid var(--acc);
-  border-radius:10px;flex-wrap:wrap}
-.cupIc{width:38px;height:38px;border-radius:9px;background:var(--acc);color:#fff;
+.cupBox{display:flex;align-items:center;gap:12px;margin:12px 16px 0;padding:9px 14px;
+  background:var(--acc-soft);border:1px solid var(--acc);border-radius:8px;flex-wrap:wrap}
+.cupIc{width:28px;height:28px;border-radius:7px;background:var(--acc);color:#fff;
   display:flex;align-items:center;justify-content:center;flex:none}
-.cupT b{display:block;font-size:13.5px;color:var(--ink)}
-.cupT span{display:block;font-size:11.5px;color:var(--ink-2);margin-top:1px}
-.cupN{margin-left:auto;text-align:right}
-.cupN span{display:block;font-size:9.5px;font-weight:700;color:var(--ink-3);
-  text-transform:uppercase;letter-spacing:.04em}
-.cupN b{display:block;font-size:16px;font-weight:700;margin-top:2px}
+.cupT b{display:block;font-size:12px;color:var(--ink)}
+.cupT span{display:block;font-size:10.5px;color:var(--ink-2)}
+.cupN{margin-left:14px;text-align:right}
+.cupN span{display:block;font-size:9.5px;font-weight:600;color:var(--ink-3)}
+.cupN b{display:block;font-size:14px;font-weight:700}
 .etTab tbody tr.linCanc td{opacity:.6;background:#FCF3F3}
+
+/* tabelas dos relatórios: linha mais baixa, cara de sistema */
+.etTabW.plano2 .etTab td{padding:5px 10px}
+.etTabW.plano2 .etTab th{padding:7px 10px;font-size:10.5px}
+.etTabW.plano2 .etTab td small{font-size:9.5px}
+.etTabW.plano2{margin:0 16px 14px;border:1px solid var(--line);border-radius:8px;overflow:auto}
+
+/* ---------- painel de indicadores compacto ---------- */
+.painelInd{margin:12px 16px;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.piH{display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--alt);
+  border-bottom:1px solid var(--line-2);font-size:11px;font-weight:700;color:var(--ink-2);
+  text-transform:uppercase;letter-spacing:.05em}
+.piSub{margin-left:auto;font-size:10.5px;font-weight:500;color:var(--ink-3);text-transform:none;letter-spacing:0}
+.piGrade{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:1px;background:var(--line-2)}
+.piIt{background:#fff;padding:8px 12px 9px}
+.piIt.dest{background:var(--acc-soft)}
+.piT{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--ink-3);
+  font-weight:600;line-height:1.3}
+.piI{width:13px;height:13px;border-radius:50%;border:1px solid var(--line);background:#fff;
+  color:var(--ink-3);font-size:9px;font-weight:700;cursor:pointer;line-height:1;
+  display:flex;align-items:center;justify-content:center;flex:none;padding:0;font-family:inherit}
+.piI:hover{background:var(--acc);border-color:var(--acc);color:#fff}
+.piIt b{display:block;font-size:16px;font-weight:700;margin-top:2px;font-variant-numeric:tabular-nums}
+.piIt.dest b{color:var(--acc-d);font-size:18px}
+.dicaBox{padding:10px 12px;max-width:250px}
+.dicaBox b{display:block;font-size:12px;color:var(--ink);margin-bottom:3px}
+.dicaBox span{display:block;font-size:11.5px;color:var(--ink-2);line-height:1.55}
 
 @media(max-width:1000px){.ivGrade{flex-direction:column}.ivAdic{width:100%}}
 
@@ -2447,18 +2498,43 @@ tbody td small{font-size:10.5px}
 .indIt:hover .indDica{opacity:1;top:calc(100% + 5px)}
 .indIt:hover .indT svg{opacity:1;color:var(--acc-d)}
 /* ---------- caixa de cupom ---------- */
-.cupBox{display:flex;align-items:center;gap:14px;margin:0 16px;padding:13px 16px;
-  background:linear-gradient(90deg,var(--acc-soft),#fff);border:1px solid var(--acc);
-  border-radius:10px;flex-wrap:wrap}
-.cupIc{width:38px;height:38px;border-radius:9px;background:var(--acc);color:#fff;
+.cupBox{display:flex;align-items:center;gap:12px;margin:12px 16px 0;padding:9px 14px;
+  background:var(--acc-soft);border:1px solid var(--acc);border-radius:8px;flex-wrap:wrap}
+.cupIc{width:28px;height:28px;border-radius:7px;background:var(--acc);color:#fff;
   display:flex;align-items:center;justify-content:center;flex:none}
-.cupT b{display:block;font-size:13.5px;color:var(--ink)}
-.cupT span{display:block;font-size:11.5px;color:var(--ink-2);margin-top:1px}
-.cupN{margin-left:auto;text-align:right}
-.cupN span{display:block;font-size:9.5px;font-weight:700;color:var(--ink-3);
-  text-transform:uppercase;letter-spacing:.04em}
-.cupN b{display:block;font-size:16px;font-weight:700;margin-top:2px}
+.cupT b{display:block;font-size:12px;color:var(--ink)}
+.cupT span{display:block;font-size:10.5px;color:var(--ink-2)}
+.cupN{margin-left:14px;text-align:right}
+.cupN span{display:block;font-size:9.5px;font-weight:600;color:var(--ink-3)}
+.cupN b{display:block;font-size:14px;font-weight:700}
 .etTab tbody tr.linCanc td{opacity:.6;background:#FCF3F3}
+
+/* tabelas dos relatórios: linha mais baixa, cara de sistema */
+.etTabW.plano2 .etTab td{padding:5px 10px}
+.etTabW.plano2 .etTab th{padding:7px 10px;font-size:10.5px}
+.etTabW.plano2 .etTab td small{font-size:9.5px}
+.etTabW.plano2{margin:0 16px 14px;border:1px solid var(--line);border-radius:8px;overflow:auto}
+
+/* ---------- painel de indicadores compacto ---------- */
+.painelInd{margin:12px 16px;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.piH{display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--alt);
+  border-bottom:1px solid var(--line-2);font-size:11px;font-weight:700;color:var(--ink-2);
+  text-transform:uppercase;letter-spacing:.05em}
+.piSub{margin-left:auto;font-size:10.5px;font-weight:500;color:var(--ink-3);text-transform:none;letter-spacing:0}
+.piGrade{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:1px;background:var(--line-2)}
+.piIt{background:#fff;padding:8px 12px 9px}
+.piIt.dest{background:var(--acc-soft)}
+.piT{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--ink-3);
+  font-weight:600;line-height:1.3}
+.piI{width:13px;height:13px;border-radius:50%;border:1px solid var(--line);background:#fff;
+  color:var(--ink-3);font-size:9px;font-weight:700;cursor:pointer;line-height:1;
+  display:flex;align-items:center;justify-content:center;flex:none;padding:0;font-family:inherit}
+.piI:hover{background:var(--acc);border-color:var(--acc);color:#fff}
+.piIt b{display:block;font-size:16px;font-weight:700;margin-top:2px;font-variant-numeric:tabular-nums}
+.piIt.dest b{color:var(--acc-d);font-size:18px}
+.dicaBox{padding:10px 12px;max-width:250px}
+.dicaBox b{display:block;font-size:12px;color:var(--ink);margin-bottom:3px}
+.dicaBox span{display:block;font-size:11.5px;color:var(--ink-2);line-height:1.55}
 
 @media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
 
@@ -2532,18 +2608,43 @@ tbody td small{font-size:10.5px}
 .indIt:hover .indDica{opacity:1;top:calc(100% + 5px)}
 .indIt:hover .indT svg{opacity:1;color:var(--acc-d)}
 /* ---------- caixa de cupom ---------- */
-.cupBox{display:flex;align-items:center;gap:14px;margin:0 16px;padding:13px 16px;
-  background:linear-gradient(90deg,var(--acc-soft),#fff);border:1px solid var(--acc);
-  border-radius:10px;flex-wrap:wrap}
-.cupIc{width:38px;height:38px;border-radius:9px;background:var(--acc);color:#fff;
+.cupBox{display:flex;align-items:center;gap:12px;margin:12px 16px 0;padding:9px 14px;
+  background:var(--acc-soft);border:1px solid var(--acc);border-radius:8px;flex-wrap:wrap}
+.cupIc{width:28px;height:28px;border-radius:7px;background:var(--acc);color:#fff;
   display:flex;align-items:center;justify-content:center;flex:none}
-.cupT b{display:block;font-size:13.5px;color:var(--ink)}
-.cupT span{display:block;font-size:11.5px;color:var(--ink-2);margin-top:1px}
-.cupN{margin-left:auto;text-align:right}
-.cupN span{display:block;font-size:9.5px;font-weight:700;color:var(--ink-3);
-  text-transform:uppercase;letter-spacing:.04em}
-.cupN b{display:block;font-size:16px;font-weight:700;margin-top:2px}
+.cupT b{display:block;font-size:12px;color:var(--ink)}
+.cupT span{display:block;font-size:10.5px;color:var(--ink-2)}
+.cupN{margin-left:14px;text-align:right}
+.cupN span{display:block;font-size:9.5px;font-weight:600;color:var(--ink-3)}
+.cupN b{display:block;font-size:14px;font-weight:700}
 .etTab tbody tr.linCanc td{opacity:.6;background:#FCF3F3}
+
+/* tabelas dos relatórios: linha mais baixa, cara de sistema */
+.etTabW.plano2 .etTab td{padding:5px 10px}
+.etTabW.plano2 .etTab th{padding:7px 10px;font-size:10.5px}
+.etTabW.plano2 .etTab td small{font-size:9.5px}
+.etTabW.plano2{margin:0 16px 14px;border:1px solid var(--line);border-radius:8px;overflow:auto}
+
+/* ---------- painel de indicadores compacto ---------- */
+.painelInd{margin:12px 16px;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.piH{display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--alt);
+  border-bottom:1px solid var(--line-2);font-size:11px;font-weight:700;color:var(--ink-2);
+  text-transform:uppercase;letter-spacing:.05em}
+.piSub{margin-left:auto;font-size:10.5px;font-weight:500;color:var(--ink-3);text-transform:none;letter-spacing:0}
+.piGrade{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:1px;background:var(--line-2)}
+.piIt{background:#fff;padding:8px 12px 9px}
+.piIt.dest{background:var(--acc-soft)}
+.piT{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--ink-3);
+  font-weight:600;line-height:1.3}
+.piI{width:13px;height:13px;border-radius:50%;border:1px solid var(--line);background:#fff;
+  color:var(--ink-3);font-size:9px;font-weight:700;cursor:pointer;line-height:1;
+  display:flex;align-items:center;justify-content:center;flex:none;padding:0;font-family:inherit}
+.piI:hover{background:var(--acc);border-color:var(--acc);color:#fff}
+.piIt b{display:block;font-size:16px;font-weight:700;margin-top:2px;font-variant-numeric:tabular-nums}
+.piIt.dest b{color:var(--acc-d);font-size:18px}
+.dicaBox{padding:10px 12px;max-width:250px}
+.dicaBox b{display:block;font-size:12px;color:var(--ink);margin-bottom:3px}
+.dicaBox span{display:block;font-size:11.5px;color:var(--ink-2);line-height:1.55}
 
 @media(max-width:1000px){
   .lfPeriodo{order:3;width:100%}
@@ -3592,15 +3693,15 @@ tbody td small{font-size:10.5px}
   cursor:pointer;color:var(--ink-3);display:flex;align-items:center;justify-content:center;
   align-self:center;margin-left:8px;flex:none}
 .infoBt:hover{border-color:var(--acc);color:var(--acc-d);background:var(--acc-soft)}
-.caResumo{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;padding:14px 16px}
-.caCard{background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 14px}
-.caCardT{display:block;font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;
-  letter-spacing:.05em}
-.caCardV{display:flex;align-items:baseline;gap:8px;margin:5px 0 3px}
-.caCardV b{font-size:19px;font-weight:700}
-.caVar{font-size:11px;font-weight:700}
+.caResumo{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:1px;
+  margin:12px 16px;background:var(--line-2);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.caCard{background:#fff;padding:9px 12px 10px}
+.caCardT{display:block;font-size:10px;font-weight:600;color:var(--ink-3);line-height:1.3}
+.caCardV{display:flex;align-items:baseline;gap:7px;margin:3px 0 2px}
+.caCardV b{font-size:16px;font-weight:700;font-variant-numeric:tabular-nums}
+.caVar{font-size:10.5px;font-weight:700}
 .caVar.sobe{color:var(--acc-d)} .caVar.desce{color:var(--red)}
-.caCardA{font-size:11px;color:var(--ink-3)}
+.caCardA{font-size:10.5px;color:var(--ink-3)}
 .caGraf{margin:4px 16px 14px;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
 .caGrafH{display:flex;align-items:center;padding:10px 14px;background:var(--alt);
   border-bottom:1px solid var(--line-2);font-size:12px;font-weight:700;color:var(--ink-2)}
@@ -3652,12 +3753,13 @@ tbody td small{font-size:10.5px}
 .chip.on{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
 .chip input{width:12px;height:12px;margin:0}
 .rfAcoes{display:flex;gap:8px}
-.relKpis{display:flex;gap:10px;padding:13px 16px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
-.rk{border:1px solid var(--line);border-radius:7px;padding:9px 14px;background:#fff;min-width:120px}
-.rk span{display:block;font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em}
-.rk b{display:block;font-size:17px;font-weight:700;margin-top:2px}
-.rk.dest{border-color:var(--acc);box-shadow:inset 3px 0 0 var(--acc)}
-.rk.dest b{color:var(--acc-d);font-size:20px}
+.relKpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:1px;
+  margin:12px 16px;background:var(--line-2);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.rk{background:#fff;padding:8px 12px 9px}
+.rk span{display:block;font-size:10px;font-weight:600;color:var(--ink-3);line-height:1.3}
+.rk b{display:block;font-size:16px;font-weight:700;margin-top:2px;font-variant-numeric:tabular-nums}
+.rk.dest{background:var(--acc-soft)}
+.rk.dest b{color:var(--acc-d);font-size:18px}
 .ivGrade{display:flex;gap:12px;padding:0 16px 16px;align-items:flex-start}
 .ivGrade .etTabW{flex:1;min-width:0;border:1px solid var(--line);border-radius:8px}
 .ivAdic{width:290px;flex:none;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
@@ -3824,18 +3926,43 @@ tbody td small{font-size:10.5px}
 .indIt:hover .indDica{opacity:1;top:calc(100% + 5px)}
 .indIt:hover .indT svg{opacity:1;color:var(--acc-d)}
 /* ---------- caixa de cupom ---------- */
-.cupBox{display:flex;align-items:center;gap:14px;margin:0 16px;padding:13px 16px;
-  background:linear-gradient(90deg,var(--acc-soft),#fff);border:1px solid var(--acc);
-  border-radius:10px;flex-wrap:wrap}
-.cupIc{width:38px;height:38px;border-radius:9px;background:var(--acc);color:#fff;
+.cupBox{display:flex;align-items:center;gap:12px;margin:12px 16px 0;padding:9px 14px;
+  background:var(--acc-soft);border:1px solid var(--acc);border-radius:8px;flex-wrap:wrap}
+.cupIc{width:28px;height:28px;border-radius:7px;background:var(--acc);color:#fff;
   display:flex;align-items:center;justify-content:center;flex:none}
-.cupT b{display:block;font-size:13.5px;color:var(--ink)}
-.cupT span{display:block;font-size:11.5px;color:var(--ink-2);margin-top:1px}
-.cupN{margin-left:auto;text-align:right}
-.cupN span{display:block;font-size:9.5px;font-weight:700;color:var(--ink-3);
-  text-transform:uppercase;letter-spacing:.04em}
-.cupN b{display:block;font-size:16px;font-weight:700;margin-top:2px}
+.cupT b{display:block;font-size:12px;color:var(--ink)}
+.cupT span{display:block;font-size:10.5px;color:var(--ink-2)}
+.cupN{margin-left:14px;text-align:right}
+.cupN span{display:block;font-size:9.5px;font-weight:600;color:var(--ink-3)}
+.cupN b{display:block;font-size:14px;font-weight:700}
 .etTab tbody tr.linCanc td{opacity:.6;background:#FCF3F3}
+
+/* tabelas dos relatórios: linha mais baixa, cara de sistema */
+.etTabW.plano2 .etTab td{padding:5px 10px}
+.etTabW.plano2 .etTab th{padding:7px 10px;font-size:10.5px}
+.etTabW.plano2 .etTab td small{font-size:9.5px}
+.etTabW.plano2{margin:0 16px 14px;border:1px solid var(--line);border-radius:8px;overflow:auto}
+
+/* ---------- painel de indicadores compacto ---------- */
+.painelInd{margin:12px 16px;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.piH{display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--alt);
+  border-bottom:1px solid var(--line-2);font-size:11px;font-weight:700;color:var(--ink-2);
+  text-transform:uppercase;letter-spacing:.05em}
+.piSub{margin-left:auto;font-size:10.5px;font-weight:500;color:var(--ink-3);text-transform:none;letter-spacing:0}
+.piGrade{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:1px;background:var(--line-2)}
+.piIt{background:#fff;padding:8px 12px 9px}
+.piIt.dest{background:var(--acc-soft)}
+.piT{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--ink-3);
+  font-weight:600;line-height:1.3}
+.piI{width:13px;height:13px;border-radius:50%;border:1px solid var(--line);background:#fff;
+  color:var(--ink-3);font-size:9px;font-weight:700;cursor:pointer;line-height:1;
+  display:flex;align-items:center;justify-content:center;flex:none;padding:0;font-family:inherit}
+.piI:hover{background:var(--acc);border-color:var(--acc);color:#fff}
+.piIt b{display:block;font-size:16px;font-weight:700;margin-top:2px;font-variant-numeric:tabular-nums}
+.piIt.dest b{color:var(--acc-d);font-size:18px}
+.dicaBox{padding:10px 12px;max-width:250px}
+.dicaBox b{display:block;font-size:12px;color:var(--ink);margin-bottom:3px}
+.dicaBox span{display:block;font-size:11.5px;color:var(--ink-2);line-height:1.55}
 
 @media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
 
@@ -3909,18 +4036,43 @@ tbody td small{font-size:10.5px}
 .indIt:hover .indDica{opacity:1;top:calc(100% + 5px)}
 .indIt:hover .indT svg{opacity:1;color:var(--acc-d)}
 /* ---------- caixa de cupom ---------- */
-.cupBox{display:flex;align-items:center;gap:14px;margin:0 16px;padding:13px 16px;
-  background:linear-gradient(90deg,var(--acc-soft),#fff);border:1px solid var(--acc);
-  border-radius:10px;flex-wrap:wrap}
-.cupIc{width:38px;height:38px;border-radius:9px;background:var(--acc);color:#fff;
+.cupBox{display:flex;align-items:center;gap:12px;margin:12px 16px 0;padding:9px 14px;
+  background:var(--acc-soft);border:1px solid var(--acc);border-radius:8px;flex-wrap:wrap}
+.cupIc{width:28px;height:28px;border-radius:7px;background:var(--acc);color:#fff;
   display:flex;align-items:center;justify-content:center;flex:none}
-.cupT b{display:block;font-size:13.5px;color:var(--ink)}
-.cupT span{display:block;font-size:11.5px;color:var(--ink-2);margin-top:1px}
-.cupN{margin-left:auto;text-align:right}
-.cupN span{display:block;font-size:9.5px;font-weight:700;color:var(--ink-3);
-  text-transform:uppercase;letter-spacing:.04em}
-.cupN b{display:block;font-size:16px;font-weight:700;margin-top:2px}
+.cupT b{display:block;font-size:12px;color:var(--ink)}
+.cupT span{display:block;font-size:10.5px;color:var(--ink-2)}
+.cupN{margin-left:14px;text-align:right}
+.cupN span{display:block;font-size:9.5px;font-weight:600;color:var(--ink-3)}
+.cupN b{display:block;font-size:14px;font-weight:700}
 .etTab tbody tr.linCanc td{opacity:.6;background:#FCF3F3}
+
+/* tabelas dos relatórios: linha mais baixa, cara de sistema */
+.etTabW.plano2 .etTab td{padding:5px 10px}
+.etTabW.plano2 .etTab th{padding:7px 10px;font-size:10.5px}
+.etTabW.plano2 .etTab td small{font-size:9.5px}
+.etTabW.plano2{margin:0 16px 14px;border:1px solid var(--line);border-radius:8px;overflow:auto}
+
+/* ---------- painel de indicadores compacto ---------- */
+.painelInd{margin:12px 16px;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.piH{display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--alt);
+  border-bottom:1px solid var(--line-2);font-size:11px;font-weight:700;color:var(--ink-2);
+  text-transform:uppercase;letter-spacing:.05em}
+.piSub{margin-left:auto;font-size:10.5px;font-weight:500;color:var(--ink-3);text-transform:none;letter-spacing:0}
+.piGrade{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:1px;background:var(--line-2)}
+.piIt{background:#fff;padding:8px 12px 9px}
+.piIt.dest{background:var(--acc-soft)}
+.piT{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--ink-3);
+  font-weight:600;line-height:1.3}
+.piI{width:13px;height:13px;border-radius:50%;border:1px solid var(--line);background:#fff;
+  color:var(--ink-3);font-size:9px;font-weight:700;cursor:pointer;line-height:1;
+  display:flex;align-items:center;justify-content:center;flex:none;padding:0;font-family:inherit}
+.piI:hover{background:var(--acc);border-color:var(--acc);color:#fff}
+.piIt b{display:block;font-size:16px;font-weight:700;margin-top:2px;font-variant-numeric:tabular-nums}
+.piIt.dest b{color:var(--acc-d);font-size:18px}
+.dicaBox{padding:10px 12px;max-width:250px}
+.dicaBox b{display:block;font-size:12px;color:var(--ink);margin-bottom:3px}
+.dicaBox span{display:block;font-size:11.5px;color:var(--ink-2);line-height:1.55}
 
 @media(max-width:1000px){.ivGrade{flex-direction:column}.ivAdic{width:100%}}
 
@@ -4076,18 +4228,43 @@ tbody td small{font-size:10.5px}
 .indIt:hover .indDica{opacity:1;top:calc(100% + 5px)}
 .indIt:hover .indT svg{opacity:1;color:var(--acc-d)}
 /* ---------- caixa de cupom ---------- */
-.cupBox{display:flex;align-items:center;gap:14px;margin:0 16px;padding:13px 16px;
-  background:linear-gradient(90deg,var(--acc-soft),#fff);border:1px solid var(--acc);
-  border-radius:10px;flex-wrap:wrap}
-.cupIc{width:38px;height:38px;border-radius:9px;background:var(--acc);color:#fff;
+.cupBox{display:flex;align-items:center;gap:12px;margin:12px 16px 0;padding:9px 14px;
+  background:var(--acc-soft);border:1px solid var(--acc);border-radius:8px;flex-wrap:wrap}
+.cupIc{width:28px;height:28px;border-radius:7px;background:var(--acc);color:#fff;
   display:flex;align-items:center;justify-content:center;flex:none}
-.cupT b{display:block;font-size:13.5px;color:var(--ink)}
-.cupT span{display:block;font-size:11.5px;color:var(--ink-2);margin-top:1px}
-.cupN{margin-left:auto;text-align:right}
-.cupN span{display:block;font-size:9.5px;font-weight:700;color:var(--ink-3);
-  text-transform:uppercase;letter-spacing:.04em}
-.cupN b{display:block;font-size:16px;font-weight:700;margin-top:2px}
+.cupT b{display:block;font-size:12px;color:var(--ink)}
+.cupT span{display:block;font-size:10.5px;color:var(--ink-2)}
+.cupN{margin-left:14px;text-align:right}
+.cupN span{display:block;font-size:9.5px;font-weight:600;color:var(--ink-3)}
+.cupN b{display:block;font-size:14px;font-weight:700}
 .etTab tbody tr.linCanc td{opacity:.6;background:#FCF3F3}
+
+/* tabelas dos relatórios: linha mais baixa, cara de sistema */
+.etTabW.plano2 .etTab td{padding:5px 10px}
+.etTabW.plano2 .etTab th{padding:7px 10px;font-size:10.5px}
+.etTabW.plano2 .etTab td small{font-size:9.5px}
+.etTabW.plano2{margin:0 16px 14px;border:1px solid var(--line);border-radius:8px;overflow:auto}
+
+/* ---------- painel de indicadores compacto ---------- */
+.painelInd{margin:12px 16px;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.piH{display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--alt);
+  border-bottom:1px solid var(--line-2);font-size:11px;font-weight:700;color:var(--ink-2);
+  text-transform:uppercase;letter-spacing:.05em}
+.piSub{margin-left:auto;font-size:10.5px;font-weight:500;color:var(--ink-3);text-transform:none;letter-spacing:0}
+.piGrade{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:1px;background:var(--line-2)}
+.piIt{background:#fff;padding:8px 12px 9px}
+.piIt.dest{background:var(--acc-soft)}
+.piT{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--ink-3);
+  font-weight:600;line-height:1.3}
+.piI{width:13px;height:13px;border-radius:50%;border:1px solid var(--line);background:#fff;
+  color:var(--ink-3);font-size:9px;font-weight:700;cursor:pointer;line-height:1;
+  display:flex;align-items:center;justify-content:center;flex:none;padding:0;font-family:inherit}
+.piI:hover{background:var(--acc);border-color:var(--acc);color:#fff}
+.piIt b{display:block;font-size:16px;font-weight:700;margin-top:2px;font-variant-numeric:tabular-nums}
+.piIt.dest b{color:var(--acc-d);font-size:18px}
+.dicaBox{padding:10px 12px;max-width:250px}
+.dicaBox b{display:block;font-size:12px;color:var(--ink);margin-bottom:3px}
+.dicaBox span{display:block;font-size:11.5px;color:var(--ink-2);line-height:1.55}
 
 @media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
 
@@ -4161,18 +4338,43 @@ tbody td small{font-size:10.5px}
 .indIt:hover .indDica{opacity:1;top:calc(100% + 5px)}
 .indIt:hover .indT svg{opacity:1;color:var(--acc-d)}
 /* ---------- caixa de cupom ---------- */
-.cupBox{display:flex;align-items:center;gap:14px;margin:0 16px;padding:13px 16px;
-  background:linear-gradient(90deg,var(--acc-soft),#fff);border:1px solid var(--acc);
-  border-radius:10px;flex-wrap:wrap}
-.cupIc{width:38px;height:38px;border-radius:9px;background:var(--acc);color:#fff;
+.cupBox{display:flex;align-items:center;gap:12px;margin:12px 16px 0;padding:9px 14px;
+  background:var(--acc-soft);border:1px solid var(--acc);border-radius:8px;flex-wrap:wrap}
+.cupIc{width:28px;height:28px;border-radius:7px;background:var(--acc);color:#fff;
   display:flex;align-items:center;justify-content:center;flex:none}
-.cupT b{display:block;font-size:13.5px;color:var(--ink)}
-.cupT span{display:block;font-size:11.5px;color:var(--ink-2);margin-top:1px}
-.cupN{margin-left:auto;text-align:right}
-.cupN span{display:block;font-size:9.5px;font-weight:700;color:var(--ink-3);
-  text-transform:uppercase;letter-spacing:.04em}
-.cupN b{display:block;font-size:16px;font-weight:700;margin-top:2px}
+.cupT b{display:block;font-size:12px;color:var(--ink)}
+.cupT span{display:block;font-size:10.5px;color:var(--ink-2)}
+.cupN{margin-left:14px;text-align:right}
+.cupN span{display:block;font-size:9.5px;font-weight:600;color:var(--ink-3)}
+.cupN b{display:block;font-size:14px;font-weight:700}
 .etTab tbody tr.linCanc td{opacity:.6;background:#FCF3F3}
+
+/* tabelas dos relatórios: linha mais baixa, cara de sistema */
+.etTabW.plano2 .etTab td{padding:5px 10px}
+.etTabW.plano2 .etTab th{padding:7px 10px;font-size:10.5px}
+.etTabW.plano2 .etTab td small{font-size:9.5px}
+.etTabW.plano2{margin:0 16px 14px;border:1px solid var(--line);border-radius:8px;overflow:auto}
+
+/* ---------- painel de indicadores compacto ---------- */
+.painelInd{margin:12px 16px;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.piH{display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--alt);
+  border-bottom:1px solid var(--line-2);font-size:11px;font-weight:700;color:var(--ink-2);
+  text-transform:uppercase;letter-spacing:.05em}
+.piSub{margin-left:auto;font-size:10.5px;font-weight:500;color:var(--ink-3);text-transform:none;letter-spacing:0}
+.piGrade{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:1px;background:var(--line-2)}
+.piIt{background:#fff;padding:8px 12px 9px}
+.piIt.dest{background:var(--acc-soft)}
+.piT{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--ink-3);
+  font-weight:600;line-height:1.3}
+.piI{width:13px;height:13px;border-radius:50%;border:1px solid var(--line);background:#fff;
+  color:var(--ink-3);font-size:9px;font-weight:700;cursor:pointer;line-height:1;
+  display:flex;align-items:center;justify-content:center;flex:none;padding:0;font-family:inherit}
+.piI:hover{background:var(--acc);border-color:var(--acc);color:#fff}
+.piIt b{display:block;font-size:16px;font-weight:700;margin-top:2px;font-variant-numeric:tabular-nums}
+.piIt.dest b{color:var(--acc-d);font-size:18px}
+.dicaBox{padding:10px 12px;max-width:250px}
+.dicaBox b{display:block;font-size:12px;color:var(--ink);margin-bottom:3px}
+.dicaBox span{display:block;font-size:11.5px;color:var(--ink-2);line-height:1.55}
 
 @media(max-width:1000px){
   .lgCard{grid-template-columns:1fr}.lgR{display:none}
@@ -5313,7 +5515,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V4.6.0';
+var VERSAO='V4.6.1';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
@@ -16143,14 +16345,17 @@ function telaVendasPeriodo(){
       money(soma(comCupom,function(p){return Number(p.total)||0}))+'</b></div>'+
      '<div class="cupN"><span>Desconto concedido</span><b class="vr">R$ '+money(vCup||vDesc)+'</b></div>'+
     '</div>':'')+
-   '<div class="indGrade">'+
-   IND.map(function(x){
-     return '<div class="indIt'+(x[2]==='dest'?' dest':'')+'" title="'+E(x[3])+'">'+
-      '<span class="indT">'+E(x[0])+sv('help',10)+'</span>'+
-      '<b class="'+(x[2]&&x[2]!=='dest'?x[2]:'')+'">'+E(String(x[1]))+'</b>'+
-      '<i class="indDica">'+E(x[3])+'</i></div>';
-   }).join('')+
-   '</div>'+
+   '<div class="painelInd">'+
+    '<div class="piH">Resumo do período'+
+     '<span class="piSub">'+dataBR(VPE.de)+' a '+dataBR(VPE.ate)+'</span></div>'+
+    '<div class="piGrade">'+
+    IND.map(function(x,k){
+      return '<div class="piIt'+(x[2]==='dest'?' dest':'')+'">'+
+       '<span class="piT">'+E(x[0])+
+        '<button class="piI" onclick="dicaInd(event,'+k+')" title="o que é isso">i</button></span>'+
+       '<b class="'+(x[2]&&x[2]!=='dest'?x[2]:'')+'">'+E(String(x[1]))+'</b></div>';
+    }).join('')+
+    '</div></div>'+
    '<div class="etTabW plano2" id="relArea">'+
    (lista.length?'<table class="etTab"><thead><tr>'+
     '<th style="width:70px">Pedido</th>'+
@@ -16197,7 +16402,15 @@ function telaVendasPeriodo(){
     '<td style="text-align:right"><b>R$ '+money(vTotal)+'</b></td><td></td></tr></tfoot></table>'
    :'<div class="mvVazio">'+sv('box',26)+'<b>Nenhum pedido no período</b></div>')+
    '</div></div></div>';
+  _dicasInd=IND.map(function(x){return [x[0],x[3]]});
   rodape(peds.length+' pedidos · R$ '+money(vTotal));
+}
+var _dicasInd=[];
+function dicaInd(ev,k){
+  ev.stopPropagation();
+  fecharPops();
+  var d=_dicasInd[k]||['',''];
+  pop(ev,'<div class="dicaBox"><b>'+E(d[0])+'</b><span>'+E(d[1])+'</span></div>');
 }
 function togVPE(c){togFiltro(VPE.canais,c);telaVendasPeriodo();}
 function togVPEcup(c){togFiltro(VPE.cupons,c);telaVendasPeriodo();}
