@@ -2010,6 +2010,41 @@ tbody td small{font-size:10.5px}
 .caTip i{font-style:normal;font-weight:700}
 .caTip i.sobe{color:#5FE0CB} .caTip i.desce{color:#FF9B9B}
 
+/* ================= RELATÓRIOS ================= */
+.relFiltros{display:flex;flex-direction:column;gap:12px;padding:14px 16px;background:var(--alt);
+  border-bottom:1px solid var(--line)}
+.rfBloco{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
+.rfTit{font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;
+  letter-spacing:.05em;width:100%;margin-bottom:-4px}
+.rfChips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border:1px solid var(--line);
+  border-radius:20px;background:#fff;cursor:pointer;font-size:11.5px;color:var(--ink-2);user-select:none}
+.chip:hover{border-color:var(--acc)}
+.chip.on{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+.chip input{width:12px;height:12px;margin:0}
+.rfAcoes{display:flex;gap:8px}
+.relKpis{display:flex;gap:10px;padding:13px 16px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.rk{border:1px solid var(--line);border-radius:7px;padding:9px 14px;background:#fff;min-width:120px}
+.rk span{display:block;font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em}
+.rk b{display:block;font-size:17px;font-weight:700;margin-top:2px}
+.rk.dest{border-color:var(--acc);box-shadow:inset 3px 0 0 var(--acc)}
+.rk.dest b{color:var(--acc-d);font-size:20px}
+.ivGrade{display:flex;gap:12px;padding:0 16px 16px;align-items:flex-start}
+.ivGrade .etTabW{flex:1;min-width:0;border:1px solid var(--line);border-radius:8px}
+.ivAdic{width:290px;flex:none;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.ivAdicH{display:flex;align-items:center;gap:7px;padding:10px 13px;background:var(--alt);
+  border-bottom:1px solid var(--line-2);font-size:11.5px;font-weight:700;color:var(--ink-2)}
+.ivAdicH svg{color:var(--acc-d)}
+.ivAdicH .cnt2{margin-left:auto}
+.ivAdicT{width:100%;border-collapse:collapse;font-size:11.5px}
+.ivAdicT td{padding:6px 12px;border-bottom:1px solid var(--line-2)}
+.ivAdicT tr:last-child td{border-bottom:none}
+.ivTab tbody tr.ivCat{cursor:pointer;background:var(--alt)}
+.ivTab tbody tr.ivCat:hover td{background:#EEF3F7}
+.ivTab tbody tr.ivCat td{border-top:1px solid var(--line)}
+.ivTab tbody tr.ivProd td:first-child{padding-left:34px;color:var(--ink-2)}
+@media(max-width:1000px){.ivGrade{flex-direction:column}.ivAdic{width:100%}}
+
 @media(max-width:1000px){
   .lfPeriodo{order:3;width:100%}
   .lfTopBtns{width:100%}
@@ -3103,6 +3138,41 @@ tbody td small{font-size:10.5px}
 .caCol.fino .caMes{font-size:9px}
 .caTip i{font-style:normal;font-weight:700}
 .caTip i.sobe{color:#5FE0CB} .caTip i.desce{color:#FF9B9B}
+
+/* ================= RELATÓRIOS ================= */
+.relFiltros{display:flex;flex-direction:column;gap:12px;padding:14px 16px;background:var(--alt);
+  border-bottom:1px solid var(--line)}
+.rfBloco{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
+.rfTit{font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;
+  letter-spacing:.05em;width:100%;margin-bottom:-4px}
+.rfChips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border:1px solid var(--line);
+  border-radius:20px;background:#fff;cursor:pointer;font-size:11.5px;color:var(--ink-2);user-select:none}
+.chip:hover{border-color:var(--acc)}
+.chip.on{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+.chip input{width:12px;height:12px;margin:0}
+.rfAcoes{display:flex;gap:8px}
+.relKpis{display:flex;gap:10px;padding:13px 16px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.rk{border:1px solid var(--line);border-radius:7px;padding:9px 14px;background:#fff;min-width:120px}
+.rk span{display:block;font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em}
+.rk b{display:block;font-size:17px;font-weight:700;margin-top:2px}
+.rk.dest{border-color:var(--acc);box-shadow:inset 3px 0 0 var(--acc)}
+.rk.dest b{color:var(--acc-d);font-size:20px}
+.ivGrade{display:flex;gap:12px;padding:0 16px 16px;align-items:flex-start}
+.ivGrade .etTabW{flex:1;min-width:0;border:1px solid var(--line);border-radius:8px}
+.ivAdic{width:290px;flex:none;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.ivAdicH{display:flex;align-items:center;gap:7px;padding:10px 13px;background:var(--alt);
+  border-bottom:1px solid var(--line-2);font-size:11.5px;font-weight:700;color:var(--ink-2)}
+.ivAdicH svg{color:var(--acc-d)}
+.ivAdicH .cnt2{margin-left:auto}
+.ivAdicT{width:100%;border-collapse:collapse;font-size:11.5px}
+.ivAdicT td{padding:6px 12px;border-bottom:1px solid var(--line-2)}
+.ivAdicT tr:last-child td{border-bottom:none}
+.ivTab tbody tr.ivCat{cursor:pointer;background:var(--alt)}
+.ivTab tbody tr.ivCat:hover td{background:#EEF3F7}
+.ivTab tbody tr.ivCat td{border-top:1px solid var(--line)}
+.ivTab tbody tr.ivProd td:first-child{padding-left:34px;color:var(--ink-2)}
+@media(max-width:1000px){.ivGrade{flex-direction:column}.ivAdic{width:100%}}
 
 @media(max-width:1000px){
   .lgCard{grid-template-columns:1fr}.lgR{display:none}
@@ -4242,7 +4312,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V4.0.0';
+var VERSAO='V4.1.0';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
@@ -4280,6 +4350,9 @@ if(mid==='financeira'&&iid==='frente-caixa')return telaFrenteCaixa();
 if(mid==='clientes'&&iid==='cadastro-clientes')return telaClientes();
 if(mid==='clientes'&&iid==='cupons-clientes')return telaCupons();
 if(mid==='dashboard'&&iid==='comparativo-anual')return telaComparativo();
+if(mid==='relatorios'&&iid==='faturamento-dia')return telaFaturamentoDia();
+if(mid==='relatorios'&&iid==='itens-consumidos')return telaItensConsumidos();
+if(mid==='relatorios'&&iid==='itens-vendidos')return telaItensVendidos();
 if(mid==='estoque'&&iid==='producao')return telaProducao();
 if(mid==='estoque'&&iid==='ficha-tecnica')return telaFichaTecnica();
 if(mid==='estoque'&&iid==='ingredientes-insumos')return telaInsumos();
@@ -13656,6 +13729,541 @@ function exportarComparativo(){
   a.download='nexor-comparativo-'+String(t1).replace('/','-')+'-'+String(t2).replace('/','-')+'.csv';
   document.body.appendChild(a);a.click();setTimeout(function(){a.remove()},400);
   toast('Comparativo exportado.');
+}
+
+/* ==========================================================
+   BLOCO 28 — RELATÓRIOS
+   ========================================================== */
+var DIAS_SEM=['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
+function diaSemana(d){ return new Date(String(d)+'T12:00:00').getDay(); }
+function canaisVenda(){
+  var s={'loja':'Frente de caixa','entrega':'Entrega','retirada':'Retirada'};
+  (DB.pedidos||[]).forEach(function(p){ if(p.canal&&!s[p.canal])s[p.canal]=p.canal; });
+  return s;
+}
+function pedidosFiltrados(f){
+  return (DB.pedidos||[]).filter(function(p){
+    var d=String(p.data||'').slice(0,10);
+    if(f.de&&d<f.de)return false;
+    if(f.ate&&d>f.ate)return false;
+    if(f.tipos&&f.tipos.length&&f.tipos.indexOf(p.tipo||'loja')<0)return false;
+    if(f.canais&&f.canais.length&&f.canais.indexOf(p.canal||p.tipo||'loja')<0)return false;
+    if(f.dias&&f.dias.length&&f.dias.indexOf(diaSemana(d))<0)return false;
+    return true;
+  });
+}
+/* painel de explicação padrão de todos os relatórios */
+function explicaRel(titulo,linhas,fontes,fora){
+  var h='<div class="mdB"><div class="blk" style="margin:0;max-width:none">'+
+  '<h3>De onde vem cada número</h3>'+
+  '<div class="expList">'+linhas.map(function(l){
+    return '<div class="expIt"><b>'+E(l[0])+'</b><span>'+E(l[1])+'</span></div>';}).join('')+'</div>'+
+  '<div class="hint" style="margin-top:14px;line-height:1.7">'+
+   '<b>Fontes:</b> '+fontes+'<br><br><b>O que não entra:</b> '+fora+'</div></div></div>';
+  var o=document.createElement('div');o.className='mdOv';o.id='mdOv';
+  o.innerHTML='<div class="mdBox lg"><div class="mdH"><b>'+E(titulo)+'</b>'+
+   '<button onclick="fecharModal()">&times;</button></div>'+h+
+   '<div class="mdF"><button class="btnP2" onclick="fecharModal()">Fechar</button></div></div>';
+  document.body.appendChild(o);
+  fecharSoForaDeVerdade(o);
+}
+function baixarCSV(nome,linhas){
+  var csv=linhas.map(function(r){return r.map(function(c){
+    return '"'+String(c).replace(/"/g,'""')+'"'}).join(';')}).join('\n');
+  var b=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(b);
+  a.download=nome;document.body.appendChild(a);a.click();
+  setTimeout(function(){a.remove()},400);
+  toast('Relatório exportado.');
+}
+
+/* ==========================================================
+   1 — FATURAMENTO POR DIA
+   ========================================================== */
+var FD={de:'',ate:'',tipos:[],canais:[],dias:[]};
+function telaFaturamentoDia(){
+  baseMov();
+  if(!FD.de){var d=new Date();
+    FD.de=new Date(d.getFullYear(),d.getMonth(),1).toISOString().slice(0,10);
+    FD.ate=hojeISO();}
+  var peds=pedidosFiltrados(FD);
+  var porDia={};
+  peds.forEach(function(p){
+    var d=String(p.data||'').slice(0,10);
+    porDia[d]=porDia[d]||{qtd:0,valor:0,itens:0,taxa:0,desc:0,acresc:0,canc:0,vcanc:0};
+    var x=porDia[d];
+    if(p.fase==='cancelado'){x.canc++;x.vcanc+=Number(p.total)||0;return;}
+    x.qtd++; x.valor+=Number(p.total)||0;
+    x.itens+=(p.itens||[]).reduce(function(a,i){return a+(Number(i.qtd)||0)},0);
+    x.taxa+=Number(p.taxa)||0; x.desc+=Number(p.desconto)||0;
+    x.acresc+=Number(p.acrescimo)||0;
+  });
+  var dias=Object.keys(porDia).sort();
+  var acum=0;
+  var linhas=dias.map(function(d){
+    var x=porDia[d];
+    acum+=x.valor;
+    return {data:d,ds:DIAS_SEM[diaSemana(d)],qtd:x.qtd,valor:x.valor,acum:acum,
+      ticket:x.qtd?x.valor/x.qtd:0,itens:x.itens,taxa:x.taxa,desc:x.desc,
+      acresc:x.acresc,canc:x.canc,vcanc:x.vcanc};
+  });
+  var t={qtd:0,valor:0,itens:0,taxa:0,desc:0,acresc:0,canc:0,vcanc:0};
+  linhas.forEach(function(l){for(var k in t)t[k]+=l[k]||0;});
+
+  var canais=canaisVenda();
+  $('content').innerHTML='<div class="etWrap"><div class="etScroll">'+
+   '<div class="etTopo">'+
+    '<div><h1>Faturamento por Dia</h1><p>Vendas dia a dia, com acumulado e ticket médio.</p></div>'+
+    '<button class="infoBt" onclick="explicaFaturamentoDia()">'+sv('help',15)+'</button>'+
+    '<div style="flex:1"></div>'+
+    '<button class="btnP2" onclick="imprimirRel(\'Faturamento por Dia\')">'+sv('print2',13)+' PDF</button>'+
+    '<button class="btnP2" onclick="exportarFatDia()">'+sv('down2',13)+' Exportar</button>'+
+   '</div>'+
+   '<div class="relFiltros">'+
+    '<div class="rfBloco">'+
+     '<div class="f2" style="max-width:150px"><label>Data inicial</label>'+
+      '<input type="date" id="fdDe" value="'+FD.de+'"></div>'+
+     '<div class="f2" style="max-width:150px"><label>Data final</label>'+
+      '<input type="date" id="fdAte" value="'+FD.ate+'"></div>'+
+    '</div>'+
+    '<div class="rfBloco"><label class="rfTit">Tipo de venda</label><div class="rfChips">'+
+     ['loja','entrega','retirada'].map(function(k){
+       return '<label class="chip'+(FD.tipos.indexOf(k)>=0?' on':'')+'">'+
+       '<input type="checkbox" onchange="togFiltro(FD.tipos,\''+k+'\');telaFaturamentoDia()"'+
+       (FD.tipos.indexOf(k)>=0?' checked':'')+'>'+
+       (k==='loja'?'Salão / balcão':k==='entrega'?'Entrega':'Retirada')+'</label>';}).join('')+
+    '</div></div>'+
+    '<div class="rfBloco"><label class="rfTit">Canal de origem</label><div class="rfChips">'+
+     Object.keys(canais).map(function(k){
+       return '<label class="chip'+(FD.canais.indexOf(k)>=0?' on':'')+'">'+
+       '<input type="checkbox" onchange="togFiltro(FD.canais,\''+k+'\');telaFaturamentoDia()"'+
+       (FD.canais.indexOf(k)>=0?' checked':'')+'>'+E(canais[k])+'</label>';}).join('')+
+    '</div></div>'+
+    '<div class="rfBloco"><label class="rfTit">Dias da semana</label><div class="rfChips">'+
+     DIAS_SEM.map(function(d,i){
+       return '<label class="chip'+(FD.dias.indexOf(i)>=0?' on':'')+'">'+
+       '<input type="checkbox" onchange="togFiltro(FD.dias,'+i+');telaFaturamentoDia()"'+
+       (FD.dias.indexOf(i)>=0?' checked':'')+'>'+d.slice(0,3)+'</label>';}).join('')+
+    '</div></div>'+
+    '<div class="rfAcoes">'+
+     '<button class="btnP2 ok" onclick="FD.de=$(\'fdDe\').value;FD.ate=$(\'fdAte\').value;telaFaturamentoDia()">'+
+      sv('search',13)+' Buscar</button>'+
+     '<button class="btnP2" onclick="FD={de:FD.de,ate:FD.ate,tipos:[],canais:[],dias:[]};telaFaturamentoDia()">Limpar</button>'+
+    '</div>'+
+   '</div>'+
+   '<div class="relKpis">'+
+    '<div class="rk"><span>Vendas</span><b>'+t.qtd+'</b></div>'+
+    '<div class="rk dest"><span>Faturamento</span><b>R$ '+money(t.valor)+'</b></div>'+
+    '<div class="rk"><span>Ticket médio</span><b>R$ '+money(t.qtd?t.valor/t.qtd:0)+'</b></div>'+
+    '<div class="rk"><span>Itens</span><b>'+fmtQt(t.itens)+'</b></div>'+
+    '<div class="rk"><span>Taxa de entrega</span><b>R$ '+money(t.taxa)+'</b></div>'+
+    '<div class="rk"><span>Descontos</span><b class="vr">R$ '+money(t.desc)+'</b></div>'+
+    '<div class="rk"><span>Canceladas</span><b class="'+(t.canc?'vr':'')+'">'+t.canc+' · R$ '+money(t.vcanc)+'</b></div>'+
+   '</div>'+
+   '<div class="etTabW plano2" id="relArea">'+
+   (linhas.length?'<table class="etTab"><thead><tr>'+
+    '<th style="width:100px">Data</th><th style="width:90px">Dia</th>'+
+    '<th style="width:80px;text-align:right">Vendas</th>'+
+    '<th style="width:120px;text-align:right">Valor</th>'+
+    '<th style="width:130px;text-align:right">Acumulado</th>'+
+    '<th style="width:110px;text-align:right">Ticket médio</th>'+
+    '<th style="width:90px;text-align:right">Itens</th>'+
+    '<th style="width:110px;text-align:right">Taxa entrega</th>'+
+    '<th style="width:100px;text-align:right">Acréscimos</th>'+
+    '<th style="width:100px;text-align:right">Descontos</th>'+
+    '<th style="width:90px;text-align:right">Canc.</th>'+
+    '<th style="width:110px;text-align:right">Valor canc.</th></tr></thead><tbody>'+
+    linhas.map(function(l){
+      return '<tr><td><b>'+dataBR(l.data)+'</b></td><td>'+l.ds+'</td>'+
+      '<td style="text-align:right">'+l.qtd+'</td>'+
+      '<td style="text-align:right"><b>R$ '+money(l.valor)+'</b></td>'+
+      '<td style="text-align:right;color:var(--ink-3)">R$ '+money(l.acum)+'</td>'+
+      '<td style="text-align:right">R$ '+money(l.ticket)+'</td>'+
+      '<td style="text-align:right">'+fmtQt(l.itens)+'</td>'+
+      '<td style="text-align:right">'+(l.taxa?'R$ '+money(l.taxa):'—')+'</td>'+
+      '<td style="text-align:right">'+(l.acresc?'R$ '+money(l.acresc):'—')+'</td>'+
+      '<td style="text-align:right" class="'+(l.desc?'vr':'')+'">'+(l.desc?'R$ '+money(l.desc):'—')+'</td>'+
+      '<td style="text-align:right" class="'+(l.canc?'vr':'')+'">'+(l.canc||'—')+'</td>'+
+      '<td style="text-align:right" class="'+(l.vcanc?'vr':'')+'">'+(l.vcanc?'R$ '+money(l.vcanc):'—')+'</td></tr>';
+    }).join('')+'</tbody>'+
+    '<tfoot><tr><td colspan="2"><b>Total — '+linhas.length+' dia(s)</b></td>'+
+    '<td style="text-align:right"><b>'+t.qtd+'</b></td>'+
+    '<td style="text-align:right"><b>R$ '+money(t.valor)+'</b></td><td></td>'+
+    '<td style="text-align:right"><b>R$ '+money(t.qtd?t.valor/t.qtd:0)+'</b></td>'+
+    '<td style="text-align:right"><b>'+fmtQt(t.itens)+'</b></td>'+
+    '<td style="text-align:right"><b>R$ '+money(t.taxa)+'</b></td>'+
+    '<td style="text-align:right"><b>R$ '+money(t.acresc)+'</b></td>'+
+    '<td style="text-align:right"><b>R$ '+money(t.desc)+'</b></td>'+
+    '<td style="text-align:right"><b>'+t.canc+'</b></td>'+
+    '<td style="text-align:right"><b>R$ '+money(t.vcanc)+'</b></td></tr></tfoot></table>'
+   :'<div class="mvVazio">'+sv('box',26)+'<b>Nenhuma venda no período</b>'+
+    '<span>Ajuste as datas ou os filtros.</span></div>')+
+   '</div></div></div>';
+  rodape(linhas.length+' dias · R$ '+money(t.valor));
+}
+function togFiltro(arr,v){
+  var i=arr.indexOf(v);
+  if(i>=0)arr.splice(i,1); else arr.push(v);
+}
+function explicaFaturamentoDia(){
+  explicaRel('Faturamento por Dia — como é feito',[
+   ['Vendas','quantidade de pedidos do dia, sem contar os cancelados'],
+   ['Valor','soma do total de cada pedido, já com taxa e desconto aplicados'],
+   ['Acumulado','soma corrida do valor, do primeiro dia até aquele'],
+   ['Ticket médio','valor do dia dividido pela quantidade de vendas'],
+   ['Itens','soma das quantidades de todos os itens vendidos no dia'],
+   ['Taxa de entrega','taxas cobradas nos pedidos de delivery'],
+   ['Acréscimos e descontos','valores lançados no fechamento de cada pedido'],
+   ['Canceladas','pedidos que foram para a fase Cancelado — não entram no faturamento']
+  ],'os pedidos registrados no PDV, pela data da venda.',
+    'pedidos cancelados no faturamento (aparecem em coluna própria), '+
+    'lançamentos financeiros que não vieram de venda, e vendas de outras lojas.');
+}
+function exportarFatDia(){
+  var peds=pedidosFiltrados(FD), porDia={};
+  peds.forEach(function(p){
+    var d=String(p.data||'').slice(0,10);
+    porDia[d]=porDia[d]||{qtd:0,valor:0,itens:0,taxa:0,desc:0,canc:0,vcanc:0};
+    var x=porDia[d];
+    if(p.fase==='cancelado'){x.canc++;x.vcanc+=Number(p.total)||0;return;}
+    x.qtd++;x.valor+=Number(p.total)||0;
+    x.itens+=(p.itens||[]).reduce(function(a,i){return a+(Number(i.qtd)||0)},0);
+    x.taxa+=Number(p.taxa)||0;x.desc+=Number(p.desconto)||0;
+  });
+  var l=[['Data','Dia da semana','Vendas','Valor','Acumulado','Ticket medio','Itens','Taxa','Descontos','Canceladas','Valor cancelado']];
+  var acum=0;
+  Object.keys(porDia).sort().forEach(function(d){
+    var x=porDia[d];acum+=x.valor;
+    l.push([dataBR(d),DIAS_SEM[diaSemana(d)],x.qtd,
+      String(x.valor.toFixed(2)).replace('.',','),String(acum.toFixed(2)).replace('.',','),
+      String((x.qtd?x.valor/x.qtd:0).toFixed(2)).replace('.',','),x.itens,
+      String(x.taxa.toFixed(2)).replace('.',','),String(x.desc.toFixed(2)).replace('.',','),
+      x.canc,String(x.vcanc.toFixed(2)).replace('.',',')]);
+  });
+  baixarCSV('nexor-faturamento-dia.csv',l);
+}
+function imprimirRel(titulo){
+  var area=document.getElementById('relArea');
+  if(!area)return;
+  var el=document.getElementById('viaImp')||document.createElement('div');
+  el.id='viaImp';
+  el.innerHTML='<div style="text-align:center;border-bottom:2px solid #000;padding-bottom:6px;margin-bottom:10px">'+
+   '<b style="font-size:15px">'+E(titulo)+'</b><br>'+
+   '<span style="font-size:11px">'+E(nomeLojaAtual())+' · emitido em '+
+   new Date().toLocaleString('pt-BR')+'</span></div>'+
+   '<style>#viaImp table{width:100%;border-collapse:collapse;font-size:9.5px}'+
+   '#viaImp th{background:#eee;text-align:left;padding:4px;border-bottom:1px solid #000}'+
+   '#viaImp td{padding:3px 4px;border-bottom:1px solid #ddd}'+
+   '#viaImp tfoot td{font-weight:700;border-top:1px solid #000}</style>'+
+   area.innerHTML;
+  document.body.appendChild(el);
+  setTimeout(function(){window.print()},250);
+}
+
+/* ==========================================================
+   2 — ITENS CONSUMIDOS
+   ========================================================== */
+var IC={de:'',ate:'',motivos:[],grupo:'',item:'',busca:''};
+function telaItensConsumidos(){
+  baseMov();
+  if(!IC.de){var d=new Date();
+    IC.de=new Date(d.getFullYear(),d.getMonth(),1).toISOString().slice(0,10);
+    IC.ate=hojeISO();}
+  var por={};
+  (DB.movEst||[]).forEach(function(m){
+    var d=String(m.data||'').slice(0,10);
+    if(IC.de&&d<IC.de)return;
+    if(IC.ate&&d>IC.ate)return;
+    if(IC.motivos.length&&IC.motivos.indexOf(m.motivoId)<0)return;
+    (m.linhas||[]).forEach(function(l){
+      if(l.direcao!=='saida')return;                 /* consumo = saída */
+      var it=itemEstoque(l.insumoId);
+      if(IC.grupo&&(!it||(it.grupoId!==IC.grupo&&it.categoriaId!==IC.grupo)))return;
+      if(IC.item&&l.insumoId!==IC.item)return;
+      var k=l.insumoId;
+      por[k]=por[k]||{nome:l.nome,item:it,qtd:0,valor:0,mov:0,unidade:l.unidade};
+      var q=it?convUnid(l.qtd,l.unidade,it.unidade):null;
+      por[k].qtd+=(q===null?Number(l.qtd)||0:q);
+      if(it)por[k].unidade=it.unidade;
+      por[k].valor+=(Number(l.qtd)||0)*(Number(l.custo)||0);
+      por[k].mov++;
+    });
+  });
+  var lista=Object.keys(por).map(function(k){return por[k]})
+    .filter(function(x){
+      if(!IC.busca)return true;
+      return String(x.nome||'').toLowerCase().indexOf(IC.busca.toLowerCase())>=0;
+    })
+    .sort(function(a,b){return b.valor-a.valor});
+  var total=lista.reduce(function(a,x){return a+x.valor},0);
+
+  $('content').innerHTML='<div class="etWrap"><div class="etScroll">'+
+   '<div class="etTopo">'+
+    '<div><h1>Itens Consumidos</h1><p>Tudo que saiu do estoque, por motivo.</p></div>'+
+    '<button class="infoBt" onclick="explicaItensConsumidos()">'+sv('help',15)+'</button>'+
+    '<div style="flex:1"></div>'+
+    '<button class="btnP2" onclick="imprimirRel(\'Itens Consumidos\')">'+sv('print2',13)+' PDF</button>'+
+    '<button class="btnP2" onclick="exportarItensCons()">'+sv('down2',13)+' Exportar</button>'+
+   '</div>'+
+   '<div class="relFiltros">'+
+    '<div class="rfBloco">'+
+     '<div class="f2" style="max-width:150px"><label>Data inicial</label>'+
+      '<input type="date" id="icDe" value="'+IC.de+'"></div>'+
+     '<div class="f2" style="max-width:150px"><label>Data final</label>'+
+      '<input type="date" id="icAte" value="'+IC.ate+'"></div>'+
+     '<div class="f2"><label>Grupo</label>'+
+      '<select onchange="IC.grupo=this.value;telaItensConsumidos()">'+
+      '<option value="">Todos os grupos</option>'+
+      (DB.gruposIng||[]).map(function(g){return '<option value="'+g.id+'"'+(IC.grupo===g.id?' selected':'')+'>'+E(g.nome)+'</option>'}).join('')+
+      (DB.fichaCats||[]).map(function(c){return '<option value="'+c.id+'"'+(IC.grupo===c.id?' selected':'')+'>'+E(c.nome)+' (fichas)</option>'}).join('')+
+      '</select></div>'+
+     '<div class="f2"><label>Item</label>'+
+      '<input id="icBusca" value="'+E(IC.busca)+'" placeholder="filtrar pelo nome"></div>'+
+    '</div>'+
+    '<div class="rfBloco"><label class="rfTit">Motivo da saída</label><div class="rfChips">'+
+     (DB.motivosMov||[]).filter(function(m){return m.tipo!=='entrada'||m.id==='mv_prod'})
+      .map(function(m){
+       return '<label class="chip'+(IC.motivos.indexOf(m.id)>=0?' on':'')+'">'+
+       '<input type="checkbox" onchange="togFiltro(IC.motivos,\''+m.id+'\');telaItensConsumidos()"'+
+       (IC.motivos.indexOf(m.id)>=0?' checked':'')+'>'+E(m.nome)+'</label>';}).join('')+
+    '</div><div class="hint">Sem marcar nada, mostra todas as saídas.</div></div>'+
+    '<div class="rfAcoes">'+
+     '<button class="btnP2 ok" onclick="IC.de=$(\'icDe\').value;IC.ate=$(\'icAte\').value;telaItensConsumidos()">'+
+      sv('search',13)+' Buscar</button>'+
+     '<button class="btnP2" onclick="IC={de:IC.de,ate:IC.ate,motivos:[],grupo:\'\',item:\'\',busca:\'\'};telaItensConsumidos()">Limpar</button>'+
+    '</div>'+
+   '</div>'+
+   '<div class="relKpis">'+
+    '<div class="rk"><span>Itens diferentes</span><b>'+lista.length+'</b></div>'+
+    '<div class="rk dest"><span>Custo total consumido</span><b>R$ '+money(total)+'</b></div>'+
+    '<div class="rk"><span>Movimentos</span><b>'+lista.reduce(function(a,x){return a+x.mov},0)+'</b></div>'+
+   '</div>'+
+   '<div class="etTabW plano2" id="relArea">'+
+   (lista.length?'<table class="etTab"><thead><tr>'+
+    '<th>Item</th><th style="width:160px">Grupo</th>'+
+    '<th style="width:130px;text-align:right">Consumido</th>'+
+    '<th style="width:130px;text-align:right">Custo por unidade</th>'+
+    '<th style="width:140px;text-align:right">Custo total</th>'+
+    '<th style="width:100px;text-align:right">% do total</th></tr></thead><tbody>'+
+    lista.map(function(x){
+      var it=x.item||{};
+      var g=ehFicha(it)?catFicha(it.categoriaId):grupoIng(it.grupoId);
+      var pc=total?(x.valor/total*100):0;
+      return '<tr><td><b>'+E(x.nome)+'</b>'+
+       (ehFicha(it)?'<span class="tagFicha">ficha</span>':'')+
+       '<small style="display:block;color:var(--ink-3)">'+x.mov+' movimento(s)</small></td>'+
+      '<td>'+E(g?g.nome:'—')+'</td>'+
+      '<td style="text-align:right"><b>'+fmtQt(x.qtd)+' '+un(x.unidade).ab+'</b></td>'+
+      '<td style="text-align:right">'+money(x.qtd?x.valor/x.qtd:0)+'</td>'+
+      '<td style="text-align:right"><b>R$ '+money(x.valor)+'</b></td>'+
+      '<td style="text-align:right"><span class="hpBar"><i style="width:'+Math.min(100,pc)+'%"></i></span>'+
+       '<small>'+pc.toFixed(1)+'%</small></td></tr>';
+    }).join('')+'</tbody>'+
+    '<tfoot><tr><td colspan="4"><b>Total consumido</b></td>'+
+    '<td style="text-align:right"><b>R$ '+money(total)+'</b></td><td></td></tr></tfoot></table>'
+   :'<div class="mvVazio">'+sv('box',26)+'<b>Nenhum consumo no período</b></div>')+
+   '</div></div></div>';
+  var b=$('icBusca');
+  if(b)b.oninput=function(){IC.busca=this.value;var p=this.selectionStart;telaItensConsumidos();
+    var n=$('icBusca');if(n){n.focus();n.setSelectionRange(p,p);}};
+  rodape(lista.length+' itens · R$ '+money(total));
+}
+function explicaItensConsumidos(){
+  explicaRel('Itens Consumidos — como é feito',[
+   ['Consumido','soma de todas as saídas de estoque do item no período, convertidas para a unidade de cadastro'],
+   ['Custo por unidade','custo total dividido pela quantidade consumida — é a média real do período'],
+   ['Custo total','quantidade que saiu multiplicada pelo custo do item no momento de cada baixa'],
+   ['Motivo da saída','filtra por venda, produção, baixa manual, perda ou qualquer motivo cadastrado'],
+   ['% do total','peso daquele item no custo total consumido no período']
+  ],'as movimentações de estoque com direção de saída, no período escolhido. '+
+    'O custo usado é o que estava valendo no momento de cada baixa, não o de hoje.',
+   'entradas de estoque (compras e produção), itens que não controlam estoque, '+
+   'e saídas de outras lojas.');
+}
+function exportarItensCons(){
+  var area=[['Item','Grupo','Consumido','Unidade','Custo unitario','Custo total']];
+  var tab=document.querySelectorAll('#relArea tbody tr');
+  for(var i=0;i<tab.length;i++){
+    var td=tab[i].querySelectorAll('td');
+    area.push([td[0].innerText.split('\n')[0],td[1].innerText,
+      td[2].innerText,'',td[3].innerText,td[4].innerText]);
+  }
+  baixarCSV('nexor-itens-consumidos.csv',area);
+}
+
+/* ==========================================================
+   3 — ITENS VENDIDOS
+   ========================================================== */
+var IV={de:'',ate:'',tipos:[],canais:[],cats:[],busca:'',abertas:{},verAdic:false};
+function telaItensVendidos(){
+  baseMov();
+  if(!IV.de){var d=new Date();
+    IV.de=new Date(d.getFullYear(),d.getMonth(),1).toISOString().slice(0,10);
+    IV.ate=hojeISO();}
+  var peds=pedidosFiltrados(IV).filter(function(p){return p.fase!=='cancelado'});
+  var porCat={},adicionais={},totalFat=0,totalItens=0;
+  peds.forEach(function(p){
+    totalFat+=Number(p.total)||0;
+    (p.itens||[]).forEach(function(it){
+      var prod=(DB.produtos||[]).find(function(x){return x.id===it.produtoId});
+      var cat=prod?(DB.categorias||[]).find(function(c){return c.id===prod.categoriaId}):null;
+      var ck=cat?cat.id:'_sem';
+      var cn=cat?cat.nome:'Sem categoria';
+      if(IV.cats.length&&IV.cats.indexOf(ck)<0)return;
+      porCat[ck]=porCat[ck]||{nome:cn,qtd:0,valor:0,itens:{}};
+      var C=porCat[ck];
+      var q=Number(it.qtd)||0, v=Number(it.total)||0;
+      C.qtd+=q; C.valor+=v; totalItens+=q;
+      var ik=it.produtoId||it.nome;
+      C.itens[ik]=C.itens[ik]||{nome:it.nome,qtd:0,valor:0};
+      C.itens[ik].qtd+=q; C.itens[ik].valor+=v;
+      /* acompanhamentos escolhidos no pedido */
+      (it.opcoes||[]).forEach(function(o){
+        var on=o.nome||o;
+        adicionais[on]=adicionais[on]||{nome:on,qtd:0,valor:0};
+        adicionais[on].qtd+=q;
+        adicionais[on].valor+=(Number(o.preco)||0)*q;
+      });
+    });
+  });
+  var cats=Object.keys(porCat).map(function(k){
+    var c=porCat[k];c.id=k;
+    c.lista=Object.keys(c.itens).map(function(i2){return c.itens[i2]})
+      .sort(function(a,b){return b.valor-a.valor});
+    return c;
+  }).filter(function(c){
+    if(!IV.busca)return true;
+    var q2=IV.busca.toLowerCase();
+    return c.nome.toLowerCase().indexOf(q2)>=0||
+      c.lista.some(function(i3){return i3.nome.toLowerCase().indexOf(q2)>=0});
+  }).sort(function(a,b){return b.valor-a.valor});
+  var adic=Object.keys(adicionais).map(function(k){return adicionais[k]})
+    .sort(function(a,b){return b.qtd-a.qtd});
+  var totalCat=cats.reduce(function(a,c){return a+c.valor},0);
+  var canais=canaisVenda();
+
+  $('content').innerHTML='<div class="etWrap"><div class="etScroll">'+
+   '<div class="etTopo">'+
+    '<div><h1>Itens Vendidos</h1><p>O que saiu no cardápio, por categoria e produto.</p></div>'+
+    '<button class="infoBt" onclick="explicaItensVendidos()">'+sv('help',15)+'</button>'+
+    '<div style="flex:1"></div>'+
+    '<button class="btnP2" onclick="imprimirRel(\'Itens Vendidos\')">'+sv('print2',13)+' PDF</button>'+
+    '<button class="btnP2" onclick="exportarItensVend()">'+sv('down2',13)+' Exportar</button>'+
+   '</div>'+
+   '<div class="relFiltros">'+
+    '<div class="rfBloco">'+
+     '<div class="f2" style="max-width:150px"><label>Data inicial</label>'+
+      '<input type="date" id="ivDe" value="'+IV.de+'"></div>'+
+     '<div class="f2" style="max-width:150px"><label>Data final</label>'+
+      '<input type="date" id="ivAte" value="'+IV.ate+'"></div>'+
+     '<div class="f2"><label>Buscar produto</label>'+
+      '<input id="ivBusca" value="'+E(IV.busca)+'" placeholder="nome do produto ou categoria"></div>'+
+    '</div>'+
+    '<div class="rfBloco"><label class="rfTit">Tipo de venda</label><div class="rfChips">'+
+     ['loja','entrega','retirada'].map(function(k){
+       return '<label class="chip'+(IV.tipos.indexOf(k)>=0?' on':'')+'">'+
+       '<input type="checkbox" onchange="togFiltro(IV.tipos,\''+k+'\');telaItensVendidos()"'+
+       (IV.tipos.indexOf(k)>=0?' checked':'')+'>'+
+       (k==='loja'?'Salão / balcão':k==='entrega'?'Entrega':'Retirada')+'</label>';}).join('')+
+    '</div></div>'+
+    '<div class="rfBloco"><label class="rfTit">Canal de origem</label><div class="rfChips">'+
+     Object.keys(canais).map(function(k){
+       return '<label class="chip'+(IV.canais.indexOf(k)>=0?' on':'')+'">'+
+       '<input type="checkbox" onchange="togFiltro(IV.canais,\''+k+'\');telaItensVendidos()"'+
+       (IV.canais.indexOf(k)>=0?' checked':'')+'>'+E(canais[k])+'</label>';}).join('')+
+    '</div></div>'+
+    '<div class="rfBloco"><label class="rfTit">Categorias do cardápio</label><div class="rfChips">'+
+     (DB.categorias||[]).map(function(c){
+       return '<label class="chip'+(IV.cats.indexOf(c.id)>=0?' on':'')+'">'+
+       '<input type="checkbox" onchange="togFiltro(IV.cats,\''+c.id+'\');telaItensVendidos()"'+
+       (IV.cats.indexOf(c.id)>=0?' checked':'')+'>'+E(c.nome)+'</label>';}).join('')+
+    '</div></div>'+
+    '<div class="rfAcoes">'+
+     '<button class="btnP2 ok" onclick="IV.de=$(\'ivDe\').value;IV.ate=$(\'ivAte\').value;telaItensVendidos()">'+
+      sv('search',13)+' Buscar</button>'+
+     '<button class="btnP2" onclick="IV={de:IV.de,ate:IV.ate,tipos:[],canais:[],cats:[],busca:\'\',abertas:{},verAdic:IV.verAdic};telaItensVendidos()">Limpar</button>'+
+    '</div>'+
+   '</div>'+
+   '<div class="relKpis">'+
+    '<div class="rk"><span>Itens vendidos</span><b>'+fmtQt(totalItens)+'</b></div>'+
+    '<div class="rk dest"><span>Faturamento do período</span><b>R$ '+money(totalFat)+'</b></div>'+
+    '<div class="rk"><span>Valor em itens</span><b>R$ '+money(totalCat)+'</b></div>'+
+    '<div class="rk"><span>Categorias</span><b>'+cats.length+'</b></div>'+
+   '</div>'+
+   '<div class="ivGrade">'+
+   '<div class="etTabW plano2" id="relArea">'+
+   (cats.length?'<table class="etTab ivTab"><thead><tr>'+
+    '<th>Categoria / produto</th>'+
+    '<th style="width:110px;text-align:right">Quantidade</th>'+
+    '<th style="width:140px;text-align:right">Valor total</th>'+
+    '<th style="width:130px;text-align:right">% do faturamento</th></tr></thead><tbody>'+
+    cats.map(function(c){
+      var ab=!!IV.abertas[c.id];
+      var pc=totalFat?(c.valor/totalFat*100):0;
+      return '<tr class="ivCat" onclick="IV.abertas[\''+c.id+'\']=!IV.abertas[\''+c.id+'\'];telaItensVendidos()">'+
+      '<td><span class="ftSeta'+(ab?' ab':'')+'">'+sv('tri',10)+'</span> <b>'+E(c.nome)+'</b>'+
+       '<small style="color:var(--ink-3)"> · '+c.lista.length+' produto(s)</small></td>'+
+      '<td style="text-align:right"><b>'+fmtQt(c.qtd)+'</b></td>'+
+      '<td style="text-align:right"><b>R$ '+money(c.valor)+'</b></td>'+
+      '<td style="text-align:right"><span class="hpBar"><i style="width:'+Math.min(100,pc)+'%"></i></span>'+
+       '<small>'+pc.toFixed(1)+'%</small></td></tr>'+
+      (ab?c.lista.map(function(i4){
+        var p2=totalFat?(i4.valor/totalFat*100):0;
+        return '<tr class="ivProd"><td>'+E(i4.nome)+'</td>'+
+        '<td style="text-align:right">'+fmtQt(i4.qtd)+'</td>'+
+        '<td style="text-align:right">R$ '+money(i4.valor)+'</td>'+
+        '<td style="text-align:right;color:var(--ink-3)">'+p2.toFixed(1)+'%</td></tr>';
+      }).join(''):'');
+    }).join('')+'</tbody>'+
+    '<tfoot><tr><td><b>Total</b></td>'+
+    '<td style="text-align:right"><b>'+fmtQt(totalItens)+'</b></td>'+
+    '<td style="text-align:right"><b>R$ '+money(totalCat)+'</b></td>'+
+    '<td style="text-align:right"><b>'+(totalFat?(totalCat/totalFat*100).toFixed(1):'0')+'%</b></td></tr></tfoot></table>'
+   :'<div class="mvVazio">'+sv('box',26)+'<b>Nenhuma venda no período</b></div>')+
+   '</div>'+
+   '<aside class="ivAdic">'+
+    '<div class="ivAdicH">'+sv('plus',13)+' Acompanhamentos'+
+     '<span class="cnt2">'+adic.length+'</span></div>'+
+    (adic.length?'<table class="ivAdicT"><tbody>'+adic.map(function(a){
+      return '<tr><td>'+E(a.nome)+'</td>'+
+      '<td style="text-align:right">'+fmtQt(a.qtd)+'</td>'+
+      '<td style="text-align:right">'+(a.valor?'R$ '+money(a.valor):'—')+'</td></tr>';
+    }).join('')+'</tbody></table>'
+    :'<div class="hint" style="padding:14px">Nenhum acompanhamento vendido no período.</div>')+
+   '</aside>'+
+   '</div></div></div>';
+  var b=$('ivBusca');
+  if(b)b.oninput=function(){IV.busca=this.value;var p=this.selectionStart;telaItensVendidos();
+    var n=$('ivBusca');if(n){n.focus();n.setSelectionRange(p,p);}};
+  rodape(fmtQt(totalItens)+' itens · R$ '+money(totalCat));
+}
+function explicaItensVendidos(){
+  explicaRel('Itens Vendidos — como é feito',[
+   ['Quantidade','soma das quantidades de cada produto nos pedidos do período'],
+   ['Valor total','soma do valor de cada item já com o preço praticado na venda'],
+   ['% do faturamento','valor do item dividido pelo faturamento total do período'],
+   ['Categoria','a categoria do cardápio à qual o produto pertence — clique para abrir os produtos'],
+   ['Acompanhamentos','opções escolhidas dentro do pedido, como borda e adicionais, contadas à parte']
+  ],'os itens de cada pedido do PDV, no período e nos filtros escolhidos. '+
+    'O faturamento usado como base é o total dos mesmos pedidos.',
+   'pedidos cancelados, taxas de entrega e acréscimos do pedido (não são itens), '+
+   'e vendas de outras lojas. O percentual pode não somar 100% porque taxa de entrega '+
+   'entra no faturamento mas não é item.');
+}
+function exportarItensVend(){
+  var l=[['Categoria','Produto','Quantidade','Valor total']];
+  var trs=document.querySelectorAll('#relArea tbody tr');
+  var catAtual='';
+  for(var i=0;i<trs.length;i++){
+    var td=trs[i].querySelectorAll('td');
+    if(trs[i].className.indexOf('ivCat')>=0){
+      catAtual=td[0].innerText.split('·')[0].trim();
+      l.push([catAtual,'',td[1].innerText,td[2].innerText]);
+    }else{
+      l.push([catAtual,td[0].innerText,td[1].innerText,td[2].innerText]);
+    }
+  }
+  baixarCSV('nexor-itens-vendidos.csv',l);
 }
 
 /* ---------- POPUP E MODAL ---------- */
