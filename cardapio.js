@@ -524,6 +524,7 @@ async function enviarPedido(taxa,tot){
   var num=String(Date.now()).slice(-6);
   try{
     var r=await sb.from('pedidos_online').insert([{
+      loja_id:'ffe70bae-97f0-495d-aac3-d3a2aa333298',
       sucursal_id:S.loja.id,numero:num,situacao:'novo',
       cliente_nome:cl.nome,cliente_tel:cl.tel,
       endereco:{rua:cl.rua,numero:cl.numero,referencia:cl.ref},
@@ -538,8 +539,20 @@ async function enviarPedido(taxa,tot){
     fechar();
     telaSucesso(num,tot);
   }catch(e){
-    if(bt){bt.disabled=false;bt.textContent='Enviar pedido';}
-    alert('Não consegui enviar agora. Tente de novo em instantes.');
+    if(bt){bt.disabled=false;bt.textContent='Tentar enviar de novo';}
+    var det=(e&&(e.message||e.hint||e.details))||'';
+    var box=document.getElementById('erroEnvio');
+    if(!box){
+      box=document.createElement('div');
+      box.id='erroEnvio';box.className='aviso';
+      box.style.cssText='background:#FBEDE9;border-color:#E9C9BF;color:#9A4B33;margin:0 0 14px';
+      var pb=document.querySelector('.pnlB');
+      if(pb)pb.insertBefore(box,pb.firstChild);
+    }
+    box.innerHTML='<b>Não consegui enviar o pedido.</b><br>'+
+      'Confira sua internet e tente de novo. Se continuar, chame no WhatsApp.'+
+      (det?'<br><small style="opacity:.7;font-size:11px">detalhe: '+E(det)+'</small>':'');
+    try{ console.error('erro ao enviar pedido:',e); }catch(x){}
   }
 }
 function telaSucesso(num,tot){
