@@ -4132,7 +4132,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V3.7.0';
+var VERSAO='V3.8.0';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
@@ -12804,8 +12804,18 @@ function proxNumOP(){
 /* fichas que podem ser produzidas */
 function fichasProduziveis(){
   baseProd();
-  return (DB.fichas||[]).filter(function(f){return (f.itens||[]).length>0;})
-    .sort(function(a,b){return (a.nome||'').localeCompare(b.nome||'')});
+  return (DB.fichas||[]).filter(function(f){
+    if(!(f.itens||[]).length)return false;              /* sem receita não produz */
+    var c=catFicha(f.categoriaId);
+    return !!(c&&/produz/i.test(c.nome||''));           /* só o grupo Produzido */
+  }).sort(function(a,b){return (a.nome||'').localeCompare(b.nome||'')});
+}
+/* o que uma receita inteira gera, já na unidade do destino */
+function previstoDestino(f){
+  var d=destinoDaFicha(f);
+  var qtdRec=Number(f.rendimento)||0;
+  if(!d)return {qtd:qtdRec,unidade:f.rendUnidade||f.unidade,destino:null};
+  return {qtd:qtdNoDestino(f,qtdRec),unidade:d.unidade,destino:d};
 }
 
 /* ---------- TELA ---------- */
@@ -12884,20 +12894,14 @@ function telaOPNova(){
     return (f.nome||'').toLowerCase().indexOf(q)>=0||String(f.codigo||'').indexOf(q)>=0;
   }).slice(0,12);
 
-  var prev=OP.itens.reduce(function(a,it){return a+(Number(it.previsto)||0)},0);
-  var real=OP.itens.reduce(function(a,it){return a+somaCubas(it)},0);
+  var tot=totaisOP();
 
   $('content').innerHTML='<div class="etWrap">'+
    '<div class="etTopo" style="flex:none">'+
     '<button class="btnP2" onclick="voltarOP()">'+sv('cr2',13)+' Voltar</button>'+
     '<div><h1>Nova ordem de produção</h1>'+
     '<p>Escolha os sabores, pese as cubas e clique em Produzir.</p></div>'+
-    '<div class="etTot">'+
-     '<div class="etT"><span>Previsto</span><b>'+fmtQt(prev)+' kg</b></div>'+
-     '<div class="etT"><span>Produzido</span><b>'+fmtQt(real)+' kg</b></div>'+
-     '<div class="etT dest"><span>Diferença</span><b class="'+((real-prev)>=0?'vg':'vr')+'">'+
-      ((real-prev)>=0?'+':'')+fmtQt(real-prev)+' kg</b></div>'+
-    '</div>'+
+    '<div class="etTot" id="opTotais">'+htmlTotaisOP(tot)+'</div>'+
     '<button class="btnP2 ok" onclick="confirmarProducao()">'+sv('check',14)+' Produzir</button>'+
    '</div>'+
    '<div class="etFiltros" style="flex:none">'+
@@ -12915,14 +12919,15 @@ function telaOPNova(){
      (OP.todos?'<div class="opSugT">Todos os sabores — clique para adicionar'+
        '<button class="arvB" onclick="OP.todos=false;telaProducao()">'+sv('x2',12)+'</button></div>':'')+
      achadas.map(function(f){
+      var pd=previstoDestino(f);
       return '<button class="opSugIt" onclick="addSaborOP(\''+f.id+'\')">'+
-      '<b>'+E(f.nome)+'</b><span>'+fmtQt(f.rendimento)+' '+un(f.rendUnidade||f.unidade).ab+
-      ' · '+((f.itens||[]).length)+' ingredientes</span></button>';
+      '<b>'+E(f.nome)+'</b><span>gera '+fmtQt(pd.qtd)+' '+un(pd.unidade).ab+
+      (pd.destino?' de '+E(pd.destino.nome):'')+'</span></button>';
     }).join('')+'</div>':'')+
    '<div class="etTabW">'+
    (OP.itens.length?'<table class="etTab opTab"><thead><tr>'+
     '<th style="width:34px"></th><th>Sabor</th>'+
-    '<th style="width:104px;text-align:right">Previsto</th>'+
+    '<th style="width:120px;text-align:right">Previsto</th>'+
     '<th style="width:96px;text-align:right">Cuba 1</th>'+
     '<th style="width:96px;text-align:right">Cuba 2</th>'+
     '<th style="width:96px;text-align:right">Cuba 3</th>'+
@@ -12936,14 +12941,15 @@ function telaOPNova(){
       return '<tr id="lop-'+k+'">'+
       '<td><button class="xDel" onclick="remSaborOP('+k+')">'+sv('x2',10)+'</button></td>'+
       '<td><button class="opNome" onclick="verReceitaOP('+k+')">'+E(it.nome)+
-       '<span class="opVerRec">'+sv('book',11)+' modo de preparo</span></button></td>'+
-      '<td style="text-align:right">'+fmtQt(it.previsto)+' kg</td>'+
+       '<span class="opVerRec">'+sv('book',11)+' modo de preparo'+
+       (it.destinoNome?' · gera '+E(it.destinoNome):'')+'</span></button></td>'+
+      '<td style="text-align:right">'+fmtQt(it.previsto)+' '+un(it.unidade).ab+'</td>'+
       [0,1,2].map(function(c){
         return '<td><input class="opCuba" data-k="'+k+'" data-c="'+c+'" type="number" step="0.001" '+
         'value="'+(it.cubas[c]||'')+'" placeholder="—"></td>';}).join('')+
-      '<td style="text-align:right" class="opTot"><b>'+(tot?fmtQt(tot)+' kg':'—')+'</b></td>'+
+      '<td style="text-align:right" class="opTot"><b>'+(tot?fmtQt(tot)+' '+un(it.unidade).ab:'—')+'</b></td>'+
       '<td style="text-align:right" class="opDif">'+(tot
-        ?'<b class="'+(dif>=0?'vg':'vr')+'">'+(dif>0?'+':'')+fmtQt(dif)+' kg</b>'
+        ?'<b class="'+(dif>=0?'vg':'vr')+'">'+(dif>0?'+':'')+fmtQt(dif)+' '+un(it.unidade).ab+'</b>'
         :'<span style="color:var(--ink-3)">—</span>')+'</td>'+
       '<td></td></tr>'+
       (OP.verReceita===k?'<tr class="opRec"><td colspan="9">'+
@@ -12959,12 +12965,7 @@ function telaOPNova(){
           return E(i2.nome||'')+' '+fmtQt(ci.qtd)+' '+un(ci.unidade).ab;}).join(' · ')||'—')+'</div>'+
         '</div></td></tr>':'');
     }).join('')+'</tbody>'+
-    '<tfoot><tr><td colspan="2"><b>Total da ordem</b></td>'+
-    '<td style="text-align:right"><b>'+fmtQt(prev)+' kg</b></td>'+
-    '<td colspan="3"></td>'+
-    '<td style="text-align:right"><b>'+fmtQt(real)+' kg</b></td>'+
-    '<td style="text-align:right"><b class="'+((real-prev)>=0?'vg':'vr')+'">'+
-     ((real-prev)>=0?'+':'')+fmtQt(real-prev)+' kg</b></td><td></td></tr></tfoot></table>'
+    '<tfoot id="opRodape">'+htmlRodapeOP(tot)+'</tfoot></table>'
    :'<div class="mvVazio">'+sv('box',26)+'<b>Nenhum sabor na ordem</b>'+
     '<span>Use o campo <b>Adicionar sabor</b> acima para montar a produção do dia.</span></div>')+
    '</div>'+
@@ -12973,6 +12974,39 @@ function telaOPNova(){
      '<input id="opObs" value="'+E(OP.obs)+'" placeholder="observação da produção"></div>'+
    '</div></div>';
   ligarOP();
+}
+/* soma separada por unidade: kg com kg, unidade com unidade */
+function totaisOP(){
+  var por={};
+  (OP.itens||[]).forEach(function(it){
+    var u=it.unidade||'kg';
+    por[u]=por[u]||{prev:0,real:0};
+    por[u].prev+=Number(it.previsto)||0;
+    por[u].real+=somaCubas(it);
+  });
+  return por;
+}
+function htmlTotaisOP(t){
+  var ks=Object.keys(t);
+  if(!ks.length)return '<div class="etT"><span>Previsto</span><b>—</b></div>';
+  return ks.map(function(u){
+    var d=t[u].real-t[u].prev;
+    return '<div class="etT"><span>Previsto ('+un(u).ab+')</span><b>'+fmtQt(t[u].prev)+'</b></div>'+
+    '<div class="etT"><span>Produzido</span><b>'+fmtQt(t[u].real)+'</b></div>'+
+    '<div class="etT dest"><span>Diferença</span><b class="'+(d>=0?'vg':'vr')+'">'+
+     (d>0?'+':'')+fmtQt(d)+' '+un(u).ab+'</b></div>';
+  }).join('');
+}
+function htmlRodapeOP(t){
+  return Object.keys(t).map(function(u){
+    var d=t[u].real-t[u].prev;
+    return '<tr><td colspan="2"><b>Total em '+un(u).n.toLowerCase()+'</b></td>'+
+    '<td style="text-align:right"><b>'+fmtQt(t[u].prev)+' '+un(u).ab+'</b></td>'+
+    '<td colspan="3"></td>'+
+    '<td style="text-align:right"><b>'+fmtQt(t[u].real)+' '+un(u).ab+'</b></td>'+
+    '<td style="text-align:right"><b class="'+(d>=0?'vg':'vr')+'">'+
+     (d>0?'+':'')+fmtQt(d)+' '+un(u).ab+'</b></td><td></td></tr>';
+  }).join('');
 }
 function somaCubas(it){
   return (it.cubas||[]).reduce(function(a,c){return a+(parseFloat(c)||0)},0);
@@ -13008,31 +13042,25 @@ function atualizaLinhaOP(k){
   var tot=somaCubas(it);
   var dif=tot?(tot-(Number(it.previsto)||0)):0;
   var ct=tr.querySelector('.opTot'),cd=tr.querySelector('.opDif');
-  if(ct)ct.innerHTML='<b>'+(tot?fmtQt(tot)+' kg':'—')+'</b>';
-  if(cd)cd.innerHTML=tot?('<b class="'+(dif>=0?'vg':'vr')+'">'+(dif>0?'+':'')+fmtQt(dif)+' kg</b>')
+  if(ct)ct.innerHTML='<b>'+(tot?fmtQt(tot)+' '+un(it.unidade).ab:'—')+'</b>';
+  if(cd)cd.innerHTML=tot?('<b class="'+(dif>=0?'vg':'vr')+'">'+(dif>0?'+':'')+fmtQt(dif)+' '+un(it.unidade).ab+'</b>')
     :'<span style="color:var(--ink-3)">—</span>';
   atualizaTotaisOP();
 }
 function atualizaTotaisOP(){
-  var prev=OP.itens.reduce(function(a,it){return a+(Number(it.previsto)||0)},0);
-  var real=OP.itens.reduce(function(a,it){return a+somaCubas(it)},0);
-  var box=document.querySelector('.etTot');
-  if(box)box.innerHTML='<div class="etT"><span>Previsto</span><b>'+fmtQt(prev)+' kg</b></div>'+
-   '<div class="etT"><span>Produzido</span><b>'+fmtQt(real)+' kg</b></div>'+
-   '<div class="etT dest"><span>Diferença</span><b class="'+((real-prev)>=0?'vg':'vr')+'">'+
-   ((real-prev)>=0?'+':'')+fmtQt(real-prev)+' kg</b></div>';
-  var tf=document.querySelector('.opTab tfoot tr');
-  if(tf)tf.innerHTML='<td colspan="2"><b>Total da ordem</b></td>'+
-   '<td style="text-align:right"><b>'+fmtQt(prev)+' kg</b></td><td colspan="3"></td>'+
-   '<td style="text-align:right"><b>'+fmtQt(real)+' kg</b></td>'+
-   '<td style="text-align:right"><b class="'+((real-prev)>=0?'vg':'vr')+'">'+
-   ((real-prev)>=0?'+':'')+fmtQt(real-prev)+' kg</b></td><td></td>';
+  var t=totaisOP();
+  var box=document.getElementById('opTotais');
+  if(box)box.innerHTML=htmlTotaisOP(t);
+  var tf=document.getElementById('opRodape');
+  if(tf)tf.innerHTML=htmlRodapeOP(t);
 }
 function addSaborOP(fid){
   var f=(DB.fichas||[]).find(function(x){return x.id===fid});
   if(!f)return;
-  OP.itens.push({fichaId:f.id,nome:f.nome,previsto:Number(f.rendimento)||0,
-    unidade:f.rendUnidade||f.unidade,cubas:['','','']});
+  var p=previstoDestino(f);
+  OP.itens.push({fichaId:f.id,nome:f.nome,previsto:p.qtd,unidade:p.unidade,
+    destinoNome:p.destino?p.destino.nome:'',qtdReceita:Number(f.rendimento)||0,
+    unReceita:f.rendUnidade||f.unidade,cubas:['','','']});
   OP.busca='';OP.todos=false;
   telaProducao();
 }
@@ -13047,21 +13075,27 @@ function confirmarProducao(){
   if(semPeso.length&&!confirm(semPeso.length+' sabor(es) sem peso informado.\n\n'+
     'Eles serão produzidos sem registrar perda ou ganho. Continuar?'))return;
 
-  var prev=OP.itens.reduce(function(a,it){return a+(Number(it.previsto)||0)},0);
-  var real=OP.itens.reduce(function(a,it){return a+somaCubas(it)},0);
-  var dif=+(real-prev).toFixed(3);
+  var tt=totaisOP();
+  var prev=0,real=0,dif=0;
+  var linhasRes=Object.keys(tt).map(function(u){
+    var d=tt[u].real-tt[u].prev;
+    prev+=tt[u].prev;real+=tt[u].real;dif+=d;
+    return 'Previsto '+fmtQt(tt[u].prev)+' '+un(u).ab+
+      ' · Produzido '+fmtQt(tt[u].real)+' '+un(u).ab+
+      (Math.abs(d)>0.0001?(d>0?'  (ganho de ':'  (perda de ')+fmtQt(Math.abs(d))+' '+un(u).ab+')':'');
+  }).join('\n');
+  dif=+dif.toFixed(3);
 
   var resumo='Confirmar a produção?\n\n'+
-    OP.itens.length+' sabor(es)\n'+
-    'Previsto: '+fmtQt(prev)+' kg\n'+
-    'Produzido: '+fmtQt(real)+' kg\n'+
-    (Math.abs(dif)>0.0001?(dif>0?'GANHO de ':'PERDA de ')+fmtQt(Math.abs(dif))+' kg\n':'')+
-    '\nOs ingredientes serão baixados e o produto acabado entrará no estoque.';
+    OP.itens.length+' item(ns)\n'+linhasRes+
+    '\n\nOs ingredientes serão baixados e o produto acabado entrará no estoque.';
   if(!confirm(resumo))return;
 
   /* 1) a produção em si — baixa ingredientes e gera o destino, pelo previsto */
   var itensMov=OP.itens.map(function(it){
-    return {tipo:'ficha',refId:it.fichaId,qtd:Number(it.previsto)||0,unidade:it.unidade,custo:0};
+    return {tipo:'ficha',refId:it.fichaId,
+      qtd:Number(it.qtdReceita)||Number(it.previsto)||0,
+      unidade:it.unReceita||it.unidade,custo:0};
   });
   var linhas=montarLinhas(itensMov,'producao');
   var mv=null;
