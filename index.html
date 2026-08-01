@@ -2125,7 +2125,81 @@ tbody td small{font-size:10.5px}
 .vpBt b{font-size:12.5px}
 .vpBar{height:7px;border-radius:4px;background:var(--line-2);overflow:hidden}
 .vpBar i{display:block;height:100%;border-radius:4px}
+/* ---------- caixa de confirmação ---------- */
+.cfOv{align-items:center;justify-content:center;padding:20px}
+.cfBox{background:var(--panel);border-radius:14px;width:100%;max-width:440px;
+  box-shadow:0 24px 60px rgba(5,16,28,.35);overflow:hidden;animation:cfEntra .16s ease-out}
+@keyframes cfEntra{from{opacity:0;transform:translateY(-10px) scale(.98)}to{opacity:1;transform:none}}
+.cfTopo{display:flex;gap:14px;padding:22px 24px 16px}
+.cfIc{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;
+  justify-content:center;flex:none}
+.cfTopo b{display:block;font-size:16.5px;font-weight:600;color:var(--ink);line-height:1.35}
+.cfTopo span{display:block;font-size:13px;color:var(--ink-2);margin-top:5px;line-height:1.55}
+.cfLinhas{margin:0 24px 4px;border:1px solid var(--line-2);border-radius:9px;overflow:hidden}
+.cfL{display:flex;align-items:center;gap:12px;padding:10px 14px;background:#fff;
+  border-bottom:1px solid var(--line-2);font-size:13px}
+.cfL:last-child{border-bottom:none}
+.cfL span{flex:1;color:var(--ink-2)}
+.cfL b{font-weight:700;font-variant-numeric:tabular-nums}
+.cfAviso{display:flex;gap:9px;margin:14px 24px 0;padding:11px 13px;background:var(--amber-soft);
+  border:1px solid #E8CFA0;border-radius:9px;font-size:12px;color:#8A5A08;line-height:1.55}
+.cfAviso svg{flex:none;margin-top:1px}
+.cfBt{display:flex;gap:9px;justify-content:flex-end;padding:20px 24px 22px}
+.cfBt .btnP2{height:38px;padding:0 20px;font-size:13px}
+
+/* ---------- gráfico ---------- */
+.grafCard{margin:4px 16px 14px;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.grafH{display:flex;align-items:center;padding:13px 16px;border-bottom:1px solid var(--line-2)}
+.grafH b{display:block;font-size:13.5px;font-weight:600;color:var(--ink)}
+.grafH span{display:block;font-size:11px;color:var(--ink-3);margin-top:1px}
+.grafLeg{margin-left:auto;display:flex;gap:14px}
+.grafLeg span{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink-2)}
+.grafLeg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.grafLeg i.lg1{background:linear-gradient(180deg,#00B89E,#00806F)}
+.grafLeg i.lg2{background:#B8730B;border-radius:50%;width:9px;height:9px}
+.grafBox{padding:8px 6px 2px;overflow-x:auto}
+.gTip{opacity:0;pointer-events:none;transition:opacity .12s}
+.gBar:hover .gTip{opacity:1}
+.gBar:hover rect:first-child{filter:brightness(1.12)}
+
 @media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
+
+/* ---------- caixa de confirmação ---------- */
+.cfOv{align-items:center;justify-content:center;padding:20px}
+.cfBox{background:var(--panel);border-radius:14px;width:100%;max-width:440px;
+  box-shadow:0 24px 60px rgba(5,16,28,.35);overflow:hidden;animation:cfEntra .16s ease-out}
+@keyframes cfEntra{from{opacity:0;transform:translateY(-10px) scale(.98)}to{opacity:1;transform:none}}
+.cfTopo{display:flex;gap:14px;padding:22px 24px 16px}
+.cfIc{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;
+  justify-content:center;flex:none}
+.cfTopo b{display:block;font-size:16.5px;font-weight:600;color:var(--ink);line-height:1.35}
+.cfTopo span{display:block;font-size:13px;color:var(--ink-2);margin-top:5px;line-height:1.55}
+.cfLinhas{margin:0 24px 4px;border:1px solid var(--line-2);border-radius:9px;overflow:hidden}
+.cfL{display:flex;align-items:center;gap:12px;padding:10px 14px;background:#fff;
+  border-bottom:1px solid var(--line-2);font-size:13px}
+.cfL:last-child{border-bottom:none}
+.cfL span{flex:1;color:var(--ink-2)}
+.cfL b{font-weight:700;font-variant-numeric:tabular-nums}
+.cfAviso{display:flex;gap:9px;margin:14px 24px 0;padding:11px 13px;background:var(--amber-soft);
+  border:1px solid #E8CFA0;border-radius:9px;font-size:12px;color:#8A5A08;line-height:1.55}
+.cfAviso svg{flex:none;margin-top:1px}
+.cfBt{display:flex;gap:9px;justify-content:flex-end;padding:20px 24px 22px}
+.cfBt .btnP2{height:38px;padding:0 20px;font-size:13px}
+
+/* ---------- gráfico ---------- */
+.grafCard{margin:4px 16px 14px;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.grafH{display:flex;align-items:center;padding:13px 16px;border-bottom:1px solid var(--line-2)}
+.grafH b{display:block;font-size:13.5px;font-weight:600;color:var(--ink)}
+.grafH span{display:block;font-size:11px;color:var(--ink-3);margin-top:1px}
+.grafLeg{margin-left:auto;display:flex;gap:14px}
+.grafLeg span{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink-2)}
+.grafLeg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.grafLeg i.lg1{background:linear-gradient(180deg,#00B89E,#00806F)}
+.grafLeg i.lg2{background:#B8730B;border-radius:50%;width:9px;height:9px}
+.grafBox{padding:8px 6px 2px;overflow-x:auto}
+.gTip{opacity:0;pointer-events:none;transition:opacity .12s}
+.gBar:hover .gTip{opacity:1}
+.gBar:hover rect:first-child{filter:brightness(1.12)}
 
 @media(max-width:1000px){.ivGrade{flex-direction:column}.ivAdic{width:100%}}
 
@@ -2211,7 +2285,81 @@ tbody td small{font-size:10.5px}
 .vpBt b{font-size:12.5px}
 .vpBar{height:7px;border-radius:4px;background:var(--line-2);overflow:hidden}
 .vpBar i{display:block;height:100%;border-radius:4px}
+/* ---------- caixa de confirmação ---------- */
+.cfOv{align-items:center;justify-content:center;padding:20px}
+.cfBox{background:var(--panel);border-radius:14px;width:100%;max-width:440px;
+  box-shadow:0 24px 60px rgba(5,16,28,.35);overflow:hidden;animation:cfEntra .16s ease-out}
+@keyframes cfEntra{from{opacity:0;transform:translateY(-10px) scale(.98)}to{opacity:1;transform:none}}
+.cfTopo{display:flex;gap:14px;padding:22px 24px 16px}
+.cfIc{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;
+  justify-content:center;flex:none}
+.cfTopo b{display:block;font-size:16.5px;font-weight:600;color:var(--ink);line-height:1.35}
+.cfTopo span{display:block;font-size:13px;color:var(--ink-2);margin-top:5px;line-height:1.55}
+.cfLinhas{margin:0 24px 4px;border:1px solid var(--line-2);border-radius:9px;overflow:hidden}
+.cfL{display:flex;align-items:center;gap:12px;padding:10px 14px;background:#fff;
+  border-bottom:1px solid var(--line-2);font-size:13px}
+.cfL:last-child{border-bottom:none}
+.cfL span{flex:1;color:var(--ink-2)}
+.cfL b{font-weight:700;font-variant-numeric:tabular-nums}
+.cfAviso{display:flex;gap:9px;margin:14px 24px 0;padding:11px 13px;background:var(--amber-soft);
+  border:1px solid #E8CFA0;border-radius:9px;font-size:12px;color:#8A5A08;line-height:1.55}
+.cfAviso svg{flex:none;margin-top:1px}
+.cfBt{display:flex;gap:9px;justify-content:flex-end;padding:20px 24px 22px}
+.cfBt .btnP2{height:38px;padding:0 20px;font-size:13px}
+
+/* ---------- gráfico ---------- */
+.grafCard{margin:4px 16px 14px;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.grafH{display:flex;align-items:center;padding:13px 16px;border-bottom:1px solid var(--line-2)}
+.grafH b{display:block;font-size:13.5px;font-weight:600;color:var(--ink)}
+.grafH span{display:block;font-size:11px;color:var(--ink-3);margin-top:1px}
+.grafLeg{margin-left:auto;display:flex;gap:14px}
+.grafLeg span{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink-2)}
+.grafLeg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.grafLeg i.lg1{background:linear-gradient(180deg,#00B89E,#00806F)}
+.grafLeg i.lg2{background:#B8730B;border-radius:50%;width:9px;height:9px}
+.grafBox{padding:8px 6px 2px;overflow-x:auto}
+.gTip{opacity:0;pointer-events:none;transition:opacity .12s}
+.gBar:hover .gTip{opacity:1}
+.gBar:hover rect:first-child{filter:brightness(1.12)}
+
 @media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
+
+/* ---------- caixa de confirmação ---------- */
+.cfOv{align-items:center;justify-content:center;padding:20px}
+.cfBox{background:var(--panel);border-radius:14px;width:100%;max-width:440px;
+  box-shadow:0 24px 60px rgba(5,16,28,.35);overflow:hidden;animation:cfEntra .16s ease-out}
+@keyframes cfEntra{from{opacity:0;transform:translateY(-10px) scale(.98)}to{opacity:1;transform:none}}
+.cfTopo{display:flex;gap:14px;padding:22px 24px 16px}
+.cfIc{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;
+  justify-content:center;flex:none}
+.cfTopo b{display:block;font-size:16.5px;font-weight:600;color:var(--ink);line-height:1.35}
+.cfTopo span{display:block;font-size:13px;color:var(--ink-2);margin-top:5px;line-height:1.55}
+.cfLinhas{margin:0 24px 4px;border:1px solid var(--line-2);border-radius:9px;overflow:hidden}
+.cfL{display:flex;align-items:center;gap:12px;padding:10px 14px;background:#fff;
+  border-bottom:1px solid var(--line-2);font-size:13px}
+.cfL:last-child{border-bottom:none}
+.cfL span{flex:1;color:var(--ink-2)}
+.cfL b{font-weight:700;font-variant-numeric:tabular-nums}
+.cfAviso{display:flex;gap:9px;margin:14px 24px 0;padding:11px 13px;background:var(--amber-soft);
+  border:1px solid #E8CFA0;border-radius:9px;font-size:12px;color:#8A5A08;line-height:1.55}
+.cfAviso svg{flex:none;margin-top:1px}
+.cfBt{display:flex;gap:9px;justify-content:flex-end;padding:20px 24px 22px}
+.cfBt .btnP2{height:38px;padding:0 20px;font-size:13px}
+
+/* ---------- gráfico ---------- */
+.grafCard{margin:4px 16px 14px;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.grafH{display:flex;align-items:center;padding:13px 16px;border-bottom:1px solid var(--line-2)}
+.grafH b{display:block;font-size:13.5px;font-weight:600;color:var(--ink)}
+.grafH span{display:block;font-size:11px;color:var(--ink-3);margin-top:1px}
+.grafLeg{margin-left:auto;display:flex;gap:14px}
+.grafLeg span{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink-2)}
+.grafLeg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.grafLeg i.lg1{background:linear-gradient(180deg,#00B89E,#00806F)}
+.grafLeg i.lg2{background:#B8730B;border-radius:50%;width:9px;height:9px}
+.grafBox{padding:8px 6px 2px;overflow-x:auto}
+.gTip{opacity:0;pointer-events:none;transition:opacity .12s}
+.gBar:hover .gTip{opacity:1}
+.gBar:hover rect:first-child{filter:brightness(1.12)}
 
 @media(max-width:1000px){
   .lfPeriodo{order:3;width:100%}
@@ -3422,7 +3570,81 @@ tbody td small{font-size:10.5px}
 .vpBt b{font-size:12.5px}
 .vpBar{height:7px;border-radius:4px;background:var(--line-2);overflow:hidden}
 .vpBar i{display:block;height:100%;border-radius:4px}
+/* ---------- caixa de confirmação ---------- */
+.cfOv{align-items:center;justify-content:center;padding:20px}
+.cfBox{background:var(--panel);border-radius:14px;width:100%;max-width:440px;
+  box-shadow:0 24px 60px rgba(5,16,28,.35);overflow:hidden;animation:cfEntra .16s ease-out}
+@keyframes cfEntra{from{opacity:0;transform:translateY(-10px) scale(.98)}to{opacity:1;transform:none}}
+.cfTopo{display:flex;gap:14px;padding:22px 24px 16px}
+.cfIc{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;
+  justify-content:center;flex:none}
+.cfTopo b{display:block;font-size:16.5px;font-weight:600;color:var(--ink);line-height:1.35}
+.cfTopo span{display:block;font-size:13px;color:var(--ink-2);margin-top:5px;line-height:1.55}
+.cfLinhas{margin:0 24px 4px;border:1px solid var(--line-2);border-radius:9px;overflow:hidden}
+.cfL{display:flex;align-items:center;gap:12px;padding:10px 14px;background:#fff;
+  border-bottom:1px solid var(--line-2);font-size:13px}
+.cfL:last-child{border-bottom:none}
+.cfL span{flex:1;color:var(--ink-2)}
+.cfL b{font-weight:700;font-variant-numeric:tabular-nums}
+.cfAviso{display:flex;gap:9px;margin:14px 24px 0;padding:11px 13px;background:var(--amber-soft);
+  border:1px solid #E8CFA0;border-radius:9px;font-size:12px;color:#8A5A08;line-height:1.55}
+.cfAviso svg{flex:none;margin-top:1px}
+.cfBt{display:flex;gap:9px;justify-content:flex-end;padding:20px 24px 22px}
+.cfBt .btnP2{height:38px;padding:0 20px;font-size:13px}
+
+/* ---------- gráfico ---------- */
+.grafCard{margin:4px 16px 14px;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.grafH{display:flex;align-items:center;padding:13px 16px;border-bottom:1px solid var(--line-2)}
+.grafH b{display:block;font-size:13.5px;font-weight:600;color:var(--ink)}
+.grafH span{display:block;font-size:11px;color:var(--ink-3);margin-top:1px}
+.grafLeg{margin-left:auto;display:flex;gap:14px}
+.grafLeg span{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink-2)}
+.grafLeg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.grafLeg i.lg1{background:linear-gradient(180deg,#00B89E,#00806F)}
+.grafLeg i.lg2{background:#B8730B;border-radius:50%;width:9px;height:9px}
+.grafBox{padding:8px 6px 2px;overflow-x:auto}
+.gTip{opacity:0;pointer-events:none;transition:opacity .12s}
+.gBar:hover .gTip{opacity:1}
+.gBar:hover rect:first-child{filter:brightness(1.12)}
+
 @media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
+
+/* ---------- caixa de confirmação ---------- */
+.cfOv{align-items:center;justify-content:center;padding:20px}
+.cfBox{background:var(--panel);border-radius:14px;width:100%;max-width:440px;
+  box-shadow:0 24px 60px rgba(5,16,28,.35);overflow:hidden;animation:cfEntra .16s ease-out}
+@keyframes cfEntra{from{opacity:0;transform:translateY(-10px) scale(.98)}to{opacity:1;transform:none}}
+.cfTopo{display:flex;gap:14px;padding:22px 24px 16px}
+.cfIc{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;
+  justify-content:center;flex:none}
+.cfTopo b{display:block;font-size:16.5px;font-weight:600;color:var(--ink);line-height:1.35}
+.cfTopo span{display:block;font-size:13px;color:var(--ink-2);margin-top:5px;line-height:1.55}
+.cfLinhas{margin:0 24px 4px;border:1px solid var(--line-2);border-radius:9px;overflow:hidden}
+.cfL{display:flex;align-items:center;gap:12px;padding:10px 14px;background:#fff;
+  border-bottom:1px solid var(--line-2);font-size:13px}
+.cfL:last-child{border-bottom:none}
+.cfL span{flex:1;color:var(--ink-2)}
+.cfL b{font-weight:700;font-variant-numeric:tabular-nums}
+.cfAviso{display:flex;gap:9px;margin:14px 24px 0;padding:11px 13px;background:var(--amber-soft);
+  border:1px solid #E8CFA0;border-radius:9px;font-size:12px;color:#8A5A08;line-height:1.55}
+.cfAviso svg{flex:none;margin-top:1px}
+.cfBt{display:flex;gap:9px;justify-content:flex-end;padding:20px 24px 22px}
+.cfBt .btnP2{height:38px;padding:0 20px;font-size:13px}
+
+/* ---------- gráfico ---------- */
+.grafCard{margin:4px 16px 14px;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.grafH{display:flex;align-items:center;padding:13px 16px;border-bottom:1px solid var(--line-2)}
+.grafH b{display:block;font-size:13.5px;font-weight:600;color:var(--ink)}
+.grafH span{display:block;font-size:11px;color:var(--ink-3);margin-top:1px}
+.grafLeg{margin-left:auto;display:flex;gap:14px}
+.grafLeg span{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink-2)}
+.grafLeg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.grafLeg i.lg1{background:linear-gradient(180deg,#00B89E,#00806F)}
+.grafLeg i.lg2{background:#B8730B;border-radius:50%;width:9px;height:9px}
+.grafBox{padding:8px 6px 2px;overflow-x:auto}
+.gTip{opacity:0;pointer-events:none;transition:opacity .12s}
+.gBar:hover .gTip{opacity:1}
+.gBar:hover rect:first-child{filter:brightness(1.12)}
 
 @media(max-width:1000px){.ivGrade{flex-direction:column}.ivAdic{width:100%}}
 
@@ -3508,7 +3730,81 @@ tbody td small{font-size:10.5px}
 .vpBt b{font-size:12.5px}
 .vpBar{height:7px;border-radius:4px;background:var(--line-2);overflow:hidden}
 .vpBar i{display:block;height:100%;border-radius:4px}
+/* ---------- caixa de confirmação ---------- */
+.cfOv{align-items:center;justify-content:center;padding:20px}
+.cfBox{background:var(--panel);border-radius:14px;width:100%;max-width:440px;
+  box-shadow:0 24px 60px rgba(5,16,28,.35);overflow:hidden;animation:cfEntra .16s ease-out}
+@keyframes cfEntra{from{opacity:0;transform:translateY(-10px) scale(.98)}to{opacity:1;transform:none}}
+.cfTopo{display:flex;gap:14px;padding:22px 24px 16px}
+.cfIc{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;
+  justify-content:center;flex:none}
+.cfTopo b{display:block;font-size:16.5px;font-weight:600;color:var(--ink);line-height:1.35}
+.cfTopo span{display:block;font-size:13px;color:var(--ink-2);margin-top:5px;line-height:1.55}
+.cfLinhas{margin:0 24px 4px;border:1px solid var(--line-2);border-radius:9px;overflow:hidden}
+.cfL{display:flex;align-items:center;gap:12px;padding:10px 14px;background:#fff;
+  border-bottom:1px solid var(--line-2);font-size:13px}
+.cfL:last-child{border-bottom:none}
+.cfL span{flex:1;color:var(--ink-2)}
+.cfL b{font-weight:700;font-variant-numeric:tabular-nums}
+.cfAviso{display:flex;gap:9px;margin:14px 24px 0;padding:11px 13px;background:var(--amber-soft);
+  border:1px solid #E8CFA0;border-radius:9px;font-size:12px;color:#8A5A08;line-height:1.55}
+.cfAviso svg{flex:none;margin-top:1px}
+.cfBt{display:flex;gap:9px;justify-content:flex-end;padding:20px 24px 22px}
+.cfBt .btnP2{height:38px;padding:0 20px;font-size:13px}
+
+/* ---------- gráfico ---------- */
+.grafCard{margin:4px 16px 14px;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.grafH{display:flex;align-items:center;padding:13px 16px;border-bottom:1px solid var(--line-2)}
+.grafH b{display:block;font-size:13.5px;font-weight:600;color:var(--ink)}
+.grafH span{display:block;font-size:11px;color:var(--ink-3);margin-top:1px}
+.grafLeg{margin-left:auto;display:flex;gap:14px}
+.grafLeg span{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink-2)}
+.grafLeg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.grafLeg i.lg1{background:linear-gradient(180deg,#00B89E,#00806F)}
+.grafLeg i.lg2{background:#B8730B;border-radius:50%;width:9px;height:9px}
+.grafBox{padding:8px 6px 2px;overflow-x:auto}
+.gTip{opacity:0;pointer-events:none;transition:opacity .12s}
+.gBar:hover .gTip{opacity:1}
+.gBar:hover rect:first-child{filter:brightness(1.12)}
+
 @media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
+
+/* ---------- caixa de confirmação ---------- */
+.cfOv{align-items:center;justify-content:center;padding:20px}
+.cfBox{background:var(--panel);border-radius:14px;width:100%;max-width:440px;
+  box-shadow:0 24px 60px rgba(5,16,28,.35);overflow:hidden;animation:cfEntra .16s ease-out}
+@keyframes cfEntra{from{opacity:0;transform:translateY(-10px) scale(.98)}to{opacity:1;transform:none}}
+.cfTopo{display:flex;gap:14px;padding:22px 24px 16px}
+.cfIc{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;
+  justify-content:center;flex:none}
+.cfTopo b{display:block;font-size:16.5px;font-weight:600;color:var(--ink);line-height:1.35}
+.cfTopo span{display:block;font-size:13px;color:var(--ink-2);margin-top:5px;line-height:1.55}
+.cfLinhas{margin:0 24px 4px;border:1px solid var(--line-2);border-radius:9px;overflow:hidden}
+.cfL{display:flex;align-items:center;gap:12px;padding:10px 14px;background:#fff;
+  border-bottom:1px solid var(--line-2);font-size:13px}
+.cfL:last-child{border-bottom:none}
+.cfL span{flex:1;color:var(--ink-2)}
+.cfL b{font-weight:700;font-variant-numeric:tabular-nums}
+.cfAviso{display:flex;gap:9px;margin:14px 24px 0;padding:11px 13px;background:var(--amber-soft);
+  border:1px solid #E8CFA0;border-radius:9px;font-size:12px;color:#8A5A08;line-height:1.55}
+.cfAviso svg{flex:none;margin-top:1px}
+.cfBt{display:flex;gap:9px;justify-content:flex-end;padding:20px 24px 22px}
+.cfBt .btnP2{height:38px;padding:0 20px;font-size:13px}
+
+/* ---------- gráfico ---------- */
+.grafCard{margin:4px 16px 14px;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.grafH{display:flex;align-items:center;padding:13px 16px;border-bottom:1px solid var(--line-2)}
+.grafH b{display:block;font-size:13.5px;font-weight:600;color:var(--ink)}
+.grafH span{display:block;font-size:11px;color:var(--ink-3);margin-top:1px}
+.grafLeg{margin-left:auto;display:flex;gap:14px}
+.grafLeg span{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink-2)}
+.grafLeg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.grafLeg i.lg1{background:linear-gradient(180deg,#00B89E,#00806F)}
+.grafLeg i.lg2{background:#B8730B;border-radius:50%;width:9px;height:9px}
+.grafBox{padding:8px 6px 2px;overflow-x:auto}
+.gTip{opacity:0;pointer-events:none;transition:opacity .12s}
+.gBar:hover .gTip{opacity:1}
+.gBar:hover rect:first-child{filter:brightness(1.12)}
 
 @media(max-width:1000px){
   .lgCard{grid-template-columns:1fr}.lgR{display:none}
@@ -4649,7 +4945,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V4.4.1';
+var VERSAO='V4.5.0';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
@@ -11548,10 +11844,13 @@ function verMovimento(id){
   document.body.appendChild(ov);
   fecharSoForaDeVerdade(ov);
 }
-function excluirMov(id){
+async function excluirMov(id){
   var m=(DB.movEst||[]).find(function(x){return x.id===id});
   if(!m)return;
-  if(!confirm('Excluir este lançamento?\n\nO estoque dos itens será desfeito.'))return;
+  var ok=await confirmar({titulo:'Excluir lançamento de estoque',
+    texto:'As quantidades voltam para o estoque como estavam antes.',
+    ok:'Excluir',tipo:'perigo'});
+  if(!ok)return;
   aplicarMovimento(m,true);
   DB.movEst=DB.movEst.filter(function(x){return x.id!==id});
   salvar();fecharModal();telaMovimentacao();
@@ -11847,7 +12146,7 @@ function fecharMov(){
   _movMotivo='';_movIdent='';_movObs='';_movData='';_movHora='';
   telaMovimentacao();
 }
-function salvarMovimento(){
+async function salvarMovimento(){
   guardarCabMov();
   if(!_movMotivo){toast('Selecione o motivo da movimentação.');return;}
   var itens=_movItens.filter(function(it){return it.tipo&&it.refId&&(Number(it.qtd)||0)>0});
@@ -11872,9 +12171,13 @@ function salvarMovimento(){
     var nomes=semDestino.map(function(it){
       var f4=(DB.fichas||[]).find(function(x){return x.id===it.refId});
       return f4?f4.nome:'';}).join(', ');
-    if(!confirm('ATENÇÃO\n\n'+nomes+' não tem destino de produção definido.\n\n'+
-      'Os ingredientes serão baixados, mas NENHUM produto acabado entrará no estoque.\n\n'+
-      'Para corrigir: abra a ficha técnica e preencha "Gerar estoque em".\n\nContinuar mesmo assim?'))return;
+    var segue=await confirmar({
+      titulo:'Ficha sem destino de produção',
+      texto:nomes+' não tem para onde gerar estoque.',
+      aviso:'Os ingredientes serão baixados, mas <b>nenhum produto acabado</b> entrará no estoque.<br>'+
+        'Para corrigir: abra a ficha técnica e preencha <b>Gerar estoque em</b>.',
+      ok:'Continuar mesmo assim',tipo:'perigo'});
+    if(!segue)return;
   }
 
   var linhas=montarLinhas(itens,tipo);
@@ -13274,12 +13577,18 @@ function verNota(id){
   document.body.appendChild(o);
   fecharSoForaDeVerdade(o);
 }
-function excluirNota(id){
+async function excluirNota(id){
   var n=(DB.notas||[]).find(function(x){return x.id===id});
   if(!n)return;
   var pagos=(DB.lancFin||[]).filter(function(l){return l.ref===n.id&&l.conciliado}).length;
   if(pagos){toast('Esta nota tem lançamento conciliado no banco. Desconcilie antes de excluir.');return;}
-  if(!confirm('Excluir a nota '+n.numero+'?\n\nO estoque será devolvido e os lançamentos financeiros removidos.'))return;
+  var ok=await confirmar({titulo:'Excluir a nota '+n.numero,
+    texto:'Fornecedor: '+n.fornecedorNome,
+    linhas:[['Valor da nota','R$ '+money(n.valorTotal),''],
+            ['Itens',String((n.itens||[]).length),'']],
+    aviso:'O estoque será devolvido e os lançamentos financeiros desta nota serão removidos.',
+    ok:'Excluir nota',tipo:'perigo'});
+  if(!ok)return;
   var mov=(DB.movEst||[]).find(function(m){return m.id===n.movId});
   if(mov){aplicarMovimento(mov,true);DB.movEst=DB.movEst.filter(function(m){return m.id!==n.movId});}
   (n.itens||[]).forEach(function(it){
@@ -13592,12 +13901,18 @@ function remSaborOP(k){OP.itens.splice(k,1);if(OP.verReceita===k)OP.verReceita=n
 function verReceitaOP(k){OP.verReceita=(OP.verReceita===k?null:k);telaProducao();}
 
 /* ---------- PRODUZIR ---------- */
-function confirmarProducao(){
+async function confirmarProducao(){
   baseProd();
   if(!OP.itens.length){toast('Adicione ao menos um sabor.');return;}
   var semPeso=OP.itens.filter(function(it){return !somaCubas(it)});
-  if(semPeso.length&&!confirm(semPeso.length+' sabor(es) sem peso informado.\n\n'+
-    'Eles serão produzidos sem registrar perda ou ganho. Continuar?'))return;
+  if(semPeso.length){
+    var seguir=await confirmar({
+      titulo:'Sabores sem peso informado',
+      texto:semPeso.length+' sabor(es) estão sem a pesagem das cubas.',
+      aviso:'Eles serão produzidos pelo peso previsto, sem registrar perda ou ganho.',
+      ok:'Continuar',tipo:'pergunta'});
+    if(!seguir)return;
+  }
 
   var tt=totaisOP();
   var prev=0,real=0,dif=0;
@@ -13610,10 +13925,31 @@ function confirmarProducao(){
   }).join('\n');
   dif=+dif.toFixed(3);
 
-  var resumo='Confirmar a produção?\n\n'+
-    OP.itens.length+' item(ns)\n'+linhasRes+
-    '\n\nOs ingredientes serão baixados e o produto acabado entrará no estoque.';
-  if(!confirm(resumo))return;
+  var linhasC=[];
+  Object.keys(tt).forEach(function(u){
+    var d3=tt[u].real-tt[u].prev;
+    linhasC.push(['Previsto',fmtQt(tt[u].prev)+' '+un(u).ab,'']);
+    linhasC.push(['Produzido',fmtQt(tt[u].real)+' '+un(u).ab,'']);
+    if(Math.abs(d3)>0.0001)
+      linhasC.push([d3>0?'Ganho':'Perda',(d3>0?'+':'')+fmtQt(d3)+' '+un(u).ab,d3>0?'vg':'vr']);
+  });
+  var destinos={};
+  OP.itens.forEach(function(it){ if(it.destinoNome)destinos[it.destinoNome]=true; });
+  var nomesD=Object.keys(destinos);
+  var ok=await confirmar({
+    titulo:'Confirmar a produção',
+    texto:OP.itens.length+' item(ns) nesta ordem. Os ingredientes das receitas serão baixados '+
+      'do estoque'+(nomesD.length?' e o produto acabado entrará em '+nomesD.join(', '):'')+'.',
+    linhas:linhasC,
+    aviso:(function(){
+      var d4=Object.keys(tt).map(function(u){return tt[u].real-tt[u].prev;})
+        .reduce(function(a,b){return a+Math.abs(b)},0);
+      return d4>0.0001?'A diferença entre o previsto e o pesado será lançada como '+
+        '<b>perda</b> ou <b>ganho de produção</b> na movimentação de estoque.':'';
+    })(),
+    ok:'Produzir',tipo:'check'
+  });
+  if(!ok)return;
 
   /* 1) a produção em si — baixa ingredientes e gera o destino, pelo previsto */
   var itensMov=OP.itens.map(function(it){
@@ -14804,21 +15140,66 @@ function telaVendasArea(){
     '<div class="rk"><span>Ticket da entrega</span><b>R$ '+money(totQtd?totEnt/totQtd:0)+'</b></div>'+
     '<div class="rk"><span>Taxas cobradas</span><b>R$ '+money(totTaxa)+'</b></div>'+
    '</div>'+
-   (meses.length>1?'<div class="caGraf" style="margin:4px 16px 14px">'+
-    '<div class="caGrafH">Evolução das entregas — últimos '+meses.length+' meses'+
-     '<span class="caLeg"><i class="b2"></i>faturamento em entregas</span></div>'+
-    '<div class="caBox">'+meses.map(function(m,k){
-      var v=porMes[m].valor;
-      var h=Math.max(3,(v/maxM)*150);
-      var ant=k>0?porMes[meses[k-1]].valor:0;
-      var vr=ant?((v-ant)/ant*100):0;
-      return '<div class="caCol">'+
-       '<div class="caBarras"><div class="caB b2" style="height:'+h+'px">'+
-       '<span class="caTip">'+nomeMes(m)+'<br>R$ '+money(v)+'<br>'+porMes[m].qtd+' entregas'+
-       (k>0?'<br><i class="'+(vr>=0?'sobe':'desce')+'">'+(vr>=0?'▲ +':'▼ ')+vr.toFixed(0)+'%</i>':'')+
-       '</span></div></div>'+
-       '<div class="caMes">'+nomeMes(m).replace('/','/')+'</div></div>';
-    }).join('')+'</div></div>':'')+
+   (meses.length>1?(function(){
+     var W=Math.max(560,meses.length*86), H=210, PL=58, PR=16, PT=18, PB=34;
+     var iw=W-PL-PR, ih=H-PT-PB;
+     var maxQ=Math.max.apply(null,meses.map(function(m){return porMes[m].qtd}).concat([1]));
+     var passo=iw/meses.length;
+     var larg=Math.min(38,passo*0.5);
+     /* linhas de referência */
+     var grade='',eixo='';
+     for(var g=0;g<=4;g++){
+       var y=PT+ih-(ih*g/4);
+       grade+='<line x1="'+PL+'" y1="'+y+'" x2="'+(W-PR)+'" y2="'+y+'" '+
+         'stroke="var(--line-2)" stroke-width="1"'+(g?' stroke-dasharray="3 4"':'')+'/>';
+       eixo+='<text x="'+(PL-8)+'" y="'+(y+4)+'" text-anchor="end" font-size="9.5" '+
+         'fill="var(--ink-3)">'+(maxM*g/4>=1000?(maxM*g/4/1000).toFixed(1)+'k':Math.round(maxM*g/4))+'</text>';
+     }
+     /* barras e linha de quantidade */
+     var barras='',pontos=[],rot='';
+     meses.forEach(function(m,k){
+       var v=porMes[m].valor, q=porMes[m].qtd;
+       var h=(v/maxM)*ih;
+       var x=PL+passo*k+(passo-larg)/2;
+       var y=PT+ih-h;
+       var ant=k>0?porMes[meses[k-1]].valor:0;
+       var vr=ant?((v-ant)/ant*100):0;
+       barras+='<g class="gBar">'+
+        '<rect x="'+x+'" y="'+y+'" width="'+larg+'" height="'+Math.max(2,h)+'" rx="4" '+
+         'fill="url(#gradEnt)"/>'+
+        '<rect class="gHit" x="'+(PL+passo*k)+'" y="'+PT+'" width="'+passo+'" height="'+ih+'" fill="transparent"/>'+
+        '<g class="gTip" transform="translate('+(PL+passo*k+passo/2)+','+Math.max(PT+12,y-10)+')">'+
+         '<rect x="-62" y="-46" width="124" height="44" rx="7" fill="#122A42"/>'+
+         '<text x="0" y="-30" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">'+nomeMes(m)+'</text>'+
+         '<text x="0" y="-17" text-anchor="middle" font-size="10.5" fill="#5FE0CB">R$ '+money(v)+'</text>'+
+         '<text x="0" y="-5" text-anchor="middle" font-size="9.5" fill="#9AB4CC">'+q+' entregas'+
+          (k>0?'  '+(vr>=0?'▲ +':'▼ ')+vr.toFixed(0)+'%':'')+'</text>'+
+        '</g></g>';
+       pontos.push([PL+passo*k+passo/2, PT+ih-((q/maxQ)*ih*0.82)]);
+       rot+='<text x="'+(PL+passo*k+passo/2)+'" y="'+(H-12)+'" text-anchor="middle" '+
+         'font-size="10" fill="var(--ink-3)" font-weight="600">'+nomeMes(m)+'</text>';
+     });
+     var linha=pontos.map(function(p,k){return (k?'L':'M')+p[0]+' '+p[1]}).join(' ');
+     var bolas=pontos.map(function(p){
+       return '<circle cx="'+p[0]+'" cy="'+p[1]+'" r="4" fill="#fff" stroke="#B8730B" stroke-width="2.5"/>';
+     }).join('');
+     return '<div class="grafCard">'+
+      '<div class="grafH">'+
+       '<div><b>Evolução das entregas</b><span>últimos '+meses.length+' meses</span></div>'+
+       '<div class="grafLeg">'+
+        '<span><i class="lg1"></i>faturamento</span>'+
+        '<span><i class="lg2"></i>quantidade</span>'+
+       '</div></div>'+
+      '<div class="grafBox"><svg viewBox="0 0 '+W+' '+H+'" width="100%" height="'+H+'" '+
+       'preserveAspectRatio="xMidYMid meet">'+
+       '<defs><linearGradient id="gradEnt" x1="0" y1="0" x2="0" y2="1">'+
+        '<stop offset="0%" stop-color="#00B89E"/><stop offset="100%" stop-color="#00806F"/>'+
+       '</linearGradient></defs>'+
+       grade+eixo+barras+
+       '<path d="'+linha+'" fill="none" stroke="#B8730B" stroke-width="2.5" '+
+        'stroke-linejoin="round" stroke-linecap="round" opacity=".9"/>'+bolas+rot+
+      '</svg></div></div>';
+   })():'')+
    '<div class="etTabW plano2" id="relArea">'+
    (lista.length?'<table class="etTab"><thead><tr>'+
     '<th>Cidade / área</th>'+
@@ -15226,6 +15607,55 @@ function apagarVendasDemo(){
   DB.entregadores=(DB.entregadores||[]).filter(function(e){return !e.demo});
   salvar();telaGerarDemo();
   toast('Dados de demonstração apagados.');
+}
+
+
+/* ==========================================================
+   CONFIRMAÇÃO E AVISO — no lugar das caixas do navegador
+   ========================================================== */
+function confirmar(op){
+  /* op: {titulo, texto, linhas:[[rotulo,valor,cor]], aviso, ok, cancelar, tipo, aoConfirmar} */
+  return new Promise(function(resolve){
+    var tipo=op.tipo||'pergunta';
+    var ic={pergunta:'help',perigo:'trash',check:'check',info:'help'}[tipo]||'help';
+    var cor={pergunta:'var(--acc)',perigo:'var(--red)',check:'var(--acc)',info:'var(--blue)'}[tipo];
+    var fundo={pergunta:'var(--acc-soft)',perigo:'var(--red-soft)',
+               check:'var(--acc-soft)',info:'var(--blue-soft)'}[tipo];
+    var h='<div class="cfBox">'+
+     '<div class="cfTopo">'+
+      '<div class="cfIc" style="background:'+fundo+';color:'+cor+'">'+sv(ic,22)+'</div>'+
+      '<div><b>'+E(op.titulo||'Confirmar')+'</b>'+
+      (op.texto?'<span>'+E(op.texto)+'</span>':'')+'</div></div>'+
+     ((op.linhas&&op.linhas.length)?'<div class="cfLinhas">'+op.linhas.map(function(l){
+        return '<div class="cfL"><span>'+E(l[0])+'</span>'+
+        '<b class="'+(l[2]||'')+'">'+E(l[1])+'</b></div>';}).join('')+'</div>':'')+
+     (op.aviso?'<div class="cfAviso">'+sv('help',14)+'<div>'+op.aviso+'</div></div>':'')+
+     '<div class="cfBt">'+
+      '<button class="btnP2" onclick="_respConfirma(false)">'+E(op.cancelar||'Cancelar')+'</button>'+
+      '<button class="btnP2 '+(tipo==='perigo'?'rdB':'ok')+'" onclick="_respConfirma(true)">'+
+       E(op.ok||'Confirmar')+'</button>'+
+     '</div></div>';
+    var ov=document.createElement('div');
+    ov.className='mdOv cfOv';ov.id='cfOv';
+    ov.innerHTML=h;
+    document.body.appendChild(ov);
+    window._respConfirma=function(v){
+      var o=document.getElementById('cfOv');if(o)o.remove();
+      window._respConfirma=null;
+      resolve(v);
+      if(v&&op.aoConfirmar)op.aoConfirmar();
+    };
+    var esc=function(e){
+      if(e.key==='Escape'){document.removeEventListener('keydown',esc);_respConfirma(false);}
+      if(e.key==='Enter'){document.removeEventListener('keydown',esc);_respConfirma(true);}
+    };
+    document.addEventListener('keydown',esc);
+    ov.addEventListener('mousedown',function(e){ if(e.target===ov)_respConfirma(false); });
+  });
+}
+function avisar(titulo,texto,tipo){
+  return confirmar({titulo:titulo,texto:texto,tipo:tipo||'info',
+    ok:'Entendi',cancelar:null}).then(function(){});
 }
 
 /* ---------- POPUP E MODAL ---------- */
