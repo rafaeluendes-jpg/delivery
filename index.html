@@ -2115,6 +2115,18 @@ tbody td small{font-size:10.5px}
 .bfRapido button.on{background:var(--acc);border-color:var(--acc);color:#fff}
 .bfRapido button svg{opacity:.8}
 
+.vpGrade{display:flex;gap:12px;padding:0 16px 16px;align-items:flex-start}
+.vpGrade .etTabW{flex:1;min-width:0;border:1px solid var(--line);border-radius:8px}
+.vpPizza{width:260px;flex:none;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.vpBarras{padding:12px 13px;display:flex;flex-direction:column;gap:12px}
+.vpB small{font-size:10.5px;color:var(--ink-3)}
+.vpBt{display:flex;align-items:baseline;gap:8px;font-size:11.5px;margin-bottom:4px}
+.vpBt span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink-2)}
+.vpBt b{font-size:12.5px}
+.vpBar{height:7px;border-radius:4px;background:var(--line-2);overflow:hidden}
+.vpBar i{display:block;height:100%;border-radius:4px}
+@media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
+
 @media(max-width:1000px){.ivGrade{flex-direction:column}.ivAdic{width:100%}}
 
 .chip.vazio{opacity:.55}
@@ -2188,6 +2200,18 @@ tbody td small{font-size:10.5px}
 .bfRapido button:hover{border-color:var(--acc);color:var(--acc-d)}
 .bfRapido button.on{background:var(--acc);border-color:var(--acc);color:#fff}
 .bfRapido button svg{opacity:.8}
+
+.vpGrade{display:flex;gap:12px;padding:0 16px 16px;align-items:flex-start}
+.vpGrade .etTabW{flex:1;min-width:0;border:1px solid var(--line);border-radius:8px}
+.vpPizza{width:260px;flex:none;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.vpBarras{padding:12px 13px;display:flex;flex-direction:column;gap:12px}
+.vpB small{font-size:10.5px;color:var(--ink-3)}
+.vpBt{display:flex;align-items:baseline;gap:8px;font-size:11.5px;margin-bottom:4px}
+.vpBt span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink-2)}
+.vpBt b{font-size:12.5px}
+.vpBar{height:7px;border-radius:4px;background:var(--line-2);overflow:hidden}
+.vpBar i{display:block;height:100%;border-radius:4px}
+@media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
 
 @media(max-width:1000px){
   .lfPeriodo{order:3;width:100%}
@@ -3388,6 +3412,18 @@ tbody td small{font-size:10.5px}
 .bfRapido button.on{background:var(--acc);border-color:var(--acc);color:#fff}
 .bfRapido button svg{opacity:.8}
 
+.vpGrade{display:flex;gap:12px;padding:0 16px 16px;align-items:flex-start}
+.vpGrade .etTabW{flex:1;min-width:0;border:1px solid var(--line);border-radius:8px}
+.vpPizza{width:260px;flex:none;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.vpBarras{padding:12px 13px;display:flex;flex-direction:column;gap:12px}
+.vpB small{font-size:10.5px;color:var(--ink-3)}
+.vpBt{display:flex;align-items:baseline;gap:8px;font-size:11.5px;margin-bottom:4px}
+.vpBt span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink-2)}
+.vpBt b{font-size:12.5px}
+.vpBar{height:7px;border-radius:4px;background:var(--line-2);overflow:hidden}
+.vpBar i{display:block;height:100%;border-radius:4px}
+@media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
+
 @media(max-width:1000px){.ivGrade{flex-direction:column}.ivAdic{width:100%}}
 
 .chip.vazio{opacity:.55}
@@ -3461,6 +3497,18 @@ tbody td small{font-size:10.5px}
 .bfRapido button:hover{border-color:var(--acc);color:var(--acc-d)}
 .bfRapido button.on{background:var(--acc);border-color:var(--acc);color:#fff}
 .bfRapido button svg{opacity:.8}
+
+.vpGrade{display:flex;gap:12px;padding:0 16px 16px;align-items:flex-start}
+.vpGrade .etTabW{flex:1;min-width:0;border:1px solid var(--line);border-radius:8px}
+.vpPizza{width:260px;flex:none;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.vpBarras{padding:12px 13px;display:flex;flex-direction:column;gap:12px}
+.vpB small{font-size:10.5px;color:var(--ink-3)}
+.vpBt{display:flex;align-items:baseline;gap:8px;font-size:11.5px;margin-bottom:4px}
+.vpBt span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink-2)}
+.vpBt b{font-size:12.5px}
+.vpBar{height:7px;border-radius:4px;background:var(--line-2);overflow:hidden}
+.vpBar i{display:block;height:100%;border-radius:4px}
+@media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
 
 @media(max-width:1000px){
   .lgCard{grid-template-columns:1fr}.lgR{display:none}
@@ -3628,6 +3676,7 @@ var MOD=[
  {id:'cfg-pdv',n:'Configuração do PDV'},
  {id:'cfg-movimentacao',n:'Configuração de Movimentação de Estoque'},
  {id:'reset-sistema',n:'Dados de Teste e Reinício'},
+ {id:'gerar-demo',n:'Gerar Vendas de Demonstração'},
  {id:'areas-entrega',n:'Áreas de Entrega'},{id:'cfg-sucursais',n:'Configurações Sucursais de Franquia'},
  {id:'canais-integracao',n:'Canais de Venda e Integração'},{id:'cfg-loja',n:'Configuração da Loja'},
  {id:'dados-loja',n:'Dados da Loja'},{id:'dados-fiscais',n:'Dados Fiscais'},
@@ -4600,7 +4649,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V4.3.0';
+var VERSAO='V4.4.0';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
@@ -4626,6 +4675,7 @@ if(mid==='estoque'&&iid==='contagem-estoque')return telaContagem();
 if(mid==='estoque'&&iid==='historico-posicao')return telaHistPosicao();
 if(mid==='estoque'&&iid==='notas-entrada')return telaNotas();
 if(mid==='loja'&&iid==='reset-sistema')return telaReset();
+if(mid==='loja'&&iid==='gerar-demo')return telaGerarDemo();
 if(mid==='financeira'&&iid==='acerto-entregadores')return telaAcertos();
 if(mid==='financeira'&&iid==='categorias-financeiras')return telaCatFin();
 if(mid==='financeira'&&iid==='contas-bancarias')return telaContas();
@@ -4641,6 +4691,8 @@ if(mid==='dashboard'&&iid==='comparativo-anual')return telaComparativo();
 if(mid==='relatorios'&&iid==='faturamento-dia')return telaFaturamentoDia();
 if(mid==='relatorios'&&iid==='itens-consumidos')return telaItensConsumidos();
 if(mid==='relatorios'&&iid==='itens-vendidos')return telaItensVendidos();
+if(mid==='relatorios'&&iid==='vendas-area-entrega')return telaVendasArea();
+if(mid==='relatorios'&&iid==='vendas-forma-pagamento')return telaVendasFormaPag();
 if(mid==='estoque'&&iid==='producao')return telaProducao();
 if(mid==='estoque'&&iid==='ficha-tecnica')return telaFichaTecnica();
 if(mid==='estoque'&&iid==='ingredientes-insumos')return telaInsumos();
@@ -14664,6 +14716,431 @@ function exportarItensVend(){
     }
   }
   baixarCSV('nexor-itens-vendidos.csv',l);
+}
+
+/* ==========================================================
+   4 — VENDAS POR ÁREA DE ENTREGA
+   ========================================================== */
+var VA={de:'',ate:'',cidades:[],canais:[]};
+function cidadesCadastradas(){
+  var s={};
+  (DB.entregadores||[]).forEach(function(e){
+    (e.taxas||[]).forEach(function(t){ if(t.cidade)s[t.cidade]=true; });
+  });
+  (DB.areas||[]).forEach(function(a){ if(a.nome)s[a.nome]=true; });
+  (DB.pedidos||[]).forEach(function(p){ if(p.cidade)s[p.cidade]=true; });
+  return Object.keys(s).sort();
+}
+function telaVendasArea(){
+  baseMov();
+  if(!VA.de){var d=new Date();
+    VA.de=new Date(d.getFullYear(),d.getMonth(),1).toISOString().slice(0,10);
+    VA.ate=hojeISO();}
+  var peds=pedidosFiltrados(VA).filter(function(p){return p.fase!=='cancelado'});
+  var totalFat=peds.reduce(function(a,p){return a+(Number(p.total)||0)},0);
+  var ents=peds.filter(function(p){return (p.tipo==='entrega')});
+  var porCid={};
+  ents.forEach(function(p){
+    var c=p.cidade||'Sem cidade';
+    if(VA.cidades.length&&VA.cidades.indexOf(c)<0)return;
+    porCid[c]=porCid[c]||{nome:c,qtd:0,valor:0,taxa:0,itens:0};
+    porCid[c].qtd++; porCid[c].valor+=Number(p.total)||0;
+    porCid[c].taxa+=Number(p.taxa)||0;
+    porCid[c].itens+=(p.itens||[]).reduce(function(a,i){return a+(Number(i.qtd)||0)},0);
+  });
+  var lista=Object.keys(porCid).map(function(k){return porCid[k]})
+    .sort(function(a,b){return b.valor-a.valor});
+  var totEnt=lista.reduce(function(a,x){return a+x.valor},0);
+  var totQtd=lista.reduce(function(a,x){return a+x.qtd},0);
+  var totTaxa=lista.reduce(function(a,x){return a+x.taxa},0);
+
+  /* evolução mês a mês das entregas */
+  var porMes={};
+  (DB.pedidos||[]).forEach(function(p){
+    if(p.fase==='cancelado'||p.tipo!=='entrega')return;
+    var m=String(p.data||'').slice(0,7);
+    if(!m)return;
+    porMes[m]=porMes[m]||{qtd:0,valor:0};
+    porMes[m].qtd++; porMes[m].valor+=Number(p.total)||0;
+  });
+  var meses=Object.keys(porMes).sort().slice(-12);
+  var maxM=Math.max.apply(null,meses.map(function(m){return porMes[m].valor}).concat([1]));
+  var canais=canaisVenda();
+
+  $('content').innerHTML='<div class="etWrap"><div class="etScroll">'+
+   '<div class="etTopo">'+
+    '<div><h1>Vendas por Área de Entrega</h1><p>Quanto cada cidade representa no delivery.</p></div>'+
+    '<button class="infoBt" onclick="explicaVendasArea()">'+sv('help',15)+'</button>'+
+    '<div style="flex:1"></div>'+
+    '<button class="btnP2" onclick="imprimirRel(\'Vendas por Área de Entrega\')">'+sv('print2',13)+' PDF</button>'+
+    '<button class="btnP2" onclick="exportarArea()">'+sv('down2',13)+' Exportar</button>'+
+   '</div>'+
+   '<div class="barraF">'+
+    '<div class="bfCampo"><label>De</label><input type="date" id="vaDe" value="'+VA.de+'"></div>'+
+    '<div class="bfCampo"><label>Até</label><input type="date" id="vaAte" value="'+VA.ate+'"></div>'+
+    selMulti('vaCid','Cidades',
+      cidadesCadastradas().map(function(c){
+        var q=0;(DB.pedidos||[]).forEach(function(p){if(p.cidade===c&&p.tipo==='entrega')q++;});
+        return {id:c,nome:c,n:q||''};}),
+      VA.cidades,'togVA','togTodosVA()')+
+    selMulti('vaCan','Canal',
+      Object.keys(canais).map(function(k){return {id:k,nome:canais[k]}}),
+      VA.canais,'togVAc','togTodosVAc()')+
+    '<button class="btnP2 ok" onclick="VA.de=$(\'vaDe\').value;VA.ate=$(\'vaAte\').value;telaVendasArea()">'+
+     sv('search',13)+' Buscar</button>'+
+    '<div class="bfAtalhos">'+
+     '<button onclick="perVA(0)">Mês</button>'+
+     '<button onclick="perVA(-1)">Anterior</button>'+
+     '<button onclick="perVA(90)">90d</button>'+
+     (VA.cidades.length||VA.canais.length?'<button class="lim" onclick="limparVA()">limpar</button>':'')+
+    '</div>'+
+   '</div>'+
+   '<div class="relKpis">'+
+    '<div class="rk"><span>Entregas</span><b>'+totQtd+'</b></div>'+
+    '<div class="rk dest"><span>Faturamento em entregas</span><b>R$ '+money(totEnt)+'</b></div>'+
+    '<div class="rk"><span>Faturamento total</span><b>R$ '+money(totalFat)+'</b></div>'+
+    '<div class="rk"><span>Entrega no faturamento</span><b class="vg">'+
+     (totalFat?(totEnt/totalFat*100).toFixed(1).replace('.',','):'0')+'%</b></div>'+
+    '<div class="rk"><span>Ticket da entrega</span><b>R$ '+money(totQtd?totEnt/totQtd:0)+'</b></div>'+
+    '<div class="rk"><span>Taxas cobradas</span><b>R$ '+money(totTaxa)+'</b></div>'+
+   '</div>'+
+   (meses.length>1?'<div class="caGraf" style="margin:4px 16px 14px">'+
+    '<div class="caGrafH">Evolução das entregas — últimos '+meses.length+' meses'+
+     '<span class="caLeg"><i class="b2"></i>faturamento em entregas</span></div>'+
+    '<div class="caBox">'+meses.map(function(m,k){
+      var v=porMes[m].valor;
+      var h=Math.max(3,(v/maxM)*150);
+      var ant=k>0?porMes[meses[k-1]].valor:0;
+      var vr=ant?((v-ant)/ant*100):0;
+      return '<div class="caCol">'+
+       '<div class="caBarras"><div class="caB b2" style="height:'+h+'px">'+
+       '<span class="caTip">'+nomeMes(m)+'<br>R$ '+money(v)+'<br>'+porMes[m].qtd+' entregas'+
+       (k>0?'<br><i class="'+(vr>=0?'sobe':'desce')+'">'+(vr>=0?'▲ +':'▼ ')+vr.toFixed(0)+'%</i>':'')+
+       '</span></div></div>'+
+       '<div class="caMes">'+nomeMes(m).replace('/','/')+'</div></div>';
+    }).join('')+'</div></div>':'')+
+   '<div class="etTabW plano2" id="relArea">'+
+   (lista.length?'<table class="etTab"><thead><tr>'+
+    '<th>Cidade / área</th>'+
+    '<th style="width:110px;text-align:right">Entregas</th>'+
+    '<th style="width:100px;text-align:right">Itens</th>'+
+    '<th style="width:140px;text-align:right">Valor</th>'+
+    '<th style="width:120px;text-align:right">Ticket médio</th>'+
+    '<th style="width:120px;text-align:right">Taxas</th>'+
+    '<th style="width:150px;text-align:right">% do faturamento</th></tr></thead><tbody>'+
+    lista.map(function(x){
+      var pc=totalFat?(x.valor/totalFat*100):0;
+      return '<tr><td><b>'+E(x.nome)+'</b></td>'+
+      '<td style="text-align:right"><b>'+x.qtd+'</b></td>'+
+      '<td style="text-align:right">'+fmtQt(x.itens)+'</td>'+
+      '<td style="text-align:right"><b>R$ '+money(x.valor)+'</b></td>'+
+      '<td style="text-align:right">R$ '+money(x.qtd?x.valor/x.qtd:0)+'</td>'+
+      '<td style="text-align:right">R$ '+money(x.taxa)+'</td>'+
+      '<td style="text-align:right"><span class="hpBar"><i style="width:'+Math.min(100,pc*3)+'%"></i></span>'+
+       '<small>'+pc.toFixed(1).replace('.',',')+'%</small></td></tr>';
+    }).join('')+'</tbody>'+
+    '<tfoot><tr><td><b>Total das entregas</b></td>'+
+    '<td style="text-align:right"><b>'+totQtd+'</b></td>'+
+    '<td style="text-align:right"><b>'+fmtQt(lista.reduce(function(a,x){return a+x.itens},0))+'</b></td>'+
+    '<td style="text-align:right"><b>R$ '+money(totEnt)+'</b></td>'+
+    '<td style="text-align:right"><b>R$ '+money(totQtd?totEnt/totQtd:0)+'</b></td>'+
+    '<td style="text-align:right"><b>R$ '+money(totTaxa)+'</b></td>'+
+    '<td style="text-align:right"><b>'+(totalFat?(totEnt/totalFat*100).toFixed(1).replace('.',','):'0')+'%</b></td></tr>'+
+    '<tr class="sub2"><td colspan="7">Faturamento total do período: R$ '+money(totalFat)+
+     ' — as entregas representam '+(totalFat?(totEnt/totalFat*100).toFixed(1).replace('.',','):'0')+
+     '% desse valor</td></tr></tfoot></table>'
+   :'<div class="mvVazio">'+sv('box',26)+'<b>Nenhuma entrega no período</b></div>')+
+   '</div></div></div>';
+  rodape(totQtd+' entregas · R$ '+money(totEnt));
+}
+function togVA(c){togFiltro(VA.cidades,c);telaVendasArea();}
+function togVAc(c){togFiltro(VA.canais,c);telaVendasArea();}
+function togTodosVA(){VA.cidades=VA.cidades.length?[]:cidadesCadastradas();telaVendasArea();}
+function togTodosVAc(){VA.canais=VA.canais.length?[]:Object.keys(canaisVenda());telaVendasArea();}
+function limparVA(){VA.cidades=[];VA.canais=[];telaVendasArea();}
+function perVA(n){
+  var d=new Date();
+  if(n===0){VA.de=new Date(d.getFullYear(),d.getMonth(),1).toISOString().slice(0,10);VA.ate=hojeISO();}
+  else if(n===-1){VA.de=new Date(d.getFullYear(),d.getMonth()-1,1).toISOString().slice(0,10);
+    VA.ate=new Date(d.getFullYear(),d.getMonth(),0).toISOString().slice(0,10);}
+  else {VA.de=diasAtrasISO(n);VA.ate=hojeISO();}
+  telaVendasArea();
+}
+function explicaVendasArea(){
+  explicaRel('Vendas por Área de Entrega — como é feito',[
+   ['Cidade / área','a cidade informada no cadastro do cliente, gravada no pedido no momento da venda'],
+   ['Entregas','quantidade de pedidos do tipo entrega naquela cidade'],
+   ['Valor','soma do total dos pedidos, já com taxa de entrega e descontos'],
+   ['Ticket médio','valor da cidade dividido pela quantidade de entregas'],
+   ['Taxas','soma das taxas de entrega cobradas — vêm da tabela de taxas do entregador por cidade'],
+   ['% do faturamento','valor da cidade dividido pelo faturamento total do período, incluindo as vendas de balcão'],
+   ['Gráfico','faturamento em entregas mês a mês, com a variação em relação ao mês anterior']
+  ],'os pedidos do tipo entrega registrados no PDV. As cidades vêm das taxas cadastradas '+
+    'nos entregadores e do endereço dos clientes.',
+   'pedidos cancelados, vendas de balcão e retirada no cálculo das entregas — '+
+   'elas entram apenas no faturamento total, que serve de base para o percentual.');
+}
+function exportarArea(){
+  var l=[['Cidade','Entregas','Itens','Valor','Ticket medio','Taxas','% faturamento']];
+  var trs=document.querySelectorAll('#relArea tbody tr');
+  for(var i=0;i<trs.length;i++){
+    var td=trs[i].querySelectorAll('td');
+    l.push([td[0].innerText,td[1].innerText,td[2].innerText,td[3].innerText,
+      td[4].innerText,td[5].innerText,td[6].innerText]);
+  }
+  baixarCSV('nexor-vendas-area-entrega.csv',l);
+}
+
+/* ==========================================================
+   5 — VENDAS POR FORMA DE PAGAMENTO
+   ========================================================== */
+var VP={de:'',ate:'',formas:[],canais:[]};
+function telaVendasFormaPag(){
+  baseMov();baseFormas();
+  if(!VP.de){var d=new Date();
+    VP.de=new Date(d.getFullYear(),d.getMonth(),1).toISOString().slice(0,10);
+    VP.ate=hojeISO();}
+  var peds=pedidosFiltrados(VP).filter(function(p){return p.fase!=='cancelado'});
+  var totalFat=peds.reduce(function(a,p){return a+(Number(p.total)||0)},0);
+  var porForma={},semForma=0;
+  peds.forEach(function(p){
+    var pgs=p.pagamentos||[];
+    if(!pgs.length){semForma+=Number(p.total)||0;return;}
+    pgs.forEach(function(pg){
+      var f=(DB.formasPag||[]).find(function(x){return x.id===pg.formaId});
+      var k=f?f.id:'_sem';
+      if(VP.formas.length&&VP.formas.indexOf(k)<0)return;
+      porForma[k]=porForma[k]||{nome:f?f.nome:'Não informado',tipo:f?f.tipo:'',
+        taxaPct:f?Number(f.taxaPct)||0:0,taxaFixa:f?Number(f.taxaFixa)||0:0,
+        prazo:f?Number(f.dias)||0:0,qtd:0,valor:0};
+      porForma[k].qtd++; porForma[k].valor+=Number(pg.valor)||0;
+    });
+  });
+  var lista=Object.keys(porForma).map(function(k){
+    var x=porForma[k];
+    x.taxa=(x.valor*x.taxaPct/100)+(x.taxaFixa*x.qtd);
+    x.liquido=x.valor-x.taxa;
+    return x;
+  }).sort(function(a,b){return b.valor-a.valor});
+  var totV=lista.reduce(function(a,x){return a+x.valor},0);
+  var totT=lista.reduce(function(a,x){return a+x.taxa},0);
+  var totQ=lista.reduce(function(a,x){return a+x.qtd},0);
+  var canais=canaisVenda();
+
+  $('content').innerHTML='<div class="etWrap"><div class="etScroll">'+
+   '<div class="etTopo">'+
+    '<div><h1>Vendas por Forma de Pagamento</h1>'+
+    '<p>Quanto entrou em cada forma, com as taxas descontadas.</p></div>'+
+    '<button class="infoBt" onclick="explicaVendasFormaPag()">'+sv('help',15)+'</button>'+
+    '<div style="flex:1"></div>'+
+    '<button class="btnP2" onclick="imprimirRel(\'Vendas por Forma de Pagamento\')">'+sv('print2',13)+' PDF</button>'+
+    '<button class="btnP2" onclick="exportarFormaPag()">'+sv('down2',13)+' Exportar</button>'+
+   '</div>'+
+   '<div class="barraF">'+
+    '<div class="bfCampo"><label>De</label><input type="date" id="vpDe" value="'+VP.de+'"></div>'+
+    '<div class="bfCampo"><label>Até</label><input type="date" id="vpAte" value="'+VP.ate+'"></div>'+
+    selMulti('vpFor','Formas de pagamento',
+      (DB.formasPag||[]).map(function(f){return {id:f.id,nome:f.nome}}),
+      VP.formas,'togVP','togTodosVP()')+
+    selMulti('vpCan','Canal',
+      Object.keys(canais).map(function(k){return {id:k,nome:canais[k]}}),
+      VP.canais,'togVPc','togTodosVPc()')+
+    '<button class="btnP2 ok" onclick="VP.de=$(\'vpDe\').value;VP.ate=$(\'vpAte\').value;telaVendasFormaPag()">'+
+     sv('search',13)+' Buscar</button>'+
+    '<div class="bfAtalhos">'+
+     '<button onclick="perVP(0)">Mês</button>'+
+     '<button onclick="perVP(-1)">Anterior</button>'+
+     (VP.formas.length||VP.canais.length?'<button class="lim" onclick="limparVP()">limpar</button>':'')+
+    '</div>'+
+   '</div>'+
+   '<div class="relKpis">'+
+    '<div class="rk"><span>Recebimentos</span><b>'+totQ+'</b></div>'+
+    '<div class="rk dest"><span>Valor recebido</span><b>R$ '+money(totV)+'</b></div>'+
+    '<div class="rk"><span>Taxas das maquininhas</span><b class="vr">R$ '+money(totT)+'</b></div>'+
+    '<div class="rk"><span>Líquido</span><b class="vg">R$ '+money(totV-totT)+'</b></div>'+
+    (semForma?'<div class="rk"><span>Sem forma informada</span><b class="vr">R$ '+money(semForma)+'</b></div>':'')+
+   '</div>'+
+   '<div class="vpGrade">'+
+   '<div class="etTabW plano2" id="relArea">'+
+   (lista.length?'<table class="etTab"><thead><tr>'+
+    '<th>Forma de pagamento</th>'+
+    '<th style="width:100px;text-align:right">Qtd</th>'+
+    '<th style="width:140px;text-align:right">Valor bruto</th>'+
+    '<th style="width:110px;text-align:right">Taxa</th>'+
+    '<th style="width:140px;text-align:right">Líquido</th>'+
+    '<th style="width:90px;text-align:right">Prazo</th>'+
+    '<th style="width:150px;text-align:right">% do faturamento</th></tr></thead><tbody>'+
+    lista.map(function(x){
+      var pc=totalFat?(x.valor/totalFat*100):0;
+      return '<tr><td><b>'+E(x.nome)+'</b>'+
+       (x.taxaPct||x.taxaFixa?'<small style="display:block;color:var(--ink-3)">taxa '+
+         (x.taxaPct?fmtQt(x.taxaPct)+'%':'')+
+         (x.taxaFixa?(x.taxaPct?' + ':'')+'R$ '+money(x.taxaFixa)+' por venda':'')+'</small>':'')+'</td>'+
+      '<td style="text-align:right">'+x.qtd+'</td>'+
+      '<td style="text-align:right"><b>R$ '+money(x.valor)+'</b></td>'+
+      '<td style="text-align:right" class="'+(x.taxa?'vr':'')+'">'+(x.taxa?'R$ '+money(x.taxa):'—')+'</td>'+
+      '<td style="text-align:right"><b class="vg">R$ '+money(x.liquido)+'</b></td>'+
+      '<td style="text-align:right">'+(x.prazo?x.prazo+' dias':'na hora')+'</td>'+
+      '<td style="text-align:right"><span class="hpBar"><i style="width:'+Math.min(100,pc)+'%"></i></span>'+
+       '<small>'+pc.toFixed(1).replace('.',',')+'%</small></td></tr>';
+    }).join('')+'</tbody>'+
+    '<tfoot><tr><td><b>Total</b></td>'+
+    '<td style="text-align:right"><b>'+totQ+'</b></td>'+
+    '<td style="text-align:right"><b>R$ '+money(totV)+'</b></td>'+
+    '<td style="text-align:right"><b class="vr">R$ '+money(totT)+'</b></td>'+
+    '<td style="text-align:right"><b class="vg">R$ '+money(totV-totT)+'</b></td>'+
+    '<td></td><td style="text-align:right"><b>'+
+     (totalFat?(totV/totalFat*100).toFixed(1).replace('.',','):'0')+'%</b></td></tr></tfoot></table>'
+   :'<div class="mvVazio">'+sv('box',26)+'<b>Nenhum recebimento no período</b></div>')+
+   '</div>'+
+   (lista.length?'<aside class="vpPizza">'+
+    '<div class="ivAdicH">'+sv('chart',13)+' Participação</div>'+
+    '<div class="vpBarras">'+lista.map(function(x,k){
+      var pc=totV?(x.valor/totV*100):0;
+      return '<div class="vpB"><div class="vpBt"><span>'+E(x.nome)+'</span>'+
+      '<b>'+pc.toFixed(1).replace('.',',')+'%</b></div>'+
+      '<div class="vpBar"><i style="width:'+pc+'%;background:'+
+       ['#00A08B','#2C6FD1','#B8730B','#8B5CF6','#C94141','#0E8A46'][k%6]+'"></i></div>'+
+      '<small>R$ '+money(x.valor)+'</small></div>';
+    }).join('')+'</div></aside>':'')+
+   '</div></div></div>';
+  rodape(totQ+' recebimentos · R$ '+money(totV));
+}
+function togVP(f){togFiltro(VP.formas,f);telaVendasFormaPag();}
+function togVPc(c){togFiltro(VP.canais,c);telaVendasFormaPag();}
+function togTodosVP(){VP.formas=VP.formas.length?[]:(DB.formasPag||[]).map(function(f){return f.id});telaVendasFormaPag();}
+function togTodosVPc(){VP.canais=VP.canais.length?[]:Object.keys(canaisVenda());telaVendasFormaPag();}
+function limparVP(){VP.formas=[];VP.canais=[];telaVendasFormaPag();}
+function perVP(n){
+  var d=new Date();
+  if(n===0){VP.de=new Date(d.getFullYear(),d.getMonth(),1).toISOString().slice(0,10);VP.ate=hojeISO();}
+  else {VP.de=new Date(d.getFullYear(),d.getMonth()-1,1).toISOString().slice(0,10);
+    VP.ate=new Date(d.getFullYear(),d.getMonth(),0).toISOString().slice(0,10);}
+  telaVendasFormaPag();
+}
+function explicaVendasFormaPag(){
+  explicaRel('Vendas por Forma de Pagamento — como é feito',[
+   ['Forma de pagamento','vem do cadastro em Financeiro › Formas de Pagamento, escolhida no fechamento da venda'],
+   ['Qtd','quantos recebimentos foram feitos naquela forma — um pedido pode ter mais de uma'],
+   ['Valor bruto','soma do que foi pago naquela forma, antes de qualquer desconto de taxa'],
+   ['Taxa','calculada pelo que está no cadastro da forma: percentual sobre o valor mais valor fixo por venda'],
+   ['Líquido','o que efetivamente entra na conta depois da taxa da maquininha'],
+   ['Prazo','dias até o dinheiro cair, conforme cadastrado na forma de pagamento'],
+   ['% do faturamento','valor daquela forma dividido pelo faturamento total do período']
+  ],'os pagamentos registrados em cada pedido do PDV, cruzados com o cadastro de formas '+
+    'de pagamento — de onde vêm a taxa e o prazo.',
+   'pedidos cancelados e pedidos sem forma de pagamento informada, que aparecem em '+
+   'indicador próprio no topo. A taxa é calculada, não é o valor real cobrado pela operadora.');
+}
+function exportarFormaPag(){
+  var l=[['Forma','Qtd','Valor bruto','Taxa','Liquido','Prazo','% faturamento']];
+  var trs=document.querySelectorAll('#relArea tbody tr');
+  for(var i=0;i<trs.length;i++){
+    var td=trs[i].querySelectorAll('td');
+    l.push([td[0].innerText.split('\n')[0],td[1].innerText,td[2].innerText,
+      td[3].innerText,td[4].innerText,td[5].innerText,td[6].innerText]);
+  }
+  baixarCSV('nexor-vendas-forma-pagamento.csv',l);
+}
+
+
+/* ==========================================================
+   GERADOR DE VENDAS DE DEMONSTRAÇÃO
+   ========================================================== */
+function telaGerarDemo(){
+  baseMov();baseFormas();
+  var qtd=(DB.pedidos||[]).filter(function(p){return p.demo}).length;
+  $('content').innerHTML='<div class="finWrap" style="max-width:820px">'+
+  '<div class="finTop"><div><h1>Gerar Vendas de Demonstração</h1>'+
+  '<p>Cria vendas fictícias nos últimos meses para você ver os relatórios e gráficos preenchidos.</p></div></div>'+
+  '<div class="cfgCard"><div class="h"><div class="ic2">'+sv('chart',16)+'</div>'+
+  '<div><b>Criar vendas de teste</b><span>gera pedidos com cidades, formas de pagamento e '+
+  'produtos variados nos últimos 6 meses</span></div></div>'+
+  '<div class="b">'+
+   '<div class="row2">'+
+    '<div class="fld2" style="margin:0"><label>Quantos meses para trás</label>'+
+     '<input id="gdMeses" type="number" min="1" max="24" value="6"></div>'+
+    '<div class="fld2" style="margin:0"><label>Vendas por dia (média)</label>'+
+     '<input id="gdDia" type="number" min="1" max="200" value="18"></div>'+
+   '</div>'+
+   '<div class="avisoCfg" style="margin-top:12px">'+sv('help',15)+
+   '<div>As vendas criadas ficam marcadas como demonstração e podem ser apagadas a qualquer momento, '+
+   'sem afetar o que você cadastrou de verdade.</div></div>'+
+   '<button class="btnP2 ok" style="margin-top:12px" onclick="gerarVendasDemo()">'+
+    sv('plus',13)+' Gerar vendas</button>'+
+  '</div></div>'+
+  (qtd?'<div class="cfgCard" style="border-color:var(--red)"><div class="h">'+
+   '<div class="ic2" style="background:var(--red-soft);color:var(--red)">'+sv('trash',16)+'</div>'+
+   '<div><b>Apagar vendas de demonstração</b><span>'+qtd+' venda(s) de teste no sistema</span></div></div>'+
+   '<div class="b"><button class="btnP2 rdB" onclick="apagarVendasDemo()">Apagar as '+qtd+' vendas de teste</button>'+
+   '</div></div>':'')+
+  '</div>';
+  rodape(qtd?qtd+' vendas de demonstração':'');
+}
+function gerarVendasDemo(){
+  baseMov();baseFormas();
+  var meses=parseInt($('gdMeses').value)||6;
+  var porDia=parseInt($('gdDia').value)||18;
+  var cidades=cidadesCadastradas();
+  if(!cidades.length)cidades=['Santa Fé do Sul','Jales','Rubinéia','Três Fronteiras'];
+  var formas=(DB.formasPag||[]).filter(function(f){return f.ativa!==false});
+  if(!formas.length){toast('Cadastre as formas de pagamento antes.');return;}
+  var prods=(DB.produtos||[]);
+  if(!prods.length){toast('Cadastre produtos no cardápio antes.');return;}
+  var clientes=(DB.clientes||[]);
+  var hoje=new Date();
+  var criados=0, num=(DB.pedidos||[]).reduce(function(a,p){return Math.max(a,Number(p.numero)||0)},0);
+
+  for(var m=meses-1;m>=0;m--){
+    var ini=new Date(hoje.getFullYear(),hoje.getMonth()-m,1);
+    var fim=new Date(hoje.getFullYear(),hoje.getMonth()-m+1,0);
+    if(m===0)fim=hoje;
+    var cresc=1+((meses-1-m)*0.06);          /* cresce ~6% ao mês */
+    for(var d=new Date(ini);d<=fim;d.setDate(d.getDate()+1)){
+      var dia=d.getDay();
+      var peso=(dia===5||dia===6)?1.6:(dia===0?1.3:1);   /* fim de semana vende mais */
+      var n=Math.max(1,Math.round(porDia*peso*cresc*(0.8+Math.random()*0.4)));
+      for(var k=0;k<n;k++){
+        var entrega=Math.random()<0.32;
+        var itens=[],total=0;
+        var qi=1+Math.floor(Math.random()*3);
+        for(var z=0;z<qi;z++){
+          var pr=prods[Math.floor(Math.random()*prods.length)];
+          var q=1+Math.floor(Math.random()*2);
+          var v=(Number(pr.preco)||10)*q;
+          total+=v;
+          itens.push({produtoId:pr.id,nome:pr.nome,qtd:q,unitario:Number(pr.preco)||10,
+            total:v,obs:'',opcoes:[]});
+        }
+        var taxa=entrega?[5,6,8,10][Math.floor(Math.random()*4)]:0;
+        var desc=Math.random()<0.12?[2,3,5][Math.floor(Math.random()*3)]:0;
+        total=total+taxa-desc;
+        var f=formas[Math.floor(Math.random()*formas.length)];
+        var cl=clientes.length?clientes[Math.floor(Math.random()*clientes.length)]:null;
+        num++;
+        DB.pedidos.push({id:uid('ped'),numero:num,demo:true,
+          data:d.toISOString().slice(0,10),
+          hora:String(10+Math.floor(Math.random()*12)).padStart(2,'0')+':'+
+               String(Math.floor(Math.random()*60)).padStart(2,'0'),
+          tipo:entrega?'entrega':'loja',fase:'entregue',
+          cidade:entrega?cidades[Math.floor(Math.random()*cidades.length)]:'',
+          clienteId:cl?cl.id:'',clienteNome:cl?cl.nome:'',
+          total:+total.toFixed(2),taxa:taxa,desconto:desc,
+          itens:itens,pagamentos:[{formaId:f.id,valor:+total.toFixed(2)}]});
+        criados++;
+      }
+    }
+  }
+  salvar();
+  telaGerarDemo();
+  toast(criados+' vendas de demonstração criadas nos últimos '+meses+' meses.');
+}
+function apagarVendasDemo(){
+  var q=(DB.pedidos||[]).filter(function(p){return p.demo}).length;
+  if(!confirm('Apagar as '+q+' vendas de demonstração?'))return;
+  DB.pedidos=(DB.pedidos||[]).filter(function(p){return !p.demo});
+  salvar();telaGerarDemo();
+  toast('Vendas de demonstração apagadas.');
 }
 
 /* ---------- POPUP E MODAL ---------- */
