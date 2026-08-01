@@ -4649,7 +4649,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V4.4.0';
+var VERSAO='V4.4.1';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
@@ -15050,6 +15050,7 @@ function exportarFormaPag(){
 function telaGerarDemo(){
   baseMov();baseFormas();
   var qtd=(DB.pedidos||[]).filter(function(p){return p.demo}).length;
+  var qmov=(DB.movEst||[]).filter(function(x){return x.demo}).length;
   $('content').innerHTML='<div class="finWrap" style="max-width:820px">'+
   '<div class="finTop"><div><h1>Gerar Vendas de Demonstração</h1>'+
   '<p>Cria vendas fictícias nos últimos meses para você ver os relatórios e gráficos preenchidos.</p></div></div>'+
@@ -15071,22 +15072,54 @@ function telaGerarDemo(){
   '</div></div>'+
   (qtd?'<div class="cfgCard" style="border-color:var(--red)"><div class="h">'+
    '<div class="ic2" style="background:var(--red-soft);color:var(--red)">'+sv('trash',16)+'</div>'+
-   '<div><b>Apagar vendas de demonstração</b><span>'+qtd+' venda(s) de teste no sistema</span></div></div>'+
-   '<div class="b"><button class="btnP2 rdB" onclick="apagarVendasDemo()">Apagar as '+qtd+' vendas de teste</button>'+
+   '<div><b>Apagar dados de demonstração</b><span>'+qtd+' venda(s) e '+qmov+' movimentação(ões) de teste</span></div></div>'+
+   '<div class="b"><button class="btnP2 rdB" onclick="apagarVendasDemo()">Apagar dados de demonstração</button>'+
    '</div></div>':'')+
   '</div>';
   rodape(qtd?qtd+' vendas de demonstração':'');
 }
 function gerarVendasDemo(){
   baseMov();baseFormas();
+  /* garante que todas as listas existem */
+  ['pedidos','produtos','categorias','clientes','entregadores','movEst','formasPag']
+    .forEach(function(k){ DB[k]=DB[k]||[]; });
   var meses=parseInt($('gdMeses').value)||6;
   var porDia=parseInt($('gdDia').value)||18;
   var cidades=cidadesCadastradas();
   if(!cidades.length)cidades=['Santa Fé do Sul','Jales','Rubinéia','Três Fronteiras'];
   var formas=(DB.formasPag||[]).filter(function(f){return f.ativa!==false});
   if(!formas.length){toast('Cadastre as formas de pagamento antes.');return;}
+  /* cria o que faltar, para o gerador nunca parar */
+  if(!(DB.categorias||[]).length){
+    DB.categorias=[{id:'cat_demo1',nome:'Cascões',cor:'#00A08B',ativo:true,ordem:0,demo:true},
+      {id:'cat_demo2',nome:'Potes',cor:'#2C6FD1',ativo:true,ordem:1,demo:true},
+      {id:'cat_demo3',nome:'Bebidas',cor:'#B8730B',ativo:true,ordem:2,demo:true}];
+  }
+  if(!(DB.produtos||[]).length){
+    DB.produtos=[
+     {id:'pd1',nome:'Cascão 1 bola',preco:12,categoriaId:DB.categorias[0].id,ativo:true,ordem:0,demo:true,disponivel:{},promocoes:[]},
+     {id:'pd2',nome:'Cascão 2 bolas',preco:18,categoriaId:DB.categorias[0].id,ativo:true,ordem:1,demo:true,disponivel:{},promocoes:[]},
+     {id:'pd3',nome:'Cascão 3 bolas',preco:24,categoriaId:DB.categorias[0].id,ativo:true,ordem:2,demo:true,disponivel:{},promocoes:[]},
+     {id:'pd4',nome:'Pote 500ml',preco:32,categoriaId:DB.categorias[1].id,ativo:true,ordem:0,demo:true,disponivel:{},promocoes:[]},
+     {id:'pd5',nome:'Pote 1 litro',preco:58,categoriaId:DB.categorias[1].id,ativo:true,ordem:1,demo:true,disponivel:{},promocoes:[]},
+     {id:'pd6',nome:'Água mineral',preco:5,categoriaId:DB.categorias[2].id,ativo:true,ordem:0,demo:true,disponivel:{},promocoes:[]},
+     {id:'pd7',nome:'Refrigerante lata',preco:7,categoriaId:DB.categorias[2].id,ativo:true,ordem:1,demo:true,disponivel:{},promocoes:[]}];
+  }
+  if(!(DB.clientes||[]).length){
+    ['Maria Silva','João Pereira','Ana Souza','Carlos Lima','Fernanda Rocha',
+     'Paulo Dias','Juliana Alves','Marcos Antunes'].forEach(function(nm,i){
+      DB.clientes.push({id:'cli_d'+i,nome:nm,tel:'1799900'+String(1000+i),
+        rua:'Rua Exemplo',numero:String(100+i),bairro:'Centro',
+        cidade:cidades[i%cidades.length],compras:0,gasto:0,
+        limiteFiado:0,saldoFiado:0,demo:true});
+    });
+  }
+  if(!(DB.entregadores||[]).length){
+    DB.entregadores.push({id:'ent_d1',nome:'Entregador Demo',tel:'17999000000',
+      ativo:true,padrao:true,diarias:{},demo:true,
+      taxas:cidades.map(function(c,i){return {id:'tx'+i,cidade:c,valor:[5,6,8,10][i%4]}})});
+  }
   var prods=(DB.produtos||[]);
-  if(!prods.length){toast('Cadastre produtos no cardápio antes.');return;}
   var clientes=(DB.clientes||[]);
   var hoje=new Date();
   var criados=0, num=(DB.pedidos||[]).reduce(function(a,p){return Math.max(a,Number(p.numero)||0)},0);
@@ -15131,16 +15164,68 @@ function gerarVendasDemo(){
       }
     }
   }
+  /* consumo de estoque e produções, para alimentar os relatórios de custo */
+  var movs=0;
+  var insumosOk=(DB.insumos||[]).filter(function(i){return i.controlaEstoque!==false});
+  var fichasOk=fichasProduziveis();
+  if(insumosOk.length){
+    DB.pedidos.filter(function(p){return p.demo}).forEach(function(p){
+      if(Math.random()>0.55)return;                 /* nem toda venda gera linha */
+      var linhas=[];
+      var qi=1+Math.floor(Math.random()*3);
+      for(var z=0;z<qi;z++){
+        var ins=insumosOk[Math.floor(Math.random()*insumosOk.length)];
+        var q=+(0.05+Math.random()*0.4).toFixed(3);
+        linhas.push({insumoId:ins.id,nome:ins.nome,unidade:ins.unidade,qtd:q,
+          custo:custoAtual(ins),direcao:'saida',origem:'venda'});
+      }
+      DB.movEst.push({id:uid('mv'),data:p.data,hora:p.hora,motivoId:'mv_venda',
+        identificacao:'Pedido #'+p.numero,obs:'',linhas:linhas,origem:'venda',
+        pedidoId:p.id,demo:true});
+      movs++;
+    });
+  }
+  if(fichasOk.length){
+    for(var mm=meses-1;mm>=0;mm--){
+      var base=new Date(hoje.getFullYear(),hoje.getMonth()-mm,1);
+      for(var dd=1;dd<=26;dd+=3){
+        var dia=new Date(base.getFullYear(),base.getMonth(),dd);
+        if(dia>hoje)break;
+        var f=fichasOk[Math.floor(Math.random()*fichasOk.length)];
+        var itensP=[{tipo:'ficha',refId:f.id,qtd:Number(f.rendimento)||1,
+          unidade:f.rendUnidade||f.unidade,custo:0}];
+        var lin=montarLinhas(itensP,'producao');
+        if(!lin.length)continue;
+        lin.forEach(function(l){l.demo=true});
+        var mv2={id:uid('mv'),data:dia.toISOString().slice(0,10),hora:'09:00',
+          motivoId:motivoProduzir(),identificacao:'Produção demo',obs:'',
+          linhas:lin,origem:'producao',demo:true};
+        DB.movEst.push(mv2);
+        aplicarMovimento(mv2);
+        movs++;
+      }
+    }
+  }
   salvar();
   telaGerarDemo();
-  toast(criados+' vendas de demonstração criadas nos últimos '+meses+' meses.');
+  toast(criados+' vendas e '+movs+' movimentações criadas nos últimos '+meses+' meses.');
 }
 function apagarVendasDemo(){
   var q=(DB.pedidos||[]).filter(function(p){return p.demo}).length;
-  if(!confirm('Apagar as '+q+' vendas de demonstração?'))return;
+  var m=(DB.movEst||[]).filter(function(x){return x.demo}).length;
+  if(!confirm('Apagar '+q+' venda(s) e '+m+' movimentação(ões) de demonstração?\n\n'+
+    'Os cadastros criados junto (produtos, clientes) também serão removidos.'))return;
+  (DB.movEst||[]).filter(function(x){return x.demo}).forEach(function(x){
+    try{aplicarMovimento(x,true);}catch(e){}
+  });
+  DB.movEst=(DB.movEst||[]).filter(function(x){return !x.demo});
   DB.pedidos=(DB.pedidos||[]).filter(function(p){return !p.demo});
+  DB.produtos=(DB.produtos||[]).filter(function(p){return !p.demo});
+  DB.categorias=(DB.categorias||[]).filter(function(c){return !c.demo});
+  DB.clientes=(DB.clientes||[]).filter(function(c){return !c.demo});
+  DB.entregadores=(DB.entregadores||[]).filter(function(e){return !e.demo});
   salvar();telaGerarDemo();
-  toast('Vendas de demonstração apagadas.');
+  toast('Dados de demonstração apagados.');
 }
 
 /* ---------- POPUP E MODAL ---------- */
