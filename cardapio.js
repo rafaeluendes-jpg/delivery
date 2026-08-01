@@ -66,32 +66,67 @@ function render(){
   telaMenu();
 }
 function telaLojas(){
-  $('app').innerHTML=capa()+
-   '<div class="lojaTela">'+
-    '<h2>Onde você quer pedir?</h2>'+
-    '<p class="sub">Escolha a loja mais perto de você</p>'+
-    (D.lojas.length?D.lojas.map(function(l){
+  $('app').innerHTML=topo()+capa()+
+   '<div class="telaLojas">'+
+    '<div class="tl-h"><h2>Onde você quer pedir?</h2>'+
+    '<p>Escolha a loja mais perto de você</p></div>'+
+    (D.lojas.length?'<div class="lojasG">'+D.lojas.map(function(l){
       var c=D.cfg[l.id]||{};
       var ab=(c.ativo!==false);
-      return '<button class="lojaCard" onclick="escolherLoja(\''+l.id+'\')">'+
-       '<div class="lojaIc">◉</div>'+
-       '<div><b>'+E(l.nome)+'</b><span>'+E(l.cidade||'')+(l.uf?' · '+E(l.uf):'')+
-       (c.tempo_entrega?' · '+E(c.tempo_entrega):'')+'</span></div>'+
-       '<span class="lojaTag'+(ab?'':' off')+'">'+(ab?'aberto':'fechado')+'</span>'+
-      '</button>';}).join('')
-     :'<div class="vazio"><div>◉</div>Nenhuma loja disponível no momento.</div>')+
+      return '<button class="lojaC" onclick="escolherLoja(\''+l.id+'\')">'+
+       '<div class="lojaIc">'+IC.loja+'</div>'+
+       '<b>'+E(l.nome)+'</b>'+
+       '<span class="end">'+E(l.cidade||'')+(l.uf?' · '+E(l.uf):'')+'</span>'+
+       '<div class="rod"><span class="pill'+(ab?'':' off')+'">'+(ab?'aberto agora':'fechado')+'</span>'+
+       (c.tempo_entrega?'<span style="font-size:12.5px;color:var(--ink-3)">'+E(c.tempo_entrega)+'</span>':'')+
+       '<span class="seta">→</span></div>'+
+      '</button>';}).join('')+'</div>'
+     :'<div class="vazio">'+IC.loja+'<br>Nenhuma loja disponível no momento.</div>')+
    '</div>'+rodape();
 }
+var IC={
+ loja:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="24" height="24"><path d="M3 9l1.5-5h15L21 9M3 9h18M3 9v11h18V9M9 20v-6h6v6"/></svg>',
+ gelato:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 10a4 4 0 0 1 8 0M7.5 10h9L12 22 7.5 10z"/><path d="M8.6 13.5h6.8M9.6 16.5h4.8"/></svg>',
+ sacola:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="18" height="18"><path d="M6 7h12l-1 13H7L6 7zM9 7V5a3 3 0 0 1 6 0v2"/></svg>',
+ check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="38" height="38"><path d="M4 12.5l5.5 5.5L20 7"/></svg>'
+};
+function topo(){
+  var qt=S.sacola.reduce(function(a,i){return a+i.qtd},0);
+  var vl=S.sacola.reduce(function(a,i){return a+i.total},0);
+  var ab=S.loja?abertoAgora():true;
+  var c=cfgLoja();
+  return '<div class="topo"><div class="topoIn">'+
+   '<div class="marca"><img src="img/logo.jpg" alt="">'+
+    '<div><b>JOLÔ</b><span>gelato</span></div></div>'+
+   (S.loja?'<div class="statusP"><span class="pt'+(ab?'':' off')+'"></span>'+
+     (ab?'Aberto':'Fechado')+(c.tempo_entrega?' · '+E(c.tempo_entrega):'')+'</div>':'')+
+   '<div style="flex:1"></div>'+
+   (S.loja?'<button class="lojaSel" onclick="S.tela=\'lojas\';render()">'+
+     E(S.loja.apelido||S.loja.nome)+' <span style="opacity:.5">▾</span></button>':'')+
+   (qt?'<button class="btSac" onclick="abrirSacola()">'+IC.sacola+
+     '<span class="n">'+qt+'</span> R$ '+money(vl)+'</button>':'')+
+  '</div></div>';
+}
 function capa(){
-  return '<div class="capa"><img src="img/capa.jpg" alt="">'+
-   '<div class="capaIn"><div class="logoBox"><img src="img/logo.jpg" alt="Jolô Gelato"></div>'+
-   '<h1>Delivery</h1><p>feito para valer a pena</p></div></div>';
+  var c=cfgLoja();
+  return '<div class="hero"><img src="img/capa.jpg" alt="">'+
+   '<div class="heroIn"><div class="heroLogo"><img src="img/logo.jpg" alt="Jolô Gelato"></div>'+
+   '<h1>Gelato artesanal</h1><p>feito para valer a pena</p>'+
+   (S.loja?'<div class="heroTags">'+
+     (c.tempo_entrega?'<span class="heroTag">entrega em '+E(c.tempo_entrega)+'</span>':'')+
+     (Number(c.pedido_minimo)?'<span class="heroTag">mínimo R$ '+money(c.pedido_minimo)+'</span>':'')+
+     (c.aceita_retirada!==false?'<span class="heroTag">retirada na loja</span>':'')+
+    '</div>':'')+
+   '</div></div>';
 }
 function rodape(){
-  return '<div class="rod"><img src="img/logo.jpg" alt="">'+
-   'Jolô Gelato · gelato artesanal<br>'+
-   'pedido pelo cardápio digital<br><br>'+
-   '<span style="opacity:.6">sistema Nexor</span></div>';
+  var c=cfgLoja();
+  return '<div class="rodape"><img src="img/logo.jpg" alt="">'+
+   '<b>Jolô Gelato</b>'+
+   'feito para valer a pena<br>'+
+   (S.loja?E(S.loja.nome)+(S.loja.cidade?' · '+E(S.loja.cidade):'')+'<br>':'')+
+   (c.whatsapp?'WhatsApp '+E(c.whatsapp)+'<br>':'')+
+   '<br><span style="opacity:.55;font-size:11px">pedidos por Nexor Delivery</span></div>';
 }
 function escolherLoja(id){
   S.loja=D.lojas.find(function(x){return x.id===id});
@@ -116,44 +151,35 @@ function telaMenu(){
     var k=p.categoria_id||'_';
     porCat[k]=porCat[k]||[];porCat[k].push(p);
   });
-  var qt=S.sacola.reduce(function(a,i){return a+i.qtd},0);
-  var vl=S.sacola.reduce(function(a,i){return a+i.total},0);
-
-  $('app').innerHTML=capa()+
-   '<div class="status"><span class="pt'+(ab?'':' off')+'"></span>'+
-    '<b>'+(ab?'Aberto agora':'Fechado no momento')+'</b>'+
-    (c.tempo_entrega?'<span class="sep">·</span>'+E(c.tempo_entrega):'')+
-    '<button class="trocarLoja" onclick="S.tela=\'lojas\';render()">'+
-     E(S.loja.apelido||S.loja.nome)+' ▾</button></div>'+
-   (!ab?'<div style="padding:14px 18px 0"><div class="aviso">'+
-     'A loja está fechada agora. Você pode montar o pedido e enviar quando abrirmos.'+
-     '</div></div>':'')+
-   (c.aviso?'<div style="padding:14px 18px 0"><div class="aviso">'+E(c.aviso)+'</div></div>':'')+
-   '<div class="cats">'+
+  $('app').innerHTML=topo()+capa()+
+   (!ab||c.aviso?'<div class="centro" style="padding-top:22px">'+
+     (!ab?'<div class="aviso">A loja está fechada agora. Você pode montar o pedido e enviar quando abrirmos.</div>':'')+
+     (c.aviso?'<div class="aviso">'+E(c.aviso)+'</div>':'')+'</div>':'')+
+   '<div class="catBar"><div class="catIn">'+
     '<button class="catB'+(!S.cat?' on':'')+'" onclick="S.cat=null;render()">Tudo</button>'+
     cats.map(function(x){
       return '<button class="catB'+(S.cat===x.id?' on':'')+'" onclick="S.cat=\''+x.id+'\';render()">'+
       E(x.nome)+'</button>';}).join('')+
-   '</div>'+
+   '</div></div>'+
    (Object.keys(porCat).length?Object.keys(porCat).map(function(k){
      var cat=D.cats.find(function(x){return x.id===k})||{nome:'Outros'};
-     return '<div class="secao"><h3>'+E(cat.nome)+'</h3>'+
-      (cat.descricao?'<p>'+E(cat.descricao)+'</p>':'')+'</div>'+
-      '<div class="prods">'+porCat[k].map(cardProduto).join('')+'</div>';
+     return '<div class="secao"><div class="secH"><h3>'+E(cat.nome)+'</h3>'+
+      (cat.descricao?'<span>'+E(cat.descricao)+'</span>':'')+'</div>'+
+      '<div class="grade">'+porCat[k].map(cardProduto).join('')+'</div></div>';
    }).join('')
-    :'<div class="vazio"><div>🍨</div>Nenhum produto disponível nesta categoria.</div>')+
-   rodape()+
-   (qt?'<div class="sacolaBar"><button class="sacolaBt" onclick="abrirSacola()">'+
-     '<span class="qt">'+qt+'</span><span class="tx">Ver sacola</span>'+
-     '<span class="vl">R$ '+money(vl)+'</span></button></div>':'');
+    :'<div class="vazio">'+IC.gelato+'<br>Nenhum produto nesta categoria.</div>')+
+   '<div style="height:40px"></div>'+rodape();
 }
+function fotoDe(p){ return p.imagem||p.imagem_url||''; }
 function cardProduto(p){
-  return '<button class="prod" onclick="abrirProduto(\''+p.id+'\')">'+
-   '<div class="prodT"><b>'+E(p.nome)+'</b>'+
-    (p.descricao?'<p>'+E(p.descricao)+'</p>':'')+
-    '<span class="preco">R$ '+money(p.preco)+'</span></div>'+
-   (p.imagem?'<div class="prodF"><img src="'+p.imagem+'" alt=""></div>'
-    :'<div class="prodF">🍨</div>')+
+  var f=fotoDe(p);
+  return '<button class="card" onclick="abrirProduto(\''+p.id+'\')">'+
+   '<div class="cardF">'+(f?'<img src="'+f+'" alt="'+E(p.nome)+'" loading="lazy">'
+     :'<div class="semF">'+IC.gelato+'</div>')+'</div>'+
+   '<div class="cardB"><b>'+E(p.nome)+'</b>'+
+    (p.descricao?'<p>'+E(p.descricao)+'</p>':'<p></p>')+
+    '<div class="cardR"><span class="preco">R$ '+money(p.preco)+'</span>'+
+    '<span class="addB">+</span></div></div>'+
   '</button>';
 }
 
@@ -186,11 +212,11 @@ function desenhaProduto(){
   });
   var ov=$('ov')||document.createElement('div');
   ov.id='ov';ov.className='ov';
-  ov.innerHTML='<div class="pnl">'+
+  ov.innerHTML='<div class="pnl g">'+
    '<div class="pnlH"><b>'+E(p.nome)+'</b>'+
     '<button class="fechar" onclick="fechar()">×</button></div>'+
    '<div class="pnlB">'+
-    (p.imagem?'<img src="'+p.imagem+'" style="width:100%;border-radius:12px;margin-bottom:14px">':'')+
+    (fotoDe(p)?'<img src="'+fotoDe(p)+'" class="fotoP" alt="">':'')+
     (p.descricao?'<p style="margin:0 0 18px;color:var(--ink-2);font-size:14px">'+E(p.descricao)+'</p>':'')+
     gs.map(function(g,gi){
       var sel=_esc[g.id]||[];
@@ -265,14 +291,17 @@ function abrirSacola(){
    '<div class="pnlH"><b>Sua sacola</b><button class="fechar" onclick="fechar()">×</button></div>'+
    '<div class="pnlB">'+
    (S.sacola.length?S.sacola.map(function(i,k){
-     return '<div class="si"><div class="siT"><b>'+E(i.nome)+'</b>'+
+     var fp=(D.prods.find(function(x){return x.id===i.id})||{});
+     var fu=fp.imagem||fp.imagem_url||'';
+     return '<div class="si">'+(fu?'<img src="'+fu+'" class="siF" alt="">':'')+
+      '<div class="siT"><b>'+E(i.nome)+'</b>'+
       (i.opcoes.length?'<small>'+i.opcoes.map(function(o){return E(o.nome)}).join(' · ')+'</small>':'')+
       (i.obs?'<small>obs: '+E(i.obs)+'</small>':'')+
       '<div class="qtd"><button onclick="mudarQtd('+k+',-1)">−</button>'+
        '<b>'+i.qtd+'</b><button onclick="mudarQtd('+k+',1)">+</button></div></div>'+
       '<div class="siV">R$ '+money(i.total)+'</div></div>';
    }).join('')
-    :'<div class="vazio"><div>🛍️</div>Sua sacola está vazia</div>')+
+    :'<div class="vazio">'+IC.sacola+'<br>Sua sacola está vazia</div>')+
    (S.sacola.length?'<div style="margin-top:16px">'+
      '<div class="tot"><span>Subtotal</span><b>R$ '+money(sub)+'</b></div>'+
      (min&&sub<min?'<div class="aviso" style="margin-top:10px">Pedido mínimo de R$ '+money(min)+
@@ -429,8 +458,8 @@ function telaRevisao(){
      (S.tipo==='entrega'?'<div class="tot"><span>Taxa de entrega</span><b>R$ '+money(taxa)+'</b></div>':'')+
      '<div class="tot f"><span>Total</span><span>R$ '+money(tot)+'</span></div>'+
     '</div>'+
-    '<div style="background:var(--creme);border-radius:12px;padding:14px;margin-top:16px;font-size:13.5px">'+
-     '<b style="display:block;margin-bottom:7px;color:var(--verde)">'+
+    '<div class="resumo">'+
+     '<b class="tit">'+
       (S.tipo==='entrega'?'Entrega':'Retirada na loja')+'</b>'+
      E(cl.nome)+' · '+E(cl.tel)+'<br>'+
      (S.tipo==='entrega'?E(cl.rua)+', '+E(cl.numero)+'<br>'+E(cl.zona)+' — '+E(cl.cidade)+
@@ -477,8 +506,8 @@ function telaSucesso(num,tot){
   var c=cfgLoja();
   var zap=(c.whatsapp||'').replace(/\D/g,'');
   var msg=encodeURIComponent('Olá! Fiz o pedido nº '+num+' pelo cardápio digital. Total R$ '+money(tot)+'.');
-  $('app').innerHTML=capa()+
-   '<div class="ok"><div class="okIc">✓</div>'+
+  $('app').innerHTML=topo()+capa()+
+   '<div class="ok"><div class="okIc">'+IC.check+'</div>'+
    '<h2>Pedido enviado!</h2>'+
    '<p>Número <b>#'+num+'</b> · Total <b>R$ '+money(tot)+'</b></p>'+
    '<p style="color:var(--ink-3);margin-top:12px">Já apareceu na tela da loja. '+
