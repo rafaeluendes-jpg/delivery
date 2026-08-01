@@ -1949,6 +1949,15 @@ tbody td small{font-size:10.5px}
 .opRecIng b{color:var(--ink-2)}
 .opRod{padding:11px 16px;background:var(--panel);border-top:1px solid var(--line);display:flex;gap:12px;flex:none}
 
+.opSugT{width:100%;display:flex;align-items:center;font-size:10.5px;font-weight:700;
+  color:var(--acc-d);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
+.opSugT button{margin-left:auto}
+.opRecGrid{display:flex;gap:12px;align-items:flex-start}
+.opRecFoto{width:200px;flex:none}
+.opRecFoto img{width:100%;border-radius:8px;border:1px solid var(--line);display:block}
+.opRecGrid .opRecTxt{flex:1;min-width:0}
+@media(max-width:900px){.opRecGrid{flex-direction:column}.opRecFoto{width:100%;max-width:260px}}
+
 @media(max-width:1000px){
   .lfPeriodo{order:3;width:100%}
   .lfTopBtns{width:100%}
@@ -2981,6 +2990,15 @@ tbody td small{font-size:10.5px}
 .opRecIng{margin-top:8px;font-size:11px;color:var(--ink-3)}
 .opRecIng b{color:var(--ink-2)}
 .opRod{padding:11px 16px;background:var(--panel);border-top:1px solid var(--line);display:flex;gap:12px;flex:none}
+
+.opSugT{width:100%;display:flex;align-items:center;font-size:10.5px;font-weight:700;
+  color:var(--acc-d);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
+.opSugT button{margin-left:auto}
+.opRecGrid{display:flex;gap:12px;align-items:flex-start}
+.opRecFoto{width:200px;flex:none}
+.opRecFoto img{width:100%;border-radius:8px;border:1px solid var(--line);display:block}
+.opRecGrid .opRecTxt{flex:1;min-width:0}
+@media(max-width:900px){.opRecGrid{flex-direction:column}.opRecFoto{width:100%;max-width:260px}}
 
 @media(max-width:1000px){
   .lgCard{grid-template-columns:1fr}.lgR{display:none}
@@ -4114,7 +4132,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V3.6.0';
+var VERSAO='V3.7.0';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
@@ -10917,7 +10935,10 @@ function telaMovimentacao(){
       '<td class="obsC">'+(l.sistema!==undefined
         ?'sistema '+fmtQt(l.sistema)+' · contado '+fmtQt(l.conferido)
         :E(m.obs||''))+'</td>'+
-      '<td>'+(m.origem!=='venda'?'<button class="rBtn rd" onclick="excluirMov(\''+m.id+'\')" title="Excluir lançamento">'+sv('trash',11)+'</button>':'')+'</td></tr>';
+      '<td><div class="rowAct">'+
+       '<button class="rBtn" onclick="verMovimento(\''+m.id+'\')" title="Ver o lançamento">'+sv('eye',11)+'</button>'+
+       (m.origem!=='venda'?'<button class="rBtn rd" onclick="excluirMov(\''+m.id+'\')" title="Excluir lançamento">'+sv('trash',11)+'</button>':'')+
+      '</div></td></tr>';
     }).join('')+'</tbody>'+
     '<tfoot><tr><td colspan="7"><b>Subtotal — '+linhas.length+' movimentações</b></td>'+
     '<td></td><td style="text-align:right"><b>R$ '+money(totCusto)+'</b></td><td colspan="2"></td></tr>'+
@@ -10943,13 +10964,73 @@ function telaMovimentacao(){
   }
   rodape(linhas.length+' movimentações no período');
 }
+/* abre o lançamento inteiro: o que saiu, o que entrou, quando e por quê */
+function verMovimento(id){
+  var m=(DB.movEst||[]).find(function(x){return x.id===id});
+  if(!m)return;
+  var linhas=m.linhas||[];
+  var ent=linhas.filter(function(l){return l.direcao==='entrada'});
+  var sai=linhas.filter(function(l){return l.direcao==='saida'});
+  var vEnt=ent.reduce(function(a,l){return a+(Number(l.qtd)||0)*(Number(l.custo)||0)},0);
+  var vSai=sai.reduce(function(a,l){return a+(Number(l.qtd)||0)*(Number(l.custo)||0)},0);
+  var fichas={};
+  linhas.forEach(function(l){if(l.fichaNome)fichas[l.fichaNome]=true;});
+  var nomesF=Object.keys(fichas);
+
+  function tabela(tit,arr,cor){
+    if(!arr.length)return '';
+    return '<div class="blk" style="margin:0 0 11px;max-width:none;padding:0;overflow:hidden">'+
+     '<div class="acTit">'+tit+' — '+arr.length+' item(ns)</div>'+
+     '<table class="acTab"><thead><tr><th>Item</th>'+
+     '<th style="width:120px;text-align:right">Quantidade</th>'+
+     '<th style="width:110px;text-align:right">Custo unit.</th>'+
+     '<th style="width:110px;text-align:right">Valor</th></tr></thead><tbody>'+
+     arr.map(function(l){
+       return '<tr><td><b>'+E(l.nome)+'</b>'+
+       (l.fichaNome?'<small style="display:block;color:var(--ink-3)">'+
+         (l.direcao==='entrada'?'produzido a partir de ':'usado em ')+E(l.fichaNome)+'</small>':'')+'</td>'+
+       '<td style="text-align:right"><b class="'+cor+'">'+(l.direcao==='entrada'?'+':'-')+
+        fmtQt(l.qtd)+' '+un(l.unidade).ab+'</b></td>'+
+       '<td style="text-align:right">'+money(l.custo)+'</td>'+
+       '<td style="text-align:right"><b>'+money((Number(l.qtd)||0)*(Number(l.custo)||0))+'</b></td></tr>';
+     }).join('')+'</tbody></table></div>';
+  }
+
+  var h='<div class="mdB">'+
+  '<div class="acHead"><div class="av3" style="width:42px;height:42px">'+sv('box',18)+'</div>'+
+  '<div><b>'+E(nomeMotivo(m.motivoId))+'</b>'+
+  '<span>'+dataBR(m.data)+' às '+E(m.hora||'')+
+   (m.identificacao?' · '+E(m.identificacao):'')+'</span>'+
+  (nomesF.length?'<span>Receita: '+E(nomesF.join(', '))+'</span>':'')+
+  (m.obs?'<span>'+E(m.obs)+'</span>':'')+'</div>'+
+  '<div style="text-align:right"><span class="hint">Movimento</span>'+
+  '<b style="display:block;font-size:18px;color:var(--acc-d)">'+linhas.length+' linha(s)</b></div></div>'+
+  '<div class="acKpis">'+
+   '<div class="acK"><span>Entrou</span><b class="vg">'+ent.length+' item(ns)</b></div>'+
+   '<div class="acK"><span>Valor que entrou</span><b class="vg">R$ '+money(vEnt)+'</b></div>'+
+   '<div class="acK"><span>Saiu</span><b class="vr">'+sai.length+' item(ns)</b></div>'+
+   '<div class="acK dest3"><span>Valor consumido</span><b>R$ '+money(vSai)+'</b></div>'+
+  '</div>'+
+  tabela('Entrou no estoque',ent,'vg')+
+  tabela('Saiu do estoque',sai,'vr')+
+  '</div>';
+
+  var ov=document.createElement('div');ov.className='mdOv';ov.id='mdOv';
+  ov.innerHTML='<div class="mdBox xl"><div class="mdH"><b>Lançamento de estoque</b>'+
+   '<button onclick="fecharModal()">&times;</button></div>'+h+
+   '<div class="mdF"><button class="btnP2" onclick="fecharModal()">Fechar</button>'+
+   (m.origem!=='venda'?'<button class="btnP2 rdB" onclick="excluirMov(\''+m.id+'\')">'+
+     sv('trash',13)+' Excluir lançamento</button>':'')+'</div></div>';
+  document.body.appendChild(ov);
+  fecharSoForaDeVerdade(ov);
+}
 function excluirMov(id){
   var m=(DB.movEst||[]).find(function(x){return x.id===id});
   if(!m)return;
   if(!confirm('Excluir este lançamento?\n\nO estoque dos itens será desfeito.'))return;
   aplicarMovimento(m,true);
   DB.movEst=DB.movEst.filter(function(x){return x.id!==id});
-  salvar();telaMovimentacao();
+  salvar();fecharModal();telaMovimentacao();
   toast('Lançamento excluído e estoque desfeito.');
 }
 function buscarMov(){MV.de=$('mvDe').value;MV.ate=$('mvAte').value;telaMovimentacao();}
@@ -12710,7 +12791,7 @@ function exportarNotas(){
 /* ==========================================================
    BLOCO 26 — PRODUÇÃO (ordem de produção com conferência de peso)
    ========================================================== */
-var OP={aba:'hist',de:'',ate:'',itens:[],resp:'',obs:'',data:'',busca:'',verReceita:null};
+var OP={aba:'hist',de:'',ate:'',itens:[],resp:'',obs:'',data:'',busca:'',verReceita:null,todos:false};
 
 function baseProd(){
   baseMov();
@@ -12797,9 +12878,11 @@ function voltarOP(){OP.aba='hist';telaProducao();}
 /* ---------- NOVA ORDEM ---------- */
 function telaOPNova(){
   var q=(OP.busca||'').toLowerCase();
-  var achadas=q.length>=2?fichasProduziveis().filter(function(f){
+  var achadas=[];
+  if(OP.todos)achadas=fichasProduziveis();
+  else if(q.length>=2)achadas=fichasProduziveis().filter(function(f){
     return (f.nome||'').toLowerCase().indexOf(q)>=0||String(f.codigo||'').indexOf(q)>=0;
-  }).slice(0,12):[];
+  }).slice(0,12);
 
   var prev=OP.itens.reduce(function(a,it){return a+(Number(it.previsto)||0)},0);
   var real=OP.itens.reduce(function(a,it){return a+somaCubas(it)},0);
@@ -12823,9 +12906,15 @@ function telaOPNova(){
     '<div class="f2" style="max-width:200px"><label>Responsável</label>'+
      '<input id="opResp" value="'+E(OP.resp)+'" placeholder="quem produziu"></div>'+
     '<div class="f2 gw2"><label>Adicionar sabor</label>'+
-     '<input id="opBusca" value="'+E(OP.busca)+'" placeholder="digite 2 letras do sabor" autocomplete="off"></div>'+
+     '<div class="pickRow">'+
+      '<input id="opBusca" value="'+E(OP.busca)+'" placeholder="digite o sabor ou clique na seta" autocomplete="off">'+
+      '<button class="btnP2" onclick="OP.todos=!OP.todos;telaProducao()" title="Ver todos os sabores">'+
+      sv(OP.todos?'up2':'dn',13)+'</button></div></div>'+
    '</div>'+
-   (achadas.length?'<div class="opSug">'+achadas.map(function(f){
+   (achadas.length?'<div class="opSug">'+
+     (OP.todos?'<div class="opSugT">Todos os sabores — clique para adicionar'+
+       '<button class="arvB" onclick="OP.todos=false;telaProducao()">'+sv('x2',12)+'</button></div>':'')+
+     achadas.map(function(f){
       return '<button class="opSugIt" onclick="addSaborOP(\''+f.id+'\')">'+
       '<b>'+E(f.nome)+'</b><span>'+fmtQt(f.rendimento)+' '+un(f.rendUnidade||f.unidade).ab+
       ' · '+((f.itens||[]).length)+' ingredientes</span></button>';
@@ -12860,7 +12949,10 @@ function telaOPNova(){
       (OP.verReceita===k?'<tr class="opRec"><td colspan="9">'+
         '<div class="opRecBox"><div class="opRecH">'+sv('book',14)+' Modo de preparo — '+E(it.nome)+
         '<button class="arvB" onclick="OP.verReceita=null;telaProducao()">'+sv('x2',12)+'</button></div>'+
+        '<div class="opRecGrid">'+
+        (f.foto?'<div class="opRecFoto"><img src="'+f.foto+'"></div>':'')+
         '<div class="opRecTxt">'+(f.receita?E(f.receita):'<i>Esta ficha ainda não tem o modo de preparo cadastrado.</i>')+'</div>'+
+        '</div>'+
         '<div class="opRecIng"><b>Ingredientes desta receita:</b> '+
         ((f.itens||[]).map(function(ci){
           var i2=itemComp(ci.insumoId)||{};
@@ -12941,7 +13033,7 @@ function addSaborOP(fid){
   if(!f)return;
   OP.itens.push({fichaId:f.id,nome:f.nome,previsto:Number(f.rendimento)||0,
     unidade:f.rendUnidade||f.unidade,cubas:['','','']});
-  OP.busca='';
+  OP.busca='';OP.todos=false;
   telaProducao();
 }
 function remSaborOP(k){OP.itens.splice(k,1);if(OP.verReceita===k)OP.verReceita=null;telaProducao();}
