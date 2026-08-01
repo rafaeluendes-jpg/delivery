@@ -1958,6 +1958,47 @@ tbody td small{font-size:10.5px}
 .opRecGrid .opRecTxt{flex:1;min-width:0}
 @media(max-width:900px){.opRecGrid{flex-direction:column}.opRecFoto{width:100%;max-width:260px}}
 
+/* ================= COMPARATIVO ANUAL ================= */
+.infoBt{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);background:#fff;
+  cursor:pointer;color:var(--ink-3);display:flex;align-items:center;justify-content:center;
+  align-self:center;margin-left:8px;flex:none}
+.infoBt:hover{border-color:var(--acc);color:var(--acc-d);background:var(--acc-soft)}
+.caResumo{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;padding:14px 16px}
+.caCard{background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.caCardT{display:block;font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;
+  letter-spacing:.05em}
+.caCardV{display:flex;align-items:baseline;gap:8px;margin:5px 0 3px}
+.caCardV b{font-size:19px;font-weight:700}
+.caVar{font-size:11px;font-weight:700}
+.caVar.sobe{color:var(--acc-d)} .caVar.desce{color:var(--red)}
+.caCardA{font-size:11px;color:var(--ink-3)}
+.caGraf{margin:4px 16px 14px;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.caGrafH{display:flex;align-items:center;padding:10px 14px;background:var(--alt);
+  border-bottom:1px solid var(--line-2);font-size:12px;font-weight:700;color:var(--ink-2)}
+.caLeg{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:11px;font-weight:500;color:var(--ink-3)}
+.caLeg i{width:11px;height:11px;border-radius:3px;display:inline-block;margin-left:8px}
+.caLeg i.b1{background:#9AB4CC} .caLeg i.b2{background:var(--acc)}
+.caBox{display:flex;align-items:flex-end;gap:6px;padding:18px 14px 8px;overflow-x:auto;min-height:210px}
+.caCol{flex:1;min-width:44px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.caBarras{display:flex;align-items:flex-end;gap:3px;height:160px}
+.caB{width:16px;border-radius:3px 3px 0 0;position:relative;cursor:default;transition:.15s}
+.caB.b1{background:#9AB4CC} .caB.b2{background:var(--acc)}
+.caB:hover{filter:brightness(1.15)}
+.caB:hover .caTip{display:block}
+.caTip{display:none;position:absolute;bottom:calc(100% + 7px);left:50%;transform:translateX(-50%);
+  background:var(--deep);color:#fff;padding:6px 9px;border-radius:6px;font-size:10.5px;
+  white-space:nowrap;z-index:5;text-align:center;line-height:1.4;box-shadow:var(--sh2)}
+.caMes{font-size:10.5px;color:var(--ink-3);font-weight:600}
+.caTab tbody tr.caGrupo td{background:var(--alt);padding:7px 10px;border-top:1px solid var(--line)}
+.caTab .caAno{font-weight:700;color:var(--ink-2)}
+.caTab .caAno.destaque{color:var(--acc-d)}
+.caTab td small{display:block;font-size:9.5px;margin-top:1px}
+.expList{display:flex;flex-direction:column;gap:1px;background:var(--line-2);
+  border:1px solid var(--line-2);border-radius:6px;overflow:hidden}
+.expIt{background:#fff;padding:9px 12px}
+.expIt b{display:block;font-size:12.5px;color:var(--ink)}
+.expIt span{display:block;font-size:11.5px;color:var(--ink-3);margin-top:1px}
+
 @media(max-width:1000px){
   .lfPeriodo{order:3;width:100%}
   .lfTopBtns{width:100%}
@@ -2999,6 +3040,47 @@ tbody td small{font-size:10.5px}
 .opRecFoto img{width:100%;border-radius:8px;border:1px solid var(--line);display:block}
 .opRecGrid .opRecTxt{flex:1;min-width:0}
 @media(max-width:900px){.opRecGrid{flex-direction:column}.opRecFoto{width:100%;max-width:260px}}
+
+/* ================= COMPARATIVO ANUAL ================= */
+.infoBt{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);background:#fff;
+  cursor:pointer;color:var(--ink-3);display:flex;align-items:center;justify-content:center;
+  align-self:center;margin-left:8px;flex:none}
+.infoBt:hover{border-color:var(--acc);color:var(--acc-d);background:var(--acc-soft)}
+.caResumo{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;padding:14px 16px}
+.caCard{background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.caCardT{display:block;font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;
+  letter-spacing:.05em}
+.caCardV{display:flex;align-items:baseline;gap:8px;margin:5px 0 3px}
+.caCardV b{font-size:19px;font-weight:700}
+.caVar{font-size:11px;font-weight:700}
+.caVar.sobe{color:var(--acc-d)} .caVar.desce{color:var(--red)}
+.caCardA{font-size:11px;color:var(--ink-3)}
+.caGraf{margin:4px 16px 14px;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.caGrafH{display:flex;align-items:center;padding:10px 14px;background:var(--alt);
+  border-bottom:1px solid var(--line-2);font-size:12px;font-weight:700;color:var(--ink-2)}
+.caLeg{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:11px;font-weight:500;color:var(--ink-3)}
+.caLeg i{width:11px;height:11px;border-radius:3px;display:inline-block;margin-left:8px}
+.caLeg i.b1{background:#9AB4CC} .caLeg i.b2{background:var(--acc)}
+.caBox{display:flex;align-items:flex-end;gap:6px;padding:18px 14px 8px;overflow-x:auto;min-height:210px}
+.caCol{flex:1;min-width:44px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.caBarras{display:flex;align-items:flex-end;gap:3px;height:160px}
+.caB{width:16px;border-radius:3px 3px 0 0;position:relative;cursor:default;transition:.15s}
+.caB.b1{background:#9AB4CC} .caB.b2{background:var(--acc)}
+.caB:hover{filter:brightness(1.15)}
+.caB:hover .caTip{display:block}
+.caTip{display:none;position:absolute;bottom:calc(100% + 7px);left:50%;transform:translateX(-50%);
+  background:var(--deep);color:#fff;padding:6px 9px;border-radius:6px;font-size:10.5px;
+  white-space:nowrap;z-index:5;text-align:center;line-height:1.4;box-shadow:var(--sh2)}
+.caMes{font-size:10.5px;color:var(--ink-3);font-weight:600}
+.caTab tbody tr.caGrupo td{background:var(--alt);padding:7px 10px;border-top:1px solid var(--line)}
+.caTab .caAno{font-weight:700;color:var(--ink-2)}
+.caTab .caAno.destaque{color:var(--acc-d)}
+.caTab td small{display:block;font-size:9.5px;margin-top:1px}
+.expList{display:flex;flex-direction:column;gap:1px;background:var(--line-2);
+  border:1px solid var(--line-2);border-radius:6px;overflow:hidden}
+.expIt{background:#fff;padding:9px 12px}
+.expIt b{display:block;font-size:12.5px;color:var(--ink)}
+.expIt span{display:block;font-size:11.5px;color:var(--ink-3);margin-top:1px}
 
 @media(max-width:1000px){
   .lgCard{grid-template-columns:1fr}.lgR{display:none}
@@ -4138,7 +4220,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V3.8.1';
+var VERSAO='V3.9.0';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
@@ -4175,6 +4257,7 @@ if(mid==='financeira'&&iid==='fornecedores')return telaFornecedores();
 if(mid==='financeira'&&iid==='frente-caixa')return telaFrenteCaixa();
 if(mid==='clientes'&&iid==='cadastro-clientes')return telaClientes();
 if(mid==='clientes'&&iid==='cupons-clientes')return telaCupons();
+if(mid==='dashboard'&&iid==='comparativo-anual')return telaComparativo();
 if(mid==='estoque'&&iid==='producao')return telaProducao();
 if(mid==='estoque'&&iid==='ficha-tecnica')return telaFichaTecnica();
 if(mid==='estoque'&&iid==='ingredientes-insumos')return telaInsumos();
@@ -13231,6 +13314,233 @@ function imprimirOP(id){
   '<div style="margin-top:26px;font-size:11px">Conferido por: ____________________________</div>';
   document.body.appendChild(el);
   setTimeout(function(){window.print()},200);
+}
+
+/* ==========================================================
+   BLOCO 27 — COMPARATIVO ANUAL
+   ========================================================== */
+var CA={a1:0,a2:0,metrica:'faturamento',mes:0};
+
+function anosComVenda(){
+  var s={};
+  (DB.pedidos||[]).forEach(function(p){
+    var d=String(p.data||'').slice(0,4);
+    if(d&&d.length===4)s[d]=true;
+  });
+  var hoje=new Date().getFullYear();
+  s[hoje]=true;s[hoje-1]=true;
+  return Object.keys(s).sort().reverse();
+}
+/* junta tudo de um ano, mês a mês */
+function dadosAno(ano){
+  var m=[];
+  for(var i=0;i<12;i++)m.push({fat:0,ped:0,loja:0,entrega:0,desc:0,taxa:0,
+    cmv:0,clientes:{},itens:0});
+  (DB.pedidos||[]).forEach(function(p){
+    if(p.fase==='cancelado')return;
+    var d=String(p.data||'');
+    if(d.slice(0,4)!==String(ano))return;
+    var k=parseInt(d.slice(5,7),10)-1;
+    if(isNaN(k)||k<0||k>11)return;
+    m[k].fat+=Number(p.total)||0;
+    m[k].ped++;
+    if(p.tipo==='entrega')m[k].entrega++; else m[k].loja++;
+    m[k].desc+=Number(p.desconto)||0;
+    m[k].taxa+=Number(p.taxa)||0;
+    m[k].itens+=(p.itens||[]).reduce(function(a,i){return a+(Number(i.qtd)||0)},0);
+    if(p.clienteId)m[k].clientes[p.clienteId]=true;
+  });
+  /* custo da mercadoria: saídas de estoque por venda */
+  (DB.movEst||[]).forEach(function(mv){
+    var d=String(mv.data||'');
+    if(d.slice(0,4)!==String(ano))return;
+    var k=parseInt(d.slice(5,7),10)-1;
+    if(isNaN(k)||k<0||k>11)return;
+    (mv.linhas||[]).forEach(function(l){
+      if(l.direcao!=='saida')return;
+      if(String(l.origem||'')!=='venda')return;
+      m[k].cmv+=(Number(l.qtd)||0)*(Number(l.custo)||0);
+    });
+  });
+  m.forEach(function(x){
+    x.ticket=x.ped?x.fat/x.ped:0;
+    x.nclientes=Object.keys(x.clientes).length;
+    x.cmvPct=x.fat?(x.cmv/x.fat*100):0;
+    x.margem=x.fat?((x.fat-x.cmv)/x.fat*100):0;
+  });
+  return m;
+}
+var METRICAS=[
+ {id:'fat',      n:'Faturamento',        fmt:'money', dica:'soma dos pedidos não cancelados'},
+ {id:'ped',      n:'Pedidos',            fmt:'int',   dica:'quantidade de pedidos'},
+ {id:'ticket',   n:'Ticket médio',       fmt:'money', dica:'faturamento dividido pelos pedidos'},
+ {id:'loja',     n:'Frente de caixa',    fmt:'int',   dica:'pedidos feitos na loja'},
+ {id:'entrega',  n:'Entrega',            fmt:'int',   dica:'pedidos de delivery'},
+ {id:'itens',    n:'Itens vendidos',     fmt:'int',   dica:'soma das quantidades dos itens'},
+ {id:'nclientes',n:'Clientes atendidos', fmt:'int',   dica:'clientes diferentes no mês'},
+ {id:'cmv',      n:'CMV (R$)',           fmt:'money', dica:'custo das mercadorias que saíram por venda'},
+ {id:'cmvPct',   n:'CMV (%)',            fmt:'pct',   dica:'custo dividido pelo faturamento'},
+ {id:'margem',   n:'Margem bruta (%)',   fmt:'pct',   dica:'quanto sobra depois do custo da mercadoria'},
+ {id:'desc',     n:'Descontos',          fmt:'money', dica:'descontos e cupons concedidos'},
+ {id:'taxa',     n:'Taxa de entrega',    fmt:'money', dica:'taxas cobradas nas entregas'}
+];
+var MESES=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+function fmtM(v,tipo){
+  if(tipo==='money')return 'R$ '+money(v);
+  if(tipo==='pct')return (Number(v)||0).toFixed(1).replace('.',',')+'%';
+  return fmtQt(Math.round(v));
+}
+
+function telaComparativo(){
+  baseMov();
+  var anos=anosComVenda();
+  if(!CA.a2)CA.a2=Number(anos[0]);
+  if(!CA.a1)CA.a1=CA.a2-1;
+  var d1=dadosAno(CA.a1), d2=dadosAno(CA.a2);
+  var met=METRICAS.find(function(x){return x.id===CA.metrica})||METRICAS[0];
+
+  function tot(d,campo){
+    if(campo==='ticket'){
+      var f=d.reduce(function(a,x){return a+x.fat},0),p=d.reduce(function(a,x){return a+x.ped},0);
+      return p?f/p:0;
+    }
+    if(campo==='cmvPct'){
+      var f2=d.reduce(function(a,x){return a+x.fat},0),c=d.reduce(function(a,x){return a+x.cmv},0);
+      return f2?(c/f2*100):0;
+    }
+    if(campo==='margem'){
+      var f3=d.reduce(function(a,x){return a+x.fat},0),c2=d.reduce(function(a,x){return a+x.cmv},0);
+      return f3?((f3-c2)/f3*100):0;
+    }
+    return d.reduce(function(a,x){return a+(Number(x[campo])||0)},0);
+  }
+  function varia(a,b){ if(!a)return b?100:0; return ((b-a)/Math.abs(a))*100; }
+
+  /* gráfico de barras */
+  var vals=[];
+  for(var i=0;i<12;i++){vals.push(d1[i][met.id]||0);vals.push(d2[i][met.id]||0);}
+  var maxV=Math.max.apply(null,vals.concat([1]));
+  var barras='';
+  for(var i2=0;i2<12;i2++){
+    var v1=d1[i2][met.id]||0, v2=d2[i2][met.id]||0;
+    var h1=Math.max(2,(v1/maxV)*150), h2=Math.max(2,(v2/maxV)*150);
+    barras+='<div class="caCol">'+
+      '<div class="caBarras">'+
+       '<div class="caB b1" style="height:'+h1+'px" title="'+CA.a1+' · '+MESES[i2]+': '+fmtM(v1,met.fmt)+'">'+
+        '<span class="caTip">'+CA.a1+'<br>'+fmtM(v1,met.fmt)+'</span></div>'+
+       '<div class="caB b2" style="height:'+h2+'px" title="'+CA.a2+' · '+MESES[i2]+': '+fmtM(v2,met.fmt)+'">'+
+        '<span class="caTip">'+CA.a2+'<br>'+fmtM(v2,met.fmt)+'</span></div>'+
+      '</div><div class="caMes">'+MESES[i2]+'</div></div>';
+  }
+
+  $('content').innerHTML='<div class="etWrap"><div class="etScroll">'+
+   '<div class="etTopo">'+
+    '<div><h1>Comparativo Anual</h1>'+
+    '<p>Compare dois anos mês a mês e veja onde cresceu ou caiu.</p></div>'+
+    '<button class="infoBt" onclick="explicaComparativo()" title="Como este relatório é feito">'+
+     sv('help',15)+'</button>'+
+    '<div style="flex:1"></div>'+
+    '<button class="btnP2" onclick="exportarComparativo()">'+sv('down2',13)+' Exportar</button>'+
+   '</div>'+
+   '<div class="etFiltros">'+
+    '<div class="f2" style="max-width:130px"><label>Ano base</label>'+
+     '<select onchange="CA.a1=Number(this.value);telaComparativo()">'+
+     anos.map(function(a){return '<option value="'+a+'"'+(CA.a1==a?' selected':'')+'>'+a+'</option>'}).join('')+
+     '</select></div>'+
+    '<div class="f2" style="max-width:130px"><label>Comparar com</label>'+
+     '<select onchange="CA.a2=Number(this.value);telaComparativo()">'+
+     anos.map(function(a){return '<option value="'+a+'"'+(CA.a2==a?' selected':'')+'>'+a+'</option>'}).join('')+
+     '</select></div>'+
+    '<div class="f2"><label>Indicador do gráfico</label>'+
+     '<select onchange="CA.metrica=this.value;telaComparativo()">'+
+     METRICAS.map(function(m){return '<option value="'+m.id+'"'+(CA.metrica===m.id?' selected':'')+'>'+m.n+'</option>'}).join('')+
+     '</select></div>'+
+   '</div>'+
+
+   '<div class="caResumo">'+
+   METRICAS.slice(0,6).map(function(m){
+     var t1=tot(d1,m.id), t2=tot(d2,m.id), vr=varia(t1,t2);
+     return '<div class="caCard">'+
+      '<span class="caCardT">'+m.n+'</span>'+
+      '<div class="caCardV"><b>'+fmtM(t2,m.fmt)+'</b>'+
+       '<span class="caVar '+(vr>=0?'sobe':'desce')+'">'+(vr>=0?'▲':'▼')+' '+
+       Math.abs(vr).toFixed(1).replace('.',',')+'%</span></div>'+
+      '<span class="caCardA">'+CA.a1+': '+fmtM(t1,m.fmt)+'</span></div>';
+   }).join('')+
+   '</div>'+
+
+   '<div class="caGraf">'+
+    '<div class="caGrafH">'+E(met.n)+' — '+CA.a1+' contra '+CA.a2+
+     '<span class="caLeg"><i class="b1"></i>'+CA.a1+'<i class="b2"></i>'+CA.a2+'</span></div>'+
+    '<div class="caBox">'+barras+'</div>'+
+   '</div>'+
+
+   '<div class="etTabW plano2"><table class="etTab caTab"><thead><tr>'+
+    '<th style="width:150px">Indicador</th>'+
+    MESES.map(function(m){return '<th style="text-align:right">'+m+'</th>'}).join('')+
+    '<th style="text-align:right;width:120px">Total</th></tr></thead><tbody>'+
+    METRICAS.map(function(m){
+      var t1=tot(d1,m.id), t2=tot(d2,m.id), vr=varia(t1,t2);
+      return '<tr class="caGrupo"><td colspan="14"><b>'+m.n+'</b> '+
+        '<small style="color:var(--ink-3)">'+m.dica+'</small></td></tr>'+
+      '<tr><td class="caAno">'+CA.a1+'</td>'+
+       d1.map(function(x){return '<td style="text-align:right">'+fmtM(x[m.id],m.fmt)+'</td>'}).join('')+
+       '<td style="text-align:right"><b>'+fmtM(t1,m.fmt)+'</b></td></tr>'+
+      '<tr><td class="caAno destaque">'+CA.a2+'</td>'+
+       d2.map(function(x,k){
+         var a=d1[k][m.id]||0,b=x[m.id]||0;
+         var v=varia(a,b);
+         return '<td style="text-align:right">'+fmtM(b,m.fmt)+
+           (a||b?'<small class="'+(v>=0?'vg':'vr')+'">'+(v>=0?'+':'')+v.toFixed(0)+'%</small>':'')+'</td>';
+       }).join('')+
+       '<td style="text-align:right"><b>'+fmtM(t2,m.fmt)+'</b>'+
+       '<small class="'+(vr>=0?'vg':'vr')+'">'+(vr>=0?'+':'')+vr.toFixed(1).replace('.',',')+'%</small></td></tr>';
+    }).join('')+
+   '</tbody></table></div>'+
+   '</div></div>';
+  rodape('comparando '+CA.a1+' e '+CA.a2);
+}
+function explicaComparativo(){
+  var h='<div class="mdB"><div class="blk" style="margin:0;max-width:none">'+
+  '<h3>De onde vem cada número</h3>'+
+  '<div class="expList">'+
+   METRICAS.map(function(m){
+     return '<div class="expIt"><b>'+m.n+'</b><span>'+m.dica+'</span></div>';
+   }).join('')+
+  '</div>'+
+  '<div class="hint" style="margin-top:14px;line-height:1.7">'+
+   '<b>Fontes:</b> os pedidos vêm do PDV (tabela de pedidos), considerando apenas os '+
+   'não cancelados. O CMV vem das movimentações de estoque com origem em venda, usando o '+
+   'custo médio de cada item no momento da baixa.<br><br>'+
+   '<b>O que não entra:</b> pedidos cancelados, perdas de produção, ajustes de contagem '+
+   'e movimentações manuais de estoque. Esses aparecem nos relatórios próprios.<br><br>'+
+   '<b>Período:</b> a data considerada é a da venda, não a do pagamento.'+
+  '</div></div></div>';
+  var o=document.createElement('div');o.className='mdOv';o.id='mdOv';
+  o.innerHTML='<div class="mdBox lg"><div class="mdH"><b>Como este relatório é feito</b>'+
+   '<button onclick="fecharModal()">&times;</button></div>'+h+
+   '<div class="mdF"><button class="btnP2" onclick="fecharModal()">Fechar</button></div></div>';
+  document.body.appendChild(o);
+  fecharSoForaDeVerdade(o);
+}
+function exportarComparativo(){
+  var d1=dadosAno(CA.a1), d2=dadosAno(CA.a2);
+  var l=[['Indicador','Ano'].concat(MESES).concat(['Total'])];
+  METRICAS.forEach(function(m){
+    [[CA.a1,d1],[CA.a2,d2]].forEach(function(par){
+      var linha=[m.n,par[0]];
+      var t=0;
+      par[1].forEach(function(x){linha.push(String(x[m.id]||0).replace('.',','));t+=Number(x[m.id])||0;});
+      linha.push(String(t.toFixed(2)).replace('.',','));
+      l.push(linha);
+    });
+  });
+  var csv=l.map(function(r){return r.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"'}).join(';')}).join('\n');
+  var b=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(b);
+  a.download='nexor-comparativo-'+CA.a1+'-'+CA.a2+'.csv';
+  document.body.appendChild(a);a.click();setTimeout(function(){a.remove()},400);
+  toast('Comparativo exportado.');
 }
 
 /* ---------- POPUP E MODAL ---------- */
