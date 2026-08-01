@@ -2266,6 +2266,48 @@ tbody td small{font-size:10.5px}
 .row3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:800px){.row3{grid-template-columns:1fr}}
 
+/* ---------- configuração do DRE em duas colunas ---------- */
+.cfgFaixa{display:flex;gap:10px;align-items:flex-end;padding:12px 16px;background:var(--panel);
+  border-bottom:1px solid var(--line);flex-wrap:wrap}
+.cfgF{display:flex;flex-direction:column;gap:3px;min-width:190px}
+.cfgF.peq{min-width:112px}
+.cfgF label{font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em}
+.cfgF select,.cfgF input{height:32px;border:1px solid var(--line);border-radius:6px;padding:0 9px;
+  font-size:12.5px;background:#fff;outline:none}
+.cfgF select:focus,.cfgF input:focus{border-color:var(--acc)}
+.cfgDica{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink-3);padding-bottom:8px}
+.alertaCfg,.okCfg{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;
+  padding:6px 11px;border-radius:6px}
+.alertaCfg{background:var(--amber-soft);color:#8A5A08;border:1px solid #E8CFA0}
+.okCfg{background:var(--acc-soft);color:var(--acc-d);border:1px solid var(--acc)}
+.cfgDuas{display:flex;gap:12px;padding:14px 16px;align-items:flex-start;flex:1;min-height:0}
+.cfgCol{flex:1;min-width:0;background:#fff;border:1px solid var(--line);border-radius:8px;
+  display:flex;flex-direction:column;overflow:hidden}
+.cfgCol.estreita{width:330px;flex:none}
+.colH{display:flex;align-items:center;gap:8px;padding:9px 14px;background:var(--alt);
+  border-bottom:1px solid var(--line-2);font-size:11px;font-weight:700;color:var(--ink-2);
+  text-transform:uppercase;letter-spacing:.05em}
+.colH .cnt2{margin-left:auto}
+.colB{overflow-y:auto;max-height:calc(100vh - 300px)}
+.cfgDreTab tr.semRub td{background:#FFFBF2}
+.cfgDreTab tr.semRub select{border-color:#E8CFA0}
+/* prévia */
+.previaDre{font-size:11.5px}
+.previaDre td{padding:5px 10px;border-bottom:1px solid var(--line-2);vertical-align:top}
+.previaDre .pC{width:42px;color:var(--ink-3);font-family:ui-monospace,Menlo,monospace;font-size:10px}
+.previaDre .pN{font-weight:600;color:var(--ink-2)}
+.previaDre small{display:block;font-weight:400;font-size:10.5px;margin-top:2px;line-height:1.45}
+.previaDre .pAuto{color:var(--acc-d)}
+.previaDre .pIt{color:var(--ink-3)}
+.previaDre .pVazio{color:#C4A05A;font-style:italic}
+.previaDre tr.pTot td{background:var(--acc-soft);color:var(--acc-d)}
+.previaDre tr.pRes td{background:#EEF3F7}
+.previaDre tr.pFin td{background:var(--deep);color:#fff}
+.previaDre tr.pFin .pC{color:rgba(255,255,255,.6)}
+.previaDre tr.pFin .pN{color:#fff}
+.bfAtalhos button.on2{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+@media(max-width:1100px){.cfgDuas{flex-direction:column}.cfgCol.estreita{width:100%}}
+
 @media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
 
 /* ---------- caixa de confirmação ---------- */
@@ -2407,6 +2449,48 @@ tbody td small{font-size:10.5px}
 .cfgAcoes{display:flex;justify-content:flex-end;padding:0 0 20px}
 .row3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:800px){.row3{grid-template-columns:1fr}}
+
+/* ---------- configuração do DRE em duas colunas ---------- */
+.cfgFaixa{display:flex;gap:10px;align-items:flex-end;padding:12px 16px;background:var(--panel);
+  border-bottom:1px solid var(--line);flex-wrap:wrap}
+.cfgF{display:flex;flex-direction:column;gap:3px;min-width:190px}
+.cfgF.peq{min-width:112px}
+.cfgF label{font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em}
+.cfgF select,.cfgF input{height:32px;border:1px solid var(--line);border-radius:6px;padding:0 9px;
+  font-size:12.5px;background:#fff;outline:none}
+.cfgF select:focus,.cfgF input:focus{border-color:var(--acc)}
+.cfgDica{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink-3);padding-bottom:8px}
+.alertaCfg,.okCfg{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;
+  padding:6px 11px;border-radius:6px}
+.alertaCfg{background:var(--amber-soft);color:#8A5A08;border:1px solid #E8CFA0}
+.okCfg{background:var(--acc-soft);color:var(--acc-d);border:1px solid var(--acc)}
+.cfgDuas{display:flex;gap:12px;padding:14px 16px;align-items:flex-start;flex:1;min-height:0}
+.cfgCol{flex:1;min-width:0;background:#fff;border:1px solid var(--line);border-radius:8px;
+  display:flex;flex-direction:column;overflow:hidden}
+.cfgCol.estreita{width:330px;flex:none}
+.colH{display:flex;align-items:center;gap:8px;padding:9px 14px;background:var(--alt);
+  border-bottom:1px solid var(--line-2);font-size:11px;font-weight:700;color:var(--ink-2);
+  text-transform:uppercase;letter-spacing:.05em}
+.colH .cnt2{margin-left:auto}
+.colB{overflow-y:auto;max-height:calc(100vh - 300px)}
+.cfgDreTab tr.semRub td{background:#FFFBF2}
+.cfgDreTab tr.semRub select{border-color:#E8CFA0}
+/* prévia */
+.previaDre{font-size:11.5px}
+.previaDre td{padding:5px 10px;border-bottom:1px solid var(--line-2);vertical-align:top}
+.previaDre .pC{width:42px;color:var(--ink-3);font-family:ui-monospace,Menlo,monospace;font-size:10px}
+.previaDre .pN{font-weight:600;color:var(--ink-2)}
+.previaDre small{display:block;font-weight:400;font-size:10.5px;margin-top:2px;line-height:1.45}
+.previaDre .pAuto{color:var(--acc-d)}
+.previaDre .pIt{color:var(--ink-3)}
+.previaDre .pVazio{color:#C4A05A;font-style:italic}
+.previaDre tr.pTot td{background:var(--acc-soft);color:var(--acc-d)}
+.previaDre tr.pRes td{background:#EEF3F7}
+.previaDre tr.pFin td{background:var(--deep);color:#fff}
+.previaDre tr.pFin .pC{color:rgba(255,255,255,.6)}
+.previaDre tr.pFin .pN{color:#fff}
+.bfAtalhos button.on2{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+@media(max-width:1100px){.cfgDuas{flex-direction:column}.cfgCol.estreita{width:100%}}
 
 @media(max-width:1000px){.ivGrade{flex-direction:column}.ivAdic{width:100%}}
 
@@ -2632,6 +2716,48 @@ tbody td small{font-size:10.5px}
 .row3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:800px){.row3{grid-template-columns:1fr}}
 
+/* ---------- configuração do DRE em duas colunas ---------- */
+.cfgFaixa{display:flex;gap:10px;align-items:flex-end;padding:12px 16px;background:var(--panel);
+  border-bottom:1px solid var(--line);flex-wrap:wrap}
+.cfgF{display:flex;flex-direction:column;gap:3px;min-width:190px}
+.cfgF.peq{min-width:112px}
+.cfgF label{font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em}
+.cfgF select,.cfgF input{height:32px;border:1px solid var(--line);border-radius:6px;padding:0 9px;
+  font-size:12.5px;background:#fff;outline:none}
+.cfgF select:focus,.cfgF input:focus{border-color:var(--acc)}
+.cfgDica{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink-3);padding-bottom:8px}
+.alertaCfg,.okCfg{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;
+  padding:6px 11px;border-radius:6px}
+.alertaCfg{background:var(--amber-soft);color:#8A5A08;border:1px solid #E8CFA0}
+.okCfg{background:var(--acc-soft);color:var(--acc-d);border:1px solid var(--acc)}
+.cfgDuas{display:flex;gap:12px;padding:14px 16px;align-items:flex-start;flex:1;min-height:0}
+.cfgCol{flex:1;min-width:0;background:#fff;border:1px solid var(--line);border-radius:8px;
+  display:flex;flex-direction:column;overflow:hidden}
+.cfgCol.estreita{width:330px;flex:none}
+.colH{display:flex;align-items:center;gap:8px;padding:9px 14px;background:var(--alt);
+  border-bottom:1px solid var(--line-2);font-size:11px;font-weight:700;color:var(--ink-2);
+  text-transform:uppercase;letter-spacing:.05em}
+.colH .cnt2{margin-left:auto}
+.colB{overflow-y:auto;max-height:calc(100vh - 300px)}
+.cfgDreTab tr.semRub td{background:#FFFBF2}
+.cfgDreTab tr.semRub select{border-color:#E8CFA0}
+/* prévia */
+.previaDre{font-size:11.5px}
+.previaDre td{padding:5px 10px;border-bottom:1px solid var(--line-2);vertical-align:top}
+.previaDre .pC{width:42px;color:var(--ink-3);font-family:ui-monospace,Menlo,monospace;font-size:10px}
+.previaDre .pN{font-weight:600;color:var(--ink-2)}
+.previaDre small{display:block;font-weight:400;font-size:10.5px;margin-top:2px;line-height:1.45}
+.previaDre .pAuto{color:var(--acc-d)}
+.previaDre .pIt{color:var(--ink-3)}
+.previaDre .pVazio{color:#C4A05A;font-style:italic}
+.previaDre tr.pTot td{background:var(--acc-soft);color:var(--acc-d)}
+.previaDre tr.pRes td{background:#EEF3F7}
+.previaDre tr.pFin td{background:var(--deep);color:#fff}
+.previaDre tr.pFin .pC{color:rgba(255,255,255,.6)}
+.previaDre tr.pFin .pN{color:#fff}
+.bfAtalhos button.on2{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+@media(max-width:1100px){.cfgDuas{flex-direction:column}.cfgCol.estreita{width:100%}}
+
 @media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
 
 /* ---------- caixa de confirmação ---------- */
@@ -2773,6 +2899,48 @@ tbody td small{font-size:10.5px}
 .cfgAcoes{display:flex;justify-content:flex-end;padding:0 0 20px}
 .row3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:800px){.row3{grid-template-columns:1fr}}
+
+/* ---------- configuração do DRE em duas colunas ---------- */
+.cfgFaixa{display:flex;gap:10px;align-items:flex-end;padding:12px 16px;background:var(--panel);
+  border-bottom:1px solid var(--line);flex-wrap:wrap}
+.cfgF{display:flex;flex-direction:column;gap:3px;min-width:190px}
+.cfgF.peq{min-width:112px}
+.cfgF label{font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em}
+.cfgF select,.cfgF input{height:32px;border:1px solid var(--line);border-radius:6px;padding:0 9px;
+  font-size:12.5px;background:#fff;outline:none}
+.cfgF select:focus,.cfgF input:focus{border-color:var(--acc)}
+.cfgDica{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink-3);padding-bottom:8px}
+.alertaCfg,.okCfg{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;
+  padding:6px 11px;border-radius:6px}
+.alertaCfg{background:var(--amber-soft);color:#8A5A08;border:1px solid #E8CFA0}
+.okCfg{background:var(--acc-soft);color:var(--acc-d);border:1px solid var(--acc)}
+.cfgDuas{display:flex;gap:12px;padding:14px 16px;align-items:flex-start;flex:1;min-height:0}
+.cfgCol{flex:1;min-width:0;background:#fff;border:1px solid var(--line);border-radius:8px;
+  display:flex;flex-direction:column;overflow:hidden}
+.cfgCol.estreita{width:330px;flex:none}
+.colH{display:flex;align-items:center;gap:8px;padding:9px 14px;background:var(--alt);
+  border-bottom:1px solid var(--line-2);font-size:11px;font-weight:700;color:var(--ink-2);
+  text-transform:uppercase;letter-spacing:.05em}
+.colH .cnt2{margin-left:auto}
+.colB{overflow-y:auto;max-height:calc(100vh - 300px)}
+.cfgDreTab tr.semRub td{background:#FFFBF2}
+.cfgDreTab tr.semRub select{border-color:#E8CFA0}
+/* prévia */
+.previaDre{font-size:11.5px}
+.previaDre td{padding:5px 10px;border-bottom:1px solid var(--line-2);vertical-align:top}
+.previaDre .pC{width:42px;color:var(--ink-3);font-family:ui-monospace,Menlo,monospace;font-size:10px}
+.previaDre .pN{font-weight:600;color:var(--ink-2)}
+.previaDre small{display:block;font-weight:400;font-size:10.5px;margin-top:2px;line-height:1.45}
+.previaDre .pAuto{color:var(--acc-d)}
+.previaDre .pIt{color:var(--ink-3)}
+.previaDre .pVazio{color:#C4A05A;font-style:italic}
+.previaDre tr.pTot td{background:var(--acc-soft);color:var(--acc-d)}
+.previaDre tr.pRes td{background:#EEF3F7}
+.previaDre tr.pFin td{background:var(--deep);color:#fff}
+.previaDre tr.pFin .pC{color:rgba(255,255,255,.6)}
+.previaDre tr.pFin .pN{color:#fff}
+.bfAtalhos button.on2{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+@media(max-width:1100px){.cfgDuas{flex-direction:column}.cfgCol.estreita{width:100%}}
 
 @media(max-width:1000px){
   .lfPeriodo{order:3;width:100%}
@@ -4124,6 +4292,48 @@ tbody td small{font-size:10.5px}
 .row3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:800px){.row3{grid-template-columns:1fr}}
 
+/* ---------- configuração do DRE em duas colunas ---------- */
+.cfgFaixa{display:flex;gap:10px;align-items:flex-end;padding:12px 16px;background:var(--panel);
+  border-bottom:1px solid var(--line);flex-wrap:wrap}
+.cfgF{display:flex;flex-direction:column;gap:3px;min-width:190px}
+.cfgF.peq{min-width:112px}
+.cfgF label{font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em}
+.cfgF select,.cfgF input{height:32px;border:1px solid var(--line);border-radius:6px;padding:0 9px;
+  font-size:12.5px;background:#fff;outline:none}
+.cfgF select:focus,.cfgF input:focus{border-color:var(--acc)}
+.cfgDica{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink-3);padding-bottom:8px}
+.alertaCfg,.okCfg{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;
+  padding:6px 11px;border-radius:6px}
+.alertaCfg{background:var(--amber-soft);color:#8A5A08;border:1px solid #E8CFA0}
+.okCfg{background:var(--acc-soft);color:var(--acc-d);border:1px solid var(--acc)}
+.cfgDuas{display:flex;gap:12px;padding:14px 16px;align-items:flex-start;flex:1;min-height:0}
+.cfgCol{flex:1;min-width:0;background:#fff;border:1px solid var(--line);border-radius:8px;
+  display:flex;flex-direction:column;overflow:hidden}
+.cfgCol.estreita{width:330px;flex:none}
+.colH{display:flex;align-items:center;gap:8px;padding:9px 14px;background:var(--alt);
+  border-bottom:1px solid var(--line-2);font-size:11px;font-weight:700;color:var(--ink-2);
+  text-transform:uppercase;letter-spacing:.05em}
+.colH .cnt2{margin-left:auto}
+.colB{overflow-y:auto;max-height:calc(100vh - 300px)}
+.cfgDreTab tr.semRub td{background:#FFFBF2}
+.cfgDreTab tr.semRub select{border-color:#E8CFA0}
+/* prévia */
+.previaDre{font-size:11.5px}
+.previaDre td{padding:5px 10px;border-bottom:1px solid var(--line-2);vertical-align:top}
+.previaDre .pC{width:42px;color:var(--ink-3);font-family:ui-monospace,Menlo,monospace;font-size:10px}
+.previaDre .pN{font-weight:600;color:var(--ink-2)}
+.previaDre small{display:block;font-weight:400;font-size:10.5px;margin-top:2px;line-height:1.45}
+.previaDre .pAuto{color:var(--acc-d)}
+.previaDre .pIt{color:var(--ink-3)}
+.previaDre .pVazio{color:#C4A05A;font-style:italic}
+.previaDre tr.pTot td{background:var(--acc-soft);color:var(--acc-d)}
+.previaDre tr.pRes td{background:#EEF3F7}
+.previaDre tr.pFin td{background:var(--deep);color:#fff}
+.previaDre tr.pFin .pC{color:rgba(255,255,255,.6)}
+.previaDre tr.pFin .pN{color:#fff}
+.bfAtalhos button.on2{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+@media(max-width:1100px){.cfgDuas{flex-direction:column}.cfgCol.estreita{width:100%}}
+
 @media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
 
 /* ---------- caixa de confirmação ---------- */
@@ -4265,6 +4475,48 @@ tbody td small{font-size:10.5px}
 .cfgAcoes{display:flex;justify-content:flex-end;padding:0 0 20px}
 .row3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:800px){.row3{grid-template-columns:1fr}}
+
+/* ---------- configuração do DRE em duas colunas ---------- */
+.cfgFaixa{display:flex;gap:10px;align-items:flex-end;padding:12px 16px;background:var(--panel);
+  border-bottom:1px solid var(--line);flex-wrap:wrap}
+.cfgF{display:flex;flex-direction:column;gap:3px;min-width:190px}
+.cfgF.peq{min-width:112px}
+.cfgF label{font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em}
+.cfgF select,.cfgF input{height:32px;border:1px solid var(--line);border-radius:6px;padding:0 9px;
+  font-size:12.5px;background:#fff;outline:none}
+.cfgF select:focus,.cfgF input:focus{border-color:var(--acc)}
+.cfgDica{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink-3);padding-bottom:8px}
+.alertaCfg,.okCfg{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;
+  padding:6px 11px;border-radius:6px}
+.alertaCfg{background:var(--amber-soft);color:#8A5A08;border:1px solid #E8CFA0}
+.okCfg{background:var(--acc-soft);color:var(--acc-d);border:1px solid var(--acc)}
+.cfgDuas{display:flex;gap:12px;padding:14px 16px;align-items:flex-start;flex:1;min-height:0}
+.cfgCol{flex:1;min-width:0;background:#fff;border:1px solid var(--line);border-radius:8px;
+  display:flex;flex-direction:column;overflow:hidden}
+.cfgCol.estreita{width:330px;flex:none}
+.colH{display:flex;align-items:center;gap:8px;padding:9px 14px;background:var(--alt);
+  border-bottom:1px solid var(--line-2);font-size:11px;font-weight:700;color:var(--ink-2);
+  text-transform:uppercase;letter-spacing:.05em}
+.colH .cnt2{margin-left:auto}
+.colB{overflow-y:auto;max-height:calc(100vh - 300px)}
+.cfgDreTab tr.semRub td{background:#FFFBF2}
+.cfgDreTab tr.semRub select{border-color:#E8CFA0}
+/* prévia */
+.previaDre{font-size:11.5px}
+.previaDre td{padding:5px 10px;border-bottom:1px solid var(--line-2);vertical-align:top}
+.previaDre .pC{width:42px;color:var(--ink-3);font-family:ui-monospace,Menlo,monospace;font-size:10px}
+.previaDre .pN{font-weight:600;color:var(--ink-2)}
+.previaDre small{display:block;font-weight:400;font-size:10.5px;margin-top:2px;line-height:1.45}
+.previaDre .pAuto{color:var(--acc-d)}
+.previaDre .pIt{color:var(--ink-3)}
+.previaDre .pVazio{color:#C4A05A;font-style:italic}
+.previaDre tr.pTot td{background:var(--acc-soft);color:var(--acc-d)}
+.previaDre tr.pRes td{background:#EEF3F7}
+.previaDre tr.pFin td{background:var(--deep);color:#fff}
+.previaDre tr.pFin .pC{color:rgba(255,255,255,.6)}
+.previaDre tr.pFin .pN{color:#fff}
+.bfAtalhos button.on2{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+@media(max-width:1100px){.cfgDuas{flex-direction:column}.cfgCol.estreita{width:100%}}
 
 @media(max-width:1000px){.ivGrade{flex-direction:column}.ivAdic{width:100%}}
 
@@ -4490,6 +4742,48 @@ tbody td small{font-size:10.5px}
 .row3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:800px){.row3{grid-template-columns:1fr}}
 
+/* ---------- configuração do DRE em duas colunas ---------- */
+.cfgFaixa{display:flex;gap:10px;align-items:flex-end;padding:12px 16px;background:var(--panel);
+  border-bottom:1px solid var(--line);flex-wrap:wrap}
+.cfgF{display:flex;flex-direction:column;gap:3px;min-width:190px}
+.cfgF.peq{min-width:112px}
+.cfgF label{font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em}
+.cfgF select,.cfgF input{height:32px;border:1px solid var(--line);border-radius:6px;padding:0 9px;
+  font-size:12.5px;background:#fff;outline:none}
+.cfgF select:focus,.cfgF input:focus{border-color:var(--acc)}
+.cfgDica{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink-3);padding-bottom:8px}
+.alertaCfg,.okCfg{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;
+  padding:6px 11px;border-radius:6px}
+.alertaCfg{background:var(--amber-soft);color:#8A5A08;border:1px solid #E8CFA0}
+.okCfg{background:var(--acc-soft);color:var(--acc-d);border:1px solid var(--acc)}
+.cfgDuas{display:flex;gap:12px;padding:14px 16px;align-items:flex-start;flex:1;min-height:0}
+.cfgCol{flex:1;min-width:0;background:#fff;border:1px solid var(--line);border-radius:8px;
+  display:flex;flex-direction:column;overflow:hidden}
+.cfgCol.estreita{width:330px;flex:none}
+.colH{display:flex;align-items:center;gap:8px;padding:9px 14px;background:var(--alt);
+  border-bottom:1px solid var(--line-2);font-size:11px;font-weight:700;color:var(--ink-2);
+  text-transform:uppercase;letter-spacing:.05em}
+.colH .cnt2{margin-left:auto}
+.colB{overflow-y:auto;max-height:calc(100vh - 300px)}
+.cfgDreTab tr.semRub td{background:#FFFBF2}
+.cfgDreTab tr.semRub select{border-color:#E8CFA0}
+/* prévia */
+.previaDre{font-size:11.5px}
+.previaDre td{padding:5px 10px;border-bottom:1px solid var(--line-2);vertical-align:top}
+.previaDre .pC{width:42px;color:var(--ink-3);font-family:ui-monospace,Menlo,monospace;font-size:10px}
+.previaDre .pN{font-weight:600;color:var(--ink-2)}
+.previaDre small{display:block;font-weight:400;font-size:10.5px;margin-top:2px;line-height:1.45}
+.previaDre .pAuto{color:var(--acc-d)}
+.previaDre .pIt{color:var(--ink-3)}
+.previaDre .pVazio{color:#C4A05A;font-style:italic}
+.previaDre tr.pTot td{background:var(--acc-soft);color:var(--acc-d)}
+.previaDre tr.pRes td{background:#EEF3F7}
+.previaDre tr.pFin td{background:var(--deep);color:#fff}
+.previaDre tr.pFin .pC{color:rgba(255,255,255,.6)}
+.previaDre tr.pFin .pN{color:#fff}
+.bfAtalhos button.on2{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+@media(max-width:1100px){.cfgDuas{flex-direction:column}.cfgCol.estreita{width:100%}}
+
 @media(max-width:1000px){.vpGrade{flex-direction:column}.vpPizza{width:100%}}
 
 /* ---------- caixa de confirmação ---------- */
@@ -4631,6 +4925,48 @@ tbody td small{font-size:10.5px}
 .cfgAcoes{display:flex;justify-content:flex-end;padding:0 0 20px}
 .row3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:800px){.row3{grid-template-columns:1fr}}
+
+/* ---------- configuração do DRE em duas colunas ---------- */
+.cfgFaixa{display:flex;gap:10px;align-items:flex-end;padding:12px 16px;background:var(--panel);
+  border-bottom:1px solid var(--line);flex-wrap:wrap}
+.cfgF{display:flex;flex-direction:column;gap:3px;min-width:190px}
+.cfgF.peq{min-width:112px}
+.cfgF label{font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em}
+.cfgF select,.cfgF input{height:32px;border:1px solid var(--line);border-radius:6px;padding:0 9px;
+  font-size:12.5px;background:#fff;outline:none}
+.cfgF select:focus,.cfgF input:focus{border-color:var(--acc)}
+.cfgDica{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink-3);padding-bottom:8px}
+.alertaCfg,.okCfg{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;
+  padding:6px 11px;border-radius:6px}
+.alertaCfg{background:var(--amber-soft);color:#8A5A08;border:1px solid #E8CFA0}
+.okCfg{background:var(--acc-soft);color:var(--acc-d);border:1px solid var(--acc)}
+.cfgDuas{display:flex;gap:12px;padding:14px 16px;align-items:flex-start;flex:1;min-height:0}
+.cfgCol{flex:1;min-width:0;background:#fff;border:1px solid var(--line);border-radius:8px;
+  display:flex;flex-direction:column;overflow:hidden}
+.cfgCol.estreita{width:330px;flex:none}
+.colH{display:flex;align-items:center;gap:8px;padding:9px 14px;background:var(--alt);
+  border-bottom:1px solid var(--line-2);font-size:11px;font-weight:700;color:var(--ink-2);
+  text-transform:uppercase;letter-spacing:.05em}
+.colH .cnt2{margin-left:auto}
+.colB{overflow-y:auto;max-height:calc(100vh - 300px)}
+.cfgDreTab tr.semRub td{background:#FFFBF2}
+.cfgDreTab tr.semRub select{border-color:#E8CFA0}
+/* prévia */
+.previaDre{font-size:11.5px}
+.previaDre td{padding:5px 10px;border-bottom:1px solid var(--line-2);vertical-align:top}
+.previaDre .pC{width:42px;color:var(--ink-3);font-family:ui-monospace,Menlo,monospace;font-size:10px}
+.previaDre .pN{font-weight:600;color:var(--ink-2)}
+.previaDre small{display:block;font-weight:400;font-size:10.5px;margin-top:2px;line-height:1.45}
+.previaDre .pAuto{color:var(--acc-d)}
+.previaDre .pIt{color:var(--ink-3)}
+.previaDre .pVazio{color:#C4A05A;font-style:italic}
+.previaDre tr.pTot td{background:var(--acc-soft);color:var(--acc-d)}
+.previaDre tr.pRes td{background:#EEF3F7}
+.previaDre tr.pFin td{background:var(--deep);color:#fff}
+.previaDre tr.pFin .pC{color:rgba(255,255,255,.6)}
+.previaDre tr.pFin .pN{color:#fff}
+.bfAtalhos button.on2{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+@media(max-width:1100px){.cfgDuas{flex-direction:column}.cfgCol.estreita{width:100%}}
 
 @media(max-width:1000px){
   .lgCard{grid-template-columns:1fr}.lgR{display:none}
@@ -5772,7 +6108,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V4.7.0';
+var VERSAO='V4.7.1';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
@@ -16896,15 +17232,18 @@ function calcularDRE(ano){
 }
 
 /* ---------- TELA DO DRE ---------- */
-var DRE={ano:0,tri:0};
+var DRE={ano:0,tri:0,mes:0};
 function telaDRE(){
   baseMov();baseFormas();
   if(!DRE.ano)DRE.ano=new Date().getFullYear();
   var m=calcularDRE(DRE.ano);
-  var ini=DRE.tri===0?0:(DRE.tri-1)*3;
-  var fim=DRE.tri===0?12:ini+3;
   var cols=[];
-  for(var i=ini;i<fim;i++)cols.push(i);
+  if(DRE.mes){ cols=[DRE.mes-1]; }
+  else{
+    var ini=DRE.tri===0?0:(DRE.tri-1)*3;
+    var fim=DRE.tri===0?12:ini+3;
+    for(var i=ini;i<fim;i++)cols.push(i);
+  }
   var anos=[];
   var ah=new Date().getFullYear();
   for(var a=ah-4;a<=ah+1;a++)anos.push(a);
@@ -16926,14 +17265,21 @@ function telaDRE(){
      '<select onchange="DRE.ano=Number(this.value);telaDRE()">'+
      anos.map(function(a){return '<option value="'+a+'"'+(DRE.ano===a?' selected':'')+'>'+a+'</option>'}).join('')+
      '</select></div>'+
+    '<div class="bfCampo"><label>Mês</label>'+
+     '<select onchange="DRE.mes=Number(this.value);telaDRE()">'+
+     '<option value="0"'+(!DRE.mes?' selected':'')+'>Todos os meses</option>'+
+     MESES_DRE.map(function(nm,k){
+       return '<option value="'+(k+1)+'"'+(DRE.mes===k+1?' selected':'')+'>'+nm+'</option>'}).join('')+
+     '</select></div>'+
     '<div class="bfCampo"><label>Período</label>'+
-     '<select onchange="DRE.tri=Number(this.value);telaDRE()">'+
+     '<select onchange="DRE.tri=Number(this.value);DRE.mes=0;telaDRE()"'+(DRE.mes?' disabled':'')+'>'+
      [[0,'Ano inteiro'],[1,'1º trimestre'],[2,'2º trimestre'],[3,'3º trimestre'],[4,'4º trimestre']]
       .map(function(t){return '<option value="'+t[0]+'"'+(DRE.tri===t[0]?' selected':'')+'>'+t[1]+'</option>'}).join('')+
      '</select></div>'+
     '<div class="bfAtalhos">'+
-     '<button onclick="DRE.tri=0;telaDRE()">Ano</button>'+
-     '<button onclick="DRE.ano='+(new Date().getFullYear()-1)+';telaDRE()">Ano anterior</button>'+
+     '<button class="'+(!DRE.mes&&!DRE.tri?'on2':'')+'" onclick="DRE.tri=0;DRE.mes=0;telaDRE()">Ano</button>'+
+     '<button class="'+(DRE.mes?'on2':'')+'" onclick="DRE.mes='+(new Date().getMonth()+1)+';telaDRE()">Mês atual</button>'+
+     '<button onclick="DRE.ano=DRE.ano-1;telaDRE()">Ano anterior</button>'+
     '</div>'+
     '<div style="flex:1"></div>'+
     '<div class="dreRegime">'+sv('help',12)+' Regime: <b>'+
@@ -16943,7 +17289,7 @@ function telaDRE(){
    '<table class="etTab dreTab"><thead><tr>'+
     '<th style="width:56px">Rubrica</th><th style="width:230px">Elemento</th>'+
     cols.map(function(k){return '<th style="text-align:right" colspan="2">'+MESES_DRE[k]+'</th>'}).join('')+
-    '<th style="text-align:right" colspan="2" class="colAno">Acumulado</th>'+
+    (cols.length>1?'<th style="text-align:right" colspan="2" class="colAno">Acumulado</th>':'')+
    '</tr></thead><tbody>'+
    RUBRICAS.map(function(r){
      var cls=r.t==='sub'?'dreSub':(r.t==='res'?'dreRes':(r.t==='fin'?'dreFin':
@@ -16959,12 +17305,14 @@ function telaDRE(){
         return '<td class="dreV'+(v<0?' neg':'')+'">'+(v?money(v):'—')+'</td>'+
                '<td class="drePc">'+(r.c==='01'?'100%':pc(v,fat))+'</td>';
       }).join('')+
-      '<td class="dreV colAno'+(totAno<0?' neg':'')+'"><b>'+(totAno?money(totAno):'—')+'</b></td>'+
-      '<td class="drePc colAno">'+(r.c==='01'?'100%':pc(totAno,fatAno))+'</td>'+
+      (cols.length>1?
+       '<td class="dreV colAno'+(totAno<0?' neg':'')+'"><b>'+(totAno?money(totAno):'—')+'</b></td>'+
+       '<td class="drePc colAno">'+(r.c==='01'?'100%':pc(totAno,fatAno))+'</td>':'')+
      '</tr>';
    }).join('')+
    '</tbody></table></div></div></div>';
-  rodape('DRE '+DRE.ano+' · regime de '+(cfgDRE().regime==='caixa'?'caixa':'competência'));
+  rodape('DRE '+(DRE.mes?MESES_DRE[DRE.mes-1]+'/':'')+DRE.ano+' · regime de '+
+    (cfgDRE().regime==='caixa'?'caixa':'competência'));
 }
 function dicaRub(ev,c){
   ev.stopPropagation();fecharPops();
@@ -17013,93 +17361,125 @@ function telaCfgDRE(){
   baseMov();
   var c=cfgDRE();
   var cats=catsFin();
-  var opts=RUBRICAS.filter(function(r){return r.t!=='res'&&r.t!=='fin'&&r.c!=='01'&&r.c!=='04'&&r.c!=='11'&&r.c!=='14'});
-  $('content').innerHTML='<div class="finWrap" style="max-width:1000px">'+
-   '<div class="finTop"><div><h1>Configuração do DRE</h1>'+
-   '<p>Diga para onde vai cada categoria financeira e como o resultado é apurado.</p></div>'+
-   '<button class="btnP2 ok" onclick="abrir(\'relatorios\',\'dre\')">'+sv('file',13)+' Ver o DRE</button></div>'+
+  var opts=RUBRICAS.filter(function(r){return r.t!=='res'&&r.t!=='fin'&&
+    r.c!=='01'&&r.c!=='04'&&r.c!=='11'&&r.c!=='14'});
+  var semRub=cats.filter(function(x){return !c.mapa[x.id]&&c.fora.indexOf(x.id)<0}).length;
 
-   '<div class="cfgCard"><div class="h"><div class="ic2">'+sv('gear2',16)+'</div>'+
-   '<div><b>Como apurar</b><span>define em que mês cada lançamento entra</span></div></div>'+
-   '<div class="b"><div class="row2">'+
-    '<div class="fld2" style="margin:0"><label>Regime</label>'+
-     '<select id="drRegime">'+
-      '<option value="competencia"'+(c.regime==='competencia'?' selected':'')+'>Competência — pela data de emissão</option>'+
-      '<option value="caixa"'+(c.regime==='caixa'?' selected':'')+'>Caixa — pela data de pagamento</option>'+
-     '</select>'+
-     '<div class="hint">Competência mostra o resultado do mês em que o fato aconteceu. '+
-     'Caixa mostra o dinheiro que efetivamente entrou e saiu.</div></div>'+
-    '<div class="fld2" style="margin:0"><label>Como calcular o CPV</label>'+
-     '<select id="drCpv">'+
-      '<option value="1"'+(c.cpvPorCompra?' selected':'')+'>Pelas compras do mês (notas de entrada)</option>'+
-      '<option value="0"'+(!c.cpvPorCompra?' selected':'')+'>Pelo custo do que foi vendido</option>'+
-     '</select>'+
-     '<div class="hint">Pelas compras é o que você usa hoje: o CPV é tudo que entrou de mercadoria no mês.</div></div>'+
-   '</div></div></div>'+
+  /* agrupa as categorias por rubrica, para ver o DRE se montando */
+  var porRub={};
+  cats.forEach(function(x){
+    if(c.fora.indexOf(x.id)>=0)return;
+    var r=c.mapa[x.id];
+    if(!r)return;
+    porRub[r]=porRub[r]||[];
+    porRub[r].push(x.nome);
+  });
 
-   '<div class="cfgCard"><div class="h"><div class="ic2">'+sv('pct',16)+'</div>'+
-   '<div><b>Percentuais sobre o faturamento</b>'+
-   '<span>preenchidos automaticamente quando não houver lançamento manual</span></div></div>'+
-   '<div class="b"><div class="row3">'+
-    '<div class="fld2" style="margin:0"><label>Impostos (%)</label>'+
-     '<input id="drImp" type="number" step="0.01" value="'+(c.aliqImposto||0)+'"></div>'+
-    '<div class="fld2" style="margin:0"><label>Royalties (%)</label>'+
-     '<input id="drRoy" type="number" step="0.01" value="'+(c.royaltiesPct||0)+'"></div>'+
-    '<div class="fld2" style="margin:0"><label>Fundo de promoção (%)</label>'+
-     '<input id="drFun" type="number" step="0.01" value="'+(c.fundoPct||0)+'"></div>'+
+  $('content').innerHTML='<div class="etWrap"><div class="etScroll">'+
+   '<div class="etTopo">'+
+    '<div><h1>Configuração do DRE</h1>'+
+    '<p>Diga para onde vai cada categoria financeira e como o resultado é apurado.</p></div>'+
+    '<div style="flex:1"></div>'+
+    (semRub?'<span class="alertaCfg">'+sv('help',13)+' '+semRub+' categoria(s) sem rubrica</span>':
+      '<span class="okCfg">'+sv('check',13)+' tudo classificado</span>')+
+    '<button class="btnP2" onclick="salvarCfgDRE()">'+sv('check',13)+' Salvar</button>'+
+    '<button class="btnP2 ok" onclick="abrir(\'relatorios\',\'dre\')">'+sv('file',13)+' Ver o DRE</button>'+
    '</div>'+
-   '<div class="hint" style="margin-top:9px">Deixe em zero se preferir lançar esses valores '+
-   'manualmente no financeiro.</div></div></div>'+
 
-   '<div class="cfgCard"><div class="h"><div class="ic2">'+sv('list',16)+'</div>'+
-   '<div><b>Para onde vai cada categoria</b>'+
-   '<span>'+cats.length+' categoria(s) financeira(s) cadastrada(s)</span></div></div>'+
-   '<div class="b" style="padding:0">'+
-   (cats.length?'<table class="etTab cfgDreTab"><thead><tr>'+
-    '<th>Categoria financeira</th><th style="width:300px">Rubrica no DRE</th>'+
-    '<th style="width:110px;text-align:center">Não entra</th></tr></thead><tbody>'+
-    cats.map(function(x){
-      var fora=c.fora.indexOf(x.id)>=0;
-      return '<tr class="'+(fora?'foraDre':'')+'">'+
-      '<td>'+(x.pai?'<span class="dreP">'+E(x.pai)+' ›</span> ':'')+'<b>'+E(x.nome)+'</b></td>'+
-      '<td><select onchange="setRubrica(\''+x.id+'\',this.value)"'+(fora?' disabled':'')+'>'+
-       '<option value="">— não classificada —</option>'+
-       opts.map(function(r){
-         return '<option value="'+r.c+'"'+(c.mapa[x.id]===r.c?' selected':'')+'>'+
-         r.c+' · '+E(r.n)+'</option>';}).join('')+
-      '</select></td>'+
-      '<td style="text-align:center"><input type="checkbox" onchange="setForaDre(\''+x.id+'\',this.checked)"'+
-       (fora?' checked':'')+'></td></tr>';
-    }).join('')+'</tbody></table>'
-   :'<div class="hint" style="padding:16px">Cadastre as categorias em Gestão Financeira › '+
-    'Categorias Financeiras para classificá-las aqui.</div>')+
-   '</div></div>'+
+   '<div class="cfgFaixa">'+
+    '<div class="cfgF"><label>Regime de apuração</label>'+
+     '<select id="drRegime">'+
+      '<option value="competencia"'+(c.regime==='competencia'?' selected':'')+'>Competência — data de emissão</option>'+
+      '<option value="caixa"'+(c.regime==='caixa'?' selected':'')+'>Caixa — data de pagamento</option>'+
+     '</select></div>'+
+    '<div class="cfgF"><label>Cálculo do CPV</label>'+
+     '<select id="drCpv">'+
+      '<option value="1"'+(c.cpvPorCompra?' selected':'')+'>Compras do mês (notas de entrada)</option>'+
+      '<option value="0"'+(!c.cpvPorCompra?' selected':'')+'>Custo do que foi vendido</option>'+
+     '</select></div>'+
+    '<div class="cfgF peq"><label>Impostos %</label>'+
+     '<input id="drImp" type="number" step="0.01" value="'+(c.aliqImposto||0)+'"></div>'+
+    '<div class="cfgF peq"><label>Royalties %</label>'+
+     '<input id="drRoy" type="number" step="0.01" value="'+(c.royaltiesPct||0)+'"></div>'+
+    '<div class="cfgF peq"><label>Fundo promoção %</label>'+
+     '<input id="drFun" type="number" step="0.01" value="'+(c.fundoPct||0)+'"></div>'+
+    '<div class="cfgDica">'+sv('help',12)+' Percentuais em zero: os valores vêm dos lançamentos manuais.</div>'+
+   '</div>'+
 
-   '<div class="cfgAcoes"><button class="btnP2 ok" onclick="salvarCfgDRE()">'+
-    sv('check',13)+' Salvar configuração</button></div>'+
-   '</div>';
-  rodape(cats.length+' categorias');
+   '<div class="cfgDuas">'+
+    '<div class="cfgCol">'+
+     '<div class="colH">Categorias financeiras'+
+      '<span class="cnt2">'+cats.length+'</span></div>'+
+     '<div class="colB">'+
+     (cats.length?'<table class="etTab cfgDreTab"><thead><tr>'+
+      '<th>Categoria</th><th style="width:240px">Rubrica no DRE</th>'+
+      '<th style="width:62px;text-align:center">Fora</th></tr></thead><tbody>'+
+      cats.map(function(x){
+        var fora=c.fora.indexOf(x.id)>=0;
+        var sem=!c.mapa[x.id]&&!fora;
+        return '<tr class="'+(fora?'foraDre':'')+(sem?' semRub':'')+'">'+
+        '<td>'+(x.pai?'<span class="dreP">'+E(x.pai)+' › </span>':'')+'<b>'+E(x.nome)+'</b></td>'+
+        '<td><select onchange="setRubrica(\''+x.id+'\',this.value)"'+(fora?' disabled':'')+'>'+
+         '<option value="">— escolha —</option>'+
+         opts.map(function(r){
+           return '<option value="'+r.c+'"'+(c.mapa[x.id]===r.c?' selected':'')+'>'+
+           r.c+' · '+E(r.n)+'</option>';}).join('')+
+        '</select></td>'+
+        '<td style="text-align:center"><input type="checkbox" '+
+         'onchange="setForaDre(\''+x.id+'\',this.checked)"'+(fora?' checked':'')+'></td></tr>';
+      }).join('')+'</tbody></table>'
+     :'<div class="hint" style="padding:16px">Cadastre em Gestão Financeira › Categorias Financeiras.</div>')+
+     '</div></div>'+
+
+    '<div class="cfgCol estreita">'+
+     '<div class="colH">Como o DRE vai ficar</div>'+
+     '<div class="colB">'+
+      '<table class="etTab previaDre"><tbody>'+
+      RUBRICAS.filter(function(r){return r.t!=='sub'||r.c==='01.01'}).map(function(r){
+        var itens=porRub[r.c]||[];
+        var auto=(r.c==='01.01'?'vendas do PDV':
+          r.c==='02'?(c.cpvPorCompra?'notas de entrada':'custo das vendas'):
+          r.c==='05'?'taxas das formas de pagamento':
+          (r.c==='03'&&c.aliqImposto)?c.aliqImposto+'% do faturamento':
+          (r.c==='04'&&(c.royaltiesPct||c.fundoPct))?'% do faturamento':'');
+        var cls=r.t==='res'?'pRes':(r.t==='fin'?'pFin':(r.t==='tot'?'pTot':''));
+        return '<tr class="'+cls+'"><td class="pC">'+r.c+'</td>'+
+        '<td class="pN">'+E(r.n)+
+         (auto?'<small class="pAuto">'+sv('check',9)+' '+E(auto)+'</small>':'')+
+         (itens.length?'<small class="pIt">'+itens.map(E).join(' · ')+'</small>':'')+
+         (!auto&&!itens.length&&r.t!=='res'&&r.t!=='fin'&&r.t!=='tot'
+           ?'<small class="pVazio">sem categoria apontada</small>':'')+
+        '</td></tr>';
+      }).join('')+'</tbody></table>'+
+     '</div></div>'+
+   '</div></div></div>';
+  rodape(cats.length+' categorias · '+(semRub?semRub+' sem rubrica':'todas classificadas'));
 }
 function setRubrica(id,v){
+  guardarCamposDRE();
   var c=cfgDRE();
   if(v)c.mapa[id]=v; else delete c.mapa[id];
-  salvar();
+  salvar();telaCfgDRE();
 }
 function setForaDre(id,v){
+  guardarCamposDRE();
   var c=cfgDRE();
   var i=c.fora.indexOf(id);
   if(v&&i<0)c.fora.push(id);
   if(!v&&i>=0)c.fora.splice(i,1);
   salvar();telaCfgDRE();
 }
-function salvarCfgDRE(){
+function guardarCamposDRE(){
   var c=cfgDRE();
-  c.regime=$('drRegime').value;
-  c.cpvPorCompra=$('drCpv').value==='1';
-  c.aliqImposto=parseFloat($('drImp').value)||0;
-  c.royaltiesPct=parseFloat($('drRoy').value)||0;
-  c.fundoPct=parseFloat($('drFun').value)||0;
-  salvar();
+  if($('drRegime'))c.regime=$('drRegime').value;
+  if($('drCpv'))c.cpvPorCompra=$('drCpv').value==='1';
+  if($('drImp'))c.aliqImposto=parseFloat($('drImp').value)||0;
+  if($('drRoy'))c.royaltiesPct=parseFloat($('drRoy').value)||0;
+  if($('drFun'))c.fundoPct=parseFloat($('drFun').value)||0;
+}
+function salvarCfgDRE(){
+  guardarCamposDRE();
+  salvar();telaCfgDRE();
   toast('Configuração do DRE salva.');
 }
 
