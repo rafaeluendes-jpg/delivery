@@ -1,14 +1,5 @@
-# Nexor
+# Jolô Delivery — cardápio digital
 
-Sistema de gestão para food service e franquias.
-Arquivo único em HTML, dados no Supabase, sincronização em tempo real.
+Página pública de pedidos. Lê os produtos do banco e grava o pedido direto no sistema.
 
-## Módulos
-- Gestão de Cardápio
-- PDV com kanban e frente de caixa
-- Gestão Financeira
-- Gestão de Clientes
-- Gestão de Estoque: ficha técnica, ingredientes, movimentação, estoque total, contagem, histórico e notas de entrada
-
-## Publicação
-O Netlify publica sozinho a cada envio para este repositório.
+Endereço: https://jolo-delivery.github.io/cardapio/
