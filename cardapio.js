@@ -532,7 +532,7 @@ async function enviarPedido(taxa,tot){
       tipo:S.tipo,forma_pagamento:cl.pag,troco_para:cl.troco||0,
       itens:S.sacola,subtotal:sub,taxa:taxa,total:tot,
       observacao:cl.obs,canal:'cardapio'
-    }]).select();
+    }]);
     if(r.error)throw r.error;
     evento('Purchase',{value:tot,currency:'BRL',num_items:S.sacola.length});
     S.sacola=[];salvarLocal();
