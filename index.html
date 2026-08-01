@@ -2072,6 +2072,49 @@ tbody td small{font-size:10.5px}
   font-weight:600;color:var(--acc-d);text-transform:none;letter-spacing:0}
 .fTodos:hover{text-decoration:underline}
 
+/* ---------- barra única de filtros ---------- */
+.barraF{display:flex;align-items:flex-end;gap:9px;padding:11px 16px;background:var(--panel);
+  border-bottom:1px solid var(--line);flex-wrap:wrap}
+.bfCampo{display:flex;flex-direction:column;gap:3px}
+.bfCampo.cresce{flex:1;min-width:150px}
+.bfCampo label{font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em}
+.bfCampo input,.bfCampo select{height:32px;border:1px solid var(--line);border-radius:6px;padding:0 9px;
+  outline:none;font-size:12.5px;background:#fff;min-width:120px}
+.bfCampo input:focus,.bfCampo select:focus{border-color:var(--acc)}
+.bfAtalhos{display:flex;gap:4px;padding-bottom:1px}
+.bfAtalhos button{height:32px;padding:0 10px;border:1px solid var(--line);border-radius:6px;
+  background:#fff;cursor:pointer;font-size:11.5px;color:var(--ink-2)}
+.bfAtalhos button:hover{border-color:var(--acc);color:var(--acc-d)}
+.bfAtalhos button.lim{color:var(--red);border-color:#F0C4C4}
+.smWrap{position:relative;display:flex;flex-direction:column;gap:3px}
+.smWrap label{font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em}
+.smBt{display:flex;align-items:center;gap:8px;height:32px;padding:0 10px;border:1px solid var(--line);
+  border-radius:6px;background:#fff;cursor:pointer;font-size:12.5px;color:var(--ink-2);min-width:140px}
+.smBt span{flex:1;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.smBt:hover{border-color:var(--acc)}
+.smBt.on{border-color:var(--acc);background:var(--acc-soft);color:var(--acc-d);font-weight:600}
+.smPop{position:absolute;top:calc(100% + 5px);left:0;z-index:60;background:#fff;
+  border:1px solid var(--line);border-radius:8px;box-shadow:var(--sh2);min-width:230px;overflow:hidden}
+.smPopH{display:flex;align-items:center;padding:8px 11px;background:var(--alt);
+  border-bottom:1px solid var(--line-2);font-size:10px;font-weight:700;color:var(--ink-3);
+  text-transform:uppercase;letter-spacing:.05em}
+.smPopH button{margin-left:auto;border:none;background:none;cursor:pointer;font-size:10.5px;
+  font-weight:600;color:var(--acc-d);text-transform:none;letter-spacing:0}
+.smPopL{max-height:280px;overflow-y:auto;padding:4px}
+.smIt{display:flex;align-items:center;gap:8px;padding:6px 9px;border-radius:5px;cursor:pointer;font-size:12.5px}
+.smIt:hover{background:var(--alt)}
+.smIt.on{background:var(--acc-soft);color:var(--acc-d);font-weight:600}
+.smIt span{flex:1}
+.smIt i{font-style:normal;font-size:10px;color:var(--ink-3);background:var(--alt);border-radius:9px;padding:0 6px}
+
+.bfRapido{display:flex;gap:5px;padding-bottom:1px;align-self:flex-end}
+.bfRapido button{display:flex;align-items:center;gap:5px;height:32px;padding:0 11px;
+  border:1px solid var(--line);border-radius:6px;background:#fff;cursor:pointer;
+  font-size:11.5px;font-weight:600;color:var(--ink-2)}
+.bfRapido button:hover{border-color:var(--acc);color:var(--acc-d)}
+.bfRapido button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.bfRapido button svg{opacity:.8}
+
 @media(max-width:1000px){.ivGrade{flex-direction:column}.ivAdic{width:100%}}
 
 .chip.vazio{opacity:.55}
@@ -2102,6 +2145,49 @@ tbody td small{font-size:10.5px}
 .fTodos{margin-left:auto;border:none;background:none;cursor:pointer;font-size:10.5px;
   font-weight:600;color:var(--acc-d);text-transform:none;letter-spacing:0}
 .fTodos:hover{text-decoration:underline}
+
+/* ---------- barra única de filtros ---------- */
+.barraF{display:flex;align-items:flex-end;gap:9px;padding:11px 16px;background:var(--panel);
+  border-bottom:1px solid var(--line);flex-wrap:wrap}
+.bfCampo{display:flex;flex-direction:column;gap:3px}
+.bfCampo.cresce{flex:1;min-width:150px}
+.bfCampo label{font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em}
+.bfCampo input,.bfCampo select{height:32px;border:1px solid var(--line);border-radius:6px;padding:0 9px;
+  outline:none;font-size:12.5px;background:#fff;min-width:120px}
+.bfCampo input:focus,.bfCampo select:focus{border-color:var(--acc)}
+.bfAtalhos{display:flex;gap:4px;padding-bottom:1px}
+.bfAtalhos button{height:32px;padding:0 10px;border:1px solid var(--line);border-radius:6px;
+  background:#fff;cursor:pointer;font-size:11.5px;color:var(--ink-2)}
+.bfAtalhos button:hover{border-color:var(--acc);color:var(--acc-d)}
+.bfAtalhos button.lim{color:var(--red);border-color:#F0C4C4}
+.smWrap{position:relative;display:flex;flex-direction:column;gap:3px}
+.smWrap label{font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em}
+.smBt{display:flex;align-items:center;gap:8px;height:32px;padding:0 10px;border:1px solid var(--line);
+  border-radius:6px;background:#fff;cursor:pointer;font-size:12.5px;color:var(--ink-2);min-width:140px}
+.smBt span{flex:1;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.smBt:hover{border-color:var(--acc)}
+.smBt.on{border-color:var(--acc);background:var(--acc-soft);color:var(--acc-d);font-weight:600}
+.smPop{position:absolute;top:calc(100% + 5px);left:0;z-index:60;background:#fff;
+  border:1px solid var(--line);border-radius:8px;box-shadow:var(--sh2);min-width:230px;overflow:hidden}
+.smPopH{display:flex;align-items:center;padding:8px 11px;background:var(--alt);
+  border-bottom:1px solid var(--line-2);font-size:10px;font-weight:700;color:var(--ink-3);
+  text-transform:uppercase;letter-spacing:.05em}
+.smPopH button{margin-left:auto;border:none;background:none;cursor:pointer;font-size:10.5px;
+  font-weight:600;color:var(--acc-d);text-transform:none;letter-spacing:0}
+.smPopL{max-height:280px;overflow-y:auto;padding:4px}
+.smIt{display:flex;align-items:center;gap:8px;padding:6px 9px;border-radius:5px;cursor:pointer;font-size:12.5px}
+.smIt:hover{background:var(--alt)}
+.smIt.on{background:var(--acc-soft);color:var(--acc-d);font-weight:600}
+.smIt span{flex:1}
+.smIt i{font-style:normal;font-size:10px;color:var(--ink-3);background:var(--alt);border-radius:9px;padding:0 6px}
+
+.bfRapido{display:flex;gap:5px;padding-bottom:1px;align-self:flex-end}
+.bfRapido button{display:flex;align-items:center;gap:5px;height:32px;padding:0 11px;
+  border:1px solid var(--line);border-radius:6px;background:#fff;cursor:pointer;
+  font-size:11.5px;font-weight:600;color:var(--ink-2)}
+.bfRapido button:hover{border-color:var(--acc);color:var(--acc-d)}
+.bfRapido button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.bfRapido button svg{opacity:.8}
 
 @media(max-width:1000px){
   .lfPeriodo{order:3;width:100%}
@@ -3259,6 +3345,49 @@ tbody td small{font-size:10.5px}
   font-weight:600;color:var(--acc-d);text-transform:none;letter-spacing:0}
 .fTodos:hover{text-decoration:underline}
 
+/* ---------- barra única de filtros ---------- */
+.barraF{display:flex;align-items:flex-end;gap:9px;padding:11px 16px;background:var(--panel);
+  border-bottom:1px solid var(--line);flex-wrap:wrap}
+.bfCampo{display:flex;flex-direction:column;gap:3px}
+.bfCampo.cresce{flex:1;min-width:150px}
+.bfCampo label{font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em}
+.bfCampo input,.bfCampo select{height:32px;border:1px solid var(--line);border-radius:6px;padding:0 9px;
+  outline:none;font-size:12.5px;background:#fff;min-width:120px}
+.bfCampo input:focus,.bfCampo select:focus{border-color:var(--acc)}
+.bfAtalhos{display:flex;gap:4px;padding-bottom:1px}
+.bfAtalhos button{height:32px;padding:0 10px;border:1px solid var(--line);border-radius:6px;
+  background:#fff;cursor:pointer;font-size:11.5px;color:var(--ink-2)}
+.bfAtalhos button:hover{border-color:var(--acc);color:var(--acc-d)}
+.bfAtalhos button.lim{color:var(--red);border-color:#F0C4C4}
+.smWrap{position:relative;display:flex;flex-direction:column;gap:3px}
+.smWrap label{font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em}
+.smBt{display:flex;align-items:center;gap:8px;height:32px;padding:0 10px;border:1px solid var(--line);
+  border-radius:6px;background:#fff;cursor:pointer;font-size:12.5px;color:var(--ink-2);min-width:140px}
+.smBt span{flex:1;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.smBt:hover{border-color:var(--acc)}
+.smBt.on{border-color:var(--acc);background:var(--acc-soft);color:var(--acc-d);font-weight:600}
+.smPop{position:absolute;top:calc(100% + 5px);left:0;z-index:60;background:#fff;
+  border:1px solid var(--line);border-radius:8px;box-shadow:var(--sh2);min-width:230px;overflow:hidden}
+.smPopH{display:flex;align-items:center;padding:8px 11px;background:var(--alt);
+  border-bottom:1px solid var(--line-2);font-size:10px;font-weight:700;color:var(--ink-3);
+  text-transform:uppercase;letter-spacing:.05em}
+.smPopH button{margin-left:auto;border:none;background:none;cursor:pointer;font-size:10.5px;
+  font-weight:600;color:var(--acc-d);text-transform:none;letter-spacing:0}
+.smPopL{max-height:280px;overflow-y:auto;padding:4px}
+.smIt{display:flex;align-items:center;gap:8px;padding:6px 9px;border-radius:5px;cursor:pointer;font-size:12.5px}
+.smIt:hover{background:var(--alt)}
+.smIt.on{background:var(--acc-soft);color:var(--acc-d);font-weight:600}
+.smIt span{flex:1}
+.smIt i{font-style:normal;font-size:10px;color:var(--ink-3);background:var(--alt);border-radius:9px;padding:0 6px}
+
+.bfRapido{display:flex;gap:5px;padding-bottom:1px;align-self:flex-end}
+.bfRapido button{display:flex;align-items:center;gap:5px;height:32px;padding:0 11px;
+  border:1px solid var(--line);border-radius:6px;background:#fff;cursor:pointer;
+  font-size:11.5px;font-weight:600;color:var(--ink-2)}
+.bfRapido button:hover{border-color:var(--acc);color:var(--acc-d)}
+.bfRapido button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.bfRapido button svg{opacity:.8}
+
 @media(max-width:1000px){.ivGrade{flex-direction:column}.ivAdic{width:100%}}
 
 .chip.vazio{opacity:.55}
@@ -3289,6 +3418,49 @@ tbody td small{font-size:10.5px}
 .fTodos{margin-left:auto;border:none;background:none;cursor:pointer;font-size:10.5px;
   font-weight:600;color:var(--acc-d);text-transform:none;letter-spacing:0}
 .fTodos:hover{text-decoration:underline}
+
+/* ---------- barra única de filtros ---------- */
+.barraF{display:flex;align-items:flex-end;gap:9px;padding:11px 16px;background:var(--panel);
+  border-bottom:1px solid var(--line);flex-wrap:wrap}
+.bfCampo{display:flex;flex-direction:column;gap:3px}
+.bfCampo.cresce{flex:1;min-width:150px}
+.bfCampo label{font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em}
+.bfCampo input,.bfCampo select{height:32px;border:1px solid var(--line);border-radius:6px;padding:0 9px;
+  outline:none;font-size:12.5px;background:#fff;min-width:120px}
+.bfCampo input:focus,.bfCampo select:focus{border-color:var(--acc)}
+.bfAtalhos{display:flex;gap:4px;padding-bottom:1px}
+.bfAtalhos button{height:32px;padding:0 10px;border:1px solid var(--line);border-radius:6px;
+  background:#fff;cursor:pointer;font-size:11.5px;color:var(--ink-2)}
+.bfAtalhos button:hover{border-color:var(--acc);color:var(--acc-d)}
+.bfAtalhos button.lim{color:var(--red);border-color:#F0C4C4}
+.smWrap{position:relative;display:flex;flex-direction:column;gap:3px}
+.smWrap label{font-size:9.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em}
+.smBt{display:flex;align-items:center;gap:8px;height:32px;padding:0 10px;border:1px solid var(--line);
+  border-radius:6px;background:#fff;cursor:pointer;font-size:12.5px;color:var(--ink-2);min-width:140px}
+.smBt span{flex:1;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.smBt:hover{border-color:var(--acc)}
+.smBt.on{border-color:var(--acc);background:var(--acc-soft);color:var(--acc-d);font-weight:600}
+.smPop{position:absolute;top:calc(100% + 5px);left:0;z-index:60;background:#fff;
+  border:1px solid var(--line);border-radius:8px;box-shadow:var(--sh2);min-width:230px;overflow:hidden}
+.smPopH{display:flex;align-items:center;padding:8px 11px;background:var(--alt);
+  border-bottom:1px solid var(--line-2);font-size:10px;font-weight:700;color:var(--ink-3);
+  text-transform:uppercase;letter-spacing:.05em}
+.smPopH button{margin-left:auto;border:none;background:none;cursor:pointer;font-size:10.5px;
+  font-weight:600;color:var(--acc-d);text-transform:none;letter-spacing:0}
+.smPopL{max-height:280px;overflow-y:auto;padding:4px}
+.smIt{display:flex;align-items:center;gap:8px;padding:6px 9px;border-radius:5px;cursor:pointer;font-size:12.5px}
+.smIt:hover{background:var(--alt)}
+.smIt.on{background:var(--acc-soft);color:var(--acc-d);font-weight:600}
+.smIt span{flex:1}
+.smIt i{font-style:normal;font-size:10px;color:var(--ink-3);background:var(--alt);border-radius:9px;padding:0 6px}
+
+.bfRapido{display:flex;gap:5px;padding-bottom:1px;align-self:flex-end}
+.bfRapido button{display:flex;align-items:center;gap:5px;height:32px;padding:0 11px;
+  border:1px solid var(--line);border-radius:6px;background:#fff;cursor:pointer;
+  font-size:11.5px;font-weight:600;color:var(--ink-2)}
+.bfRapido button:hover{border-color:var(--acc);color:var(--acc-d)}
+.bfRapido button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.bfRapido button svg{opacity:.8}
 
 @media(max-width:1000px){
   .lgCard{grid-template-columns:1fr}.lgR{display:none}
@@ -4428,7 +4600,7 @@ function trocarLoja(id){
   toast('Loja: '+nomeLojaAtual());
 }
 function fecharSuc(){$('sucBox').innerHTML='';}
-var VERSAO='V4.2.0';
+var VERSAO='V4.3.0';
 function rodape(extra){
 $('stat').innerHTML='<span class="live" id="nuvemSt"><i></i>'+(NUVEM.ligada?'Sincronizado com a nuvem':'Salvo neste aparelho')+'</span><span>|</span>'+
 '<span class="soPC">Loja: <b>'+E(nomeLojaAtual())+'</b></span><span class="soPC">|</span>'+
@@ -13934,34 +14106,25 @@ function telaFaturamentoDia(){
     '<button class="btnP2" onclick="imprimirRel(\'Faturamento por Dia\')">'+sv('print2',13)+' PDF</button>'+
     '<button class="btnP2" onclick="exportarFatDia()">'+sv('down2',13)+' Exportar</button>'+
    '</div>'+
-   (function(){
-     var at=[];
-     FD.canais.forEach(function(k){at.push(canais[k]||k)});
-     FD.dias.forEach(function(i){at.push(DIAS_SEM[i])});
-     var corpo=
-      '<div class="fLinha">'+
-       '<div class="f2" style="max-width:160px"><label>Data inicial</label>'+
-        '<input type="date" id="fdDe" value="'+FD.de+'"></div>'+
-       '<div class="f2" style="max-width:160px"><label>Data final</label>'+
-        '<input type="date" id="fdAte" value="'+FD.ate+'"></div>'+
-       '<div class="fAtalhos">'+
-        '<button onclick="perFD(0)">Este mês</button>'+
-        '<button onclick="perFD(-1)">Mês anterior</button>'+
-        '<button onclick="perFD(7)">7 dias</button>'+
-        '<button onclick="perFD(30)">30 dias</button>'+
-       '</div></div>'+
-      '<div class="fCols">'+
-       grupoChips('Canal de origem',
-         Object.keys(canais).map(function(k){return {id:k,nome:canais[k]}}),
-         FD.canais,'togFD','togTodosFD(\'canais\')')+
-       grupoChips('Dias da semana',
-         DIAS_SEM.map(function(d,i){return {id:String(i),nome:d.slice(0,3)}}),
-         FD.dias.map(String),'togFDdia','togTodosFD(\'dias\')')+
-      '</div>';
-     return painelFiltros('fd',corpo,at,
-       'FD.de=$(\'fdDe\').value;FD.ate=$(\'fdAte\').value;telaFaturamentoDia()',
-       'limparFD()');
-   })()+
+   '<div class="barraF">'+
+    '<div class="bfCampo"><label>De</label><input type="date" id="fdDe" value="'+FD.de+'"></div>'+
+    '<div class="bfCampo"><label>Até</label><input type="date" id="fdAte" value="'+FD.ate+'"></div>'+
+    selMulti('fdCanal','Canal',
+      Object.keys(canais).map(function(k){return {id:k,nome:canais[k]}}),
+      FD.canais,'togFD','togTodosFD(\'canais\')')+
+    selMulti('fdDia','Dia da semana',
+      DIAS_SEM.map(function(d,i){return {id:String(i),nome:d}}),
+      FD.dias.map(String),'togFDdia','togTodosFD(\'dias\')')+
+    '<button class="btnP2 ok" onclick="FD.de=$(\'fdDe\').value;FD.ate=$(\'fdAte\').value;telaFaturamentoDia()">'+
+     sv('search',13)+' Buscar</button>'+
+    '<div class="bfAtalhos">'+
+     '<button onclick="perFD(0)">Mês</button>'+
+     '<button onclick="perFD(-1)">Anterior</button>'+
+     '<button onclick="perFD(7)">7d</button>'+
+     '<button onclick="perFD(30)">30d</button>'+
+     (FD.canais.length||FD.dias.length?'<button class="lim" onclick="limparFD()">limpar</button>':'')+
+    '</div>'+
+   '</div>'+
    '<div class="relKpis">'+
     '<div class="rk"><span>Vendas</span><b>'+t.qtd+'</b></div>'+
     '<div class="rk dest"><span>Faturamento</span><b>R$ '+money(t.valor)+'</b></div>'+
@@ -14012,6 +14175,43 @@ function telaFaturamentoDia(){
    '</div></div></div>';
   rodape(linhas.length+' dias · R$ '+money(t.valor));
 }
+/* seletor múltiplo compacto: um botão que abre a lista em menu */
+function selMulti(id,rotulo,itens,arr,onTog,onTodos){
+  var n=arr.length;
+  var txt=!n?'Todos':(n===1
+    ?((itens.find(function(x){return String(x.id)===String(arr[0])})||{}).nome||'1 selecionado')
+    :n+' selecionados');
+  return '<div class="smWrap">'+
+   '<label>'+E(rotulo)+'</label>'+
+   '<button class="smBt'+(n?' on':'')+'" onclick="abreSelMulti(event,\''+id+'\')">'+
+    '<span>'+E(txt)+'</span>'+sv('dn',12)+'</button>'+
+   '<div class="smPop" id="sm-'+id+'" style="display:none">'+
+    '<div class="smPopH">'+E(rotulo)+
+     '<button onclick="'+onTodos+'">'+(n?'limpar':'marcar todos')+'</button></div>'+
+    '<div class="smPopL">'+itens.map(function(x){
+      var on=arr.map(String).indexOf(String(x.id))>=0;
+      return '<label class="smIt'+(on?' on':'')+'">'+
+      '<input type="checkbox"'+(on?' checked':'')+' onchange="'+onTog+'(\''+x.id+'\')">'+
+      '<span>'+E(x.nome)+'</span>'+(x.n?'<i>'+x.n+'</i>':'')+'</label>';
+    }).join('')+'</div></div></div>';
+}
+function abreSelMulti(ev,id){
+  ev.stopPropagation();
+  var el=document.getElementById('sm-'+id);
+  if(!el)return;
+  var abrindo=(el.style.display==='none');
+  var todos=document.querySelectorAll('.smPop');
+  for(var i=0;i<todos.length;i++)todos[i].style.display='none';
+  el.style.display=abrindo?'':'none';
+  if(abrindo)setTimeout(function(){
+    document.addEventListener('click',function fecha(e){
+      if(el.contains(e.target))return;
+      el.style.display='none';
+      document.removeEventListener('click',fecha);
+    });
+  },10);
+}
+
 /* filtros num painel só, que recolhe — e mostra o que está ativo */
 var _filtroAberto={};
 function painelFiltros(chave,html,ativos,onBuscar,onLimpar){
@@ -14164,39 +14364,39 @@ function telaItensConsumidos(){
     '<button class="btnP2" onclick="exportarItensCons()">'+sv('down2',13)+' Exportar</button>'+
    '</div>'+
    (function(){
-     var at=[];
-     IC.motivos.forEach(function(m){at.push(nomeMotivo(m))});
-     if(IC.grupo){var g2=grupoIng(IC.grupo)||catFicha(IC.grupo);if(g2)at.push(g2.nome);}
      var mots=(DB.motivosMov||[]).map(function(m){
        var q=(DB.movEst||[]).filter(function(mv){
          if(mv.motivoId!==m.id)return false;
          var d2=String(mv.data||'').slice(0,10);
          return (!IC.de||d2>=IC.de)&&(!IC.ate||d2<=IC.ate);
        }).length;
-       return {id:m.id,nome:m.nome,n:q||'',vazio:!q,dica:q+' lançamento(s) no período'};
+       return {id:m.id,nome:m.nome,n:q||''};
      });
-     var corpo=
-      '<div class="fLinha">'+
-       '<div class="f2" style="max-width:160px"><label>Data inicial</label>'+
-        '<input type="date" id="icDe" value="'+IC.de+'"></div>'+
-       '<div class="f2" style="max-width:160px"><label>Data final</label>'+
-        '<input type="date" id="icAte" value="'+IC.ate+'"></div>'+
-       '<div class="f2" style="max-width:220px"><label>Grupo</label>'+
-        '<select onchange="IC.grupo=this.value;telaItensConsumidos()">'+
-        '<option value="">Todos os grupos</option>'+
-        (DB.gruposIng||[]).map(function(g){return '<option value="'+g.id+'"'+(IC.grupo===g.id?' selected':'')+'>'+E(g.nome)+'</option>'}).join('')+
-        (DB.fichaCats||[]).map(function(c){return '<option value="'+c.id+'"'+(IC.grupo===c.id?' selected':'')+'>'+E(c.nome)+' (fichas)</option>'}).join('')+
-        '</select></div>'+
-       '<div class="f2"><label>Buscar item</label>'+
-        '<input id="icBusca" value="'+E(IC.busca)+'" placeholder="nome do ingrediente"></div>'+
+     return '<div class="barraF">'+
+      '<div class="bfCampo"><label>De</label><input type="date" id="icDe" value="'+IC.de+'"></div>'+
+      '<div class="bfCampo"><label>Até</label><input type="date" id="icAte" value="'+IC.ate+'"></div>'+
+      selMulti('icMot','Motivo da saída',mots,IC.motivos,'togIC','togTodosIC()')+
+      '<div class="bfRapido">'+
+       '<button class="'+(IC.motivos.length===1&&IC.motivos[0]==='mv_venda'?'on':'')+'" '+
+        'onclick="soMotivo(\'mv_venda\')" title="tudo que saiu pelas vendas no PDV, puxando a ficha técnica de cada produto">'+
+        sv('cart',12)+' Vendas PDV</button>'+
+       '<button class="'+(IC.motivos.length&&IC.motivos.every(function(m){return tipoMotivo(m)==='producao'})?'on':'')+'" '+
+        'onclick="soTipoMotivo(\'producao\')">'+sv('box',12)+' Produção</button>'+
+       '<button class="'+(IC.motivos.length===2&&IC.motivos.indexOf('mv_perdaprod')>=0?'on':'')+'" '+
+        'onclick="soPerdas()">'+sv('dn4',12)+' Perdas</button>'+
       '</div>'+
-      '<div class="fCols">'+
-       grupoChips('Motivo da saída — todos os cadastrados aparecem aqui',
-         mots,IC.motivos,'togIC','togTodosIC()')+
-      '</div>';
-     return painelFiltros('ic',corpo,at,
-       'IC.de=$(\'icDe\').value;IC.ate=$(\'icAte\').value;telaItensConsumidos()',
-       'limparIC()');
+      '<div class="bfCampo"><label>Grupo</label>'+
+       '<select onchange="IC.grupo=this.value;telaItensConsumidos()">'+
+       '<option value="">Todos</option>'+
+       (DB.gruposIng||[]).map(function(g){return '<option value="'+g.id+'"'+(IC.grupo===g.id?' selected':'')+'>'+E(g.nome)+'</option>'}).join('')+
+       (DB.fichaCats||[]).map(function(c){return '<option value="'+c.id+'"'+(IC.grupo===c.id?' selected':'')+'>'+E(c.nome)+'</option>'}).join('')+
+       '</select></div>'+
+      '<div class="bfCampo cresce"><label>Buscar</label>'+
+       '<input id="icBusca" value="'+E(IC.busca)+'" placeholder="nome do ingrediente"></div>'+
+      '<button class="btnP2 ok" onclick="IC.de=$(\'icDe\').value;IC.ate=$(\'icAte\').value;telaItensConsumidos()">'+
+       sv('search',13)+' Buscar</button>'+
+      (IC.motivos.length||IC.grupo?'<button class="btnP2" onclick="limparIC()">Limpar</button>':'')+
+     '</div>';
    })()+
    '<div class="relKpis">'+
     '<div class="rk"><span>Itens diferentes</span><b>'+lista.length+'</b></div>'+
@@ -14233,6 +14433,29 @@ function telaItensConsumidos(){
     var n=$('icBusca');if(n){n.focus();n.setSelectionRange(p,p);}};
   rodape(lista.length+' itens · R$ '+money(total));
 }
+function soMotivo(id){
+  baseMov();
+  if(!(DB.motivosMov||[]).some(function(m){return m.id===id})){
+    DB.motivosMov.push({id:'mv_venda',nome:'Venda frente de caixa',tipo:'saida',
+      sistema:true,ativo:true,lojas:[]});
+    salvar();
+  }
+  IC.motivos=(IC.motivos.length===1&&IC.motivos[0]===id)?[]:[id];
+  telaItensConsumidos();
+}
+function soTipoMotivo(tipo){
+  var ids=(DB.motivosMov||[]).filter(function(m){return m.tipo===tipo}).map(function(m){return m.id});
+  var igual=(IC.motivos.length===ids.length&&ids.every(function(i){return IC.motivos.indexOf(i)>=0}));
+  IC.motivos=igual?[]:ids;
+  telaItensConsumidos();
+}
+function soPerdas(){
+  var ids=(DB.motivosMov||[]).filter(function(m){
+    return /perda|quebra/i.test(m.nome||'')}).map(function(m){return m.id});
+  var igual=(IC.motivos.length===ids.length&&ids.every(function(i){return IC.motivos.indexOf(i)>=0}));
+  IC.motivos=igual?[]:ids;
+  telaItensConsumidos();
+}
 function togIC(k){togFiltro(IC.motivos,k);telaItensConsumidos();}
 function togTodosIC(){
   IC.motivos=IC.motivos.length?[]:(DB.motivosMov||[]).map(function(m){return m.id});
@@ -14245,7 +14468,10 @@ function explicaItensConsumidos(){
    ['Custo por unidade','custo total dividido pela quantidade consumida — é a média real do período'],
    ['Custo total','quantidade que saiu multiplicada pelo custo do item no momento de cada baixa'],
    ['Motivo da saída','filtra por venda, produção, baixa manual, perda ou qualquer motivo cadastrado'],
-   ['% do total','peso daquele item no custo total consumido no período']
+   ['% do total','peso daquele item no custo total consumido no período'],
+   ['Vendas PDV','mostra tudo que saiu pelas vendas: ao vender um cascão, o sistema puxa a '+
+    'ficha técnica dele e baixa gelato, cascão, colher e guardanapo — cada um aparece aqui '+
+    'com a quantidade e o custo do período']
   ],'as movimentações de estoque com direção de saída, no período escolhido. '+
     'O custo usado é o que estava valendo no momento de cada baixa, não o de hoje.',
    'entradas de estoque (compras e produção), itens que não controlam estoque, '+
@@ -14321,40 +14547,27 @@ function telaItensVendidos(){
     '<button class="btnP2" onclick="imprimirRel(\'Itens Vendidos\')">'+sv('print2',13)+' PDF</button>'+
     '<button class="btnP2" onclick="exportarItensVend()">'+sv('down2',13)+' Exportar</button>'+
    '</div>'+
-   (function(){
-     var at=[];
-     IV.canais.forEach(function(k){at.push(canais[k]||k)});
-     IV.cats.forEach(function(c){
-       var cc=(DB.categorias||[]).find(function(x){return x.id===c});
-       if(cc)at.push(cc.nome);});
-     var corpo=
-      '<div class="fLinha">'+
-       '<div class="f2" style="max-width:160px"><label>Data inicial</label>'+
-        '<input type="date" id="ivDe" value="'+IV.de+'"></div>'+
-       '<div class="f2" style="max-width:160px"><label>Data final</label>'+
-        '<input type="date" id="ivAte" value="'+IV.ate+'"></div>'+
-       '<div class="f2"><label>Buscar produto</label>'+
-        '<input id="ivBusca" value="'+E(IV.busca)+'" placeholder="nome do produto ou categoria"></div>'+
-       '<div class="fAtalhos">'+
-        '<button onclick="perIV(0)">Este mês</button>'+
-        '<button onclick="perIV(-1)">Mês anterior</button>'+
-        '<button onclick="perIV(7)">7 dias</button>'+
-       '</div></div>'+
-      '<div class="fCols">'+
-       grupoChips('Canal de origem',
-         Object.keys(canais).map(function(k){return {id:k,nome:canais[k]}}),
-         IV.canais,'togIVc','togTodosIV(\'canais\')')+
-       grupoChips('Categorias do cardápio',
-         (DB.categorias||[]).map(function(c){
-           var q=0;
-           (DB.produtos||[]).forEach(function(p){if(p.categoriaId===c.id)q++;});
-           return {id:c.id,nome:c.nome,n:q||''};}),
-         IV.cats,'togIVcat','togTodosIV(\'cats\')')+
-      '</div>';
-     return painelFiltros('iv',corpo,at,
-       'IV.de=$(\'ivDe\').value;IV.ate=$(\'ivAte\').value;telaItensVendidos()',
-       'limparIV()');
-   })()+
+   '<div class="barraF">'+
+    '<div class="bfCampo"><label>De</label><input type="date" id="ivDe" value="'+IV.de+'"></div>'+
+    '<div class="bfCampo"><label>Até</label><input type="date" id="ivAte" value="'+IV.ate+'"></div>'+
+    selMulti('ivCanal','Canal',
+      Object.keys(canais).map(function(k){return {id:k,nome:canais[k]}}),
+      IV.canais,'togIVc','togTodosIV(\'canais\')')+
+    selMulti('ivCat','Categorias',
+      (DB.categorias||[]).map(function(c){
+        var q=0;(DB.produtos||[]).forEach(function(p){if(p.categoriaId===c.id)q++;});
+        return {id:c.id,nome:c.nome,n:q||''};}),
+      IV.cats,'togIVcat','togTodosIV(\'cats\')')+
+    '<div class="bfCampo cresce"><label>Buscar</label>'+
+     '<input id="ivBusca" value="'+E(IV.busca)+'" placeholder="produto ou categoria"></div>'+
+    '<button class="btnP2 ok" onclick="IV.de=$(\'ivDe\').value;IV.ate=$(\'ivAte\').value;telaItensVendidos()">'+
+     sv('search',13)+' Buscar</button>'+
+    '<div class="bfAtalhos">'+
+     '<button onclick="perIV(0)">Mês</button>'+
+     '<button onclick="perIV(-1)">Anterior</button>'+
+     (IV.canais.length||IV.cats.length?'<button class="lim" onclick="limparIV()">limpar</button>':'')+
+    '</div>'+
+   '</div>'+
    '<div class="relKpis">'+
     '<div class="rk"><span>Itens vendidos</span><b>'+fmtQt(totalItens)+'</b></div>'+
     '<div class="rk dest"><span>Faturamento do período</span><b>R$ '+money(totalFat)+'</b></div>'+
