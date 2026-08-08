@@ -170,9 +170,21 @@ function escolherLoja(id){
   render();
   evento('ViewContent',{content_name:S.loja.nome});
 }
+/* O cardapio mostrava TODO produto ativo. O campo "Disponivel em" da
+   Gestao de Cardapio era gravado e ignorado aqui — item marcado so para
+   frente de caixa aparecia para o cliente do mesmo jeito.
+   Agora o cardapio obedece a marcacao, e ela e o unico lugar de decidir.
+   Produto sem nenhuma marcacao continua aparecendo: quem nunca preencheu
+   isso nao pode ficar com o cardapio vazio de uma hora para outra. */
+function noCardapio(p){
+  var d=p.disponivel||{};
+  var algum=d.pdv||d.delivery||d.online||d.cardapio;
+  if(!algum)return p.disponivel_delivery!==false;
+  return !!(d.cardapio||d.online||d.delivery);
+}
 function prodsDaLoja(){
   return D.prods.filter(function(p){
-    return p.ativo!==false && p.disponivel_delivery!==false;
+    return p.ativo!==false && noCardapio(p);
   });
 }
 function formasAceitas(){
