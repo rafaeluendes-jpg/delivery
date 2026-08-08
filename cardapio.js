@@ -6,7 +6,23 @@ var SB_KEY='sb_publishable_tH04wQWnUjOUQWePZ0Bshw_RirDPUDY';
 var sb=window.supabase.createClient(SB_URL,SB_KEY);
 
 var D={lojas:[],cats:[],prods:[],grupos:[],opcoes:[],areas:[],formas:[],cfg:{}};
-var S={loja:null,cat:null,sacola:[],tela:'lojas',prod:null,cliente:{},tipo:'entrega'};
+var S={loja:null,cat:null,sacola:[],tela:'lojas',prod:null,cliente:{},tipo:'entrega',
+       mesa:null,comanda:''};
+
+/* O QR da mesa aponta para esta mesma pagina com ?mesa=3&loja=xxx.
+   E a mesma vitrine, mas em outro modo: quem esta sentado na mesa nao
+   escolhe entrega, nao digita endereco e nao paga aqui — a conta e da
+   mesa e fecha no caixa. */
+(function lerMesaDoQR(){
+  try{
+    var p=new URLSearchParams(location.search);
+    var m=p.get('mesa');
+    if(m){S.mesa=String(m);S.tipo='mesa';}
+    var l=p.get('loja');
+    if(l)S._lojaQR=l;
+  }catch(e){}
+})();
+function modoMesa(){return !!S.mesa;}
 
 function $(id){return document.getElementById(id)}
 function E(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){
@@ -34,7 +50,11 @@ async function carregar(){
     var lc=lerLocal();
     if(lc.sacola)S.sacola=lc.sacola;
     if(lc.cliente)S.cliente=lc.cliente;
-    if(lc.loja){var l=D.lojas.find(function(x){return x.id===lc.loja});
+    if(S._lojaQR){var lq=D.lojas.find(function(x){return x.id===S._lojaQR});
+      if(lq){S.loja=lq;S.tela='menu';aplicarMarca();}}
+    if(!S.loja&&modoMesa()&&D.lojas.length===1){
+      S.loja=D.lojas[0];S.tela='menu';aplicarMarca();}
+    if(!S.loja&&lc.loja){var l=D.lojas.find(function(x){return x.id===lc.loja});
       if(l){S.loja=l;S.tela='menu';aplicarMarca();}}
     render();
   }catch(e){
@@ -71,6 +91,22 @@ function abertoAgora(){
 function render(){
   if(S.tela==='lojas')return telaLojas();
   telaMenu();
+  pintarFaixaMesa();
+}
+/* quem esta na mesa precisa ver que o pedido vai para AQUELA mesa */
+function pintarFaixaMesa(){
+  var v=document.getElementById('faixaMesa');
+  if(v)v.remove();
+  if(!modoMesa())return;
+  var d=document.createElement('div');
+  d.id='faixaMesa';
+  d.style.cssText='position:sticky;top:66px;z-index:45;background:var(--verde);color:#fff;'+
+   'padding:9px 24px;font-size:14px;font-weight:600;text-align:center;letter-spacing:.02em';
+  d.textContent='MESA '+S.mesa+(S.comanda?' — comanda de '+S.comanda:'')+
+   ' · o pagamento é no caixa';
+  var app=document.getElementById('app');
+  if(app&&app.firstChild)app.insertBefore(d,app.firstChild.nextSibling);
+  else if(app)app.appendChild(d);
 }
 function telaLojas(){
   $('app').innerHTML=topo()+capa()+
@@ -178,8 +214,12 @@ function escolherLoja(id){
    isso nao pode ficar com o cardapio vazio de uma hora para outra. */
 function noCardapio(p){
   var d=p.disponivel||{};
-  var algum=d.pdv||d.delivery||d.online||d.cardapio;
-  if(!algum)return p.disponivel_delivery!==false;
+  var algum=d.pdv||d.delivery||d.online||d.cardapio||d.mesa;
+  if(!algum)return p.disponivel_delivery!==false;   /* sem marcacao: aparece */
+  /* Na mesa a vitrine e a do balcao, nao a de entrega. Quem esta sentado
+     na loja compra o que se vende ali — inclusive o que nunca sai para
+     delivery. Por isso o modo mesa olha "Mesa" e "Frente de caixa". */
+  if(modoMesa())return !!(d.mesa||d.pdv);
   return !!(d.cardapio||d.online||d.delivery);
 }
 function prodsDaLoja(){
@@ -392,6 +432,8 @@ function zonasDaLoja(){
   return l;
 }
 function irDados(){
+  /* na mesa nao ha o que perguntar de entrega: so o nome da comanda */
+  if(modoMesa())return irComanda();
   fechar();
   var c=cfgLoja();
   var cl=S.cliente||{};
@@ -526,6 +568,70 @@ function telaRevisao(){
     'Enviar pedido</button>'+
     '<button class="btnL" onclick="fechar();irDados()">Corrigir dados</button></div>'+
   '</div>';
+  document.body.appendChild(ov);
+}
+/* a tela da mesa: so o nome de quem esta pedindo */
+function irComanda(){
+  var ov=document.createElement('div');ov.className='ovl';ov.id='ovl';
+  var sub=S.sacola.reduce(function(a,i){return a+i.total},0);
+  ov.innerHTML='<div class="pnl">'+
+   '<div class="pnlH"><b>Mesa '+E(S.mesa)+'</b>'+
+    '<button onclick="fechar()">&times;</button></div>'+
+   '<div class="pnlB">'+
+    '<div class="campo"><label>Seu nome</label>'+
+     '<input id="cmNome" value="'+E(S.comanda)+'" placeholder="Como te chamamos?" autocomplete="off">'+
+     '<div class="dica">É por este nome que seus itens ficam separados na conta da mesa.</div>'+
+    '</div>'+
+    '<div class="campo"><label>Observação</label>'+
+     '<textarea id="cmObs" rows="2" placeholder="sem cebola, ponto da carne..."></textarea></div>'+
+    '<div class="tot"><span>Total do pedido</span><b>R$ '+money(sub)+'</b></div>'+
+    '<div class="dica">O pagamento é feito no caixa, no fim. Este pedido vai para o '+
+    'atendente conferir antes de ir para a cozinha.</div>'+
+   '</div>'+
+   '<div class="pnlF"><button class="btnV" id="btEnviar" onclick="enviarPedidoMesa('+sub+')">'+
+    'Enviar para a cozinha</button></div>'+
+  '</div>';
+  document.body.appendChild(ov);
+  setTimeout(function(){var i=$('cmNome');if(i)i.focus();},80);
+}
+async function enviarPedidoMesa(tot){
+  var nome=($('cmNome')||{}).value||'';
+  nome=String(nome).trim();
+  if(!nome){alert('Digite seu nome para separar a conta.');return;}
+  var obs=(($('cmObs')||{}).value||'').trim();
+  S.comanda=nome;
+  var bt=$('btEnviar');
+  if(bt){bt.disabled=true;bt.textContent='Enviando...';}
+  var num=String(Date.now()).slice(-6);
+  try{
+    var r=await sb.from('pedidos_online').insert([{
+      loja_id:'ffe70bae-97f0-495d-aac3-d3a2aa333298',
+      sucursal_id:S.loja.id,numero:num,situacao:'novo',
+      cliente_nome:nome,cliente_tel:'',
+      tipo:'mesa',mesa_numero:parseInt(S.mesa,10)||null,comanda_nome:nome,
+      itens:S.sacola,subtotal:tot,taxa:0,total:tot,
+      observacao:obs,canal:'mesa'
+    }]);
+    if(r.error)throw r.error;
+    S.sacola=[];salvarLocal();
+    fechar();
+    telaSucessoMesa(nome);
+  }catch(e){
+    if(bt){bt.disabled=false;bt.textContent='Enviar para a cozinha';}
+    alert('Não consegui enviar: '+((e&&e.message)||'tente de novo'));
+  }
+}
+function telaSucessoMesa(nome){
+  var ov=document.createElement('div');ov.className='ovl';ov.id='ovl';
+  ov.innerHTML='<div class="pnl"><div class="pnlB" style="text-align:center;padding:34px 24px">'+
+   '<div style="font-size:44px">🍽️</div>'+
+   '<h2 style="margin:10px 0 6px">Pedido enviado!</h2>'+
+   '<p style="color:var(--ink-2)">Mesa '+E(S.mesa)+' — comanda de <b>'+E(nome)+'</b>.<br>'+
+   'O atendente vai conferir e levar para a cozinha.</p>'+
+   '<p style="color:var(--ink-3);font-size:13px">Quer pedir mais? É só continuar — '+
+   'tudo vai para a mesma conta.</p>'+
+   '</div><div class="pnlF"><button class="btnV" onclick="fechar();render()">Continuar pedindo</button>'+
+   '</div></div>';
   document.body.appendChild(ov);
 }
 async function enviarPedido(taxa,tot){
