@@ -18,8 +18,8 @@ var S={loja:null,cat:null,sacola:[],tela:'lojas',prod:null,cliente:{},tipo:'entr
     var p=new URLSearchParams(location.search);
     var m=p.get('mesa');
     if(m){S.mesa=String(m);S.tipo='mesa';}
-    var l=p.get('loja');
-    if(l)S._lojaQR=l;
+    var l=p.get('loja')||p.get('l');
+    if(l)S._lojaQR=String(l).trim();
   }catch(e){}
 })();
 function modoMesa(){return !!S.mesa;}
@@ -50,7 +50,17 @@ async function carregar(){
     var lc=lerLocal();
     if(lc.sacola)S.sacola=lc.sacola;
     if(lc.cliente)S.cliente=lc.cliente;
-    if(S._lojaQR){var lq=D.lojas.find(function(x){return x.id===S._lojaQR});
+    /* ==========================================================
+       UM LINK POR LOJA
+
+       ?loja= aceita o codigo interno, mas ninguem divulga um codigo
+       desses num cartao. Aceita tambem o apelido e o proprio nome, sem
+       acento e sem espaco: ?loja=santafe abre direto Santa Fe do Sul,
+       ?loja=jales abre Jales. Quem entra por esse link nao passa pela
+       tela de escolher loja — mas continua podendo trocar, pelo seletor
+       do topo, se pedir de outra unidade.
+       ========================================================== */
+    if(S._lojaQR){var lq=acharLojaPorApelido(S._lojaQR);
       if(lq){S.loja=lq;S.tela='menu';aplicarMarca();}}
     if(!S.loja&&modoMesa()&&D.lojas.length===1){
       S.loja=D.lojas[0];S.tela='menu';aplicarMarca();}
@@ -73,6 +83,21 @@ async function carregar(){
    Sem loja escolhida vale a marca da rede: a configuracao da matriz, ou,
    na falta dela, a primeira que tiver imagem.
    ========================================================== */
+function chaveLoja(t){
+  return String(t||'').toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-z0-9]/g,'');
+}
+function acharLojaPorApelido(t){
+  var k=chaveLoja(t);
+  var l=D.lojas||[];
+  return l.find(function(x){return x.id===t})
+      || l.find(function(x){return x.ref_local===t})
+      || l.find(function(x){return chaveLoja(x.apelido)===k&&k})
+      || l.find(function(x){return chaveLoja(x.nome)===k&&k})
+      || l.find(function(x){return k&&chaveLoja(x.nome).indexOf(k)>=0})
+      || null;
+}
 function cfgRede(){
   var m=(D.lojas||[]).find(function(l){return l.matriz});
   if(m&&D.cfg[m.id])return D.cfg[m.id];
@@ -173,8 +198,15 @@ function topo(){
 }
 function capa(){
   var c=cfgLoja();
+  /* ==========================================================
+     A LOGO JA ESTA NO TOPO
+
+     O bloco branco com a logo no meio da capa tapava justamente o
+     produto da foto, e repetia a marca que ja aparece na barra de cima.
+     Ficou so o nome e a frase, sobre a foto.
+     ========================================================== */
   return '<div class="hero"><img src="'+capaLoja()+'" alt="">'+
-   '<div class="heroIn">'+(logoLoja()?'<div class="heroLogo"><img src="'+logoLoja()+'" alt=""></div>':'')+
+   '<div class="heroIn">'+
    '<h1>'+E(nomeLoja())+'</h1><p>'+E(sloganLoja())+'</p>'+
    (S.loja?'<div class="heroTags">'+
      (c.tempo_entrega?'<span class="heroTag">entrega em '+E(c.tempo_entrega)+'</span>':'')+
