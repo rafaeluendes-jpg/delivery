@@ -62,13 +62,33 @@ async function carregar(){
       '<button class="btnL" style="max-width:220px;margin:16px auto" onclick="location.reload()">Tentar de novo</button></div>';
   }
 }
+/* ==========================================================
+   A VITRINE PRECISA DE UMA CARA, MESMO SEM LOJA ESCOLHIDA
+
+   Na tela de escolher a loja ainda nao ha loja, entao cfgLoja() devolvia
+   {} e a capa e a logo caiam nas imagens de exemplo do repositorio —
+   img/capa.jpg. Quem tinha acabado de subir a propria capa no sistema
+   via outra foto na abertura e achava, com razao, que nao tinha salvo.
+
+   Sem loja escolhida vale a marca da rede: a configuracao da matriz, ou,
+   na falta dela, a primeira que tiver imagem.
+   ========================================================== */
+function cfgRede(){
+  var m=(D.lojas||[]).find(function(l){return l.matriz});
+  if(m&&D.cfg[m.id])return D.cfg[m.id];
+  var k=Object.keys(D.cfg||{}).find(function(id){
+    var c=D.cfg[id]; return c&&(c.capa||c.logo||c.titulo);
+  });
+  return (k&&D.cfg[k])||D.cfg.geral||{};
+}
 function cfgLoja(){
-  if(!S.loja)return {};
+  if(!S.loja)return cfgRede();
   return D.cfg[S.loja.id]||D.cfg.geral||{};
 }
 function nomeLoja(){
   var c=cfgLoja();
-  return c.titulo||(S.loja?S.loja.nome:'Cardápio Digital');
+  if(!S.loja)return c.titulo||'Cardápio Digital';
+  return c.titulo||S.loja.nome;
 }
 function sloganLoja(){ return cfgLoja().slogan||''; }
 function logoLoja(){ return cfgLoja().logo||'img/logo.jpg'; }
