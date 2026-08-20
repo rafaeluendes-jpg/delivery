@@ -177,10 +177,11 @@ function pintarFaixaMesa(){
    existe e esta fora do horario; desligado e a que nao atende por aqui.
    ========================================================== */
 function lojasNaVitrine(){
-  return (D.lojas||[]).filter(function(l){
-    var c=D.cfg[l.id];
-    return !c||c.ativo!==false;
-  });
+  /* A regra do banco so devolve configuracao com ativo=true para quem nao
+     esta logado. Entao, aqui fora, loja desligada chega SEM configuracao —
+     e nao adianta olhar c.ativo, porque `c` nem existe. Aparece quem tem
+     configuracao visivel; sem ela, a loja nao atende por aqui. */
+  return (D.lojas||[]).filter(function(l){ return !!D.cfg[l.id]; });
 }
 function telaLojas(){
   var lojas=lojasNaVitrine();
