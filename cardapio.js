@@ -118,6 +118,21 @@ function nomeLoja(){
 function sloganLoja(){ return cfgLoja().slogan||''; }
 function logoLoja(){ return cfgLoja().logo||'img/logo.jpg'; }
 function capaLoja(){ return cfgLoja().capa||'img/capa.jpg'; }
+/* na lista, cada cartao mostra o horario DA LOJA dele, nao o da aberta */
+function abertoDaLoja(l){
+  var c=D.cfg[l.id]||{};
+  if(c.ativo===false)return false;
+  var h=c.horarios;
+  if(!h||!h.length)return true;
+  var ag=new Date(), d=ag.getDay(), m=ag.getHours()*60+ag.getMinutes();
+  return h.some(function(x){
+    if(Number(x.dia)!==d||x.fechado)return false;
+    var a=(x.abre||'00:00').split(':'), f=(x.fecha||'23:59').split(':');
+    var ini=+a[0]*60+ +a[1], fim=+f[0]*60+ +f[1];
+    if(fim<ini)fim+=1440;
+    return m>=ini&&m<=fim;
+  });
+}
 function abertoAgora(){
   var c=cfgLoja();
   if(c.ativo===false)return false;
@@ -153,14 +168,29 @@ function pintarFaixaMesa(){
   if(app&&app.firstChild)app.insertBefore(d,app.firstChild.nextSibling);
   else if(app)app.appendChild(d);
 }
+/* ==========================================================
+   LOJA COM O CARDAPIO DESLIGADO NAO APARECE PARA O CLIENTE
+
+   Antes, a unidade com "Cardapio no ar" desmarcado continuava na lista,
+   so que com a etiqueta "fechado". Nao e a mesma coisa: a matriz nao
+   vende para o consumidor e nao deve nem aparecer. Fechado e a loja que
+   existe e esta fora do horario; desligado e a que nao atende por aqui.
+   ========================================================== */
+function lojasNaVitrine(){
+  return (D.lojas||[]).filter(function(l){
+    var c=D.cfg[l.id];
+    return !c||c.ativo!==false;
+  });
+}
 function telaLojas(){
+  var lojas=lojasNaVitrine();
   $('app').innerHTML=topo()+capa()+
    '<div class="telaLojas">'+
     '<div class="tl-h"><h2>Onde você quer pedir?</h2>'+
     '<p>Escolha a loja mais perto de você</p></div>'+
-    (D.lojas.length?'<div class="lojasG">'+D.lojas.map(function(l){
+    (lojas.length?'<div class="lojasG">'+lojas.map(function(l){
       var c=D.cfg[l.id]||{};
-      var ab=(c.ativo!==false);
+      var ab=abertoDaLoja(l);
       return '<button class="lojaC" onclick="escolherLoja(\''+l.id+'\')">'+
        '<div class="lojaIc">'+IC.loja+'</div>'+
        '<b>'+E(l.nome)+'</b>'+
