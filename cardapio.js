@@ -176,6 +176,19 @@ function pintarFaixaMesa(){
    vende para o consumidor e nao deve nem aparecer. Fechado e a loja que
    existe e esta fora do horario; desligado e a que nao atende por aqui.
    ========================================================== */
+/* ==========================================================
+   O PEDIDO PRECISA CAIR NA EMPRESA CERTA
+
+   O codigo da empresa estava fixo no arquivo — 'ffe70bae-...', de outra
+   rede. O pedido entrava numa empresa que nao e a dona da loja e nunca
+   aparecia no PDV: o sino nao tocava e o cliente ficava esperando.
+   Agora sai da propria loja escolhida, que ja vem do banco com o
+   loja_id dela.
+   ========================================================== */
+function lojaDaEmpresa(){
+  return (S.loja&&S.loja.loja_id)||
+         ((D.lojas||[])[0]||{}).loja_id||null;
+}
 function lojasNaVitrine(){
   /* A regra do banco so devolve configuracao com ativo=true para quem nao
      esta logado. Entao, aqui fora, loja desligada chega SEM configuracao —
@@ -688,7 +701,7 @@ async function enviarPedidoMesa(tot){
   var num=String(Date.now()).slice(-6);
   try{
     var r=await sb.from('pedidos_online').insert([{
-      loja_id:'ffe70bae-97f0-495d-aac3-d3a2aa333298',
+      loja_id:lojaDaEmpresa(),
       sucursal_id:S.loja.id,numero:num,situacao:'novo',
       cliente_nome:nome,cliente_tel:'',
       tipo:'mesa',mesa_numero:parseInt(S.mesa,10)||null,comanda_nome:nome,
@@ -725,7 +738,7 @@ async function enviarPedido(taxa,tot){
   var num=String(Date.now()).slice(-6);
   try{
     var r=await sb.from('pedidos_online').insert([{
-      loja_id:'ffe70bae-97f0-495d-aac3-d3a2aa333298',
+      loja_id:lojaDaEmpresa(),
       sucursal_id:S.loja.id,numero:num,situacao:'novo',
       cliente_nome:cl.nome,cliente_tel:cl.tel,
       endereco:{rua:cl.rua,numero:cl.numero,referencia:cl.ref},
