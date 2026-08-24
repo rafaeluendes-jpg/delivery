@@ -268,7 +268,7 @@ function rodape(){
    (c.instagram?E(c.instagram)+'<br>':'')+
    (S.loja?E(S.loja.nome)+(S.loja.cidade?' · '+E(S.loja.cidade):'')+'<br>':'')+
    (c.whatsapp?'WhatsApp '+E(c.whatsapp)+'<br>':'')+
-   '<br><span style="opacity:.55;font-size:11px">pedidos por Nexor Delivery</span></div>';
+   '<br><span style="opacity:.55;font-size:11px">pedidos por Joia</span></div>';
 }
 function aplicarMarca(){
   var c=cfgLoja();
