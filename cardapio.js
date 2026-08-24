@@ -349,7 +349,21 @@ function telaMenu(){
       return '<button class="catB'+(S.cat===x.id?' on':'')+'" onclick="S.cat=\''+x.id+'\';render()">'+
       E(x.nome)+'</button>';}).join('')+
    '</div></div>'+
-   (Object.keys(porCat).length?Object.keys(porCat).map(function(k){
+   /* ==========================================================
+      A ORDEM DAS SECOES E A DO CADASTRO
+
+      As secoes saiam na ordem em que os produtos apareciam na lista —
+      ou seja, na ordem dos PRODUTOS, nao das CATEGORIAS. Por isso as
+      bebidas abriam o cardapio: o primeiro produto da lista era uma
+      agua. A ordem cadastrada em Gestao de Cardapio ja existia e era
+      ignorada aqui.
+      ========================================================== */
+   (Object.keys(porCat).length?Object.keys(porCat).sort(function(a2,b2){
+     var ia=D.cats.findIndex(function(x){return x.id===a2});
+     var ib=D.cats.findIndex(function(x){return x.id===b2});
+     if(ia<0)ia=999; if(ib<0)ib=999;      /* sem categoria vai para o fim */
+     return ia-ib;
+   }).map(function(k){
      var cat=D.cats.find(function(x){return x.id===k})||{nome:'Outros'};
      return '<div class="secao"><div class="secH"><h3>'+E(cat.nome)+'</h3>'+
       (cat.descricao?'<span>'+E(cat.descricao)+'</span>':'')+'</div>'+
