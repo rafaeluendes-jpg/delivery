@@ -407,10 +407,26 @@ function desenhaProduto(){
       if(o)total+=Number(o.preco)||0;
     });
   });
+  /* ==========================================================
+     O MINIMO TAMBEM VALE
+
+     Antes so o `forcado` barrava, e so quando nada era escolhido. Um
+     grupo de 2 sabores com minimo 2 deixava passar com um sabor so —
+     e o pedido chegava na loja incompleto, sem ninguem notar.
+
+     Agora barra quem escolheu menos que o minimo, dizendo o que falta.
+     ========================================================== */
+  var _oQueFalta='';
   var falta=gs.some(function(g){
-    if(!g.forcado)return false;
     var n=(_esc[g.id]||[]).length;
-    return n===0 && _esc['nao_'+g.id]!==true;
+    var min=Number(g.minimo!=null?g.minimo:g.min)||0;
+    var recusou=_esc['nao_'+g.id]===true;
+    if(g.forcado && n===0 && !recusou){ _oQueFalta='Escolha: '+g.nome; return true; }
+    if(min>0 && n>0 && n<min){
+      _oQueFalta='Falta escolher '+(min-n)+' em '+g.nome; return true; }
+    if(min>0 && n===0 && !recusou && g.forcado){
+      _oQueFalta='Escolha '+min+' em '+g.nome; return true; }
+    return false;
   });
   var ov=$('ov')||document.createElement('div');
   ov.id='ov';ov.className='ov';
@@ -422,11 +438,25 @@ function desenhaProduto(){
     (p.descricao?'<p style="margin:0 0 18px;color:var(--ink-2);font-size:14px">'+E(p.descricao)+'</p>':'')+
     gs.map(function(g,gi){
       var sel=_esc[g.id]||[];
-      var max=Number(g.max)||1;
+      /* ==========================================================
+         O NOME DA COLUNA E `maximo`, NAO `max`
+
+         O banco guarda `minimo` e `maximo`. Este arquivo procurava
+         `g.max`, que nao existe — entao `Number(g.max)||1` dava 1
+         SEMPRE. O grupo de 2 sabores virava radio de 1 sabor, e o de
+         3 tambem. O cliente escolhia um sabor e o segundo trocava o
+         primeiro. A configuracao estava certa; a leitura e que errava.
+
+         Le os dois nomes: `maximo` do banco e `max` de quem ja tiver
+         gravado assim.
+         ========================================================== */
+      var max=Number(g.maximo!=null?g.maximo:g.max)||1;
+      var min=Number(g.minimo!=null?g.minimo:g.min)||0;
       var multi=max>1;
-      return '<div class="gr"><div class="grH"><b>'+E(g.nome)+'</b>'+
+      return '<div class="gr" data-g="'+E(g.id)+'"><div class="grH"><b>'+E(g.nome)+'</b>'+
        (g.forcado?'<span class="ob">escolha</span>':'<span>opcional</span>')+
-       (multi?'<span>até '+max+'</span>':'')+'</div>'+
+       (multi?'<span>'+(min>1?'escolha '+min+' a '+max:'até '+max)+'</span>':'')+
+       (multi?'<span class="cont">'+sel.length+'/'+max+'</span>':'')+'</div>'+
        (g.forcado?'<label class="op'+(_esc['nao_'+g.id]?' on':'')+'" onclick="naoQuero(\''+g.id+'\')">'+
          '<input type="radio" name="g'+gi+'"'+(_esc['nao_'+g.id]?' checked':'')+'>'+
          '<span class="nm">Não quero</span></label>':'')+
@@ -442,7 +472,7 @@ function desenhaProduto(){
      '<textarea id="obsP" rows="2" placeholder="ex.: sem calda, bem gelado"></textarea></div>'+
    '</div>'+
    '<div class="pnlF"><button class="btnV" '+(falta?'disabled':'')+' onclick="addSacola()">'+
-    (falta?'Escolha as opções obrigatórias':'Adicionar · R$ '+money(total))+'</button></div>'+
+    (falta?E(_oQueFalta||'Escolha as opções obrigatórias'):'Adicionar · R$ '+money(total))+'</button></div>'+
   '</div>';
   if(!$('ov'))document.body.appendChild(ov);
   ov.onclick=function(e){if(e.target===ov)fechar()};
@@ -453,14 +483,46 @@ function escolher(gid,oi,max){
   var i=s.indexOf(oi);
   if(max>1){
     if(i>=0)s.splice(i,1);
-    else{ if(s.length>=max)s.shift(); s.push(oi); }
+    /* cheio: avisa em vez de trocar o sabor que a pessoa ja tinha escolhido
+       sem ela perceber */
+    else if(s.length>=max){ _esc[gid]=s; return semPular(function(){
+      aviso('Você já escolheu '+max+'. Toque em um sabor para tirar.'); }); }
+    else s.push(oi);
   }else s=[oi];
   _esc[gid]=s;
-  desenhaProduto();
+  semPular(desenhaProduto);
+}
+/* ==========================================================
+   CLICAR NUM SABOR NAO PODE JOGAR A TELA PARA O TOPO
+
+   Cada clique redesenha o painel inteiro (innerHTML), e o navegador
+   volta a rolagem para zero. Quem escolhia o terceiro sabor la embaixo
+   era jogado para cima e tinha que rolar tudo de novo a cada toque —
+   com 16 sabores na lista, isso torna o cardapio impraticavel.
+
+   Guarda a posicao, redesenha, devolve a posicao.
+   ========================================================== */
+function semPular(fn){
+  var b=document.querySelector('#ov .pnlB');
+  var y=b?b.scrollTop:0;
+  fn();
+  var b2=document.querySelector('#ov .pnlB');
+  if(b2&&y){ b2.scrollTop=y; requestAnimationFrame(function(){b2.scrollTop=y}); }
+}
+var _tAviso;
+function aviso(txt){
+  var e=document.getElementById('avisoOp');
+  if(!e){ e=document.createElement('div'); e.id='avisoOp';
+    e.style.cssText='position:fixed;left:50%;transform:translateX(-50%);bottom:96px;'+
+      'background:#2F4A32;color:#fff;padding:10px 16px;border-radius:22px;font-size:14px;'+
+      'z-index:99;box-shadow:0 4px 18px rgba(0,0,0,.25);max-width:86%;text-align:center';
+    document.body.appendChild(e); }
+  e.textContent=txt; e.style.display='block';
+  clearTimeout(_tAviso); _tAviso=setTimeout(function(){e.style.display='none'},2600);
 }
 function naoQuero(gid){
   _esc[gid]=[];_esc['nao_'+gid]=true;
-  desenhaProduto();
+  semPular(desenhaProduto);
 }
 function addSacola(){
   var p=S.prod;
