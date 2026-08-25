@@ -404,7 +404,7 @@ function desenhaProduto(){
   gs.forEach(function(g){
     (_esc[g.id]||[]).forEach(function(k){
       var o=(g.opcoes||[])[k];
-      if(o)total+=Number(o.preco)||0;
+      if(o)total+=precoOp(o);
     });
   });
   /* ==========================================================
@@ -479,12 +479,12 @@ function desenhaProduto(){
            return '<label class="op'+(on?' on':'')+'" onclick="escolher(\''+g.id+'\','+oi+','+max+')">'+
             '<input type="radio" name="g'+gi+'"'+(on?' checked':'')+'>'+
             '<span class="nm">'+E(o.nome)+'</span>'+
-            (Number(o.preco)?'<span class="pr">+ R$ '+money(o.preco)+'</span>':'')+'</label>';
+            (precoOp(o)?'<span class="pr">+ R$ '+money(precoOp(o))+'</span>':'')+'</label>';
          }
          var cheio=sel.length>=max;
          return '<div class="op qt'+(q?' on':'')+'">'+
           '<span class="nm">'+E(o.nome)+'</span>'+
-          (Number(o.preco)?'<span class="pr">+ R$ '+money(o.preco)+'</span>':'')+
+          (precoOp(o)?'<span class="pr">+ R$ '+money(precoOp(o))+'</span>':'')+
           '<span class="stp">'+
            '<button type="button" class="mn"'+(q?'':' disabled')+
              ' onclick="menos(\''+g.id+'\','+oi+')">−</button>'+
@@ -579,6 +579,34 @@ function aviso(txt){
    '.op.qt .stp b{min-width:18px;text-align:center;font-size:15px}';
   document.head.appendChild(e);
 })();
+/* ==========================================================
+   O PRECO DA OPCAO SE CHAMA `preco_adicional` NO BANCO
+
+   Este arquivo lia `o.preco`, que nao existe. Resultado: o cascao
+   adicional de R$ 3,00 aparecia sem preco no cardapio e NAO SOMAVA no
+   total — o cliente levava dois cascoes de graca, e o pedido chegava
+   na loja com valor menor do que devia.
+
+   O cadastro estava certo o tempo todo. Era a leitura.
+
+   Mesma familia do `maximo` lido como `max`: campo com nome diferente
+   entre o banco e quem le. Uma funcao so, usada em todos os lugares,
+   impede que volte a divergir.
+   ========================================================== */
+function precoOp(o){
+  if(!o)return 0;
+  var v=(o.preco_adicional!=null?o.preco_adicional:o.preco);
+  return Number(v)||0;
+}
+/* a zona de entrega guarda o nome da cidade na area, nao na zona */
+function cidadeZona(z){
+  if(!z)return '';
+  if(z.cidade)return z.cidade;
+  var a=(D.areas||[]).find(function(x){
+    return (x.areas_zonas||[]).some(function(y){return y.id===z.id});
+  });
+  return a?(a.nome||''):'';
+}
 function naoQuero(gid){
   _esc[gid]=[];_esc['nao_'+gid]=true;
   semPular(desenhaProduto);
@@ -591,8 +619,8 @@ function addSacola(){
     (_esc[g.id]||[]).forEach(function(k){
       var o=(g.opcoes||[])[k];
       if(!o)return;
-      ops.push({nome:o.nome,preco:Number(o.preco)||0});
-      extra+=Number(o.preco)||0;
+      ops.push({nome:o.nome,preco:precoOp(o)});
+      extra+=precoOp(o);
     });
   });
   var un=(Number(p.preco)||0)+extra;
@@ -697,7 +725,7 @@ function irDados(){
       '<option value="">Selecione onde você está</option>'+
       zs.map(function(z){
         return '<option value="'+z.id+'"'+(cl.zonaId===z.id?' selected':'')+'>'+
-        E(z.cidade)+' — '+E(z.nome)+' · R$ '+money(z.taxa)+
+        E(cidadeZona(z))+' — '+E(z.nome)+' · R$ '+money(z.taxa)+
         (z.tipo==='rural'?' (zona rural)':'')+'</option>';}).join('')+
       '</select><div class="dica" id="dicaZona"></div></div>'+
      '<div class="cp"><label>Referência</label>'+
@@ -753,7 +781,7 @@ function revisar(){
   var z=zs.find(function(x){return x.id===zid});
   S.cliente={nome:nome.trim(),tel:tel,rua:($('cRua')||{}).value||'',
     numero:($('cNum')||{}).value||'',ref:($('cRef')||{}).value||'',
-    zonaId:zid,zona:z?z.nome:'',cidade:z?z.cidade:'',
+    zonaId:zid,zona:z?z.nome:'',cidade:cidadeZona(z),
     pag:pag,troco:parseFloat(($('cTroco')||{}).value)||0,
     obs:($('cObs')||{}).value||''};
   salvarLocal();fechar();
