@@ -428,6 +428,30 @@ function desenhaProduto(){
       _oQueFalta='Escolha '+min+' em '+g.nome; return true; }
     return false;
   });
+  /* ==========================================================
+     ITEM 12 — A CAUSA DO SALTO PARA O TOPO
+
+     Nao era `scrollTo`, nem `<a href="#">`, nem submit de formulario,
+     nem troca de rota. Era isto:
+
+         ov.innerHTML = '...' ;
+
+     Cada toque num sabor redesenhava o painel INTEIRO. `innerHTML`
+     destroi todos os elementos filhos e cria outros novos. O elemento
+     que guardava a rolagem — a `.pnlB` — deixava de existir, e a nova
+     nascia com scrollTop zero. O navegador nao "voltou ao topo": o
+     lugar onde a pessoa estava foi apagado.
+
+     Por isso o remendo de guardar e devolver a posicao so funcionava as
+     vezes: entre destruir e recriar, o navegador ja tinha recalculado o
+     tamanho da caixa, e devolver 1800px numa caixa que ainda nao tem
+     1800px de conteudo simplesmente nao pega.
+
+     A correcao e nao destruir. O painel e montado uma vez; a cada
+     escolha atualizamos SO o que mudou: a marca da opcao, o contador do
+     grupo e o botao do rodape. A `.pnlB` nunca e recriada, entao a
+     rolagem nem chega a se perder — nao ha o que restaurar.
+     ========================================================== */
   var ov=$('ov')||document.createElement('div');
   ov.id='ov';ov.className='ov';
   ov.innerHTML='<div class="pnl g">'+
@@ -457,7 +481,7 @@ function desenhaProduto(){
        (g.forcado?'<span class="ob">escolha</span>':'<span>opcional</span>')+
        (multi?'<span>'+(min>1?'escolha '+min+' a '+max:'até '+max)+'</span>':'')+
        (multi?'<span class="cont">'+sel.length+'/'+max+'</span>':'')+'</div>'+
-       (g.forcado?'<label class="op'+(_esc['nao_'+g.id]?' on':'')+'" onclick="naoQuero(\''+g.id+'\')">'+
+       (g.forcado?'<label class="op naoq'+(_esc['nao_'+g.id]?' on':'')+'" onclick="naoQuero(\''+g.id+'\')">'+
          '<input type="radio" name="g'+gi+'"'+(_esc['nao_'+g.id]?' checked':'')+'>'+
          '<span class="nm">Não quero</span></label>':'')+
        /* ==========================================================
@@ -503,28 +527,91 @@ function desenhaProduto(){
   if(!$('ov'))document.body.appendChild(ov);
   ov.onclick=function(e){if(e.target===ov)fechar()};
 }
+/* ==========================================================
+   ATUALIZA SO O QUE MUDOU — SEM RECRIAR NADA
+
+   Estas tres funcoes chamavam `desenhaProduto()`, que refaz o painel
+   inteiro. Agora elas mexem so nos pedacos afetados: o estado da
+   opcao tocada, o contador do grupo dela e o rodape (preco e o que
+   falta). Nenhum elemento e destruido, entao a rolagem fica onde
+   estava por consequencia, e nao por conserto.
+   ========================================================== */
+function atualizarGrupo(gid){
+  var p=S.prod; if(!p)return;
+  var gs=gruposDoProduto(p);
+  var gi=gs.findIndex(function(g){return g.id===gid});
+  var g=gs[gi]; if(!g)return;
+  var sel=_esc[gid]||[];
+  var max=Number(g.maximo!=null?g.maximo:g.max)||1;
+  var cheio=sel.length>=max;
+  var caixa=document.querySelector('.gr[data-g="'+gid+'"]');
+  if(!caixa)return;
+
+  /* contador do cabecalho */
+  var cont=caixa.querySelector('.cont');
+  if(cont)cont.textContent=sel.length+'/'+max;
+
+  /* cada opcao: quantidade, marca e botoes */
+  /* `:not(.naoq)` e essencial: o botao "nao quero" tambem tem a classe .op e
+     vem ANTES das opcoes. Sem excluir, o indice de cada opcao andava um, e
+     tocar no primeiro sabor marcava o segundo. */
+  Array.prototype.forEach.call(caixa.querySelectorAll('.op:not(.naoq)'),function(el,oi){
+    var q=sel.filter(function(k){return k===oi}).length;
+    el.classList.toggle('on',q>0);
+    var b=el.querySelector('.stp b'); if(b)b.textContent=q;
+    var mn=el.querySelector('.stp .mn'); if(mn)mn.disabled=!q;
+    var ms=el.querySelector('.stp .ms'); if(ms)ms.disabled=cheio;
+    var r=el.querySelector('input[type="radio"]'); if(r)r.checked=q>0;
+  });
+  /* o "não quero" deixa de estar marcado se a pessoa escolheu algo */
+  var nq=caixa.querySelector('.op.naoq');
+  if(nq)nq.classList.toggle('on',_esc['nao_'+gid]===true);
+  atualizarRodape();
+}
+function atualizarRodape(){
+  var p=S.prod; if(!p)return;
+  var gs=gruposDoProduto(p);
+  var total=Number(p.preco)||0;
+  gs.forEach(function(g){
+    (_esc[g.id]||[]).forEach(function(k){
+      var o=(g.opcoes||[])[k]; if(o)total+=precoOp(o);
+    });
+  });
+  var falta=false,oQue='';
+  gs.forEach(function(g){
+    if(falta)return;
+    var n=(_esc[g.id]||[]).length;
+    var min=Number(g.minimo!=null?g.minimo:g.min)||0;
+    var recusou=_esc['nao_'+g.id]===true;
+    if(g.forcado&&n===0&&!recusou){falta=true;oQue='Escolha: '+g.nome;return;}
+    if(min>0&&n>0&&n<min){falta=true;oQue='Falta escolher '+(min-n)+' em '+g.nome;return;}
+    if(min>0&&n===0&&!recusou&&g.forcado){falta=true;oQue='Escolha '+min+' em '+g.nome;}
+  });
+  var b=document.querySelector('#ov .pnlF .btnV');
+  if(!b)return;
+  b.disabled=falta;
+  b.textContent=falta?(oQue||'Escolha as opções obrigatórias')
+                     :('Adicionar · R$ '+money(total));
+}
 function escolher(gid,oi,max){
-  var s=_esc[gid]||[];
   _esc['nao_'+gid]=false;
   if(max>1)return mais(gid,oi,max);
   _esc[gid]=[oi];
-  semPular(desenhaProduto);
+  atualizarGrupo(gid);
 }
 function mais(gid,oi,max){
   var s=(_esc[gid]||[]).slice();
   _esc['nao_'+gid]=false;
-  if(s.length>=max){
-    return semPular(function(){ aviso('O máximo aqui é '+max+'.'); });
-  }
+  if(s.length>=max)return aviso('O máximo aqui é '+max+'.');
   s.push(oi); _esc[gid]=s;
-  semPular(desenhaProduto);
+  atualizarGrupo(gid);
 }
 function menos(gid,oi){
   var s=(_esc[gid]||[]).slice();
   var i=s.indexOf(oi);
   if(i>=0)s.splice(i,1);
   _esc[gid]=s;
-  semPular(desenhaProduto);
+  atualizarGrupo(gid);
 }
 /* ==========================================================
    CLICAR NUM SABOR NAO PODE JOGAR A TELA PARA O TOPO
@@ -609,7 +696,7 @@ function cidadeZona(z){
 }
 function naoQuero(gid){
   _esc[gid]=[];_esc['nao_'+gid]=true;
-  semPular(desenhaProduto);
+  atualizarGrupo(gid);
 }
 function addSacola(){
   var p=S.prod;
@@ -632,16 +719,15 @@ function addSacola(){
 function fechar(){var o=$('ov');if(o)o.remove();}
 
 /* ---------- sacola ---------- */
-function abrirSacola(){
-  var sub=S.sacola.reduce(function(a,i){return a+i.total},0);
+function subtotalSacola(){
+  return S.sacola.reduce(function(a,i){return a+i.total},0);
+}
+/* o miolo da sacola, montado a parte para poder ser atualizado sozinho */
+function mioloSacola(){
+  var sub=subtotalSacola();
   var c=cfgLoja();
   var min=Number(c.pedido_minimo)||0;
-  var ov=document.createElement('div');
-  ov.id='ov';ov.className='ov';
-  ov.innerHTML='<div class="pnl">'+
-   '<div class="pnlH"><b>Sua sacola</b><button class="fechar" onclick="fechar()">×</button></div>'+
-   '<div class="pnlB">'+
-   (S.sacola.length?S.sacola.map(function(i,k){
+  return (S.sacola.length?S.sacola.map(function(i,k){
      var fp=(D.prods.find(function(x){return x.id===i.id})||{});
      var fu=fp.imagem||fp.imagem_url||'';
      return '<div class="si">'+(fu?'<img src="'+fu+'" class="siF" alt="">':'')+
@@ -657,8 +743,17 @@ function abrirSacola(){
      '<div class="tot"><span>Subtotal</span><b>R$ '+money(sub)+'</b></div>'+
      (min&&sub<min?'<div class="aviso" style="margin-top:10px">Pedido mínimo de R$ '+money(min)+
        '. Faltam R$ '+money(min-sub)+' para fechar.</div>':'')+
-    '</div>':'')+
-   '</div>'+
+    '</div>':'');
+}
+function abrirSacola(){
+  var sub=subtotalSacola();
+  var c=cfgLoja();
+  var min=Number(c.pedido_minimo)||0;
+  var ov=document.createElement('div');
+  ov.id='ov';ov.className='ov';
+  ov.innerHTML='<div class="pnl">'+
+   '<div class="pnlH"><b>Sua sacola</b><button class="fechar" onclick="fechar()">×</button></div>'+
+   '<div class="pnlB">'+mioloSacola()+'</div>'+
    (S.sacola.length?'<div class="pnlF">'+
     '<button class="btnV"'+(min&&sub<min?' disabled':'')+' onclick="irDados()">Continuar</button>'+
     '<button class="btnL" onclick="fechar()">Escolher mais itens</button></div>':'')+
@@ -666,14 +761,42 @@ function abrirSacola(){
   document.body.appendChild(ov);
   ov.onclick=function(e){if(e.target===ov)fechar()};
 }
+/* ==========================================================
+   ITEM 15 — O MESMO PADRAO NA SACOLA
+
+   Aqui era ainda mais forte: cada toque no + ou no − fechava o painel
+   da sacola (`fechar()`), abria outro do zero (`abrirSacola()`) e ainda
+   redesenhava a pagina inteira DUAS vezes (`render()` dentro do if e
+   `render()` de novo logo abaixo).
+
+   Com tres ou quatro itens na sacola o cliente via a lista piscar e
+   voltar ao topo a cada ajuste de quantidade — bem no momento em que
+   ele esta decidindo quanto vai gastar.
+
+   Agora: fecha e reabre so quando a sacola esvazia (ai o painel deixa
+   de fazer sentido mesmo). Enquanto houver item, atualiza a lista e o
+   total sem recriar o painel.
+   ========================================================== */
 function mudarQtd(k,d){
   var i=S.sacola[k];
+  if(!i)return;
   i.qtd+=d;
   if(i.qtd<=0)S.sacola.splice(k,1);
   else i.total=i.unitario*i.qtd;
-  salvarLocal();fechar();
-  if(S.sacola.length)abrirSacola(); else render();
-  render();
+  salvarLocal();
+  if(!S.sacola.length){ fechar(); render(); return; }
+  atualizarSacola();
+}
+/* troca SO o miolo do painel: a caixa que rola continua a mesma */
+function atualizarSacola(){
+  var corpo=document.querySelector('#ov .pnlB');
+  if(!corpo){ fechar(); abrirSacola(); return; }
+  var pos=corpo.scrollTop;
+  corpo.innerHTML=mioloSacola();
+  corpo.scrollTop=pos;          /* o miolo encolheu: garante a posicao */
+  var c=cfgLoja(), min=Number(c.pedido_minimo)||0, sub=subtotalSacola();
+  var b=document.querySelector('#ov .pnlF .btnV');
+  if(b)b.disabled=!!(min&&sub<min);
 }
 
 /* ---------- dados do cliente e fechamento ---------- */
