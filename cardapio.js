@@ -460,12 +460,38 @@ function desenhaProduto(){
        (g.forcado?'<label class="op'+(_esc['nao_'+g.id]?' on':'')+'" onclick="naoQuero(\''+g.id+'\')">'+
          '<input type="radio" name="g'+gi+'"'+(_esc['nao_'+g.id]?' checked':'')+'>'+
          '<span class="nm">Não quero</span></label>':'')+
+       /* ==========================================================
+          GRUPO DE VARIOS E QUANTIDADE, NAO CAIXINHA DE MARCAR
+
+          O grupo "Cascao Adicional" vai de 1 a 50: e quantidade, nao
+          escolha. Com caixinha de marcar so dava para levar UM cascao.
+          E em "2 sabores" ninguem conseguia pedir dois potes do mesmo
+          sabor, que e pedido comum em gelato.
+
+          Agora todo grupo com maximo maior que 1 mostra − e + por
+          opcao. A soma de todas as opcoes respeita o maximo do grupo,
+          e o + fica desligado quando o grupo enche.
+          ========================================================== */
        (g.opcoes||[]).map(function(o,oi){
-         var on=sel.indexOf(oi)>=0;
-         return '<label class="op'+(on?' on':'')+'" onclick="escolher(\''+g.id+'\','+oi+','+max+')">'+
-          '<input type="'+(multi?'checkbox':'radio')+'" name="g'+gi+'"'+(on?' checked':'')+'>'+
+         var q=sel.filter(function(k){return k===oi}).length;
+         if(!multi){
+           var on=q>0;
+           return '<label class="op'+(on?' on':'')+'" onclick="escolher(\''+g.id+'\','+oi+','+max+')">'+
+            '<input type="radio" name="g'+gi+'"'+(on?' checked':'')+'>'+
+            '<span class="nm">'+E(o.nome)+'</span>'+
+            (Number(o.preco)?'<span class="pr">+ R$ '+money(o.preco)+'</span>':'')+'</label>';
+         }
+         var cheio=sel.length>=max;
+         return '<div class="op qt'+(q?' on':'')+'">'+
           '<span class="nm">'+E(o.nome)+'</span>'+
-          (Number(o.preco)?'<span class="pr">+ R$ '+money(o.preco)+'</span>':'')+'</label>';
+          (Number(o.preco)?'<span class="pr">+ R$ '+money(o.preco)+'</span>':'')+
+          '<span class="stp">'+
+           '<button type="button" class="mn"'+(q?'':' disabled')+
+             ' onclick="menos(\''+g.id+'\','+oi+')">−</button>'+
+           '<b>'+q+'</b>'+
+           '<button type="button" class="ms"'+(cheio?' disabled':'')+
+             ' onclick="mais(\''+g.id+'\','+oi+','+max+')">+</button>'+
+          '</span></div>';
        }).join('')+'</div>';
     }).join('')+
     '<div class="cp"><label>Observação</label>'+
@@ -480,15 +506,23 @@ function desenhaProduto(){
 function escolher(gid,oi,max){
   var s=_esc[gid]||[];
   _esc['nao_'+gid]=false;
+  if(max>1)return mais(gid,oi,max);
+  _esc[gid]=[oi];
+  semPular(desenhaProduto);
+}
+function mais(gid,oi,max){
+  var s=(_esc[gid]||[]).slice();
+  _esc['nao_'+gid]=false;
+  if(s.length>=max){
+    return semPular(function(){ aviso('O máximo aqui é '+max+'.'); });
+  }
+  s.push(oi); _esc[gid]=s;
+  semPular(desenhaProduto);
+}
+function menos(gid,oi){
+  var s=(_esc[gid]||[]).slice();
   var i=s.indexOf(oi);
-  if(max>1){
-    if(i>=0)s.splice(i,1);
-    /* cheio: avisa em vez de trocar o sabor que a pessoa ja tinha escolhido
-       sem ela perceber */
-    else if(s.length>=max){ _esc[gid]=s; return semPular(function(){
-      aviso('Você já escolheu '+max+'. Toque em um sabor para tirar.'); }); }
-    else s.push(oi);
-  }else s=[oi];
+  if(i>=0)s.splice(i,1);
   _esc[gid]=s;
   semPular(desenhaProduto);
 }
@@ -503,11 +537,24 @@ function escolher(gid,oi,max){
    Guarda a posicao, redesenha, devolve a posicao.
    ========================================================== */
 function semPular(fn){
-  var b=document.querySelector('#ov .pnlB');
-  var y=b?b.scrollTop:0;
+  /* Guarda a rolagem de TODOS os quadros que possam estar rolando: o corpo
+     do painel, o fundo escuro e a pagina. Na primeira tentativa eu guardei
+     so `.pnlB`, e no celular quem rola e outro elemento — por isso a tela
+     continuou pulando para o topo. */
+  var alvos=[document.querySelector('#ov .pnlB'), document.getElementById('ov'),
+             document.scrollingElement||document.documentElement, document.body];
+  var y=alvos.map(function(e){return e?e.scrollTop:0});
+  var yPag=window.pageYOffset||0;
   fn();
-  var b2=document.querySelector('#ov .pnlB');
-  if(b2&&y){ b2.scrollTop=y; requestAnimationFrame(function(){b2.scrollTop=y}); }
+  var devolve=function(){
+    var a2=[document.querySelector('#ov .pnlB'), document.getElementById('ov'),
+            document.scrollingElement||document.documentElement, document.body];
+    a2.forEach(function(e,i){ if(e&&y[i])e.scrollTop=y[i]; });
+    if(yPag)window.scrollTo(0,yPag);
+  };
+  devolve();
+  requestAnimationFrame(devolve);
+  setTimeout(devolve,0);
 }
 var _tAviso;
 function aviso(txt){
@@ -520,6 +567,18 @@ function aviso(txt){
   e.textContent=txt; e.style.display='block';
   clearTimeout(_tAviso); _tAviso=setTimeout(function(){e.style.display='none'},2600);
 }
+(function(){
+  if(document.getElementById('estQt'))return;
+  var e=document.createElement('style'); e.id='estQt';
+  e.textContent='.op.qt{display:flex;align-items:center;gap:10px}'+
+   '.op.qt .nm{flex:1}'+
+   '.op.qt .stp{display:flex;align-items:center;gap:10px}'+
+   '.op.qt .stp button{width:34px;height:34px;border-radius:50%;border:1px solid #cfc7b6;'+
+     'background:#fff;font-size:19px;line-height:1;cursor:pointer;color:#2F4A32}'+
+   '.op.qt .stp button:disabled{opacity:.32;cursor:default}'+
+   '.op.qt .stp b{min-width:18px;text-align:center;font-size:15px}';
+  document.head.appendChild(e);
+})();
 function naoQuero(gid){
   _esc[gid]=[];_esc['nao_'+gid]=true;
   semPular(desenhaProduto);
