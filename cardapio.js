@@ -316,7 +316,23 @@ function noCardapio(p){
      na loja compra o que se vende ali — inclusive o que nunca sai para
      delivery. Por isso o modo mesa olha "Mesa" e "Frente de caixa". */
   if(modoMesa())return !!(d.mesa||d.pdv);
-  return !!(d.cardapio||d.online||d.delivery);
+  /* ==========================================================
+     "DELIVERY" NAO E "CARDAPIO DIGITAL"
+
+     Aqui estava `d.cardapio||d.online||d.delivery`. O `delivery` fazia
+     um produto marcado SO em Delivery aparecer nesta pagina — foi assim
+     que a Taxa de Entrega, que e um produto do cadastro, apareceu no
+     cardapio para o cliente escolher como se fosse um sabor. A taxa
+     desta pagina nunca veio dali: ela sai da zona de entrega, numa
+     linha propria do total.
+
+     Delivery e o pedido que a loja lanca na frente de caixa em modo
+     entrega. Cardapio digital e esta pagina. Cada chave do "Disponivel
+     em" vale por ela mesma.
+
+     `online` fica: e o nome antigo do proprio campo `cardapio`.
+     ========================================================== */
+  return !!(d.cardapio||d.online);
 }
 function prodsDaLoja(){
   return D.prods.filter(function(p){
