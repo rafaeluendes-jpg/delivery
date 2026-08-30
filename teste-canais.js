@@ -96,7 +96,7 @@ t('noCardapio não olha mais para delivery',
   !/return !!\(d\.cardapio\|\|d\.online\|\|d\.delivery\)/.test(nu));
 t('e a regra da mesa ficou intacta', /if\(modoMesa\(\)\)return !!\(d\.mesa\|\|d\.pdv\)/.test(nu));
 t('a página carrega a versão nova do arquivo',
-  /cardapio\.js\?v=130/.test(fs.readFileSync(__dirname + '/index.html', 'utf8')));
+  /cardapio\.js\?v=131/.test(fs.readFileSync(__dirname + '/index.html', 'utf8')));
 
 console.log('\n' + (falhas ? '✗ ' + falhas + ' de ' + testes + ' falharam'
                            : '✓ ' + testes + ' testes passaram') + '\n');

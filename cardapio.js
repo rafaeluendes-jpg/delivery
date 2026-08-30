@@ -409,9 +409,46 @@ function abrirProduto(id){
   desenhaProduto();
   evento('ViewContent',{content_name:S.prod.nome,value:S.prod.preco,currency:'BRL'});
 }
+/* ==========================================================
+   O QUE O JOIA DESLIGA TEM DE SUMIR DAQUI TAMBEM
+
+   Esta pagina le `grupos_opcoes` e `opcoes` direto do banco, a cada
+   visita: sabor cadastrado no Joia ja aparece na proxima abertura, sem
+   publicar nada aqui. So que ela lia TUDO, sem olhar tres campos que o
+   Joia grava:
+
+   1. `opcoes.ativo` — a loja passou a desligar um sabor em vez de
+      apagar. Desligado sumia da frente de caixa e continuava sendo
+      oferecido ao cliente na rua. O cliente pedia, e no balcao nao
+      tinha.
+   2. `grupos_opcoes.ativo` — mesma coisa, para o grupo inteiro.
+   3. `grupos_opcoes.canais` — o dono marca em qual canal a pergunta
+      aparece. Um grupo marcado so para a frente de caixa era
+      perguntado aqui do mesmo jeito. E o mesmo defeito que o
+      `teste-canais.js` ja registrou para os PRODUTOS; nos grupos nunca
+      foi feito.
+
+   `opcoesAtivas` existe para ser a UNICA porta: quem desenha e quem
+   soma o preco tem de ver a mesma lista, senao o indice de cada opcao
+   aponta para outra assim que houver uma desligada no meio.
+   ========================================================== */
+function grupoValeAqui(g){
+  if(!g||g.ativo===false)return false;
+  var c=g.canais||[];
+  if(!c.length)return true;              /* sem escolha = todos os canais */
+  return c.indexOf('cardapio')>=0;
+}
+function opcoesAtivas(g){
+  return ((g&&g.opcoes)||[]).filter(function(o){return o&&o.ativo!==false});
+}
 function gruposDoProduto(p){
   var ids=(p.produto_grupos||[]).map(function(x){return x.grupo_id});
-  return D.grupos.filter(function(g){return ids.indexOf(g.id)>=0});
+  return D.grupos.filter(function(g){
+    if(ids.indexOf(g.id)<0)return false;
+    if(!grupoValeAqui(g))return false;
+    /* grupo sem nenhuma opcao ligada nao tem o que perguntar */
+    return opcoesAtivas(g).length>0;
+  });
 }
 function desenhaProduto(){
   var p=S.prod;
@@ -419,7 +456,7 @@ function desenhaProduto(){
   var total=Number(p.preco)||0;
   gs.forEach(function(g){
     (_esc[g.id]||[]).forEach(function(k){
-      var o=(g.opcoes||[])[k];
+      var o=opcoesAtivas(g)[k];
       if(o)total+=precoOp(o);
     });
   });
@@ -512,7 +549,7 @@ function desenhaProduto(){
           opcao. A soma de todas as opcoes respeita o maximo do grupo,
           e o + fica desligado quando o grupo enche.
           ========================================================== */
-       (g.opcoes||[]).map(function(o,oi){
+       opcoesAtivas(g).map(function(o,oi){
          var q=sel.filter(function(k){return k===oi}).length;
          if(!multi){
            var on=q>0;
@@ -590,7 +627,7 @@ function atualizarRodape(){
   var total=Number(p.preco)||0;
   gs.forEach(function(g){
     (_esc[g.id]||[]).forEach(function(k){
-      var o=(g.opcoes||[])[k]; if(o)total+=precoOp(o);
+      var o=opcoesAtivas(g)[k]; if(o)total+=precoOp(o);
     });
   });
   var falta=false,oQue='';
@@ -720,7 +757,7 @@ function addSacola(){
   var ops=[],extra=0;
   gs.forEach(function(g){
     (_esc[g.id]||[]).forEach(function(k){
-      var o=(g.opcoes||[])[k];
+      var o=opcoesAtivas(g)[k];
       if(!o)return;
       ops.push({nome:o.nome,preco:precoOp(o)});
       extra+=precoOp(o);
