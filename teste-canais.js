@@ -95,8 +95,12 @@ const nu = src.replace(/\/\*[\s\S]*?\*\//g, '');
 t('noCardapio não olha mais para delivery',
   !/return !!\(d\.cardapio\|\|d\.online\|\|d\.delivery\)/.test(nu));
 t('e a regra da mesa ficou intacta', /if\(modoMesa\(\)\)return !!\(d\.mesa\|\|d\.pdv\)/.test(nu));
-t('a página carrega a versão nova do arquivo',
-  /cardapio\.js\?v=131/.test(fs.readFileSync(__dirname + '/index.html', 'utf8')));
+/* a versao presa num numero exato reprovava toda correcao seguinte, sem
+   nada estar errado. O que importa e que ela nao VOLTE para antes desta
+   correcao — o celular serviria o arquivo velho. */
+const vCard = Number((fs.readFileSync(__dirname + '/index.html', 'utf8')
+  .match(/cardapio\.js\?v=(\d+)/) || [])[1]);
+t('a página carrega a versão nova do arquivo', vCard >= 131, 'v=' + vCard);
 
 console.log('\n' + (falhas ? '✗ ' + falhas + ' de ' + testes + ' falharam'
                            : '✓ ' + testes + ' testes passaram') + '\n');

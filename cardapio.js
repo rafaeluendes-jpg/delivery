@@ -896,7 +896,11 @@ function irDados(){
       '<input id="cRua" value="'+E(cl.rua||'')+'"></div>'+
       '<div class="cp"><label>Número *</label>'+
       '<input id="cNum" value="'+E(cl.numero||'')+'"></div></div>'+
-     '<div class="cp"><label>Bairro / zona *</label>'+
+     '<div class="cp"><label>Bairro *</label>'+
+      '<input id="cBairro" value="'+E(cl.bairro||'')+'" '+
+      'placeholder="escreva o nome do seu bairro">'+
+      '<div class="dica">o nome do bairro onde você mora, do jeito que você fala</div></div>'+
+     '<div class="cp"><label>Região da entrega (taxa) *</label>'+
       '<select id="cZona" onchange="mudouZona()">'+
       '<option value="">Selecione onde você está</option>'+
       zs.map(function(z){
@@ -952,11 +956,25 @@ function revisar(){
   var pag=($('cPag')||{}).value;
   if(!pag){alert('Escolha a forma de pagamento.');return;}
   var zid=($('cZona')||{}).value;
-  if(S.tipo==='entrega'&&!zid){alert('Escolha o bairro ou zona da entrega.');return;}
+  /* ==========================================================
+     A REGIAO DA TAXA NAO E O BAIRRO DA PESSOA
+
+     A lista de regioes existe para calcular a taxa, e nao tem todos os
+     bairros da cidade — nem teria como ter. Quando so ela existia, a
+     pessoa escolhia "Todos os Bairros" e o papel da entrega saia sem
+     dizer onde fica a rua. O entregador tinha de perguntar.
+
+     Agora sao dois campos: a regiao, que decide quanto custa, e o
+     bairro escrito, que diz onde e. Os dois obrigatorios.
+     ========================================================== */
+  var bairro=String(($('cBairro')||{}).value||'').trim();
+  if(S.tipo==='entrega'&&!bairro){alert('Escreva o nome do seu bairro.');return;}
+  if(S.tipo==='entrega'&&!zid){alert('Escolha a região da entrega.');return;}
   var zs=zonasDaLoja();
   var z=zs.find(function(x){return x.id===zid});
   S.cliente={nome:nome.trim(),tel:tel,rua:($('cRua')||{}).value||'',
     numero:($('cNum')||{}).value||'',ref:($('cRef')||{}).value||'',
+    bairro:bairro,
     zonaId:zid,zona:z?z.nome:'',cidade:cidadeZona(z),
     pag:pag,troco:parseFloat(($('cTroco')||{}).value)||0,
     obs:($('cObs')||{}).value||''};
@@ -991,7 +1009,9 @@ function telaRevisao(){
      '<b class="tit">'+
       (S.tipo==='entrega'?'Entrega':'Retirada na loja')+'</b>'+
      E(cl.nome)+' · '+E(cl.tel)+'<br>'+
-     (S.tipo==='entrega'?E(cl.rua)+', '+E(cl.numero)+'<br>'+E(cl.zona)+' — '+E(cl.cidade)+
+     (S.tipo==='entrega'?E(cl.rua)+', '+E(cl.numero)+'<br>'+
+       (cl.bairro?E(cl.bairro)+' — ':'')+E(cl.cidade)+
+       '<br><span style="color:var(--ink-3)">região: '+E(cl.zona)+'</span>'+
        (cl.ref?'<br><span style="color:var(--ink-3)">'+E(cl.ref)+'</span>':'')
       :E(S.loja.nome)+(S.loja.cidade?' — '+E(S.loja.cidade):''))+
      '<br><br><b>Pagamento:</b> '+E(cl.pag)+
@@ -1080,7 +1100,7 @@ async function enviarPedido(taxa,tot){
       loja_id:lojaDaEmpresa(),
       sucursal_id:S.loja.id,numero:num,situacao:'novo',
       cliente_nome:cl.nome,cliente_tel:cl.tel,
-      endereco:{rua:cl.rua,numero:cl.numero,referencia:cl.ref},
+      endereco:{rua:cl.rua,numero:cl.numero,bairro:cl.bairro||'',referencia:cl.ref},
       zona_id:cl.zonaId,zona:cl.zona,cidade:cl.cidade,
       tipo:S.tipo,forma_pagamento:cl.pag,troco_para:cl.troco||0,
       itens:S.sacola,subtotal:sub,taxa:taxa,total:tot,
