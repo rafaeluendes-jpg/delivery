@@ -65,7 +65,8 @@ async function carregar(){
     if(!S.loja&&modoMesa()&&D.lojas.length===1){
       S.loja=D.lojas[0];S.tela='menu';aplicarMarca();}
     if(!S.loja&&lc.loja){var l=D.lojas.find(function(x){return x.id===lc.loja});
-      if(l){S.loja=l;S.tela='menu';aplicarMarca();}}
+      /* a loja guardada no celular so volta se ainda estiver atendendo */
+      if(l&&!lojaDesligada(l.id)){S.loja=l;S.tela='menu';aplicarMarca();}}
     render();
   }catch(e){
     $('app').innerHTML='<div class="carregando">Não consegui carregar o cardápio agora.<br>'+
@@ -121,6 +122,7 @@ function capaLoja(){ return cfgLoja().capa||'img/capa.jpg'; }
 /* na lista, cada cartao mostra o horario DA LOJA dele, nao o da aberta */
 function abertoDaLoja(l){
   var c=D.cfg[l.id]||{};
+  if(lojaDesligada(l&&l.id))return false;
   if(c.ativo===false)return false;
   var h=c.horarios;
   if(!h||!h.length)return true;
@@ -133,8 +135,26 @@ function abertoDaLoja(l){
     return m>=ini&&m<=fim;
   });
 }
+/* ==========================================================
+   LOJA DESLIGADA E LOJA DESLIGADA — INCLUSIVE A QUE ESTAVA SALVA AQUI
+
+   A regra do banco so entrega `cardapio_config` com `ativo=true` para
+   quem nao esta logado: loja desligada chega SEM configuracao nenhuma.
+   A vitrine ja sabia disso e nao mostrava a loja. Mas quem tinha a loja
+   guardada no proprio celular (a ultima em que pediu) entrava direto
+   nela, sem passar pela vitrine — e aqui `c` vinha vazio, `c.ativo` era
+   `undefined`, `c.horarios` tambem, e a funcao caia no `return true` do
+   fim: "Aberto", com o botao de enviar liberado.
+
+   Sem configuracao a loja nao atende por aqui. Ponto.
+   ========================================================== */
+function lojaDesligada(id){
+  id=id||(S.loja&&S.loja.id);
+  return !id||!D.cfg[id];
+}
 function abertoAgora(){
   var c=cfgLoja();
+  if(lojaDesligada())return false;
   if(c.ativo===false)return false;
   var h=c.horarios;
   if(!h||!h.length)return true;
@@ -357,7 +377,10 @@ function telaMenu(){
   });
   $('app').innerHTML=topo()+capa()+
    (!ab||c.aviso?'<div class="centro" style="padding-top:22px">'+
-     (!ab?'<div class="aviso">A loja está fechada agora. Você pode montar o pedido e enviar quando abrirmos.</div>':'')+
+     (!ab?'<div class="aviso">'+(lojaDesligada()
+        ? '<b>A loja está desligada agora.</b><br>Ela não está recebendo pedido pelo cardápio. '+
+          'Sua sacola fica guardada aqui — é só voltar quando ela ligar de novo.'
+        : 'A loja está fechada agora. Você pode montar o pedido e enviar quando abrirmos.')+'</div>':'')+
      (c.aviso?'<div class="aviso">'+E(c.aviso)+'</div>':'')+'</div>':'')+
    '<div class="catBar"><div class="catIn">'+
     '<button class="catB'+(!S.cat?' on':'')+'" onclick="S.cat=null;render()">Tudo</button>'+
@@ -1057,6 +1080,7 @@ async function enviarPedidoMesa(tot){
   S.comanda=nome;
   var bt=$('btEnviar');
   if(bt){bt.disabled=true;bt.textContent='Enviando...';}
+  if(!(await lojaAindaAtende()))return avisoLojaDesligada(bt,'Enviar pedido');
   var num=String(Date.now()).slice(-6);
   try{
     var r=await sb.from('pedidos_online').insert([{
@@ -1089,9 +1113,49 @@ function telaSucessoMesa(nome){
    '</div></div>';
   document.body.appendChild(ov);
 }
+/* ==========================================================
+   O INTERRUPTOR DA LOJA VALE NA HORA DE ENVIAR
+
+   A configuracao e lida UMA vez, quando a pagina abre. Quem deixou o
+   cardapio aberto no celular as 19h e montou a sacola devagar continuava
+   com a pagina de uma loja que ja tinha sido desligada as 20h — e o
+   pedido entrava assim mesmo, porque nada reconferia. No PDV o pedido
+   caia no sino com a loja fechada e ninguem para prepara-lo.
+
+   Antes de gravar, pergunta de novo ao banco se esta loja ainda esta
+   atendendo. A propria regra do banco responde: loja desligada nao
+   devolve configuracao.
+   ========================================================== */
+async function lojaAindaAtende(){
+  try{
+    var r=await sb.from('cardapio_config').select('sucursal_id,ativo')
+      .eq('sucursal_id',S.loja.id).limit(1);
+    if(r.error)return true;                    /* falha de rede nao vira recusa */
+    var c=(r.data||[])[0];
+    if(!c||c.ativo===false){ if(c)D.cfg[S.loja.id]=c; else delete D.cfg[S.loja.id]; return false; }
+    D.cfg[S.loja.id]=Object.assign(D.cfg[S.loja.id]||{},c);
+    return true;
+  }catch(e){ return true; }
+}
+function avisoLojaDesligada(bt,rotulo){
+  if(bt){bt.disabled=false;bt.textContent=rotulo;}
+  var box=document.getElementById('erroEnvio');
+  if(!box){
+    box=document.createElement('div');
+    box.id='erroEnvio';box.className='aviso';
+    box.style.cssText='background:#FBEDE9;border-color:#E9C9BF;color:#9A4B33;margin:0 0 14px';
+    var pb=document.querySelector('.pnlB');
+    if(pb)pb.insertBefore(box,pb.firstChild);
+  }
+  box.innerHTML='<b>A loja está desligada agora.</b><br>'+
+    'Ela parou de receber pedido pelo cardápio. Sua sacola fica guardada aqui — '+
+    'é só voltar quando ela ligar de novo.';
+  box.scrollIntoView({block:'center',behavior:'smooth'});
+}
 async function enviarPedido(taxa,tot){
   var bt=$('btEnviar');
   if(bt){bt.disabled=true;bt.textContent='Enviando...';}
+  if(!(await lojaAindaAtende()))return avisoLojaDesligada(bt,'Enviar pedido');
   var cl=S.cliente;
   var sub=S.sacola.reduce(function(a,i){return a+i.total},0);
   var num=String(Date.now()).slice(-6);
