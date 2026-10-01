@@ -288,7 +288,64 @@ function rodape(){
    (c.instagram?E(c.instagram)+'<br>':'')+
    (S.loja?E(S.loja.nome)+(S.loja.cidade?' · '+E(S.loja.cidade):'')+'<br>':'')+
    (c.whatsapp?'WhatsApp '+E(c.whatsapp)+'<br>':'')+
+   '<br><button class="privLk" onclick="avisoPrivacidade()">Privacidade</button>'+
    '<br><span style="opacity:.55;font-size:11px">pedidos por Joia</span></div>';
+}
+/* ==========================================================
+   AVISO DE PRIVACIDADE (LGPD, 01/10/2026)
+
+   O cardapio pede nome, WhatsApp e, na entrega, o endereco. Quem pede
+   tem de poder saber para que servem, quem ve e como pedir para apagar.
+   O aviso abre por cima de qualquer tela (id proprio, nao fecha o
+   formulario que estava aberto) e da para apagar do celular os dados
+   guardados para o proximo pedido.
+   ========================================================== */
+function avisoPrivacidade(){
+  fecharPrivacidade();
+  var c=cfgLoja();
+  var loja=nomeLoja();
+  if(S.loja&&S.loja.nome&&S.loja.nome!==loja)loja+=' — '+S.loja.nome;
+  var zap=(c.whatsapp||'').trim();
+  var ov=document.createElement('div');
+  ov.id='ovPriv';ov.className='ov';ov.style.zIndex='120';
+  ov.innerHTML='<div class="pnl">'+
+   '<div class="pnlH"><b>Privacidade</b><button class="fechar" onclick="fecharPrivacidade()">×</button></div>'+
+   '<div class="pnlB privTx">'+
+    '<p>Este cardápio é de <b>'+E(loja)+'</b>, responsável pelos dados do seu pedido, '+
+     'conforme a Lei Geral de Proteção de Dados (Lei 13.709/2018).</p>'+
+    '<h4>O que pedimos</h4>'+
+    '<p>Seu nome e WhatsApp. Na entrega, também o endereço e uma referência. Na mesa, só o nome. '+
+     'Não pedimos documento nem dados de cartão: o pagamento é feito na entrega, na retirada ou no caixa.</p>'+
+    '<h4>Para que usamos</h4>'+
+    '<p>Só para preparar, entregar e avisar sobre o seu pedido, e para atender você se houver algum problema com ele. '+
+     'Não vendemos nem repassamos seus dados, e não mandamos propaganda sem você pedir.</p>'+
+    '<h4>Quem vê</h4>'+
+    '<p>A equipe da loja que prepara o pedido e, na entrega, o entregador (nome, telefone e endereço).</p>'+
+    '<h4>Onde fica guardado</h4>'+
+    '<p>No sistema da loja, com acesso restrito por senha, pelo tempo necessário para o pedido e para o que a lei '+
+     'fiscal exige. Neste celular ficam o seu nome, o telefone e o endereço, para você não precisar digitar de novo.</p>'+
+    '<h4>Seus direitos</h4>'+
+    '<p>Você pode pedir para ver, corrigir ou apagar os seus dados'+
+     (zap?' pelo WhatsApp da loja: <b style="white-space:nowrap">'+E(zap)+'</b>.':' falando com a loja.')+'</p>'+
+    '<button class="btnL" onclick="apagarMeusDados()">Apagar meus dados deste celular</button>'+
+   '</div>'+
+  '</div>';
+  document.body.appendChild(ov);
+  ov.onclick=function(e){if(e.target===ov)fecharPrivacidade()};
+}
+function fecharPrivacidade(){var o=$('ovPriv');if(o)o.remove();}
+function apagarMeusDados(){
+  S.cliente={};S.comanda='';
+  salvarLocal();
+  ['cNome','cTel','cRua','cNum','cBairro','cRef','cmNome'].forEach(function(id){
+    var i=$(id);if(i)i.value='';});
+  fecharPrivacidade();
+  alert('Pronto: seus dados foram apagados deste celular.');
+}
+/* a linha curta que aparece onde a pessoa digita os dados */
+function linhaPrivacidade(){
+  return '<div class="cp privLinha"><div class="dica">Seus dados servem só para este pedido. '+
+   '<button class="privLk" onclick="avisoPrivacidade()">Ver privacidade</button></div></div>';
 }
 function aplicarMarca(){
   var c=cfgLoja();
@@ -945,6 +1002,7 @@ function irDados(){
      '<input id="cTroco" type="number" step="0.01" placeholder="deixe vazio se não precisa"></div>'+
     '<div class="cp"><label>Observação do pedido</label>'+
      '<textarea id="cObs" rows="2" placeholder="algo que devemos saber?"></textarea></div>'+
+    linhaPrivacidade()+
    '</div>'+
    '<div class="pnlF"><button class="btnV" onclick="revisar()">Revisar pedido</button></div>'+
   '</div>';
@@ -1065,6 +1123,7 @@ function irComanda(){
     '<div class="tot"><span>Total do pedido</span><b>R$ '+money(sub)+'</b></div>'+
     '<div class="dica">O pagamento é feito no caixa, no fim. Este pedido vai para o '+
     'atendente conferir antes de ir para a cozinha.</div>'+
+    linhaPrivacidade()+
    '</div>'+
    '<div class="pnlF"><button class="btnV" id="btEnviar" onclick="enviarPedidoMesa('+sub+')">'+
     'Enviar para a cozinha</button></div>'+
