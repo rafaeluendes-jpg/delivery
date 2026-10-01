@@ -36,12 +36,12 @@ function lerLocal(){try{return JSON.parse(localStorage.getItem('jolo_card')||'{}
 async function carregar(){
   try{
     var r=await Promise.all([
-      sb.from('sucursais').select('*').eq('ativa',true),
+      sb.from('sucursais').select('id,loja_id,nome,apelido,nome_fantasia,endereco,numero,complemento,cidade,uf,cep,telefone,cor,ativa,matriz,ref_local').eq('ativa',true),
       sb.from('categorias').select('*').order('ordem'),
       sb.from('produtos').select('*,produto_grupos(grupo_id)').order('ordem'),
       sb.from('grupos_opcoes').select('*,opcoes(*)').order('ordem'),
       sb.from('areas_entrega').select('*,areas_zonas(*)'),
-      sb.from('formas_pagamento').select('*'),
+      sb.from('formas_pagamento').select('id,loja_id,nome,tipo,bandeira,ativa,online,ordem,sucursais'),
       sb.from('cardapio_config').select('*')
     ]);
     D.lojas=r[0].data||[]; D.cats=r[1].data||[]; D.prods=r[2].data||[];
